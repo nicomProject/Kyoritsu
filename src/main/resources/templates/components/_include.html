@@ -1,0 +1,58 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="include_manager">
+    <title>Kyoritsu 관리자</title>
+
+    <th:block th:replace="~{components/_include::include}"></th:block>
+    <script type="text/javascript" src="/static/js/admin/template/soft-ui-dashboard.js"></script>
+    <script type="text/javascript" src="/static/js/lib/sheetjs/xlsx.full.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/common/style.css">
+    <link rel="stylesheet" href="/static/css/admin/style.css">
+    <script type="text/javascript" src="/static/js/admin/components/modal.js"></script>
+</head>
+
+<head th:fragment="include">
+    <title>Kyoritsu</title>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <link rel="apple-touch-icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+
+    <link rel="stylesheet" href="/static/css/lib/bootstrap/5.1.3/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/lib/animate/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/static/css/admin/template/soft-ui-dashboard.min.css">
+    <link rel="stylesheet" href="/static/css/lib/tabulator/5.4/tabulator_semanticui.css">
+    <link rel="stylesheet" href="/static/css/lib/three-dots/three-dots.min.css">
+    <link rel="stylesheet" href="/static/css/lib/three-dots/_variable.css">
+    <link rel="stylesheet" href="/static/fonts/notokr/notokr.css">
+
+    <script type="text/javascript" src="/static/js/lib/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/lib/popper/2.10.2/popper.min.js"></script>
+    <script type="text/javascript" src="/static/js/lib/bootstrap/5.2.0/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/lib/sweetalert/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="/static/js/lib/webfont/webfont.min.js"></script>
+    <script type="text/javascript" src="/static/js/lib/tabulator/5.4/tabulator.min.js"></script>
+    <script type="text/javascript" src="/static/js/lib/tippy/6.2.6/tippy-bundle.umd.js"></script>
+    <script type="text/javascript" src="/static/js/lib/d3/v7/d3.v7.min.js"></script>
+    <script type="text/javascript" src="/static/js/lib/Chart.min.2.4.0/Chart.min.js"></script>
+
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Lato:300,400,700,900"]
+            },
+            custom: {
+                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+                urls: ['/static/css/lib/webfont/fonts.min.css']
+            },
+        });
+    </script>
+
+    <script type="text/javascript" src="/static/js/common.js"></script>
+    <script type="text/javascript" src="/static/js/common/utils.js"></script>
+</head>

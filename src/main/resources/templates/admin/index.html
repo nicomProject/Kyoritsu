@@ -1,0 +1,127 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{components/_include::include_manager}"></th:block>
+<body class="g-sidenav-show">
+<th:block th:replace="~{components/_side::side_manager}"></th:block>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <th:block th:replace="~{components/_header::header_manager}"></th:block>
+    <!-- 스타일시트 추가 통계 페이지 전용 -->
+    <link rel="stylesheet" href="/static/css/statistics/style.css">
+    <!-- End Navbar -->
+    <div class="container-fluid py-4 page-container row">
+        <div class="col-xl-6 col-sm-12 d-flex flex-column h-100">
+            <div class="card mb-4" data-card="bookStats" style="height: 180px">
+                <div class="card-header pb-2 p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>
+                            <span class="mx-2">도서 현황</span>
+                            <span role="action" data-action="refresh" data-card="bookStats"><i
+                                    class="fas fa-undo-alt"></i></span>
+                        </h5>
+                        <div class="icon icon-shape bg-gradient-purple shadow text-center border-radius-md">
+                            <i class="ni fas fa-book opacity-100"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3 border-right-default">
+                            <div class="text-center">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">전체 도서</p>
+                                <h5 class="mb-0">
+                                    <span role="data" data-target="totalCount"
+                                          class="text-info text-gradient fs-4">0</span><span class="text-sm">권</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-3 border-right-default">
+                            <div class="text-center">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">비치 도서</p>
+                                <h5 class="mb-0">
+                                    <span role="data" data-target="inCount"
+                                          class="text-success text-gradient fs-4">0</span><span class="text-sm">권</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-3 border-right-default">
+                            <div class="text-center">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">대출 도서</p>
+                                <h5 class="mb-0">
+                                    <span role="data" data-target="outCount"
+                                          class="text-danger text-gradient fs-4">0</span><span class="text-sm">권</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="text-center">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">폐기 도서</p>
+                                <h5 class="mb-0">
+                                    <span role="data" data-target="delCount"
+                                          class="text-secondary text-gradient fs-4">0</span><span
+                                        class="text-sm">권</span>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card flex-1 overflow-hidden" data-card="roomStats">
+                <div class="card-header pb-2 p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>
+                            <span class="mx-2">자료실 현황</span>
+                            <span role="action" data-action="refresh" data-card="roomStats"><i
+                                    class="fas fa-undo-alt"></i></span>
+                        </h5>
+                        <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
+                            <i class="ni fas fa-grip-horizontal opacity-100"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body overflow-auto">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Floor
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Book
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Antenna
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Shelf
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="roomBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-sm-12 d-flex flex-column h-100">
+            <div class="card h-100" data-card="chartStats">
+                <div class="card-header pb-2 p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>
+                            <span class="mx-2">반입/반출 통계</span>
+                            <span role="action" data-action="refresh" data-card="chartStats"><i
+                                    class="fas fa-undo-alt"></i></span>
+                        </h5>
+                        <div class="icon icon-shape bg-gradient-warning shadow text-center border-radius-md">
+                            <i class="ni fas fa-chart-bar opacity-100"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!--<script type="text/javascript" src="/static/js/admin/page/dashboard.js"></script>-->
+</body>
+</html>

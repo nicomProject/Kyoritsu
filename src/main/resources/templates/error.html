@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{components/_include:: include}"></th:block>
+<link rel="stylesheet" href="/static/css/error.css">
+<body>
+<div class="container">
+    <div class="min-vh-100 d-flex align-items-center">
+        <div class="row mt-lg-0 mt-8">
+            <div class="col-lg-5 my-auto">
+                <h1 class="display-1 text-bolder text-gradient text-warning fadeIn1 fadeInBottom mt-5">Oops!</h1>
+                <h2 class="fadeIn3 fadeInBottom opacity-8">You can't access</h2>
+                <p class="lead opacity-6 fadeIn2 fadeInBottom">해당 페이지가 없거나, 접근할 수 없는 페이지 입니다.</p>
+                <button type="button" class="btn bg-gradient-warning mt-4 fadeIn2 fadeInBottom" onclick="goHome()">Go to
+                    Homepage
+                </button>
+            </div>
+            <div class="col-lg-7 my-auto">
+                <img class="w-100 fadeIn1 fadeInBottom"
+                     src="/static/images/common/error-500.png"
+                     alt="500-error">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+    function goHome() {
+        location.href = '/';
+    }
+</script>
+</body>
+</html>

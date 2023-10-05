@@ -1,0 +1,10 @@
+# DataSource Configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/EZBoard
+    username: postgres
+    password: nicom123.
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
