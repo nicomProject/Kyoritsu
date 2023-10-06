@@ -22,12 +22,17 @@ import java.util.stream.Collectors;
 public class HomeController {
     private final SecurityUtil securityUtil;
 
-    @GetMapping(path = {"/", "/admin"})
+    @GetMapping(path = {"/"})
     public String home(Model model) throws Exception {
+        return "main/index";
+    }
+
+    @GetMapping(path = { "/admin"})
+    public String admin(Model model) throws Exception {
         return login(model);
     }
 
-    @GetMapping(path = "/login")
+    @GetMapping(path = "/admin/login")
     public String login(Model model) throws Exception {
         MemberDetail member = getCurrentUser(model);
         if (member == null) {
@@ -40,7 +45,7 @@ public class HomeController {
     /**
      * Logout
      */
-    @GetMapping("/logout")
+    @GetMapping("/admin/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
         new SecurityContextLogoutHandler().logout(request, response,
                 SecurityContextHolder.getContext().getAuthentication());

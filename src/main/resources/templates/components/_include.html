@@ -10,7 +10,15 @@
     <link rel="stylesheet" href="/static/css/admin/style.css">
     <script type="text/javascript" src="/static/js/admin/components/modal.js"></script>
 </head>
+<head th:fragment="include_main">
+    <title>Kyoritsu 홈페이지</title>
 
+    <th:block th:replace="~{components/_include::include}"></th:block>
+    <script type="text/javascript" src="/static/js/admin/template/soft-ui-dashboard.js"></script>
+
+    <link rel="stylesheet" href="/static/css/common/style.css">
+    <link rel="stylesheet" href="/static/css/main/style.css">
+</head>
 <head th:fragment="include">
     <title>Kyoritsu</title>
     <meta charset="UTF-8">

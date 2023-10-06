@@ -29,7 +29,7 @@ public class Content {
     private String id;
 
     @Column(name = "subject")
-    private String subject;
+    private String subject; 
 
     @Column(name = "content")
     private String content;

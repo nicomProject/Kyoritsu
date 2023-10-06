@@ -415,9 +415,6 @@ const ParamManager = {
     },
     show: function (modalID, action, params) {
         const urlHash = {
-            'eachLocationModal': '/modal/eachLocation',
-            'locationModal': '/modal/location',
-            'callNoModal': '/modal/callNo'
         }
 
         let url = urlHash[modalID] || '/modal/' + modalID;
@@ -1098,7 +1095,7 @@ const AjaxUtil = {
         else if (code === 421) {
             Alert.error({text: desc}, () => {
                 sessionStorage.device = '';
-                location.href = '/logout';
+                location.href = '/admin/logout';
             });
 
             return true;

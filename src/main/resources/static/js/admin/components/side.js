@@ -95,7 +95,7 @@ $(function () {
                         text: '로그아웃 하시겠습니까?',
                     }, function (result) {
                         if (result.isConfirmed) {
-                            location.href = '/logout';
+                            location.href = '/admin/logout';
                         }
                     });
                 } else if (action === 'shield') {

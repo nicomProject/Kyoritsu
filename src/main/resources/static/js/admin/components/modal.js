@@ -590,7 +590,7 @@ $(function () {
                         success: function (data) {
                             if (data.code === 200) {
                                 Alert.success({text: '비밀번호가 성공적으로 변경되었습니다!<br>변경된 비밀번호로 다시 로그인해주세요!'}, function () {
-                                    location.href = '/logout';
+                                    location.href = '/admin/logout';
                                 });
                             } else {
                                 Alert.warning({text: data.desc});
