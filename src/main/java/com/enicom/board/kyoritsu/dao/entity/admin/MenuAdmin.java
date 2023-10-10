@@ -1,45 +1,54 @@
-package com.enicom.board.kyoritsu.dao.entity;
+package com.enicom.board.kyoritsu.dao.entity.admin;
 
 import com.enicom.board.kyoritsu.dao.type.MenuTarget;
-import com.enicom.board.kyoritsu.dao.type.MenuType;
+import com.enicom.board.kyoritsu.login.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "tb_menu")
+@Entity(name = "mn_menu")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @SequenceGenerator(name = "SEQ_MENU_GENERATOR", sequenceName = "SEQ_MENU", initialValue = 1, allocationSize = 1)
-public class Menu {
+public class MenuAdmin {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MENU_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
 
     @Column(name = "name", length = 20)
+    @Comment("메뉴명")
     private String name;
 
     @Column(name = "url", length = 100)
+    @Comment("메뉴 URL")
     private String url;
 
-    @Column(name = "type", length = 10, nullable = false)
-    @Builder.Default
+    @Column(name = "read_role")
     @Enumerated(EnumType.STRING)
-    @Comment("메뉴 타입 - { intro: 소개페이지, notice: 공지사항, recruit: 채용정보 }")
-    private MenuType type = MenuType.INTRO;
+    @Comment("권한 - 조회 권한")
+    private Role readRole = Role.ADMIN;
 
-    @Column(name = "target", length = 10, nullable = false)
+    @Column(name = "edit_role")
+    @Enumerated(EnumType.STRING)
+    @Comment("권한 - 수정 권한")
+    private Role editRole = Role.ADMIN;
+
+    @Column(name = "icon")
+    @Comment("아이콘 Class - FontAwesome")
+    private String icon;
+
+    @Column(name = "target")
     @Builder.Default
     @Enumerated(EnumType.STRING)
     @Comment("새창 여부 - {self: 사용 안함, blank: 사용함}")
@@ -47,13 +56,11 @@ public class Menu {
 
     @Column(name = "order_seq")
     @Builder.Default
-    @ColumnDefault("0")
     @Comment("메뉴 보여질 순서 설정 - 오름차순 정렬")
     private Integer order = 0;
 
     @Column(name = "use_yn")
     @Builder.Default
-    @ColumnDefault("1")
     private Integer use = 1;
 
     @Column(name = "create_user", length = 50)
@@ -61,9 +68,6 @@ public class Menu {
 
     @Column(name = "edit_user", length = 50)
     private String editUser;
-
-    @Column(name = "delete_user", length = 50)
-    private String deleteUser;
 
     @Column(name = "create_date")
     @Builder.Default
@@ -78,9 +82,4 @@ public class Menu {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime editDate;
 
-    @Column(name = "delete_date")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime deleteDate;
 }

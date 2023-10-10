@@ -275,13 +275,13 @@ $(function () {
                     },
                     {
                         title: '<i class="fas fa-clock"></i> 로그인 일시',
-                        field: "accessDate",
+                        field: "loginDate",
                         tooltip: true,
                         headerTooltip: true
                     },
                     {
                         title: '<i class="fas fa-clock"></i> 수정 일시',
-                        field: "updateDate",
+                        field: "editDate",
                         tooltip: true,
                         headerTooltip: true
                     },

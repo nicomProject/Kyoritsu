@@ -6,7 +6,7 @@ import com.enicom.board.kyoritsu.api.param.type.MultipleParam;
 import com.enicom.board.kyoritsu.api.param.type.MultipleType;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
-import com.enicom.board.kyoritsu.dao.entity.Manager;
+import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
 import com.enicom.board.kyoritsu.dao.repository.ManagerRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.Role;
@@ -64,7 +64,7 @@ public class ManagerServiceImpl implements ManagerService {
             manager.setName(param.getName());
             manager.setRole(param.getRole());
             manager.setEnable(param.getEnable());
-            manager.setUpdateDate(LocalDateTime.now());
+            manager.setEditDate(LocalDateTime.now());
 
             managerRepository.save(manager);
         }
@@ -94,7 +94,7 @@ public class ManagerServiceImpl implements ManagerService {
                 manager.setPassword(securityUtil.getEncodedInitPwd());
                 manager.setEnable(1);
                 manager.setFailureCnt(0);
-                manager.setUpdateDate(LocalDateTime.now());
+                manager.setEditDate(LocalDateTime.now());
             }
         });
         managerRepository.saveAll(managers);
@@ -124,7 +124,7 @@ public class ManagerServiceImpl implements ManagerService {
         }
 
         manager.setPassword(securityUtil.encode(newPassword));
-        manager.setUpdateDate(LocalDateTime.now());
+        manager.setEditDate(LocalDateTime.now());
         managerRepository.save(manager);
 
         return ResponseDataValue.builder(200).desc("비밀번호가 성공적으로 수정되었습니다!").build();

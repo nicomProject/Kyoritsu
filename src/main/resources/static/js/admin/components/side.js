@@ -2,41 +2,31 @@ const SideBar = {
     menus: [],
     load: function () {
         const that = this;
-        const dbUse = false;
-        if(dbUse){
-            AjaxUtil.request({
-                url: '/api/menus',
-                async: false,
-                success: function (data) {
-                    that.menus = data.result.items;
-                    that.draw();
-                }
-            })
-        } else {
-            const menus = [];
-            menus.push({})
-        }
+        AjaxUtil.request({
+            url: '/api/menus',
+            async: false,
+            success: function (data) {
+                that.menus = data.result.items;
+                that.draw();
+            }
+        });
     },
     draw: function () {
         const that = this;
         const container = $('.navbar.sidenav .navbar-nav');
         container.html('');
-
         this.menus.forEach(menu => {
-            // 활성 상태가 아니면 지우기
-            if (menu.enable !== 1) return;
-
-            let path = '/admin/' + menu.code;
-            let activated = location.pathname.replace("/admin/", "") === menu.code ? 'active' : '';
-            if (menu.code === 'dashboard' && location.pathname === '/') {
-                path = '/';
-                activated = 'active';
-            }
-
             container.append(that.createMenuItem(menu));
         });
     },
-    createMenuItem: function(menu) {
+    createMenuItem: function (menu) {
+        let path = menu.url || '/';
+        let activated = location.pathname === menu.url ? 'active' : '';
+        if (menu.code === 'dashboard' && location.pathname === '/') {
+            path = '/';
+            activated = 'active';
+        }
+
         return `<li class="nav-item">
                     <a class="nav-link ${activated}" href="${path}">
                         <div class="icon icon-shape icon-sm">

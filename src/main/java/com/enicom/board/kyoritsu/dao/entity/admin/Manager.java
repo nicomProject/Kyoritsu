@@ -1,4 +1,4 @@
-package com.enicom.board.kyoritsu.dao.entity;
+package com.enicom.board.kyoritsu.dao.entity.admin;
 
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.Role;
@@ -12,7 +12,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "tb_manager")
+@Entity(name = "mn_user")
 @Data
 @Builder
 @AllArgsConstructor
@@ -20,11 +20,11 @@ import java.time.LocalDateTime;
 @Getter
 @SequenceGenerator(name = "SEQ_MANAGER_GENERATOR", sequenceName = "SEQ_MANAGER", initialValue = 1, allocationSize = 1)
 public class Manager {
-    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MANAGER_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
 
+    @Id
     @Column(name = "id", length = 20, unique = true, nullable = false)
     @NonNull
     private String userId;
@@ -48,21 +48,39 @@ public class Manager {
     @Column(name = "failure_cnt")
     private Integer failureCnt = 0;
 
+    @Column(name = "create_user", length = 50)
+    private String createUser;
+
+    @Column(name = "edit_user", length = 50)
+    private String editUser;
+
+    @Column(name = "delete_user", length = 50)
+    private String deleteUser;
+
+    @Column(name = "create_date")
     @Builder.Default
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createDate = LocalDateTime.now();
 
+    @Column(name = "edit_date")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime updateDate;
+    private LocalDateTime editDate;
 
+    @Column(name = "delete_date")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime accessDate;
+    private LocalDateTime deleteDate;
+
+    @Column(name = "login_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime loginDate;
 
     public MemberDetail toMember() {
         MemberDetail member = MemberDetail.builder().id(userId).password(password).build();
