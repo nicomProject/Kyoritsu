@@ -1,7 +1,7 @@
 package com.enicom.board.kyoritsu.login;
 
 import com.enicom.board.kyoritsu.dao.entity.Code;
-import com.enicom.board.kyoritsu.dao.entity.Manager;
+import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
 import com.enicom.board.kyoritsu.dao.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,7 +43,7 @@ public class MemberDetailService implements UserDetailsService {
     public void updateAccessDate(String username) {
         managerRepository.findByUserId(username).ifPresent(manager -> {
             manager.setFailureCnt(0);
-            manager.setAccessDate(LocalDateTime.now());
+            manager.setLoginDate(LocalDateTime.now());
             managerRepository.save(manager);
         });
     }

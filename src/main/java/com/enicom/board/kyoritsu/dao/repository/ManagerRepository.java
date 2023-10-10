@@ -1,6 +1,6 @@
 package com.enicom.board.kyoritsu.dao.repository;
 
-import com.enicom.board.kyoritsu.dao.entity.Manager;
+import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
 import com.enicom.board.kyoritsu.login.Role;
 import org.springframework.data.repository.CrudRepository;
 

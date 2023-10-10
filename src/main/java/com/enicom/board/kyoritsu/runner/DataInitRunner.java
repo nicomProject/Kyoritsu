@@ -1,13 +1,11 @@
 package com.enicom.board.kyoritsu.runner;
 
-import com.enicom.board.kyoritsu.dao.entity.Manager;
-import com.enicom.board.kyoritsu.dao.entity.Menu;
+import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
 import com.enicom.board.kyoritsu.dao.entity.admin.MenuAdmin;
 import com.enicom.board.kyoritsu.dao.repository.CodeRepository;
 import com.enicom.board.kyoritsu.dao.repository.ManagerRepository;
 import com.enicom.board.kyoritsu.dao.repository.MenuAdminRepository;
-import com.enicom.board.kyoritsu.dao.type.MenuGroup;
-import com.enicom.board.kyoritsu.dao.type.MenuType;
+import com.enicom.board.kyoritsu.dao.type.admin.MenuType;
 import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;

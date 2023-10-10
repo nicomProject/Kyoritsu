@@ -1,24 +1,23 @@
 package com.enicom.board.kyoritsu.dao.type;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 public enum MenuType {
-    INTRODUCTIONS("introductions", "소개글"),
-    ANNOUNCEMENT("announcement", "공지사항 관리"),
-    JOBPOSTING("jobposting", "채용 공고"),
-    APPLICANTCHECK("applicantcheck", "지원자 조회"),
-    JOBINQUIRY("jobinquiry", "채용 문의"),
-    ADMINACCOUNTSCHECK("adminaccountscheck", "관리자 계정 조회");
+    INTRO("intro", "소개페이지"),
 
-    private final String code;
-    private final String name;
+    NOTICE("notice", "공지사항"),
+    RECRUIT("recruit", "채용정보"),
+    ;
 
-    public String id() {
+    private String code;
+    private String name;
+
+    public String getCode() {
         return code;
     }
 
-    public String display() {
+    public String getName() {
         return name;
     }
 }

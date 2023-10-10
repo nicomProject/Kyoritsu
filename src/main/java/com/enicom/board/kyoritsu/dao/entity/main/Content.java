@@ -1,4 +1,4 @@
-package com.enicom.board.kyoritsu.dao.entity;
+package com.enicom.board.kyoritsu.dao.entity.main;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -28,10 +28,13 @@ public class Content {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "subject")
-    private String subject; 
+    @Column(name = "title", length = 20)
+    private String title;
 
-    @Column(name = "content")
+    @Column(name = "subtitle", length = 100)
+    private String subtitle;
+
+    @Column(name = "content", length = 10000)
     private String content;
 
     @Column(name = "hit")
@@ -39,17 +42,31 @@ public class Content {
     @ColumnDefault("0")
     private Integer hit = 0;
 
-    @Column(name = "thumbnail_url", length = 100)
-    private String thumbnailUrl;
+    @Column(name = "create_user", length = 50)
+    private String createUser;
 
+    @Column(name = "edit_user", length = 50)
+    private String editUser;
+
+    @Column(name = "delete_user", length = 50)
+    private String deleteUser;
+
+    @Column(name = "create_date")
     @Builder.Default
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createDate = LocalDateTime.now();
 
+    @Column(name = "edit_date")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime updateDate;
+    private LocalDateTime editDate;
+
+    @Column(name = "delete_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime deleteDate;
 }
