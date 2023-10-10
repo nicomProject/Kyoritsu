@@ -12,7 +12,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "tb_manager")
+@Entity(name = "mn_user")
 @Data
 @Builder
 @AllArgsConstructor

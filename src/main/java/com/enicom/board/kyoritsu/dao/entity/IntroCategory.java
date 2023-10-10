@@ -36,13 +36,13 @@ public class IntroCategory {
     @Comment("메뉴 보여질 순서 설정 - 오름차순 정렬")
     private Integer order = 0;
 
-    @Column(name = "create_user")
+    @Column(name = "create_user", length = 50)
     private String createUser;
 
-    @Column(name = "edit_user")
+    @Column(name = "edit_user", length = 50)
     private String editUser;
 
-    @Column(name = "delete_user")
+    @Column(name = "delete_user", length = 50)
     private String deleteUser;
 
     @Column(name = "create_date")

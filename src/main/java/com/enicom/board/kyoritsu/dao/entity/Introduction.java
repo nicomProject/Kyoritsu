@@ -47,13 +47,13 @@ public class Introduction {
     @ColumnDefault("0")
     private Integer order = 0;
 
-    @Column(name = "create_user")
+    @Column(name = "create_user", length = 50)
     private String createUser;
 
-    @Column(name = "edit_user")
+    @Column(name = "edit_user", length = 50)
     private String editUser;
 
-    @Column(name = "delete_user")
+    @Column(name = "delete_user", length = 50)
     private String deleteUser;
 
     @Column(name = "create_date")
