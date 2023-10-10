@@ -1,60 +1,68 @@
-package com.enicom.board.kyoritsu.dao.entity.admin;
+package com.enicom.board.kyoritsu.dao.entity;
 
-import com.enicom.board.kyoritsu.login.MemberDetail;
-import com.enicom.board.kyoritsu.login.Role;
+import com.enicom.board.kyoritsu.dao.type.MenuTarget;
+import com.enicom.board.kyoritsu.dao.type.MenuType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "tb_manager")
-@Data
+@Entity(name = "tb_menu")
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(force = true)
+@NoArgsConstructor
 @Getter
-@SequenceGenerator(name = "SEQ_MANAGER_GENERATOR", sequenceName = "SEQ_MANAGER", initialValue = 1, allocationSize = 1)
-public class Manager {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MANAGER_GENERATOR")
+@Setter
+@SequenceGenerator(name = "SEQ_MENU_GENERATOR", sequenceName = "SEQ_MENU", initialValue = 1, allocationSize = 1)
+public class Menu {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MENU_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
-
-    @Id
-    @Column(name = "id", length = 20, unique = true, nullable = false)
-    @NonNull
-    private String userId;
-
-    @Column(name = "password", length = 200, nullable = false)
-    private String password;
 
     @Column(name = "name", length = 20)
     private String name;
 
+    @Column(name = "url", length = 100)
+    private String url;
+
+    @Column(name = "type", length = 10, nullable = false)
     @Builder.Default
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", length = 10)
-    private Role role = Role.ADMIN;
+    @Comment("메뉴 타입 - { intro: 소개페이지, notice: 공지사항, recruit: 채용정보 }")
+    private MenuType type = MenuType.INTRO;
 
+    @Column(name = "target", length = 10, nullable = false)
     @Builder.Default
-    @Column(name = "enable")
-    private Integer enable = 1;
+    @Enumerated(EnumType.STRING)
+    @Comment("새창 여부 - {self: 사용 안함, blank: 사용함}")
+    private MenuTarget target = MenuTarget.SELF;
 
+    @Column(name = "order_seq")
     @Builder.Default
-    @Column(name = "failure_cnt")
-    private Integer failureCnt = 0;
+    @ColumnDefault("0")
+    @Comment("메뉴 보여질 순서 설정 - 오름차순 정렬")
+    private Integer order = 0;
 
-    @Column(name = "create_user", length = 50)
+    @Column(name = "use_yn")
+    @Builder.Default
+    @ColumnDefault("1")
+    private Integer use = 1;
+
+    @Column(name = "create_user")
     private String createUser;
 
-    @Column(name = "edit_user", length = 50)
+    @Column(name = "edit_user")
     private String editUser;
 
-    @Column(name = "delete_user", length = 50)
+    @Column(name = "delete_user")
     private String deleteUser;
 
     @Column(name = "create_date")
@@ -75,24 +83,4 @@ public class Manager {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime deleteDate;
-
-    @Column(name = "login_date")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime loginDate;
-
-    public MemberDetail toMember() {
-        MemberDetail member = MemberDetail.builder().id(userId).password(password).build();
-        if (name != null) {
-            member.setName(name);
-        }
-        if (role != null) {
-            member.setRole(role);
-        }
-        if (enable != null) {
-            member.setEnable(enable);
-        }
-        return member;
-    }
 }

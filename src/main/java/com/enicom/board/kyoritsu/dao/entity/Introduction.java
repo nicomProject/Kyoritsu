@@ -1,4 +1,4 @@
-package com.enicom.board.kyoritsu.dao.entity.main;
+package com.enicom.board.kyoritsu.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -7,48 +7,53 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "tb_content")
+@Entity(name = "tb_intro")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@SequenceGenerator(name = "SEQ_CONTENT_GENERATOR", sequenceName = "SEQ_CONTENT", initialValue = 1, allocationSize = 1)
-public class Content {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CONTENT_GENERATOR")
+@SequenceGenerator(name = "SEQ_INTRODUCTION_GENERATOR", sequenceName = "SEQ_INTRODUCTION", initialValue = 1, allocationSize = 1)
+public class Introduction {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_INTRODUCTION_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", length = 20)
     private String id;
 
-    @Column(name = "title", length = 20)
-    private String title;
+    @NonNull
+    @Column(name = "name", length = 20)
+    private String name;
 
-    @Column(name = "subtitle", length = 100)
-    private String subtitle;
+    @JoinColumn(name = "category_id")
+    @ManyToOne
+    private IntroCategory category;
 
-    @Column(name = "content", length = 10000)
-    private String content;
+    @JoinColumn(name = "content_id")
+    @ManyToOne
+    private Content content;
 
-    @Column(name = "hit")
+    @Column(name = "order_seq")
     @Builder.Default
+    @Comment("메뉴 보여질 순서 설정 - 오름차순 정렬")
     @ColumnDefault("0")
-    private Integer hit = 0;
+    private Integer order = 0;
 
-    @Column(name = "create_user", length = 50)
+    @Column(name = "create_user")
     private String createUser;
 
-    @Column(name = "edit_user", length = 50)
+    @Column(name = "edit_user")
     private String editUser;
 
-    @Column(name = "delete_user", length = 50)
+    @Column(name = "delete_user")
     private String deleteUser;
 
     @Column(name = "create_date")

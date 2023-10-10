@@ -1,60 +1,40 @@
-package com.enicom.board.kyoritsu.dao.entity.main;
+package com.enicom.board.kyoritsu.dao.entity;
 
-import com.enicom.board.kyoritsu.dao.type.MenuTarget;
-import com.enicom.board.kyoritsu.dao.type.MenuType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "tb_menu")
+@Entity(name = "tb_intro_category")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@SequenceGenerator(name = "SEQ_MENU_GENERATOR", sequenceName = "SEQ_MENU", initialValue = 1, allocationSize = 1)
-public class Menu {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MENU_GENERATOR")
+@ToString
+@SequenceGenerator(name = "SEQ_INTRO_CATEGORY_GENERATOR", sequenceName = "SEQ_INTRO_CATEGORY", initialValue = 1, allocationSize = 1)
+public class IntroCategory {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_INTRO_CATEGORY_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
+
+    @Id
+    @Column(name = "id", length = 20)
+    private String id;
 
     @Column(name = "name", length = 20)
     private String name;
 
-    @Column(name = "url", length = 100)
-    private String url;
-
-    @Column(name = "type", length = 10, nullable = false)
-    @Builder.Default
-    @Enumerated(EnumType.STRING)
-    @Comment("메뉴 타입 - { intro: 소개페이지, notice: 공지사항, recruit: 채용정보 }")
-    private MenuType type = MenuType.INTRO;
-
-    @Column(name = "target", length = 10, nullable = false)
-    @Builder.Default
-    @Enumerated(EnumType.STRING)
-    @Comment("새창 여부 - {self: 사용 안함, blank: 사용함}")
-    private MenuTarget target = MenuTarget.SELF;
-
     @Column(name = "order_seq")
     @Builder.Default
-    @ColumnDefault("0")
     @Comment("메뉴 보여질 순서 설정 - 오름차순 정렬")
     private Integer order = 0;
-
-    @Column(name = "use_yn")
-    @Builder.Default
-    @ColumnDefault("1")
-    private Integer use = 1;
 
     @Column(name = "create_user")
     private String createUser;
