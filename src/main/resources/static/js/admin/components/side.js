@@ -2,27 +2,14 @@ const SideBar = {
     menus: [],
     load: function () {
         const that = this;
-        // const dbUse = false;
-        const dbUse = true;
-        //const menus = [];
-        //menus.push({code: '안녕'})
-        console.log(dbUse)
-        if(dbUse){
-            AjaxUtil.request({
-                url: '/api/menus',
-                async: false,
-                success: function (data) {
-                    console.log("data ======zz" + JSON.stringify(data))
-                    console.log("data.result.items" + JSON.stringify(data.result.items))
-                    that.menus = data.result.items;
-                    that.draw();
-                }
-            })
-        }
-        // else {
-        //     const menus = [];
-        //     menus.push({})
-        // }
+        AjaxUtil.request({
+            url: '/api/menus',
+            async: false,
+            success: function (data) {
+                that.menus = data.result.items;
+                that.draw();
+            }
+        });
     },
     draw: function () {
         const that = this;
@@ -32,15 +19,14 @@ const SideBar = {
             container.append(that.createMenuItem(menu));
         });
     },
-    createMenuItem: function(menu) {
-        let path = '/admin/' + menu.code;
-        let activated = location.pathname.replace("/admin/", "") === menu.code ? 'active' : '';
+    createMenuItem: function (menu) {
+        let path = menu.url || '/';
+        let activated = location.pathname === menu.url ? 'active' : '';
         if (menu.code === 'dashboard' && location.pathname === '/') {
             path = '/';
             activated = 'active';
         }
 
-        console.log("menu.name12" + menu.name)
         return `<li class="nav-item">
                     <a class="nav-link ${activated}" href="${path}">
                         <div class="icon icon-shape icon-sm">
