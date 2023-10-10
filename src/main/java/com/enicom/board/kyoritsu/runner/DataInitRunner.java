@@ -1,6 +1,6 @@
 package com.enicom.board.kyoritsu.runner;
 
-import com.enicom.board.kyoritsu.dao.entity.Manager;
+import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
 import com.enicom.board.kyoritsu.dao.repository.CodeRepository;
 import com.enicom.board.kyoritsu.dao.repository.ManagerRepository;
 import com.enicom.board.kyoritsu.login.Role;

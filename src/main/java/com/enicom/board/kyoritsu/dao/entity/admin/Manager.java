@@ -1,4 +1,4 @@
-package com.enicom.board.kyoritsu.dao.entity;
+package com.enicom.board.kyoritsu.dao.entity.admin;
 
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.Role;
@@ -48,21 +48,39 @@ public class Manager {
     @Column(name = "failure_cnt")
     private Integer failureCnt = 0;
 
+    @Column(name = "create_user", length = 50)
+    private String createUser;
+
+    @Column(name = "edit_user", length = 50)
+    private String editUser;
+
+    @Column(name = "delete_user", length = 50)
+    private String deleteUser;
+
+    @Column(name = "create_date")
     @Builder.Default
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createDate = LocalDateTime.now();
 
+    @Column(name = "edit_date")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime updateDate;
+    private LocalDateTime editDate;
 
+    @Column(name = "delete_date")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime accessDate;
+    private LocalDateTime deleteDate;
+
+    @Column(name = "login_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime loginDate;
 
     public MemberDetail toMember() {
         MemberDetail member = MemberDetail.builder().id(userId).password(password).build();
