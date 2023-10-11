@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(path = "/api")
 public class ApiController {
-    private final SettingService settingService;
     private static final Class[] classes = {
             ApiController.class,
     };
@@ -31,16 +30,6 @@ public class ApiController {
 
     @Value("${system.version}")
     private String version;
-
-    public ApiController(SettingService settingService) {
-        this.settingService = settingService;
-    }
-
-    @RequestMapping(path = "/menus", method = {RequestMethod.GET, RequestMethod.POST})
-    @ApiMapping(order = 60, desc = "메뉴 목록 조회")
-    public ResponseHandler<?> getMenuList() {
-        return new ResponseHandler<>(settingService.getMenuList());
-    }
 
     @RequestMapping(path = "/list", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseHandler<?> getApiList() {

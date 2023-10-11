@@ -883,6 +883,7 @@ label:has(+ .form-control.required):before {
     align-items: center;
     background: whitesmoke;
     border-radius: 0.5rem;
+    height: 100%;
 }
 
 .filterLegend ul {
@@ -920,29 +921,21 @@ label:has(+ .form-control.required):before {
 .status-title {
     background: transparent !important;
     font-weight: 600;
+    margin-left: 0.25rem;
 }
 
-/* 대출중 */
-.book-status-0 {
+.status-0 {
     background: #e95757;
     color: #e95757;
 }
-
-.book-status-1 {
+.status-1 {
     background: #6c7bff;
     color: #6c7bff;
 }
-
-.book-status-2 {
+.status-2 {
     background: #999999;
     color: #999999;
 }
-
-.book-new {
-    background: #ffbf00;
-    color: #ffbf00;
-}
-
 .btn.btn-round {
     align-items: center;
     display: inline-flex;

@@ -36,7 +36,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         MemberDetail member = (MemberDetail) authentication.getPrincipal();
 
         // 접속 로그 추가
-        AccessLog accessLog = AccessLog.builder().loginId(member.getId()).ip(Utils.getClientIP(request)).build();
+        AccessLog accessLog = AccessLog.builder().loginId(member.getId()).loginIp(Utils.getClientIP(request)).build();
         accessLogRepository.save(accessLog);
 
         // 초기 비밀번호 체크

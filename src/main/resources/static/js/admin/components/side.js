@@ -3,7 +3,7 @@ const SideBar = {
     load: function () {
         const that = this;
         AjaxUtil.request({
-            url: '/api/menus',
+            url: '/api/adm/setting/menus',
             async: false,
             success: function (data) {
                 that.menus = data.result.items;

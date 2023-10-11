@@ -14,23 +14,29 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api")
+@RequestMapping(path = "/api/adm/setting")
 public class SettingController {
     private final SettingService settingService;
 
-    @RequestMapping(path = "/setting/roles", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(path = "/menus", method = {RequestMethod.GET, RequestMethod.POST})
+    @ApiMapping(order = 60, desc = "메뉴 목록 조회")
+    public ResponseHandler<?> getMenuList() {
+        return new ResponseHandler<>(settingService.getMenuList());
+    }
+
+    @RequestMapping(path = "/roles", method = {RequestMethod.GET, RequestMethod.POST})
     @ApiMapping(order = 70, desc = "역할 조회")
     public ResponseHandler<?> getRoleList() {
         return new ResponseHandler<>(settingService.getRoleList());
     }
 
-    @RequestMapping(path = "/setting/initpwd", method = {RequestMethod.GET})
+    @RequestMapping(path = "/initpwd", method = {RequestMethod.GET})
     @ApiMapping(order = 71, desc = "[환경설정] 초기 비밀번호 조회")
     public ResponseHandler<?> getInitPwd() {
         return new ResponseHandler<>(settingService.getInitPwd());
     }
 
-    @RequestMapping(path = "/setting/initpwd", method = {RequestMethod.POST})
+    @RequestMapping(path = "/initpwd", method = {RequestMethod.POST})
     @ApiMapping(order = 72, desc = "[환경설정] 초기 비밀번호 변경", param = CodeParam.class)
     public ResponseHandler<?> setInitPwd(@RequestBody @Valid CodeParam param) {
         return new ResponseHandler<>(settingService.setInitPwd(param));

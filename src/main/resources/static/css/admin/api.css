@@ -118,16 +118,24 @@ input.text-success, input.text-danger {
     margin-right: 5px;
     border-radius: 10px;
 }
-.status-0 {
+.status-icon.status-0 {
     background: #e95757;
+}
+.status-0 {
     color: #e95757;
 }
-.status-1 {
+.status-icon.status-1 {
     background: #6c7bff;
     color: #6c7bff;
 }
-.status-2 {
+.status-1 {
+    color: #6c7bff;
+}
+.status-icon.status-2 {
     background: #999999;
+    color: #999999;
+}
+.status-icon.status-2 {
     color: #999999;
 }
 

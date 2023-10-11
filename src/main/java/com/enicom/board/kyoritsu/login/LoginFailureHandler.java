@@ -29,7 +29,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         String userName = request.getParameter("userName");
 
         // 접속 로그 추가
-        AccessLog accessLog = AccessLog.builder().loginId(userName).loginResult(0).ip(Utils.getClientIP(request)).build();
+        AccessLog accessLog = AccessLog.builder().loginId(userName).loginResult(0).loginIp(Utils.getClientIP(request)).build();
         accessLogRepository.save(accessLog);
 
         // 실패 횟수 업데이트

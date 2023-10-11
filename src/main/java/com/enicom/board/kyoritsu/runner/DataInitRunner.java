@@ -5,6 +5,7 @@ import com.enicom.board.kyoritsu.dao.entity.admin.MenuAdmin;
 import com.enicom.board.kyoritsu.dao.repository.CodeRepository;
 import com.enicom.board.kyoritsu.dao.repository.ManagerRepository;
 import com.enicom.board.kyoritsu.dao.repository.MenuAdminRepository;
+import com.enicom.board.kyoritsu.dao.type.admin.MenuGroup;
 import com.enicom.board.kyoritsu.dao.type.admin.MenuType;
 import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
@@ -41,7 +42,7 @@ public class DataInitRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         configureCode();
         configureManager();
-        configureMenu();
+        configureAdminMenu();
     }
 
     private void configureCode() {
@@ -56,49 +57,33 @@ public class DataInitRunner implements ApplicationRunner {
         managerRepository.save(manager);
     }
 
-    private void configureMenu() {
-        Map<String, MenuAdmin> storeList = new HashMap<>();
+    private void configureAdminMenu() {
+        Map<MenuType, MenuAdmin> storeList = new HashMap<>();
         menuAdminRepository.findAll().forEach(MenuAdmin -> {
-            storeList.put(MenuAdmin.getUrl().replace("/admin/", ""), MenuAdmin);
+            storeList.put(MenuAdmin.getCode(), MenuAdmin);
         });
 
         List<MenuAdmin> menuList = new ArrayList<>();
-        if (!storeList.containsKey(MenuType.INTRODUCTION.getCode())) {
-            menuList.add(
-                    MenuAdmin.builder().order(1).name(MenuType.INTRODUCTION.getName())
-                            .url("/admin/" + MenuType.INTRODUCTION.getCode())
-                            .icon("fas fa-handshake")
-                            .build());
+        if (!storeList.containsKey(MenuType.INTRODUCTION)) {
+            menuList.add(MenuAdmin.builder(MenuType.INTRODUCTION).group(MenuGroup.INTRODUCTION).order(1).icon("fas fa-handshake").build());
         }
-        if (!storeList.containsKey(MenuType.NOTICE.getCode())) {
-            menuList.add(MenuAdmin.builder().order(2).name(MenuType.NOTICE.getName())
-                    .url("/admin/" + MenuType.NOTICE.getCode())
-                    .icon("fas fa-volume-down")
-                    .build());
+        if (!storeList.containsKey(MenuType.NOTICE)) {
+            menuList.add(MenuAdmin.builder(MenuType.NOTICE).group(MenuGroup.NOTICE).icon("fas fa-volume-down").build());
         }
-        if (!storeList.containsKey(MenuType.JOB.getCode())) {
-            menuList.add(MenuAdmin.builder().order(3).name(MenuType.JOB.getName())
-                    .url("/admin/" + MenuType.JOB.getCode())
-                    .icon("fas fa-exclamation-circle")
-                    .build());
+        if (!storeList.containsKey(MenuType.JOB)) {
+            menuList.add(MenuAdmin.builder(MenuType.JOB).group(MenuGroup.RECRUIT).order(3).icon("fas fa-exclamation-circle").build());
         }
-        if (!storeList.containsKey(MenuType.APPLICANT.getCode())) {
-            menuList.add(MenuAdmin.builder().order(4).name(MenuType.APPLICANT.getName())
-                    .url("/admin/" + MenuType.APPLICANT.getCode())
-                    .icon("fas fa-id-badge")
-                    .build());
+        if (!storeList.containsKey(MenuType.APPLICANT)) {
+            menuList.add(MenuAdmin.builder(MenuType.APPLICANT).group(MenuGroup.RECRUIT).order(4).icon("fas fa-id-badge").build());
         }
-        if (!storeList.containsKey(MenuType.INQUIRY.getCode())) {
-            menuList.add(MenuAdmin.builder().order(5).name(MenuType.INQUIRY.getName())
-                    .url("/admin/" + MenuType.INQUIRY.getCode())
-                    .icon("fas fa-question-circle")
-                    .build());
+        if (!storeList.containsKey(MenuType.INQUIRY)) {
+            menuList.add(MenuAdmin.builder(MenuType.INQUIRY).group(MenuGroup.RECRUIT).order(5).icon("fas fa-question-circle").build());
         }
-        if (!storeList.containsKey(MenuType.ACCOUNT.getCode())) {
-            menuList.add(MenuAdmin.builder().order(6).name(MenuType.ACCOUNT.getName())
-                    .url("/admin/" + MenuType.ACCOUNT.getCode())
-                    .icon("fas fa-users-cog")
-                    .build());
+        if (!storeList.containsKey(MenuType.ACCESS)) {
+            menuList.add(MenuAdmin.builder(MenuType.ACCESS).group(MenuGroup.SYSTEM).order(6).icon("fas fa-sign-in-alt").build());
+        }
+        if (!storeList.containsKey(MenuType.ACCOUNT)) {
+            menuList.add(MenuAdmin.builder(MenuType.ACCOUNT).group(MenuGroup.SYSTEM).order(7).icon("fas fa-users-cog").build());
         }
 
         log.info("메뉴 {}건 추가됨", menuList.size());
