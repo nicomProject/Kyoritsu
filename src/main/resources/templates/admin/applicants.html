@@ -1,0 +1,37 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{components/_include::include_manager}"></th:block>
+<body class="g-sidenav-show">
+<th:block th:replace="~{components/_side::side_manager}"></th:block>
+<main class="main-content position-relative h-100 border-radius-lg">
+    <th:block th:replace="~{components/_header::header_manager}"></th:block>
+    <div class="container-fluid page-container">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">지원자 조회</h4>
+                <p class="card-category ellipsis">
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="icon-title"></span>
+                </p>
+            </div>
+            <div class="card-header card-header-action text-right">
+                <div class="btn-group me-1" role="group">
+                    <button class="btn btn-round btn-success bg-gradient-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="icon-title">파일 다운로드</span>
+                    </button>
+                    <ul class="dropdown-menu bg-gradient-success">
+                        <li><a class="dropdown-item text-white" href="#" role="action" data-action="download" data-target="excel"><i class="fas fa-file-excel"></i> Excel 다운로드</a></li>
+                        <li><a class="dropdown-item text-white" href="#" role="action" data-action="download" data-target="csv"><i class="fas fa-file-download"></i> CSV 다운로드</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="table"></div>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{components/_footer::footer_manager}"></th:block>
+
+<script type="text/javascript" src="/static/js/admin/page/applicants.js"></script>
+</body>

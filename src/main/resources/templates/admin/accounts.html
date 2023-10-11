@@ -29,9 +29,6 @@
                 <button class="btn btn-round btn-secondary btn-turn-circle me-1" role="action" data-action="setInitPwd">
                     <i class="fas fa-cog"></i><span class="icon-title">초기 비밀번호 설정</span>
                 </button>
-                <button class="btn btn-round btn-secondary bg-gradient-secondary btn-turn-circle" role="action" data-action="setEzFindPwd">
-                    <i class="fas fa-cog"></i><span class="icon-title">ezFind 비밀번호 설정</span>
-                </button>
             </div>
             <div class="card-body">
                 <div id="table"></div>
@@ -39,6 +36,8 @@
         </div>
     </div>
 </main>
+<th:block th:replace="~{components/_footer::footer_manager}"></th:block>
 <th:block th:replace="~{components/_modals::modal('account')}"></th:block>
+
 <script type="text/javascript" src="/static/js/admin/page/accounts.js"></script>
 </body>

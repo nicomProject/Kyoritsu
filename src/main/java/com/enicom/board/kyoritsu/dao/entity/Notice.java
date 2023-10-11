@@ -12,7 +12,7 @@ import org.hibernate.annotations.Comment;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "tb_notice")
 @Data
 @Builder
 @AllArgsConstructor

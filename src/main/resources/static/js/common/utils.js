@@ -1349,6 +1349,6 @@ const LoadingUtil = {
 const IconUtil = {
     enable: '<i class="text-success fas fa-check"></i>',
     disable: '<i class="text-danger fas fa-times"></i>',
-    success: '<i class="text-success fas fa-circle"></i>',
-    fail: '<i class="text-danger fas fa-circle"></i>'
+    success: '<i class="status-1 status-title fas fa-circle"></i>',
+    fail: '<i class="status-0 status-title fas fa-circle"></i>'
 }

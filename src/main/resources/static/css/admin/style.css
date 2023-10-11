@@ -136,6 +136,7 @@
 /* sidenav minified */
 .sidenav .logo-lg {
     transition: 0.5s;
+    max-height: 2.5rem;
 }
 body.g-sidenav-hidden:not(.g-sidenav-pinned) .sidenav:not(:hover) .logo-lg {
     height: 0;
@@ -1146,7 +1147,7 @@ input[type=checkbox]:checked {
     background-image: linear-gradient(310deg,#e58400, #ffe35b);
 }
 .bg-gradient-success {
-    background-image: linear-gradient(310deg,#207f35,#7cef6b);
+    background-image: linear-gradient(310deg,#207f35,#42c32f);
 }
 .bg-gradient-info {
     background-image: linear-gradient(310deg,#2190fd, #50ddff);
