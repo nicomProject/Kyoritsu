@@ -56,7 +56,7 @@ $(function () {
                     let val = '';
                     AjaxUtil.request({
                         method: 'GET',
-                        url: '/api/setting/initpwd',
+                        url: '/api/adm/setting/initpwd',
                         async: false,
                         success: function (data) {
                             val = data.result.info.value1;
@@ -100,66 +100,7 @@ $(function () {
                         Alert.confirm({title: '비밀번호 확인', text: `<b>"${value}"</b>로 변경하시겠습니까?`}, function (result) {
                             if (result.isConfirmed) {
                                 AjaxUtil.requestBody({
-                                    url: '/api/setting/initpwd',
-                                    data: {
-                                        value: value
-                                    },
-                                    successMessage: '성공적으로 변경되었습니다.'
-                                });
-                            }
-                        });
-                    });
-                }
-                // 초기 비밀번호 설정
-                else if (action === 'setEzFindPwd') {
-                    let val = '';
-                    AjaxUtil.request({
-                        method: 'GET',
-                        url: '/api/setting/ezfindPwd',
-                        async: false,
-                        success: function (data) {
-                            val = data.result.info.value1;
-                        }
-                    });
-
-                    Swal.fire({
-                        title: 'ezFind 비밀번호 설정',
-                        html: `현재 ezFind 비밀번호는 '<b>${val}</b>'입니다.<br>변경하실 ezFind 비밀번호를 입력해주십시오<br><br>해당 비밀번호는 검색프로그램 관리자 비밀번호입니다.`,
-                        icon: 'info',
-                        input: 'password',
-                        inputAttributes: {
-                            autocapitalize: 'off',
-                            autocomplete: 'new-password'
-                        },
-                        customClass: {
-                            confirmButton: `btn btn-info`,
-                            cancelButton: `btn btn-secondary`
-                        },
-                        showCancelButton: true,
-                        confirmButtonText: '변경',
-                        cancelButtonText: '취소',
-                        showLoaderOnConfirm: true,
-                        preConfirm: (pwd) => {
-                            if (pwd === '') {
-                                Swal.showValidationMessage('비밀번호를 입력해주세요!');
-                            } else if (pwd === val) {
-                                Swal.showValidationMessage('기존과 다른 비밀번호를 입력해주세요!');
-                            } else {
-                                const validation = ValidationUtil.checkPasswordPattern(pwd);
-                                if(!validation.result){
-                                    Swal.showValidationMessage(validation.error);
-                                }
-                            }
-                        },
-                        allowOutsideClick: () => !Swal.isLoading()
-                    }).then((result) => {
-                        if (!result.isConfirmed) return;
-
-                        const value = result.value;
-                        Alert.confirm({title: '비밀번호 확인', text: `<b>"${value}"</b>로 변경하시겠습니까?`}, function (result) {
-                            if (result.isConfirmed) {
-                                AjaxUtil.requestBody({
-                                    url: '/api/setting/ezfindPwd',
+                                    url: '/api/adm/setting/initpwd',
                                     data: {
                                         value: value
                                     },

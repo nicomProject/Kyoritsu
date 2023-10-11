@@ -1,4 +1,4 @@
-package com.enicom.board.kyoritsu.dao.type;
+package com.enicom.board.kyoritsu.dao.type.admin;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,10 +7,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public enum MenuGroup {
     HOME("홈"),
-    INTRODUCTIONS("소개글"),
-    ANNOUNCEMENT("공지사항"),
-    JOBPOSTING("채용 공고"),
-    JOBINQUIRY("채용 문의"),
+    INTRODUCTION("소개글"),
+    NOTICE("공지사항"),
+    RECRUIT("채용"),
     SYSTEM("시스템"),
     ;
     private final String name;

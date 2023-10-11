@@ -1,0 +1,71 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{components/_include::include_manager}"></th:block>
+<body class="g-sidenav-show">
+<th:block th:replace="~{components/_side::side_manager}"></th:block>
+<main class="main-content position-relative h-100 border-radius-lg">
+    <th:block th:replace="~{components/_header::header_manager}"></th:block>
+    <div class="container-fluid page-container">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">접속 기록</h4>
+                <p class="card-category ellipsis">
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="icon-title">관리자 계정의 접속 기록을 확인할 수 있는 메뉴입니다.</span>
+                </p>
+            </div>
+            <div class="card-header card-header-action d-flex">
+                <div class="filterLegend me-1" id="legend">
+                    <ul class="legend">
+                        <li class="text-bolder">[상태]</li>
+                        <li class="status-toggle"><span class="status-icon book-status-1"></span>비치</li>
+                        <li class="status-toggle"><span class="status-icon book-status-0"></span>대출</li>
+                        <li class="status-toggle"><span class="status-icon book-status-2"></span>폐기</li>
+                    </ul>
+                </div>
+                <div class="flex-1 text-right" th:if="${menu_auth_modify == true}">
+                    <button class="btn btn-round btn-primary bg-gradient-primary btn-pulse me-1" role="action" data-action="add">
+                        <i class="fas fa-plus"></i><span class="icon-title">등록</span>
+                    </button>
+                    <div class="btn-group me-1" role="group">
+                        <button class="btn btn-round btn-danger bg-gradient-danger btn-trash dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="trash">
+                                <span></span><i></i>
+                            </span>
+                            <span class="icon-title">삭제</span>
+                        </button>
+                        <ul class="dropdown-menu bg-gradient-danger">
+                            <li><a class="dropdown-item text-white" href="#" role="action" data-action="del" data-range="list">선택 삭제</a></li>
+                            <li><a class="dropdown-item text-white" href="#" role="action" data-action="del" data-range="all">전체 삭제</a></li>
+                            <li><a class="dropdown-item text-white" href="#" role="action" data-action="del" data-range="range">기간별 삭제</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group me-1" role="group">
+                        <button class="btn btn-round btn-warning bg-gradient-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-star"></i>
+                            <span class="icon-title">신착도서 설정</span>
+                        </button>
+                        <ul class="dropdown-menu bg-gradient-warning">
+                            <li><a class="dropdown-item text-white" href="#" role="action" data-action="new" data-range="list" data-value="1"><i class="fas fa-star"></i> 선택도서 신착 설정</a></li>
+                            <li><a class="dropdown-item text-white" href="#" role="action" data-action="new" data-range="list" data-value="0"><i class="fas fa-star-half"></i> 선택도서 신착 해제</a></li>
+                            <li><a class="dropdown-item text-white" href="#" role="action" data-action="new" data-range="all" data-value="0"><i class="fas fa-star-half"></i> 전체도서 신착 해제</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group me-1" role="group">
+                        <button class="btn btn-round btn-success bg-gradient-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-file-alt"></i>
+                            <span class="icon-title">파일 작업</span>
+                        </button>
+                        <ul class="dropdown-menu bg-gradient-success">
+                            <li><a class="dropdown-item text-white" href="#" role="action" data-action="download" data-target="excel"><i class="fas fa-file-excel"></i> Excel 다운로드</a></li>
+                            <li><a class="dropdown-item text-white" href="#" role="action" data-action="download" data-target="csv"><i class="fas fa-file-csv"></i> CSV 다운로드</a></li>
+                        </ul>
+                    </div>
+                </div>
+            <div class="card-body">
+                <div id="table"></div>
+            </div>
+        </div>
+    </div>
+</main>
+<script type="text/javascript" src="/static/js/admin/page/access.js"></script>
+</body>
