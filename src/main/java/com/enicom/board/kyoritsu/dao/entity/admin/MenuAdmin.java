@@ -1,6 +1,8 @@
 package com.enicom.board.kyoritsu.dao.entity.admin;
 
+import com.enicom.board.kyoritsu.dao.type.admin.MenuGroup;
 import com.enicom.board.kyoritsu.dao.type.MenuTarget;
+import com.enicom.board.kyoritsu.dao.type.admin.MenuType;
 import com.enicom.board.kyoritsu.login.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -25,6 +27,16 @@ public class MenuAdmin {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MENU_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
+
+    @Column(name = "code", length = 20)
+    @Enumerated(EnumType.STRING)
+    @Comment("메뉴 코드")
+    private MenuType code;
+
+    @Column(name = "grp", length = 20)
+    @Enumerated(EnumType.STRING)
+    @Comment("메뉴 그룹")
+    private MenuGroup group = MenuGroup.SYSTEM;
 
     @Column(name = "name", length = 20)
     @Comment("메뉴명")
@@ -82,4 +94,10 @@ public class MenuAdmin {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime editDate;
 
+    public static MenuAdminBuilder builder(){
+        return new MenuAdminBuilder();
+    }
+    public static MenuAdminBuilder builder(MenuType type){
+        return builder().name(type.getName()).url(String.format("/admin/%s", type.getCode()));
+    }
 }

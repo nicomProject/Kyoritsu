@@ -24,8 +24,8 @@ public class AccessLog {
     @Column(name = "rec_key")
     private Long recKey;
 
-    @Column(name = "ip", length = 20)
-    private String ip;
+    @Column(name = "login_ip", length = 20)
+    private String loginIp;
 
     @Column(name = "login_id", length = 20)
     private String loginId;

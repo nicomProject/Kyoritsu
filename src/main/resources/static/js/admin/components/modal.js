@@ -19,7 +19,7 @@ const Data = {
     getRoles: function () {
         const that = this;
         AjaxUtil.request({
-            url: '/api/setting/roles',
+            url: '/api/adm/setting/roles',
             success: function (data) {
                 const items = data.result && data.result.items || [];
                 items.forEach(item => {
