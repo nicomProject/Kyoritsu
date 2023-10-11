@@ -1,9 +1,7 @@
 package com.enicom.board.kyoritsu.dao.entity.admin;
 
-import com.enicom.board.kyoritsu.dao.type.MenuGroup;
 import com.enicom.board.kyoritsu.dao.type.MenuTarget;
 import com.enicom.board.kyoritsu.login.Role;
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -29,20 +27,26 @@ public class MenuAdmin {
     private Long recKey;
 
     @Column(name = "name", length = 20)
+    @Comment("메뉴명")
     private String name;
 
     @Column(name = "url", length = 100)
+    @Comment("메뉴 URL")
     private String url;
 
-    @Column(name = "thumbnail_url", length = 100)
-    private String thumbnailUrl;
-
     @Column(name = "read_role")
-    private String readRole;
+    @Enumerated(EnumType.STRING)
+    @Comment("권한 - 조회 권한")
+    private Role readRole = Role.ADMIN;
 
-    @Column(name = "code")
-    private String code;
+    @Column(name = "edit_role")
+    @Enumerated(EnumType.STRING)
+    @Comment("권한 - 수정 권한")
+    private Role editRole = Role.ADMIN;
 
+    @Column(name = "icon")
+    @Comment("아이콘 Class - FontAwesome")
+    private String icon;
 
     @Column(name = "target")
     @Builder.Default
@@ -59,15 +63,23 @@ public class MenuAdmin {
     @Builder.Default
     private Integer use = 1;
 
+    @Column(name = "create_user", length = 50)
+    private String createUser;
+
+    @Column(name = "edit_user", length = 50)
+    private String editUser;
+
+    @Column(name = "create_date")
     @Builder.Default
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createDate = LocalDateTime.now();
 
+    @Column(name = "edit_date")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime updateDate;
+    private LocalDateTime editDate;
 
 }

@@ -1,24 +1,18 @@
 package com.enicom.board.kyoritsu.dao.type.admin;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Getter
 public enum MenuType {
-    INTRODUCTIONS("introductions", "소개글"),
-    ANNOUNCEMENT("announcement", "공지사항 관리"),
-    JOBPOSTING("jobposting", "채용 공고"),
-    APPLICANTCHECK("applicantcheck", "지원자 조회"),
-    JOBINQUIRY("jobinquiry", "채용 문의"),
-    ADMINACCOUNTSCHECK("adminaccountscheck", "관리자 계정 조회");
+    INTRODUCTION("introductions", "소개글 관리"),
+    NOTICE("notices", "공지사항 관리"),
+    JOB("jobs", "채용 공고 관리"),
+    APPLICANT("applicants", "지원자 조회"),
+    INQUIRY("inquirys", "채용 문의"),
+    ACCOUNT("accounts", "관리자 계정 조회");
 
     private final String code;
     private final String name;
-
-    public String id() {
-        return code;
-    }
-
-    public String display() {
-        return name;
-    }
 }

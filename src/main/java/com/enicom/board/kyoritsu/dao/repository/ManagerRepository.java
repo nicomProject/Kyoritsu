@@ -11,6 +11,7 @@ public interface ManagerRepository extends CrudRepository<Manager, Long> {
     Optional<Manager> findByUserId(String userId);
 
     List<Manager> findAllByRoleIn(List<Role> roles);
+
     List<Manager> findAllByUserIdIn(List<String> ids);
 
     void deleteByUserId(String userId);

@@ -1,4 +1,4 @@
-package com.enicom.board.kyoritsu.dao.entity.main;
+package com.enicom.board.kyoritsu.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -12,16 +12,16 @@ import org.hibernate.annotations.Comment;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "tb_category_sub")
+@Entity(name = "tb_intro")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@SequenceGenerator(name = "SEQ_SUBCATEGORY_GENERATOR", sequenceName = "SEQ_SUBCATEGORY", initialValue = 1, allocationSize = 1)
-public class SubCategory {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_SUBCATEGORY_GENERATOR")
+@SequenceGenerator(name = "SEQ_INTRODUCTION_GENERATOR", sequenceName = "SEQ_INTRODUCTION", initialValue = 1, allocationSize = 1)
+public class Introduction {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_INTRODUCTION_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
 
@@ -33,9 +33,13 @@ public class SubCategory {
     @Column(name = "name", length = 20)
     private String name;
 
-    @JoinColumn(name = "co_id")
+    @JoinColumn(name = "category_id")
     @ManyToOne
-    private Content contentId;
+    private IntroCategory category;
+
+    @JoinColumn(name = "content_id")
+    @ManyToOne
+    private Content content;
 
     @Column(name = "order_seq")
     @Builder.Default
@@ -43,13 +47,13 @@ public class SubCategory {
     @ColumnDefault("0")
     private Integer order = 0;
 
-    @Column(name = "create_user")
+    @Column(name = "create_user", length = 50)
     private String createUser;
 
-    @Column(name = "edit_user")
+    @Column(name = "edit_user", length = 50)
     private String editUser;
 
-    @Column(name = "delete_user")
+    @Column(name = "delete_user", length = 50)
     private String deleteUser;
 
     @Column(name = "create_date")

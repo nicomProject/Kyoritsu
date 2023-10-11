@@ -1,4 +1,4 @@
-package com.enicom.board.kyoritsu.dao.entity.main;
+package com.enicom.board.kyoritsu.dao.entity;
 
 import com.enicom.board.kyoritsu.dao.type.MenuTarget;
 import com.enicom.board.kyoritsu.dao.type.MenuType;
@@ -56,13 +56,13 @@ public class Menu {
     @ColumnDefault("1")
     private Integer use = 1;
 
-    @Column(name = "create_user")
+    @Column(name = "create_user", length = 50)
     private String createUser;
 
-    @Column(name = "edit_user")
+    @Column(name = "edit_user", length = 50)
     private String editUser;
 
-    @Column(name = "delete_user")
+    @Column(name = "delete_user", length = 50)
     private String deleteUser;
 
     @Column(name = "create_date")

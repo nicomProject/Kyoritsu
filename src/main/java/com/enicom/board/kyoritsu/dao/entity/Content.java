@@ -1,52 +1,46 @@
-package com.enicom.board.kyoritsu.dao.entity.admin;
+package com.enicom.board.kyoritsu.dao.entity;
 
-import com.enicom.board.kyoritsu.login.MemberDetail;
-import com.enicom.board.kyoritsu.login.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "mn_user")
-@Data
+@Entity(name = "tb_content")
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(force = true)
+@NoArgsConstructor
 @Getter
-@SequenceGenerator(name = "SEQ_MANAGER_GENERATOR", sequenceName = "SEQ_MANAGER", initialValue = 1, allocationSize = 1)
-public class Manager {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MANAGER_GENERATOR")
+@Setter
+@ToString
+@SequenceGenerator(name = "SEQ_CONTENT_GENERATOR", sequenceName = "SEQ_CONTENT", initialValue = 1, allocationSize = 1)
+public class Content {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CONTENT_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
 
     @Id
-    @Column(name = "id", length = 20, unique = true, nullable = false)
-    @NonNull
-    private String userId;
+    @Column(name = "id")
+    private String id;
 
-    @Column(name = "password", length = 200, nullable = false)
-    private String password;
+    @Column(name = "title", length = 20)
+    private String title;
 
-    @Column(name = "name", length = 20)
-    private String name;
+    @Column(name = "subtitle", length = 100)
+    private String subtitle;
 
+    @Column(name = "content", length = 10000)
+    private String content;
+
+    @Column(name = "hit")
     @Builder.Default
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", length = 10)
-    private Role role = Role.ADMIN;
-
-    @Builder.Default
-    @Column(name = "enable")
-    private Integer enable = 1;
-
-    @Builder.Default
-    @Column(name = "failure_cnt")
-    private Integer failureCnt = 0;
+    @ColumnDefault("0")
+    private Integer hit = 0;
 
     @Column(name = "create_user", length = 50)
     private String createUser;
@@ -75,24 +69,4 @@ public class Manager {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime deleteDate;
-
-    @Column(name = "login_date")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime loginDate;
-
-    public MemberDetail toMember() {
-        MemberDetail member = MemberDetail.builder().id(userId).password(password).build();
-        if (name != null) {
-            member.setName(name);
-        }
-        if (role != null) {
-            member.setRole(role);
-        }
-        if (enable != null) {
-            member.setEnable(enable);
-        }
-        return member;
-    }
 }

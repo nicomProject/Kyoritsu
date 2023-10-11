@@ -59,39 +59,49 @@ public class DataInitRunner implements ApplicationRunner {
     private void configureMenu() {
         Map<String, MenuAdmin> storeList = new HashMap<>();
         menuAdminRepository.findAll().forEach(MenuAdmin -> {
-            storeList.put(MenuAdmin.getCode(), MenuAdmin);
+            storeList.put(MenuAdmin.getUrl().replace("/admin/", ""), MenuAdmin);
         });
 
         List<MenuAdmin> menuList = new ArrayList<>();
-        if (!storeList.containsKey(MenuType.INTRODUCTIONS.id())) {
+        if (!storeList.containsKey(MenuType.INTRODUCTION.getCode())) {
             menuList.add(
-                    MenuAdmin.builder().recKey(1L).order(1).name(MenuType.INTRODUCTIONS.display()).code(MenuType.INTRODUCTIONS.id())
+                    MenuAdmin.builder().order(1).name(MenuType.INTRODUCTION.getName())
+                            .url("/admin/" + MenuType.INTRODUCTION.getCode())
+                            .icon("fas fa-handshake")
                             .build());
         }
-        if (!storeList.containsKey(MenuType.ANNOUNCEMENT.id())) {
-            menuList.add(MenuAdmin.builder().recKey(2L).order(2).name(MenuType.ANNOUNCEMENT.display()).code(MenuType.ANNOUNCEMENT.id())
+        if (!storeList.containsKey(MenuType.NOTICE.getCode())) {
+            menuList.add(MenuAdmin.builder().order(2).name(MenuType.NOTICE.getName())
+                    .url("/admin/" + MenuType.NOTICE.getCode())
+                    .icon("fas fa-volume-down")
                     .build());
         }
-        if (!storeList.containsKey(MenuType.JOBPOSTING.id())) {
-            menuList.add(MenuAdmin.builder().recKey(3L).order(3).name(MenuType.JOBPOSTING.display()).code(MenuType.JOBPOSTING.id())
+        if (!storeList.containsKey(MenuType.JOB.getCode())) {
+            menuList.add(MenuAdmin.builder().order(3).name(MenuType.JOB.getName())
+                    .url("/admin/" + MenuType.JOB.getCode())
+                    .icon("fas fa-exclamation-circle")
                     .build());
         }
-        if (!storeList.containsKey(MenuType.APPLICANTCHECK.id())) {
-            menuList.add(MenuAdmin.builder().recKey(4L).order(4).name(MenuType.APPLICANTCHECK.display()).code(MenuType.APPLICANTCHECK.id())
+        if (!storeList.containsKey(MenuType.APPLICANT.getCode())) {
+            menuList.add(MenuAdmin.builder().order(4).name(MenuType.APPLICANT.getName())
+                    .url("/admin/" + MenuType.APPLICANT.getCode())
+                    .icon("fas fa-id-badge")
                     .build());
         }
-        if (!storeList.containsKey(MenuType.JOBINQUIRY.id())) {
-            menuList.add(MenuAdmin.builder().recKey(5L).order(5).name(MenuType.JOBINQUIRY.display()).code(MenuType.JOBINQUIRY.id())
+        if (!storeList.containsKey(MenuType.INQUIRY.getCode())) {
+            menuList.add(MenuAdmin.builder().order(5).name(MenuType.INQUIRY.getName())
+                    .url("/admin/" + MenuType.INQUIRY.getCode())
+                    .icon("fas fa-question-circle")
                     .build());
         }
-        if (!storeList.containsKey(MenuType.ADMINACCOUNTSCHECK.id())) {
-            menuList.add(MenuAdmin.builder().recKey(6L).order(6).name(MenuType.ADMINACCOUNTSCHECK.display()).code(MenuType.ADMINACCOUNTSCHECK.id())
+        if (!storeList.containsKey(MenuType.ACCOUNT.getCode())) {
+            menuList.add(MenuAdmin.builder().order(6).name(MenuType.ACCOUNT.getName())
+                    .url("/admin/" + MenuType.ACCOUNT.getCode())
+                    .icon("fas fa-users-cog")
                     .build());
         }
 
         log.info("메뉴 {}건 추가됨", menuList.size());
         menuAdminRepository.saveAll(menuList);
     }
-
-
 }
