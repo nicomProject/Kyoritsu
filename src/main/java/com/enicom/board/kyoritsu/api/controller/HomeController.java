@@ -27,6 +27,11 @@ public class HomeController {
         return "main/index";
     }
 
+    @GetMapping(path = {"/main"})
+    public String main(Model model) throws Exception {
+        return "main/main";
+    }
+
     @GetMapping(path = { "/admin"})
     public String admin(Model model) throws Exception {
         return login(model);
