@@ -25,10 +25,6 @@ public class Content {
     @Column(name = "rec_key")
     private Long recKey;
 
-    @Id
-    @Column(name = "id")
-    private String id;
-
     @Column(name = "title", length = 20)
     private String title;
 
