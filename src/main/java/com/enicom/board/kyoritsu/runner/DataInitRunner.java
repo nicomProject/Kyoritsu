@@ -1,11 +1,13 @@
 package com.enicom.board.kyoritsu.runner;
 
 import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
-import com.enicom.board.kyoritsu.dao.entity.admin.MenuAdmin;
+import com.enicom.board.kyoritsu.dao.entity.admin.Menu;
+import com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup;
 import com.enicom.board.kyoritsu.dao.repository.CodeRepository;
 import com.enicom.board.kyoritsu.dao.repository.ManagerRepository;
-import com.enicom.board.kyoritsu.dao.repository.MenuAdminRepository;
-import com.enicom.board.kyoritsu.dao.type.admin.MenuGroup;
+import com.enicom.board.kyoritsu.dao.repository.admin.MenuGroupRepository;
+import com.enicom.board.kyoritsu.dao.repository.admin.MenuRepository;
+import com.enicom.board.kyoritsu.dao.type.admin.MenuGroupType;
 import com.enicom.board.kyoritsu.dao.type.admin.MenuType;
 import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
@@ -16,10 +18,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @Slf4j
@@ -27,15 +26,17 @@ public class DataInitRunner implements ApplicationRunner {
     private final SecurityUtil securityUtil;
     private final CodeRepository codeRepository;
     private final ManagerRepository managerRepository;
-    private final MenuAdminRepository menuAdminRepository;
+    private final MenuRepository menuRepository;
+    private final MenuGroupRepository menuGroupRepository;
 
     @Autowired
     public DataInitRunner(SecurityUtil securityUtil, CodeRepository codeRepository, ManagerRepository managerRepository,
-                          MenuAdminRepository menuAdminRepository) {
+                          MenuRepository menuRepository, MenuGroupRepository menuGroupRepository) {
         this.securityUtil = securityUtil;
         this.codeRepository = codeRepository;
         this.managerRepository = managerRepository;
-        this.menuAdminRepository = menuAdminRepository;
+        this.menuRepository = menuRepository;
+        this.menuGroupRepository = menuGroupRepository;
     }
 
     @Override
@@ -58,35 +59,69 @@ public class DataInitRunner implements ApplicationRunner {
     }
 
     private void configureAdminMenu() {
-        Map<MenuType, MenuAdmin> storeList = new HashMap<>();
-        menuAdminRepository.findAll().forEach(MenuAdmin -> {
-            storeList.put(MenuAdmin.getCode(), MenuAdmin);
+        // 메뉴 그룹 업데이트
+        Map<MenuGroupType, MenuGroup> groupStoredList = new HashMap<>();
+        menuGroupRepository.findAll().forEach(group -> {
+            groupStoredList.put(group.getCode(), group);
         });
 
-        List<MenuAdmin> menuList = new ArrayList<>();
-        if (!storeList.containsKey(MenuType.INTRODUCTION)) {
-            menuList.add(MenuAdmin.builder(MenuType.INTRODUCTION).group(MenuGroup.INTRODUCTION).order(1).icon("fas fa-handshake").build());
+        MenuGroup home = MenuGroup.builder(MenuGroupType.HOME).orderSeq(0).build();
+        MenuGroup intro = MenuGroup.builder(MenuGroupType.INTRODUCTION).orderSeq(1).build();
+        MenuGroup notice = MenuGroup.builder(MenuGroupType.NOTICE).orderSeq(2).build();
+        MenuGroup recruit = MenuGroup.builder(MenuGroupType.RECRUIT).orderSeq(3).build();
+        MenuGroup system = MenuGroup.builder(MenuGroupType.SYSTEM).orderSeq(4).build();
+
+        if(groupStoredList.containsKey(MenuGroupType.HOME)){
+            home = groupStoredList.get(MenuGroupType.HOME);
         }
-        if (!storeList.containsKey(MenuType.NOTICE)) {
-            menuList.add(MenuAdmin.builder(MenuType.NOTICE).group(MenuGroup.NOTICE).icon("fas fa-volume-down").build());
+        if(groupStoredList.containsKey(MenuGroupType.INTRODUCTION)){
+            intro = groupStoredList.get(MenuGroupType.INTRODUCTION);
         }
-        if (!storeList.containsKey(MenuType.JOB)) {
-            menuList.add(MenuAdmin.builder(MenuType.JOB).group(MenuGroup.RECRUIT).order(3).icon("fas fa-exclamation-circle").build());
+        if(groupStoredList.containsKey(MenuGroupType.NOTICE)){
+            notice = groupStoredList.get(MenuGroupType.NOTICE);
         }
-        if (!storeList.containsKey(MenuType.APPLICANT)) {
-            menuList.add(MenuAdmin.builder(MenuType.APPLICANT).group(MenuGroup.RECRUIT).order(4).icon("fas fa-id-badge").build());
+        if(groupStoredList.containsKey(MenuGroupType.RECRUIT)){
+            recruit = groupStoredList.get(MenuGroupType.RECRUIT);
         }
-        if (!storeList.containsKey(MenuType.INQUIRY)) {
-            menuList.add(MenuAdmin.builder(MenuType.INQUIRY).group(MenuGroup.RECRUIT).order(5).icon("fas fa-question-circle").build());
+        if(groupStoredList.containsKey(MenuGroupType.SYSTEM)){
+            system = groupStoredList.get(MenuGroupType.SYSTEM);
         }
-        if (!storeList.containsKey(MenuType.ACCESS)) {
-            menuList.add(MenuAdmin.builder(MenuType.ACCESS).group(MenuGroup.SYSTEM).order(6).icon("fas fa-sign-in-alt").build());
+
+        menuGroupRepository.saveAll(Arrays.asList(home, intro, notice, recruit, system));
+
+        // 메뉴 목록 업데이트
+        Map<MenuType, Menu> menuStoredList = new HashMap<>();
+        menuRepository.findAll().forEach(menu -> {
+            menuStoredList.put(menu.getCode(), menu);
+        });
+
+        List<Menu> menuList = new ArrayList<>();
+        if (!menuStoredList.containsKey(MenuType.DASHBOARD)) {
+            menuList.add(Menu.builder(MenuType.DASHBOARD).group(home).orderSeq(0).icon("fas fa-tachometer-alt").build());
         }
-        if (!storeList.containsKey(MenuType.ACCOUNT)) {
-            menuList.add(MenuAdmin.builder(MenuType.ACCOUNT).group(MenuGroup.SYSTEM).order(7).icon("fas fa-users-cog").build());
+        if (!menuStoredList.containsKey(MenuType.INTRODUCTION)) {
+            menuList.add(Menu.builder(MenuType.INTRODUCTION).group(intro).orderSeq(1).icon("fas fa-handshake").build());
+        }
+        if (!menuStoredList.containsKey(MenuType.NOTICE)) {
+            menuList.add(Menu.builder(MenuType.NOTICE).group(notice).orderSeq(2).icon("fas fa-volume-down").build());
+        }
+        if (!menuStoredList.containsKey(MenuType.JOB)) {
+            menuList.add(Menu.builder(MenuType.JOB).group(recruit).orderSeq(3).icon("fas fa-exclamation-circle").build());
+        }
+        if (!menuStoredList.containsKey(MenuType.APPLICANT)) {
+            menuList.add(Menu.builder(MenuType.APPLICANT).group(recruit).orderSeq(4).icon("fas fa-id-badge").build());
+        }
+        if (!menuStoredList.containsKey(MenuType.INQUIRY)) {
+            menuList.add(Menu.builder(MenuType.INQUIRY).group(recruit).orderSeq(5).icon("fas fa-question-circle").build());
+        }
+        if (!menuStoredList.containsKey(MenuType.ACCESS)) {
+            menuList.add(Menu.builder(MenuType.ACCESS).group(system).orderSeq(6).icon("fas fa-sign-in-alt").build());
+        }
+        if (!menuStoredList.containsKey(MenuType.ACCOUNT)) {
+            menuList.add(Menu.builder(MenuType.ACCOUNT).group(system).orderSeq(7).icon("fas fa-users-cog").build());
         }
 
         log.info("메뉴 {}건 추가됨", menuList.size());
-        menuAdminRepository.saveAll(menuList);
+        menuRepository.saveAll(menuList);
     }
 }
