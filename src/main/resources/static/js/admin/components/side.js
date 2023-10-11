@@ -12,8 +12,8 @@ const SideBar = {
                 url: '/api/menus',
                 async: false,
                 success: function (data) {
-                    console.log("data ======zz" + JSON.stringify(data))
-                    console.log("data.result.items" + JSON.stringify(data.result.items))
+                    console.log("data ======zz", data)
+                    console.log("data.result.items", data.result.items)
                     that.menus = data.result.items;
                     that.draw();
                 }

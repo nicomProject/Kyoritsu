@@ -1373,3 +1373,33 @@ input[type=checkbox]:checked {
         color: #603cff;
     }
 }
+
+.introduceSub {
+    text-align: center;
+    height: 40px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
+.introduceTable{
+    width: 90%;
+}
+
+.introduceSub [id]  {
+    text-align: center;
+    width: 100%;
+    height: 40px;
+}
+
+.introduceSub #contents  {
+    text-align: center;
+    width: 100%;
+    height: 500px;
+}
+
+.introduceSub #management  {
+    height: 60px;
+    background-color: #fff;
+    border: 0.25px solid #7b7f83;
+    text-align: left;
+}
