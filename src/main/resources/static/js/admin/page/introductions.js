@@ -8,168 +8,7 @@ $(function () {
             this.event();
         },
         event: function () {
-            const card = $('.card')
             const table = Table.load('#table');
-
-            card.find('*[role="action"]').click(function (e) {
-                const action = this.dataset.action;
-
-                // 관리자 등록
-                if (action === 'add') {
-                    ParamManager.show('account', action, {});
-                }
-                // 관리자 초기화
-                else if (action === 'reset') {
-                    const selected = table.getSelectedData().map(e => e.userId);
-                    if(selected.length === 0){
-                        Alert.warning({
-                            title: '관리자 초기화',
-                            text: '초기화하실 관리자를 선택해주세요!'
-                        });
-                    }
-                    else if (selected.includes(memberInfo.id)) {
-                        Alert.warning({
-                            title: '관리자 초기화',
-                            text: '현재 로그인한 계정이 포함되어 있습니다.<br>이를 제외하고 다시 진행해주세요!'
-                        });
-                    } else {
-                        Alert.confirm({
-                            title: '관리자 초기화',
-                            text: '선택하신 관리자를 초기화하시겠습니까?<br>선택된 관리자: ' + selected.join(',')
-                        }, function (result) {
-                            if (!result.isConfirmed) return;
-
-                            AjaxUtil.requestBody({
-                                url: '/api/manager/init',
-                                data: {
-                                    type: 'list',
-                                    idList: selected
-                                },
-                                table: 'table',
-                                successMessage: '성공적으로 초기화되었습니다.'
-                            });
-                        });
-                    }
-                }
-                // 초기 비밀번호 설정
-                else if (action === 'setInitPwd') {
-                    let val = '';
-                    AjaxUtil.request({
-                        method: 'GET',
-                        url: '/api/setting/initpwd',
-                        async: false,
-                        success: function (data) {
-                            val = data.result.info.value1;
-                        }
-                    });
-
-                    Swal.fire({
-                        title: '초기 비밀번호 설정',
-                        html: `현재 초기 비밀번호는 '<b>${val}</b>'입니다.<br>변경하실 초기 비밀번호를 입력해주십시오`,
-                        icon: 'info',
-                        input: 'password',
-                        inputAttributes: {
-                            autocapitalize: 'off',
-                            autocomplete: 'new-password'
-                        },
-                        customClass: {
-                            confirmButton: `btn btn-info`,
-                            cancelButton: `btn btn-secondary`
-                        },
-                        showCancelButton: true,
-                        confirmButtonText: '변경',
-                        cancelButtonText: '취소',
-                        showLoaderOnConfirm: true,
-                        preConfirm: (pwd) => {
-                            if (pwd === '') {
-                                Swal.showValidationMessage('비밀번호를 입력해주세요!');
-                            } else if (pwd === val) {
-                                Swal.showValidationMessage('기존과 다른 비밀번호를 입력해주세요!');
-                            } else {
-                                const validation = ValidationUtil.checkPasswordPattern(pwd);
-                                if(!validation.result){
-                                    Swal.showValidationMessage(validation.error);
-                                }
-                            }
-                        },
-                        allowOutsideClick: () => !Swal.isLoading()
-                    }).then((result) => {
-                        if (!result.isConfirmed) return;
-
-                        const value = result.value;
-                        Alert.confirm({title: '비밀번호 확인', text: `<b>"${value}"</b>로 변경하시겠습니까?`}, function (result) {
-                            if (result.isConfirmed) {
-                                AjaxUtil.requestBody({
-                                    url: '/api/setting/initpwd',
-                                    data: {
-                                        value: value
-                                    },
-                                    successMessage: '성공적으로 변경되었습니다.'
-                                });
-                            }
-                        });
-                    });
-                }
-                // 초기 비밀번호 설정
-                else if (action === 'setEzFindPwd') {
-                    let val = '';
-                    AjaxUtil.request({
-                        method: 'GET',
-                        url: '/api/setting/ezfindPwd',
-                        async: false,
-                        success: function (data) {
-                            val = data.result.info.value1;
-                        }
-                    });
-
-                    Swal.fire({
-                        title: 'ezFind 비밀번호 설정',
-                        html: `현재 ezFind 비밀번호는 '<b>${val}</b>'입니다.<br>변경하실 ezFind 비밀번호를 입력해주십시오<br><br>해당 비밀번호는 검색프로그램 관리자 비밀번호입니다.`,
-                        icon: 'info',
-                        input: 'password',
-                        inputAttributes: {
-                            autocapitalize: 'off',
-                            autocomplete: 'new-password'
-                        },
-                        customClass: {
-                            confirmButton: `btn btn-info`,
-                            cancelButton: `btn btn-secondary`
-                        },
-                        showCancelButton: true,
-                        confirmButtonText: '변경',
-                        cancelButtonText: '취소',
-                        showLoaderOnConfirm: true,
-                        preConfirm: (pwd) => {
-                            if (pwd === '') {
-                                Swal.showValidationMessage('비밀번호를 입력해주세요!');
-                            } else if (pwd === val) {
-                                Swal.showValidationMessage('기존과 다른 비밀번호를 입력해주세요!');
-                            } else {
-                                const validation = ValidationUtil.checkPasswordPattern(pwd);
-                                if(!validation.result){
-                                    Swal.showValidationMessage(validation.error);
-                                }
-                            }
-                        },
-                        allowOutsideClick: () => !Swal.isLoading()
-                    }).then((result) => {
-                        if (!result.isConfirmed) return;
-
-                        const value = result.value;
-                        Alert.confirm({title: '비밀번호 확인', text: `<b>"${value}"</b>로 변경하시겠습니까?`}, function (result) {
-                            if (result.isConfirmed) {
-                                AjaxUtil.requestBody({
-                                    url: '/api/setting/ezfindPwd',
-                                    data: {
-                                        value: value
-                                    },
-                                    successMessage: '성공적으로 변경되었습니다.'
-                                });
-                            }
-                        });
-                    });
-                }
-            });
         }
     };
 
@@ -186,8 +25,7 @@ $(function () {
                 locale: 'ko-kr',
                 langs: TableUtil.setDefaults(),
                 layout: 'fitColumns',
-                placeholder: TableUtil.getPlaceholder('조건에 맞는 관리자가 없습니다.'),
-                headerFilterPlaceholder: '검색어 입력',
+                placeholder: TableUtil.getPlaceholder('조건에 맞는 소개글이 없습니다.'),
                 pagination: false,
                 paginationSize: paginationConfig.size,
                 paginationSizeSelector: paginationConfig.selector,
@@ -232,26 +70,90 @@ $(function () {
                         download: false,
                         headerSort: false
                     },
-                    {title: '카테고리', headerHozAlign: 'center', vertAlign: 'middle', hozAlign: 'center', field: "userId", tooltip: true, headerTooltip: true, headerFilter: 'input'},
-                    {title: '서브카테고리', headerHozAlign: 'center', vertAlign: 'middle', hozAlign: 'center', field: "name", tooltip: true, headerTooltip: true, headerFilter: 'input'},
-                    {title: '제목', headerHozAlign: 'center', vertAlign: 'middle', hozAlign: 'center', field: "name", tooltip: true, headerTooltip: true, headerFilter: 'input'},
+                    {title: '카테고리', field: "category", tooltip: true, headerTooltip: true, headerFilter: 'input'},
+                    {title: '서브 카테고리', field: "subcategory", tooltip: true, headerTooltip: true, headerFilter: 'input'},
+                    {title: '제목', field: "title", tooltip: true, headerTooltip: true, headerFilter: 'input'},
+                    {title: '소제목', field: "subtitle", tooltip: true, headerTooltip: true, headerFilter: 'input'},
                     {
                         title: '<i class="fas fa-clock"></i> 등록 일시',
-                        field: "editDate",
+                        field: "createDate",
+                        tooltip: true,
+                        headerTooltip: true
+                    },
+
+                    {
+                        title: '작업',
+                        width: 140,
+                        headerHozAlign: 'center',
+                        hozAlign: 'center',
+                        headerSort: false,
                         tooltip: true,
                         headerTooltip: true,
-                        vertAlign: 'middle',
-                        headerHozAlign: 'center',
-                        hozAlign: 'center'
+                        download: false,
+                        //visible: authInfo.edit,
+                        formatter: function (cell, formatterParams, onRendered) {
+                            const row = cell.getRow();
+                            const data = row.getData();
+                            const that = $(cell.getElement())
+                            const value = cell.getValue() || '0';
+
+                            const buttons = document.querySelectorAll("button");
+
+                            // 모든 버튼에 클릭 이벤트 리스너를 추가합니다.
+                            buttons.forEach(function (button) {
+                                button.addEventListener("click", function () {
+                                    // data-action 속성을 확인하여 해당 동작을 처리합니다.
+                                    const action = button.getAttribute("data-action");
+                                    if (action === "delete") {
+
+                                        const selected = table.getSelectedData().map(e => e.recKey);
+                                        const firstSelected = selected[0];
+                                        console.log(selected.length + "selected")
+                                        console.log(selected+ "selected222")
+                                        if(selected.length == 1){
+                                        AjaxUtil.requestBody({
+                                            url: '/api/introductions/delete',
+                                            data: {
+                                                type: 'one',
+                                                id: firstSelected
+                                            },
+                                            success: function (data) {
+                                                console.log(data)
+                                                if (data.code == 200) {
+                                                }
+                                            }
+                                        })
+                                        }
+                                        else{
+                                            AjaxUtil.requestBody({
+                                                url: '/api/introductions/delete',
+                                                data: {
+                                                    type: 'list',
+                                                    idListLong: selected
+                                                },
+                                                success: function (data) {
+                                                    console.log(data)
+                                                    if (data.code == 200) {
+                                                    }
+                                                }
+                                            })
+                                        }
+
+                                    }
+                                });
+                            });
+
+                            //return section;
+                        }
                     },
                 ],
             });
 
             const events = {
+
                 rowClick: function (e, row) {
-                    TableUtil.showRowDetail(row, 'account', {
-                        rowActive: false,
-                    });
+                    window.location.href = 'introductionsDetail?row=' + row.getData().recKey;
+
                 },
                 downloadComplete: function () {
                     Swal.close();
@@ -272,6 +174,6 @@ $(function () {
     };
 
     Content.load({
-        url: "/api/managers"
+        url: "/api/introductions/find"
     });
 })

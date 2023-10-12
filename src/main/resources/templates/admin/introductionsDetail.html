@@ -35,6 +35,10 @@
                         <td colspan="3"><input type="text" id="title" name="title"></td>
                     </tr>
                     <tr class="introduceSub">
+                        <td><label for="sub_title">소제목</label></td>
+                        <td colspan="3"><input type="text" id="sub_title" name="sub_title"></td>
+                    </tr>
+                    <tr class="introduceSub">
                         <td><label for="contents">본문</label></td>
                         <td colspan="3"><textarea id="contents" name="contents" rows="4" cols="50"></textarea></td>
                     </tr>
@@ -58,6 +62,5 @@
         </div>
     </div>
 </main>
-<th:block th:replace="~{components/_modals::modal('introductions')}"></th:block>
-<script type="text/javascript" src="/static/js/admin/page/introductionsAdd.js"></script>
+<script type="text/javascript" src="/static/js/admin/page/introductionsDetail.js"></script>
 </body>
