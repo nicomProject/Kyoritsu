@@ -5,9 +5,9 @@ import com.enicom.board.kyoritsu.api.type.InfoVO;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
 import com.enicom.board.kyoritsu.dao.entity.Code;
-import com.enicom.board.kyoritsu.dao.entity.admin.MenuAdmin;
+import com.enicom.board.kyoritsu.dao.entity.admin.Menu;
 import com.enicom.board.kyoritsu.dao.repository.CodeRepository;
-import com.enicom.board.kyoritsu.dao.repository.MenuAdminRepository;
+import com.enicom.board.kyoritsu.dao.repository.admin.MenuRepository;
 import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -22,14 +22,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SettingServiceImpl implements SettingService {
     private final SecurityUtil securityUtil;
-    private final MenuAdminRepository menuAdminRepository;
+    private final MenuRepository menuRepository;
     private final CodeRepository codeRepository;
 
 
     @Override
-    public PageVO<MenuAdmin> getMenuList() {
+    public PageVO<Menu> getMenuList() {
         List<Role> roles = securityUtil.getRoleList();
-        return PageVO.builder(menuAdminRepository.findAll()).build();
+        return PageVO.builder(menuRepository.findAllByOrderByOrderSeqAsc()).build();
     }
 
     @Override

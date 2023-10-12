@@ -85,9 +85,9 @@ $(function(){
                         headerHozAlign: 'center',
                         headerSort: false,
                         formatter: function (cell) {
-                            let element = IconUtil.success + '<span class="ms-1 text-success">성공</span>'
+                            let element = IconUtil.success + '<span class="status-title status-1">성공</span>'
                             if (cell.getValue() === 0) {
-                                element = IconUtil.fail + '<span class="ms-1 text-danger">실패</span>'
+                                element = IconUtil.fail + '<span class="status-title status-1">실패</span>'
                             }
                             return element
                         }

@@ -15,9 +15,31 @@ const SideBar = {
         const that = this;
         const container = $('.navbar.sidenav .navbar-nav');
         container.html('');
-        this.menus.forEach(menu => {
-            container.append(that.createMenuItem(menu));
+
+        const groups = this.menus.map(e => e.group);
+        const groupHash = {};
+        groups.forEach(function(e){
+            groupHash[e.code] = e;
         });
+
+        Object.entries(groupHash).forEach(([code, group]) => {
+            container.append(that.createMenuGroup(group))
+        })
+        this.menus.forEach(menu => {
+            container.find(`#collpase-${menu.group.code}`).append(that.createMenuItem(menu))
+        });
+    },
+    createMenuGroup: function(group){
+        return `<li class="nav-item" data-bs-toggle="collapse" data-bs-target="#collpase-${group.code}" role="button" aria-expanded="false" aria-controls="#collpase-${group.code}">
+                    <a class="nav-link">
+                        <div class="icon icon-shape icon-sm">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <span class="nav-link-text ms-2">${group.name}</span>
+                    </a>
+                </li>
+                <div class="collapse nav-group" id="collpase-${group.code}">
+                </div>`
     },
     createMenuItem: function (menu) {
         let path = menu.url || '/';
