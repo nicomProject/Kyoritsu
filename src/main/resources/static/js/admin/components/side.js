@@ -53,7 +53,7 @@ const SideBar = {
     createMenuItem: function (menu) {
         let path = menu.url || '/';
         let activated = location.pathname === menu.url ? 'active' : '';
-        if (menu.code === 'dashboard' && location.pathname === '/admin') {
+        if (menu.code === 'introductions' && location.pathname === '/admin') {
             path = '/admin';
             activated = 'active';
         }

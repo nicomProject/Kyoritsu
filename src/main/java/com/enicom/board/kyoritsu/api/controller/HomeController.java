@@ -45,7 +45,7 @@ public class HomeController {
             return "admin/login";
         }
 
-        return "admin/index";
+        return "admin/introductions";
     }
 
     /**
