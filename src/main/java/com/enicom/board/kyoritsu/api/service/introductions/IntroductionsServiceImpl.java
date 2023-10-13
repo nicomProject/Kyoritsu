@@ -6,34 +6,25 @@ import com.enicom.board.kyoritsu.api.param.type.MultipleType;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
 import com.enicom.board.kyoritsu.dao.entity.Content;
-import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
-import com.enicom.board.kyoritsu.dao.repository.IntroductionsRepository;
+import com.enicom.board.kyoritsu.dao.repository.introduction.IntroductionRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
-import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
-import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Service
 public class IntroductionsServiceImpl implements IntroductionsService {
     private final SecurityUtil securityUtil;
-    private final IntroductionsRepository introductionsRepository;
+    private final IntroductionRepository introductionsRepository;
 
 
 
     @Autowired
-    public IntroductionsServiceImpl(IntroductionsRepository introductionsRepository, SecurityUtil securityUtil) {
+    public IntroductionsServiceImpl(IntroductionRepository introductionsRepository, SecurityUtil securityUtil) {
         this.introductionsRepository = introductionsRepository;
         this.securityUtil = securityUtil;
     }
