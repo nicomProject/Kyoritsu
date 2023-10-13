@@ -82,7 +82,7 @@ public class HomeController {
         return String.format("admin/%s", view);
     }
 
-    @GetMapping("/admin/detail/{page}")
+    @GetMapping("/admin/{page}/detail")
     public String adminDetail(Model model, HttpServletResponse response, @PathVariable String page) throws IOException {
         MemberDetail member = getCurrentUser(model);
         if (member == null || page.equalsIgnoreCase("login")) {
@@ -91,7 +91,7 @@ public class HomeController {
 
         return String.format("admin/detail/%s", page);
     }
-    @GetMapping("/admin/detail/{page}/{key}")
+    @GetMapping("/admin/{page}/detail/{key}")
     public String adminDetail(Model model, HttpServletResponse response, @PathVariable String page, @PathVariable String key) throws IOException {
         MemberDetail member = getCurrentUser(model);
         if (member == null || page.equalsIgnoreCase("login")) {

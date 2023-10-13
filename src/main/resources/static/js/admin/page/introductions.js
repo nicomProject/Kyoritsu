@@ -18,7 +18,7 @@ $(function () {
 
                 if(action === 'add'){
                     console.log("add")
-                    window.location.href = 'introductionsDetail'
+                    window.location.href = '/admin/detail/introduction'
                 }
 
                 else if (action === 'del') {
@@ -142,7 +142,7 @@ $(function () {
             const events = {
 
                 rowClick: function (e, row) {
-                    window.location.href = 'introductionsDetail?row=' + row.getData().recKey;
+                    window.location.href = '/admin/detail/' + row.getData().recKey;
 
                 },
                 downloadComplete: function () {
