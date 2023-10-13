@@ -11,18 +11,27 @@ import com.enicom.board.kyoritsu.dao.repository.IntroductionsRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
+import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Service
 public class IntroductionsServiceImpl implements IntroductionsService {
     private final SecurityUtil securityUtil;
     private final IntroductionsRepository introductionsRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     public IntroductionsServiceImpl(IntroductionsRepository introductionsRepository, SecurityUtil securityUtil) {
@@ -32,7 +41,8 @@ public class IntroductionsServiceImpl implements IntroductionsService {
 
     @Override
     public PageVO<Content> findAll() {
-        return PageVO.builder(introductionsRepository.findAllBy()).build();
+        System.out.println(introductionsRepository.findAllByDeleteDateNull() + "introductionsRepository.findAllByCreateDateNotNull()");
+        return PageVO.builder(introductionsRepository.findAllByDeleteDateNull()).build();
     }
 
     @Override
@@ -79,23 +89,24 @@ public class IntroductionsServiceImpl implements IntroductionsService {
     @Transactional
     @Override
     public ResponseDataValue<?> delete(MultipleParam param) {
+        MemberDetail member = securityUtil.getCurrentUser();
         MultipleType type = param.getType();
-
-        System.out.println("param" + param);
-        System.out.println("type" + type);
-        System.out.println("paramId" + param.getId());
+        LocalDateTime deleteTime = LocalDateTime.now();
 
         if (type.equals(MultipleType.ONE)) {
-            System.out.println("11111111111111111111111111");
-            introductionsRepository.deleteByRecKey(Long.valueOf(param.getId()));
-            System.out.println("22222222222222222222222222");
+            Optional<Content> contentOptional = introductionsRepository.findByRecKey(Long.valueOf(param.getId()));
+            if (contentOptional.isPresent()) {
+                Content content = contentOptional.get();
+                content.setDeleteDate(LocalDateTime.now());
+                content.setCreateUser(member.getId());
+            }
         }
         else if (type.equals(MultipleType.LIST)) {
-            introductionsRepository.deleteByRecKeyIn(param.getIdListLong());
+            introductionsRepository.deleteListContent(param.getIdListLong(), deleteTime, member.getId());
         }
-//        else if (type.equals(MultipleType.SPECIFIC)) {
-//            introductionsRepository.deleteAllByRecKey(param.getIdList());
-//        }
+        else if(type.equals(MultipleType.SPECIFIC)){
+            introductionsRepository.deleteALLContent(deleteTime, member.getId());
+        }
 
         return ResponseDataValue.builder(200).build();
     }

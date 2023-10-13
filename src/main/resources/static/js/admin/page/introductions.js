@@ -9,6 +9,62 @@ $(function () {
         },
         event: function () {
             const table = Table.load('#table');
+
+            const card = $('.card');
+            card.find('*[role="action"]').click(function(e){
+                const action = this.dataset.action;
+                const range = this.dataset.range;
+                const selected = table.getSelectedData().map(e => e.recKey);
+
+                if(action === 'add'){
+                    console.log("add")
+                    window.location.href = 'introductionsDetail'
+                }
+
+                else if (action === 'del') {
+                    console.log("????")
+                    if(selected.length === 0){
+                        console.log("????")
+                        Alert.warning({text: '소개글을 먼저 선택해주세요!'});
+                        return;
+                    } else if(range === 'list' && selected.length > 0){
+                        AjaxUtil.requestBody({
+                            url: '/api/introductions/delete',
+                            data: {
+                                type: 'list',
+                                idListLong: selected
+                            },
+                            table: 'table',
+                            successMessage: '성공적으로 삭제되었습니다',
+                            failMessage: '삭제중 오류가 발생하였습니다.',
+                        })
+                    }else{
+                        AjaxUtil.requestBody({
+                            url: '/api/introductions/delete',
+                            data: {
+                                type: 'specific',
+                            },
+                            table: 'table',
+                            successMessage: '성공적으로 삭제되었습니다',
+                            failMessage: '삭제중 오류가 발생하였습니다.',
+                        })
+
+                    }
+                    console.log("삭제");
+                    // ... (기존의 삭제 로직을 이곳에 삽입)
+                }
+                else if (action === 'file') {
+                    const range = this.dataset.range;
+                    if (selected.length === 0) {
+                        Alert.warning({text: '소개글을 먼저 선택해주세요!'});
+                        return;
+                    }
+                    // 다운로드
+                    else if (range === 'download') {
+                        TableUtil.download(table, 'excel', '소개글 목록');
+                    }
+                }
+            })
         }
     };
 
@@ -75,76 +131,10 @@ $(function () {
                     {title: '제목', field: "title", tooltip: true, headerTooltip: true, headerFilter: 'input'},
                     {title: '소제목', field: "subtitle", tooltip: true, headerTooltip: true, headerFilter: 'input'},
                     {
-                        title: '<i class="fas fa-clock"></i> 등록 일시',
+                        title: '등록 일시',
                         field: "createDate",
                         tooltip: true,
                         headerTooltip: true
-                    },
-
-                    {
-                        title: '작업',
-                        width: 140,
-                        headerHozAlign: 'center',
-                        hozAlign: 'center',
-                        headerSort: false,
-                        tooltip: true,
-                        headerTooltip: true,
-                        download: false,
-                        //visible: authInfo.edit,
-                        formatter: function (cell, formatterParams, onRendered) {
-                            const row = cell.getRow();
-                            const data = row.getData();
-                            const that = $(cell.getElement())
-                            const value = cell.getValue() || '0';
-
-                            const buttons = document.querySelectorAll("button");
-
-                            // 모든 버튼에 클릭 이벤트 리스너를 추가합니다.
-                            buttons.forEach(function (button) {
-                                button.addEventListener("click", function () {
-                                    // data-action 속성을 확인하여 해당 동작을 처리합니다.
-                                    const action = button.getAttribute("data-action");
-                                    if (action === "delete") {
-
-                                        const selected = table.getSelectedData().map(e => e.recKey);
-                                        const firstSelected = selected[0];
-                                        console.log(selected.length + "selected")
-                                        console.log(selected+ "selected222")
-                                        if(selected.length == 1){
-                                        AjaxUtil.requestBody({
-                                            url: '/api/introductions/delete',
-                                            data: {
-                                                type: 'one',
-                                                id: firstSelected
-                                            },
-                                            success: function (data) {
-                                                console.log(data)
-                                                if (data.code == 200) {
-                                                }
-                                            }
-                                        })
-                                        }
-                                        else{
-                                            AjaxUtil.requestBody({
-                                                url: '/api/introductions/delete',
-                                                data: {
-                                                    type: 'list',
-                                                    idListLong: selected
-                                                },
-                                                success: function (data) {
-                                                    console.log(data)
-                                                    if (data.code == 200) {
-                                                    }
-                                                }
-                                            })
-                                        }
-
-                                    }
-                                });
-                            });
-
-                            //return section;
-                        }
                     },
                 ],
             });

@@ -23,6 +23,7 @@ $(function () {
                         $(".introduceSub #title").val(data.result.items[0].title);
                         $(".introduceSub #sub_title").val(data.result.items[0].subtitle);
                         $(".introduceSub #contents").val(data.result.items[0].content);
+
                         if (data.code == 200) {
                             Swal.fire({
                                 icon: 'success',
@@ -36,6 +37,11 @@ $(function () {
                         }
                     }
                 })
+            }else if(paramValue == null){
+
+                var deleteButton = document.querySelector('button.btn.btn-round.btn-danger.bg-gradient-danger[role=action][data-action=delete]');
+                deleteButton.style.display = 'none'; // 요소를 화면에서 숨김
+
             }
 
 
@@ -70,10 +76,8 @@ $(function () {
                             success: function (data) {
                                 console.log(data)
                                 if (data.code == 200) {
-                                    Swal.fire({
-
-                                        icon: 'success',
-                                        html: "소개글 등록이 완료되었습니다.",
+                                    Alert.success({text: '소개글 등록이 완료되었습니다.'}, function(){
+                                        location.href = '/admin/introductions'
                                     })
                                 } else {
                                     Swal.fire({
@@ -113,6 +117,23 @@ $(function () {
                                 }
                             })
                         }}
+                    else if(action === "list"){
+                        window.location.href = 'introductions'
+                    }
+                    else if(action === "delete"){
+                        AjaxUtil.requestBody({
+                            url: '/api/introductions/delete',
+                            data: {
+                                type: 'one',
+                                id: paramValue
+                            },
+                            success: function (data) {
+                                console.log(data)
+                                if (data.code == 200) {
+                                }
+                            }
+                        })
+                    }
 
 
 
