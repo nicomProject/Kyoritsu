@@ -32,9 +32,9 @@ public class MainDataInitRunner implements ApplicationRunner {
         List<MainMenu> menuList = new ArrayList<>();
 
         MainMenu company = MainMenu.builder().order(1).name("회사소개").type(MenuType.GROUP).build();
-        MainMenu product = MainMenu.builder().order(1).name("사업영역").type(MenuType.GROUP).build();
-        MainMenu notice = MainMenu.builder().order(1).name("공지사항").type(MenuType.GROUP).build();
-        MainMenu recruit = MainMenu.builder().order(1).name("채용정보").type(MenuType.GROUP).build();
+        MainMenu product = MainMenu.builder().order(2).name("사업영역").type(MenuType.GROUP).build();
+        MainMenu notice = MainMenu.builder().order(3).name("공지사항").type(MenuType.GROUP).build();
+        MainMenu recruit = MainMenu.builder().order(4).name("채용정보").type(MenuType.GROUP).build();
         menuRepository.saveAll(Arrays.asList(company, product, notice, recruit));
 
         menuList.add(MainMenu.builder().order(1).menu(company).name("기업개요").type(MenuType.INTRO).build());
