@@ -2,7 +2,6 @@ package com.enicom.board.kyoritsu.runner;
 
 import com.enicom.board.kyoritsu.dao.entity.Menu;
 import com.enicom.board.kyoritsu.dao.repository.MenuRepository;
-import com.enicom.board.kyoritsu.dao.type.admin.MenuGroup;
 import com.enicom.board.kyoritsu.dao.type.MenuType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
