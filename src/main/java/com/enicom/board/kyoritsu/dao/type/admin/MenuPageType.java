@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum MenuType {
+public enum MenuPageType {
     DASHBOARD("dashboard", "대시보드"),
     INTRODUCTION("introductions", "소개글 관리"),
     NOTICE("notices", "공지사항 관리"),

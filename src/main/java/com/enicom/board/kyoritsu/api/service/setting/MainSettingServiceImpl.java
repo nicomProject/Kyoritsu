@@ -1,8 +1,8 @@
 package com.enicom.board.kyoritsu.api.service.setting;
 
 import com.enicom.board.kyoritsu.api.type.PageVO;
-import com.enicom.board.kyoritsu.dao.entity.Menu;
-import com.enicom.board.kyoritsu.dao.repository.MenuRepository;
+import com.enicom.board.kyoritsu.dao.entity.MainMenu;
+import com.enicom.board.kyoritsu.dao.repository.MainMenuRepository;
 import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MainSettingServiceImpl implements MainSettingService {
     private final SecurityUtil securityUtil;
-    private final MenuRepository menuRepository;
+    private final MainMenuRepository menuRepository;
 
     @Override
-    public PageVO<Menu> getMenuList() {
+    public PageVO<MainMenu> getMenuList() {
         List<Role> roles = securityUtil.getRoleList();
         return PageVO.builder(menuRepository.findAll()).build();
     }

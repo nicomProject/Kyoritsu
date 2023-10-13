@@ -7,9 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum MenuType {
-    INTRO("intro", "소개페이지"),
-    NOTICE("notice", "공지사항"),
-    RECRUIT("recruit", "채용정보"),
+    GROUP("group", "메뉴 그룹"),
+    GENERAL("general", "일반 페이지"),
+    INTRO("intro", "소개 페이지"),
     ;
 
     private final String code;

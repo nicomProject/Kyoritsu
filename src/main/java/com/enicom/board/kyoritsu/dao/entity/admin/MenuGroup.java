@@ -1,8 +1,6 @@
 package com.enicom.board.kyoritsu.dao.entity.admin;
 
-import com.enicom.board.kyoritsu.dao.type.MenuTarget;
 import com.enicom.board.kyoritsu.dao.type.admin.MenuGroupType;
-import com.enicom.board.kyoritsu.dao.type.admin.MenuType;
 import com.enicom.board.kyoritsu.login.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

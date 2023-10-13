@@ -1,7 +1,7 @@
 package com.enicom.board.kyoritsu.runner;
 
-import com.enicom.board.kyoritsu.dao.entity.Menu;
-import com.enicom.board.kyoritsu.dao.repository.MenuRepository;
+import com.enicom.board.kyoritsu.dao.entity.MainMenu;
+import com.enicom.board.kyoritsu.dao.repository.MainMenuRepository;
 import com.enicom.board.kyoritsu.dao.type.MenuType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +9,15 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @Slf4j
 public class MainDataInitRunner implements ApplicationRunner {
-    private final MenuRepository menuRepository;
+    private final MainMenuRepository menuRepository;
 
     @Autowired
-    public MainDataInitRunner(MenuRepository menuRepository) {
+    public MainDataInitRunner(MainMenuRepository menuRepository) {
         this.menuRepository = menuRepository;
     }
 
@@ -30,20 +27,36 @@ public class MainDataInitRunner implements ApplicationRunner {
     }
 
     private void configureMenu() {
-        Map<MenuType, Menu> storeList = new HashMap<>();
+        Map<MenuType, MainMenu> storeList = new HashMap<>();
 
-        List<Menu> menuList = new ArrayList<>();
-        if (!storeList.containsKey(MenuType.INTRO)) {
-            menuList.add(Menu.builder(MenuType.INTRO).order(1).build());
-        }
-        if (!storeList.containsKey(MenuType.NOTICE)) {
-            menuList.add(Menu.builder(MenuType.NOTICE).order(2).build());
-        }
-        if (!storeList.containsKey(MenuType.RECRUIT)) {
-            menuList.add(Menu.builder(MenuType.RECRUIT).order(3).build());
-        }
+        List<MainMenu> menuList = new ArrayList<>();
+
+        MainMenu company = MainMenu.builder().order(1).name("회사소개").type(MenuType.GROUP).build();
+        MainMenu product = MainMenu.builder().order(1).name("사업영역").type(MenuType.GROUP).build();
+        MainMenu notice = MainMenu.builder().order(1).name("공지사항").type(MenuType.GROUP).build();
+        MainMenu recruit = MainMenu.builder().order(1).name("채용정보").type(MenuType.GROUP).build();
+        menuRepository.saveAll(Arrays.asList(company, product, notice, recruit));
+
+        menuList.add(MainMenu.builder().order(1).menu(company).name("기업개요").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(2).menu(company).name("경영이념/비전").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(3).menu(company).name("연력").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(4).menu(company).name("조직도").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(5).menu(company).name("오시는길").type(MenuType.INTRO).build());
+
+        menuList.add(MainMenu.builder().order(1).menu(product).name("기숙사").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(2).menu(product).name("도미인").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(3).menu(product).name("리조트").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(4).menu(product).name("수석생활").type(MenuType.INTRO).build());
+
+        menuList.add(MainMenu.builder().order(1).menu(notice).name("공지사항").type(MenuType.GENERAL).build());
+
+        menuList.add(MainMenu.builder().order(1).menu(recruit).name("채용 안내").type(MenuType.GENERAL).build());
+        menuList.add(MainMenu.builder().order(2).menu(recruit).name("채용 공고").type(MenuType.GENERAL).build());
+        menuList.add(MainMenu.builder().order(3).menu(recruit).name("채용 지원").type(MenuType.GENERAL).build());
+        menuList.add(MainMenu.builder().order(4).menu(recruit).name("채용 문의").type(MenuType.GENERAL).build());
+
+        menuRepository.saveAll(menuList);
 
         log.info("메뉴 {}건 추가됨", menuList.size());
-        menuRepository.saveAll(menuList);
     }
 }

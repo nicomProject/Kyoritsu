@@ -1,6 +1,5 @@
 package com.enicom.board.kyoritsu.dao.entity;
 
-import com.enicom.board.kyoritsu.dao.entity.admin.MenuAdmin;
 import com.enicom.board.kyoritsu.dao.type.MenuTarget;
 import com.enicom.board.kyoritsu.dao.type.MenuType;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,7 +21,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @SequenceGenerator(name = "SEQ_MENU_GENERATOR", sequenceName = "SEQ_MENU", initialValue = 1, allocationSize = 1)
-public class Menu {
+public class MainMenu {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MENU_GENERATOR")
     @Column(name = "rec_key")
@@ -37,7 +36,7 @@ public class Menu {
     @JoinColumn(name = "p_id")
     @Comment("메뉴 parent")
     @ManyToOne
-    private Menu menu;
+    private MainMenu menu;
 
     @Column(name = "type", length = 10, nullable = false)
     @Builder.Default
@@ -93,12 +92,4 @@ public class Menu {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime deleteDate;
-
-    public static MenuBuilder builder(){
-        return new MenuBuilder();
-    }
-    public static MenuBuilder builder(MenuType type){
-        return builder().name(type.getName()).url(String.format("/main/%s", type.getCode()));
-    }
-
 }
