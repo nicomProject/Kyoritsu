@@ -18,7 +18,7 @@ $(function () {
 
                 if(action === 'add'){
                     console.log("add")
-                    window.location.href = '/admin/detail/introduction'
+                    window.location.href = '/admin/introduction/detail'
                 }
 
                 else if (action === 'del') {
@@ -126,8 +126,13 @@ $(function () {
                         download: false,
                         headerSort: false
                     },
-                    {title: '카테고리', field: "category", tooltip: true, headerTooltip: true, headerFilter: 'input'},
-                    {title: '서브 카테고리', field: "subcategory", tooltip: true, headerTooltip: true, headerFilter: 'input'},
+                    {title: '카테고리', field: "category", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
+                            values: ["company"],
+                        }
+                    },
+                    {title: '서브 카테고리', field: "subcategory", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
+                            values: ["sub"],
+                        }},
                     {title: '제목', field: "title", tooltip: true, headerTooltip: true, headerFilter: 'input'},
                     {title: '소제목', field: "subtitle", tooltip: true, headerTooltip: true, headerFilter: 'input'},
                     {
@@ -142,7 +147,7 @@ $(function () {
             const events = {
 
                 rowClick: function (e, row) {
-                    window.location.href = '/admin/detail/' + row.getData().recKey;
+                    window.location.href = '/admin/introduction/detail/' + row.getData().recKey;
 
                 },
                 downloadComplete: function () {

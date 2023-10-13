@@ -30,8 +30,7 @@ public class IntroductionsServiceImpl implements IntroductionsService {
     private final SecurityUtil securityUtil;
     private final IntroductionsRepository introductionsRepository;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+
 
     @Autowired
     public IntroductionsServiceImpl(IntroductionsRepository introductionsRepository, SecurityUtil securityUtil) {
@@ -47,6 +46,7 @@ public class IntroductionsServiceImpl implements IntroductionsService {
 
     @Override
     public PageVO<Content> findAll(IntroductionsParam param) {
+        System.out.println(introductionsRepository.findAllByDeleteDateNull() + "introductionsRepository.findAllByCreateDateNotNull()");
         return PageVO.builder(introductionsRepository.findAllByRecKey(Long.valueOf(param.getKey()))).build();
     }
 
@@ -102,10 +102,10 @@ public class IntroductionsServiceImpl implements IntroductionsService {
             }
         }
         else if (type.equals(MultipleType.LIST)) {
-            introductionsRepository.deleteListContent(param.getIdListLong(), deleteTime, member.getId());
+            introductionsRepository.deleteListContent(param);
         }
         else if(type.equals(MultipleType.SPECIFIC)){
-            introductionsRepository.deleteALLContent(deleteTime, member.getId());
+            introductionsRepository.deleteALLContent();
         }
 
         return ResponseDataValue.builder(200).build();

@@ -23,14 +23,14 @@ public interface IntroductionsRepository extends CrudRepository<Content, Long>, 
 
     List<Content> findAllByRecKeyIn(List<Long> recKey);
 
-    @Modifying
-    @Query("UPDATE tb_content c " +
-            "SET c.deleteUser = :deleteId, c.deleteDate = :deleteTime " +
-            "WHERE c.recKey in :recKey")
-    void deleteListContent(@Param("recKey") List<Long> recKey, @Param("deleteTime") LocalDateTime deleteTime, @Param("deleteId") String deleteId);
-
-    @Modifying
-    @Query("UPDATE tb_content c " +
-            "SET c.deleteUser = :deleteId, c.deleteDate = :deleteTime " )
-    void deleteALLContent(@Param("deleteTime") LocalDateTime deleteTime, @Param("deleteId") String deleteId);
+//    @Modifying
+//    @Query("UPDATE tb_content c " +
+//            "SET c.deleteUser = :deleteId, c.deleteDate = :deleteTime " +
+//            "WHERE c.recKey in :recKey")
+//    void deleteListContent(@Param("recKey") List<Long> recKey, @Param("deleteTime") LocalDateTime deleteTime, @Param("deleteId") String deleteId);
+//
+//    @Modifying
+//    @Query("UPDATE tb_content c " +
+//            "SET c.deleteUser = :deleteId, c.deleteDate = :deleteTime " )
+//    void deleteALLContent(@Param("deleteTime") LocalDateTime deleteTime, @Param("deleteId") String deleteId);
 }

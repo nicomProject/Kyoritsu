@@ -3,14 +3,15 @@ $(function () {
         params: {},
         load: function (params) {
             this.params = params;
+            console.log(this.params)
             this.event();
         },
         event: function () {
 
-            const urlParams = new URL(location.href).searchParams;
-            const paramValue = urlParams.get('row');
-            console.log('파라미터 값: ' + paramValue);
-            if(paramValue != null){
+            const paramValue = this.params.key
+            console.log("paramValue" + paramValue)
+
+            if(paramValue !== ""){
                 AjaxUtil.requestBody({
                     url: '/api/introductions/findSelf',
                     data: {
@@ -37,14 +38,7 @@ $(function () {
                         }
                     }
                 })
-            }else if(paramValue == null){
-
-                var deleteButton = document.querySelector('button.btn.btn-round.btn-danger.bg-gradient-danger[role=action][data-action=delete]');
-                deleteButton.style.display = 'none'; // 요소를 화면에서 숨김
-
             }
-
-
 
             const buttons = document.querySelectorAll("button");
 
@@ -60,7 +54,9 @@ $(function () {
                         var categoryValue = $("#category").val();
                         var sub_categoryValue = $("#sub_category").val();
 
-                        if(paramValue == null){
+                        console.log("check")
+
+                        if(paramValue === ""){
 
                             console.log("asdasfasf")
 
@@ -88,7 +84,7 @@ $(function () {
                             }
                         })
                         alert("저장 동작을 수행합니다.");
-                    }else if(paramValue != null){
+                    }else if(paramValue !== ""){
 
                             AjaxUtil.requestBody({
                                 url: '/api/introductions/update',
@@ -142,6 +138,7 @@ $(function () {
 
         }
     };
-
-    Content.load();
+    Content.load({
+        key: $('.param[name="key"]').val() || ''
+    });
 })
