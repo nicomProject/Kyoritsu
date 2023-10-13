@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @SequenceGenerator(name = "SEQ_MENU_GENERATOR", sequenceName = "SEQ_MENU", initialValue = 1, allocationSize = 1)
-public class Menu {
+public class MainMenu {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MENU_GENERATOR")
     @Column(name = "rec_key")
@@ -33,11 +33,20 @@ public class Menu {
     @Column(name = "url", length = 100)
     private String url;
 
+    @JoinColumn(name = "p_id")
+    @Comment("메뉴 parent")
+    @ManyToOne
+    private MainMenu menu;
+
     @Column(name = "type", length = 10, nullable = false)
     @Builder.Default
     @Enumerated(EnumType.STRING)
     @Comment("메뉴 타입 - { intro: 소개페이지, notice: 공지사항, recruit: 채용정보 }")
     private MenuType type = MenuType.INTRO;
+
+    @JoinColumn(name = "content_id")
+    @ManyToOne
+    private Content content;
 
     @Column(name = "target", length = 10, nullable = false)
     @Builder.Default

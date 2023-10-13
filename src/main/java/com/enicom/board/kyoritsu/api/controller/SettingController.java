@@ -42,3 +42,5 @@ public class SettingController {
         return new ResponseHandler<>(settingService.setInitPwd(param));
     }
 }
+
+

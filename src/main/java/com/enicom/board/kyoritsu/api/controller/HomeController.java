@@ -27,19 +27,10 @@ public class HomeController {
         return "main/index";
     }
 
-    @GetMapping(path = {"/main"})
-    public String main(Model model) throws Exception {
-        return "main/main";
-    }
-
-    @GetMapping(path = {"/main2"})
-    public String mainOriginal(Model model) throws Exception {
-        return "main/main2";
-    }
-
-    @GetMapping(path = {"/about-us"})
-    public String aboutUs(Model model) throws Exception {
-        return "main/about-us";
+    @GetMapping("/{page}")
+    public String main(Model model, HttpServletResponse response, @PathVariable String page) throws IOException {
+        String view = page;
+        return String.format("main/%s", view);
     }
 
     @GetMapping(path = { "/admin"})

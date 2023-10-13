@@ -1,8 +1,7 @@
 package com.enicom.board.kyoritsu.dao.entity.admin;
 
-import com.enicom.board.kyoritsu.dao.type.admin.MenuGroupType;
 import com.enicom.board.kyoritsu.dao.type.MenuTarget;
-import com.enicom.board.kyoritsu.dao.type.admin.MenuType;
+import com.enicom.board.kyoritsu.dao.type.admin.MenuPageType;
 import com.enicom.board.kyoritsu.login.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -27,7 +26,7 @@ public class Menu {
     @Column(name = "code", length = 20)
     @Enumerated(EnumType.STRING)
     @Comment("메뉴 코드")
-    private MenuType code;
+    private MenuPageType code;
 
     @JoinColumn(name = "group_id")
     @ManyToOne
@@ -93,7 +92,7 @@ public class Menu {
     public static MenuBuilder builder(){
         return new MenuBuilder();
     }
-    public static MenuBuilder builder(MenuType type){
+    public static MenuBuilder builder(MenuPageType type){
         return builder().code(type).name(type.getName()).url(String.format("/admin/%s", type.getCode()));
     }
 }

@@ -1,60 +1,33 @@
-const SideBar = {
+const Menu = {
     menus: [],
     load: function () {
+        console.log("menu")
+        console.log(AjaxUtil)
         const that = this;
         AjaxUtil.request({
-            url: '/api/adm/setting/menus',
+            url: '/api/main/setting/menus',
             async: false,
             success: function (data) {
                 that.menus = data.result.items;
-                console.log(data.result)
+                console.log(data.result);
                 that.draw();
-
-                setTimeout(function(){
-                    that.event();
-                }, 100)
-            }
+            },
         });
     },
     draw: function () {
         const that = this;
-        const container = $('.navbar.sidenav .navbar-nav');
+        const container = $('#navbarSupportedContent .navbar-nav');
         container.html('');
-
-        const groups = this.menus.map(e => e.group);
-        const groupHash = {};
-        groups.forEach(function(e){
-            groupHash[e.code] = e;
-        });
-
-        Object.entries(groupHash).forEach(([code, group]) => {
-            container.append(that.createMenuGroup(group))
-        })
         this.menus.forEach(menu => {
-            container.find(`#collpase-${menu.group.code}`).append(that.createMenuItem(menu))
+            container.append(that.createMenuItem(menu));
         });
-    },
-    event: function(){
-        const container = $('.navbar.sidenav .navbar-nav');
-        container.find('.nav-link.active').parents('.nav-group').collapse('show');
-    },
-    createMenuGroup: function(group){
-        return `<li class="nav-item" data-bs-toggle="collapse" data-bs-target="#collpase-${group.code}" role="button" aria-expanded="false" aria-controls="#collpase-${group.code}">
-                    <a class="nav-link">
-                        <div class="icon icon-shape icon-sm">
-                            <i class="fas fa-folder"></i>
-                        </div>
-                        <span class="nav-link-text ms-2">${group.name}</span>
-                    </a>
-                </li>
-                <div class="collapse nav-group" id="collpase-${group.code}">
-                </div>`
     },
     createMenuItem: function (menu) {
+        console.log(menu)
         let path = menu.url || '/';
         let activated = location.pathname === menu.url ? 'active' : '';
-        if (menu.code === 'dashboard' && location.pathname === '/admin') {
-            path = '/admin';
+        if (menu.code === 'dashboard' && location.pathname === '/') {
+            path = '/';
             activated = 'active';
         }
 
@@ -72,14 +45,12 @@ const SideBar = {
 $(function () {
     const Content = {
         load: function () {
-            SideBar.load();
-
+            Menu.load();
             this.event();
         },
         event: function () {
             const $body = $('body');
             const navbar = $('.navbar');
-
 
             navbar.find('.navbar-close').on({
                 click: function (e) {

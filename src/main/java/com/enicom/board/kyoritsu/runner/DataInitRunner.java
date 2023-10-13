@@ -2,13 +2,12 @@ package com.enicom.board.kyoritsu.runner;
 
 import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
 import com.enicom.board.kyoritsu.dao.entity.admin.Menu;
-import com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup;
 import com.enicom.board.kyoritsu.dao.repository.CodeRepository;
 import com.enicom.board.kyoritsu.dao.repository.ManagerRepository;
 import com.enicom.board.kyoritsu.dao.repository.admin.MenuGroupRepository;
 import com.enicom.board.kyoritsu.dao.repository.admin.MenuRepository;
 import com.enicom.board.kyoritsu.dao.type.admin.MenuGroupType;
-import com.enicom.board.kyoritsu.dao.type.admin.MenuType;
+import com.enicom.board.kyoritsu.dao.type.admin.MenuPageType;
 import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -60,25 +59,21 @@ public class DataInitRunner implements ApplicationRunner {
 
     private void configureAdminMenu() {
         // 메뉴 그룹 업데이트
-        Map<MenuGroupType, MenuGroup> groupStoredList = new HashMap<>();
+        Map<MenuGroupType, com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup> groupStoredList = new HashMap<>();
         menuGroupRepository.findAll().forEach(group -> {
             groupStoredList.put(group.getCode(), group);
         });
 
-        MenuGroup home = MenuGroup.builder(MenuGroupType.HOME).orderSeq(0).build();
-        MenuGroup intro = MenuGroup.builder(MenuGroupType.INTRODUCTION).orderSeq(1).build();
-        MenuGroup notice = MenuGroup.builder(MenuGroupType.NOTICE).orderSeq(2).build();
-        MenuGroup recruit = MenuGroup.builder(MenuGroupType.RECRUIT).orderSeq(3).build();
-        MenuGroup system = MenuGroup.builder(MenuGroupType.SYSTEM).orderSeq(4).build();
+        com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup home = com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup.builder(MenuGroupType.HOME).orderSeq(0).build();
+        com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup homepage = com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup.builder(MenuGroupType.HOMEPAGE).orderSeq(1).build();
+        com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup recruit = com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup.builder(MenuGroupType.RECRUIT).orderSeq(3).build();
+        com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup system = com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup.builder(MenuGroupType.SYSTEM).orderSeq(4).build();
 
         if(groupStoredList.containsKey(MenuGroupType.HOME)){
             home = groupStoredList.get(MenuGroupType.HOME);
         }
-        if(groupStoredList.containsKey(MenuGroupType.INTRODUCTION)){
-            intro = groupStoredList.get(MenuGroupType.INTRODUCTION);
-        }
-        if(groupStoredList.containsKey(MenuGroupType.NOTICE)){
-            notice = groupStoredList.get(MenuGroupType.NOTICE);
+        if(groupStoredList.containsKey(MenuGroupType.HOMEPAGE)){
+            homepage = groupStoredList.get(MenuGroupType.HOMEPAGE);
         }
         if(groupStoredList.containsKey(MenuGroupType.RECRUIT)){
             recruit = groupStoredList.get(MenuGroupType.RECRUIT);
@@ -87,38 +82,38 @@ public class DataInitRunner implements ApplicationRunner {
             system = groupStoredList.get(MenuGroupType.SYSTEM);
         }
 
-        menuGroupRepository.saveAll(Arrays.asList(home, intro, notice, recruit, system));
+        menuGroupRepository.saveAll(Arrays.asList(home, homepage, recruit, system));
 
         // 메뉴 목록 업데이트
-        Map<MenuType, Menu> menuStoredList = new HashMap<>();
+        Map<MenuPageType, Menu> menuStoredList = new HashMap<>();
         menuRepository.findAll().forEach(menu -> {
             menuStoredList.put(menu.getCode(), menu);
         });
 
         List<Menu> menuList = new ArrayList<>();
-        if (!menuStoredList.containsKey(MenuType.DASHBOARD)) {
-            menuList.add(Menu.builder(MenuType.DASHBOARD).group(home).orderSeq(0).icon("fas fa-tachometer-alt").build());
+        if (!menuStoredList.containsKey(MenuPageType.DASHBOARD)) {
+            menuList.add(Menu.builder(MenuPageType.DASHBOARD).group(home).orderSeq(0).icon("fas fa-tachometer-alt").build());
         }
-        if (!menuStoredList.containsKey(MenuType.INTRODUCTION)) {
-            menuList.add(Menu.builder(MenuType.INTRODUCTION).group(intro).orderSeq(1).icon("fas fa-handshake").build());
+        if (!menuStoredList.containsKey(MenuPageType.INTRODUCTION)) {
+            menuList.add(Menu.builder(MenuPageType.INTRODUCTION).group(homepage).orderSeq(1).icon("fas fa-handshake").build());
         }
-        if (!menuStoredList.containsKey(MenuType.NOTICE)) {
-            menuList.add(Menu.builder(MenuType.NOTICE).group(notice).orderSeq(2).icon("fas fa-volume-down").build());
+        if (!menuStoredList.containsKey(MenuPageType.NOTICE)) {
+            menuList.add(Menu.builder(MenuPageType.NOTICE).group(homepage).orderSeq(2).icon("fas fa-volume-down").build());
         }
-        if (!menuStoredList.containsKey(MenuType.JOB)) {
-            menuList.add(Menu.builder(MenuType.JOB).group(recruit).orderSeq(3).icon("fas fa-exclamation-circle").build());
+        if (!menuStoredList.containsKey(MenuPageType.JOB)) {
+            menuList.add(Menu.builder(MenuPageType.JOB).group(recruit).orderSeq(3).icon("fas fa-exclamation-circle").build());
         }
-        if (!menuStoredList.containsKey(MenuType.APPLICANT)) {
-            menuList.add(Menu.builder(MenuType.APPLICANT).group(recruit).orderSeq(4).icon("fas fa-id-badge").build());
+        if (!menuStoredList.containsKey(MenuPageType.APPLICANT)) {
+            menuList.add(Menu.builder(MenuPageType.APPLICANT).group(recruit).orderSeq(4).icon("fas fa-id-badge").build());
         }
-        if (!menuStoredList.containsKey(MenuType.INQUIRY)) {
-            menuList.add(Menu.builder(MenuType.INQUIRY).group(recruit).orderSeq(5).icon("fas fa-question-circle").build());
+        if (!menuStoredList.containsKey(MenuPageType.INQUIRY)) {
+            menuList.add(Menu.builder(MenuPageType.INQUIRY).group(recruit).orderSeq(5).icon("fas fa-question-circle").build());
         }
-        if (!menuStoredList.containsKey(MenuType.ACCESS)) {
-            menuList.add(Menu.builder(MenuType.ACCESS).group(system).orderSeq(6).icon("fas fa-sign-in-alt").build());
+        if (!menuStoredList.containsKey(MenuPageType.ACCESS)) {
+            menuList.add(Menu.builder(MenuPageType.ACCESS).group(system).orderSeq(6).icon("fas fa-sign-in-alt").build());
         }
-        if (!menuStoredList.containsKey(MenuType.ACCOUNT)) {
-            menuList.add(Menu.builder(MenuType.ACCOUNT).group(system).orderSeq(7).icon("fas fa-users-cog").build());
+        if (!menuStoredList.containsKey(MenuPageType.ACCOUNT)) {
+            menuList.add(Menu.builder(MenuPageType.ACCOUNT).group(system).orderSeq(7).icon("fas fa-users-cog").build());
         }
 
         log.info("메뉴 {}건 추가됨", menuList.size());
