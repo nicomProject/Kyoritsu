@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MenuRepository extends CrudRepository<Menu, String> {
+public interface MainMenuRepository extends CrudRepository<Menu, String> {
 
+    @Override
     List<Menu> findAll();
 
     @Override

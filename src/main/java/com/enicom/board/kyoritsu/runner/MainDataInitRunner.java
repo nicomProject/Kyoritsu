@@ -1,7 +1,7 @@
 package com.enicom.board.kyoritsu.runner;
 
 import com.enicom.board.kyoritsu.dao.entity.Menu;
-import com.enicom.board.kyoritsu.dao.repository.MenuRepository;
+import com.enicom.board.kyoritsu.dao.repository.MainMenuRepository;
 import com.enicom.board.kyoritsu.dao.type.MenuType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,10 @@ import java.util.Map;
 @Component
 @Slf4j
 public class MainDataInitRunner implements ApplicationRunner {
-    private final MenuRepository menuRepository;
+    private final MainMenuRepository menuRepository;
 
     @Autowired
-    public MainDataInitRunner(MenuRepository menuRepository) {
+    public MainDataInitRunner(MainMenuRepository menuRepository) {
         this.menuRepository = menuRepository;
     }
 

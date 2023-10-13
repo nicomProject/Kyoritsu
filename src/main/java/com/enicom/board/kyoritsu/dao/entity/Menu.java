@@ -1,6 +1,5 @@
 package com.enicom.board.kyoritsu.dao.entity;
 
-import com.enicom.board.kyoritsu.dao.entity.admin.MenuAdmin;
 import com.enicom.board.kyoritsu.dao.type.MenuTarget;
 import com.enicom.board.kyoritsu.dao.type.MenuType;
 import com.fasterxml.jackson.annotation.JsonFormat;
