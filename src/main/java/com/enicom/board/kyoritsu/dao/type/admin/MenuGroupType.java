@@ -11,10 +11,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public enum MenuGroupType {
     HOME("home", "홈"),
-    INTRODUCTION("intro", "소개글"),
-    NOTICE("notice","공지사항"),
-    RECRUIT("recruit","채용"),
-    SYSTEM("system", "시스템"),
+    HOMEPAGE("homepage", "홈페이지 관리"),
+    RECRUIT("recruit","채용 관리"),
+    SYSTEM("system", "시스템 관리"),
     ;
     private final String code;
     private final String name;

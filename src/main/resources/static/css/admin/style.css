@@ -80,6 +80,9 @@
 .navbar.sidenav .navbar-nav .nav-item[aria-expanded="true"] .nav-link .icon {
     background: #ddd;
 }
+.navbar.sidenav .navbar-nav .nav-item[aria-expanded="true"] .nav-link .icon .fa-folder:before {
+    content: "\f07c";
+}
 
 .navbar.sidenav .navbar-nav .nav-link {
     background: #f8f8f8;

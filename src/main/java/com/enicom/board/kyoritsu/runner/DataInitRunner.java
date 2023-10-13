@@ -66,19 +66,15 @@ public class DataInitRunner implements ApplicationRunner {
         });
 
         MenuGroup home = MenuGroup.builder(MenuGroupType.HOME).orderSeq(0).build();
-        MenuGroup intro = MenuGroup.builder(MenuGroupType.INTRODUCTION).orderSeq(1).build();
-        MenuGroup notice = MenuGroup.builder(MenuGroupType.NOTICE).orderSeq(2).build();
+        MenuGroup homepage = MenuGroup.builder(MenuGroupType.HOMEPAGE).orderSeq(1).build();
         MenuGroup recruit = MenuGroup.builder(MenuGroupType.RECRUIT).orderSeq(3).build();
         MenuGroup system = MenuGroup.builder(MenuGroupType.SYSTEM).orderSeq(4).build();
 
         if(groupStoredList.containsKey(MenuGroupType.HOME)){
             home = groupStoredList.get(MenuGroupType.HOME);
         }
-        if(groupStoredList.containsKey(MenuGroupType.INTRODUCTION)){
-            intro = groupStoredList.get(MenuGroupType.INTRODUCTION);
-        }
-        if(groupStoredList.containsKey(MenuGroupType.NOTICE)){
-            notice = groupStoredList.get(MenuGroupType.NOTICE);
+        if(groupStoredList.containsKey(MenuGroupType.HOMEPAGE)){
+            homepage = groupStoredList.get(MenuGroupType.HOMEPAGE);
         }
         if(groupStoredList.containsKey(MenuGroupType.RECRUIT)){
             recruit = groupStoredList.get(MenuGroupType.RECRUIT);
@@ -87,7 +83,7 @@ public class DataInitRunner implements ApplicationRunner {
             system = groupStoredList.get(MenuGroupType.SYSTEM);
         }
 
-        menuGroupRepository.saveAll(Arrays.asList(home, intro, notice, recruit, system));
+        menuGroupRepository.saveAll(Arrays.asList(home, homepage, recruit, system));
 
         // 메뉴 목록 업데이트
         Map<MenuType, Menu> menuStoredList = new HashMap<>();
@@ -100,10 +96,10 @@ public class DataInitRunner implements ApplicationRunner {
             menuList.add(Menu.builder(MenuType.DASHBOARD).group(home).orderSeq(0).icon("fas fa-tachometer-alt").build());
         }
         if (!menuStoredList.containsKey(MenuType.INTRODUCTION)) {
-            menuList.add(Menu.builder(MenuType.INTRODUCTION).group(intro).orderSeq(1).icon("fas fa-handshake").build());
+            menuList.add(Menu.builder(MenuType.INTRODUCTION).group(homepage).orderSeq(1).icon("fas fa-handshake").build());
         }
         if (!menuStoredList.containsKey(MenuType.NOTICE)) {
-            menuList.add(Menu.builder(MenuType.NOTICE).group(notice).orderSeq(2).icon("fas fa-volume-down").build());
+            menuList.add(Menu.builder(MenuType.NOTICE).group(homepage).orderSeq(2).icon("fas fa-volume-down").build());
         }
         if (!menuStoredList.containsKey(MenuType.JOB)) {
             menuList.add(Menu.builder(MenuType.JOB).group(recruit).orderSeq(3).icon("fas fa-exclamation-circle").build());

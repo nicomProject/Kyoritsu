@@ -8,6 +8,10 @@ const SideBar = {
             success: function (data) {
                 that.menus = data.result.items;
                 that.draw();
+
+                setTimeout(function(){
+                    that.event();
+                }, 100)
             }
         });
     },
@@ -28,7 +32,9 @@ const SideBar = {
         this.menus.forEach(menu => {
             container.find(`#collpase-${menu.group.code}`).append(that.createMenuItem(menu))
         });
-
+    },
+    event: function(){
+        const container = $('.navbar.sidenav .navbar-nav');
         container.find('.nav-link.active').parents('.nav-group').collapse('show');
     },
     createMenuGroup: function(group){
@@ -46,8 +52,8 @@ const SideBar = {
     createMenuItem: function (menu) {
         let path = menu.url || '/';
         let activated = location.pathname === menu.url ? 'active' : '';
-        if (menu.code === 'dashboard' && location.pathname === '/') {
-            path = '/';
+        if (menu.code === 'dashboard' && location.pathname === '/admin') {
+            path = '/admin';
             activated = 'active';
         }
 
