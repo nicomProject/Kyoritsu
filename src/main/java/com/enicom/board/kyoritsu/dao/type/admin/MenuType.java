@@ -1,5 +1,6 @@
 package com.enicom.board.kyoritsu.dao.type.admin;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -15,6 +16,7 @@ public enum MenuType {
     ACCOUNT("accounts", "관리자 계정 조회"),
     ACCESS("access", "접속 기록");
 
+    @JsonValue
     private final String code;
     private final String name;
 }
