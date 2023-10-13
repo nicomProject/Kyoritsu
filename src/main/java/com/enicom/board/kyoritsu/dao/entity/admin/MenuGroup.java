@@ -25,7 +25,7 @@ public class MenuGroup {
     @Column(name = "code", length = 20)
     @Enumerated(EnumType.STRING)
     @Comment("메뉴 그룹")
-    private MenuGroupType code = MenuGroupType.HOME;
+    private MenuGroupType code = MenuGroupType.HOMEPAGE;
 
     @Column(name = "name", length = 20)
     @Comment("메뉴명")

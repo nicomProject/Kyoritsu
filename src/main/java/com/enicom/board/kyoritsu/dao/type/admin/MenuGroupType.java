@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum MenuGroupType {
-    HOME("home", "홈"),
     HOMEPAGE("homepage", "홈페이지 관리"),
     RECRUIT("recruit","채용 관리"),
     SYSTEM("system", "시스템 관리"),
