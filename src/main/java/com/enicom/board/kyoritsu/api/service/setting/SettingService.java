@@ -6,12 +6,12 @@ import com.enicom.board.kyoritsu.api.type.InfoVO;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
 import com.enicom.board.kyoritsu.dao.entity.Code;
-import com.enicom.board.kyoritsu.dao.entity.admin.MenuAdmin;
+import com.enicom.board.kyoritsu.dao.entity.admin.Menu;
 
 public interface SettingService {
     PageVO<RoleVO> getRoleList();
 
-    PageVO<MenuAdmin> getMenuList();
+    PageVO<Menu> getMenuList();
 
     InfoVO<Code> getInitPwd();
 

@@ -55,14 +55,14 @@ public class HomeController {
     public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
         new SecurityContextLogoutHandler().logout(request, response,
                 SecurityContextHolder.getContext().getAuthentication());
-        response.sendRedirect("/");
+        response.sendRedirect("/admin");
     }
 
     @GetMapping("/admin/{page}")
     public String admin(Model model, HttpServletResponse response, @PathVariable String page) throws IOException {
         MemberDetail member = getCurrentUser(model);
         if (member == null || page.equalsIgnoreCase("login")) {
-            response.sendRedirect("/");
+            response.sendRedirect("/admin");
         }
 
         String view = page;
@@ -71,6 +71,26 @@ public class HomeController {
         }
 
         return String.format("admin/%s", view);
+    }
+
+    @GetMapping("/admin/detail/{page}")
+    public String adminDetail(Model model, HttpServletResponse response, @PathVariable String page) throws IOException {
+        MemberDetail member = getCurrentUser(model);
+        if (member == null || page.equalsIgnoreCase("login")) {
+            response.sendRedirect("/admin");
+        }
+
+        return String.format("admin/detail/%s", page);
+    }
+    @GetMapping("/admin/detail/{page}/{key}")
+    public String adminDetail(Model model, HttpServletResponse response, @PathVariable String page, @PathVariable String key) throws IOException {
+        MemberDetail member = getCurrentUser(model);
+        if (member == null || page.equalsIgnoreCase("login")) {
+            response.sendRedirect("/admin");
+        }
+
+        model.addAttribute("key", key);
+        return String.format("admin/detail/%s", page);
     }
 
     @RequestMapping(path = "/modal/{page}", method = {RequestMethod.GET})

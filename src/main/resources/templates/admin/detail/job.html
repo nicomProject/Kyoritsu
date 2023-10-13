@@ -1,0 +1,25 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{components/_include::include_manager}"></th:block>
+<body class="g-sidenav-show">
+<th:block th:replace="~{components/_side::side_manager}"></th:block>
+<main class="main-content position-relative h-100 border-radius-lg">
+    <th:block th:replace="~{components/_header::header_manager}"></th:block>
+    <div class="container-fluid page-container">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">채용공고 상세페이지</h4>
+                <p class="card-category ellipsis">
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="icon-title"></span>
+                </p>
+            </div>
+            <div class="card-body">
+                <div id="table"></div>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{components/_footer::footer_manager}"></th:block>
+
+<script type="text/javascript" src="/js/admin/page/jobs.js"></script>
+</body>

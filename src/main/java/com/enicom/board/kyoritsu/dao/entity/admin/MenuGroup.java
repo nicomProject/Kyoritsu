@@ -1,7 +1,7 @@
 package com.enicom.board.kyoritsu.dao.entity.admin;
 
-import com.enicom.board.kyoritsu.dao.type.admin.MenuGroup;
 import com.enicom.board.kyoritsu.dao.type.MenuTarget;
+import com.enicom.board.kyoritsu.dao.type.admin.MenuGroupType;
 import com.enicom.board.kyoritsu.dao.type.admin.MenuType;
 import com.enicom.board.kyoritsu.login.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,36 +15,23 @@ import org.hibernate.annotations.Comment;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "mn_menu")
+@Entity(name = "mn_menu_group")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@SequenceGenerator(name = "SEQ_MENU_GENERATOR", sequenceName = "SEQ_MENU", initialValue = 1, allocationSize = 1)
-public class MenuAdmin {
+@SequenceGenerator(name = "SEQ_MENU_GROUP_GENERATOR", sequenceName = "SEQ_MENU_GROUP", initialValue = 1, allocationSize = 1)
+public class MenuGroup {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MENU_GENERATOR")
-    @Column(name = "rec_key")
-    private Long recKey;
-
     @Column(name = "code", length = 20)
     @Enumerated(EnumType.STRING)
-    @Comment("메뉴 코드")
-    private MenuType code;
-
-    @Column(name = "grp", length = 20)
-    @Enumerated(EnumType.STRING)
     @Comment("메뉴 그룹")
-    private MenuGroup group = MenuGroup.SYSTEM;
+    private MenuGroupType code = MenuGroupType.HOME;
 
     @Column(name = "name", length = 20)
     @Comment("메뉴명")
     private String name;
-
-    @Column(name = "url", length = 100)
-    @Comment("메뉴 URL")
-    private String url;
 
     @Column(name = "read_role")
     @Enumerated(EnumType.STRING)
@@ -56,20 +43,10 @@ public class MenuAdmin {
     @Comment("권한 - 수정 권한")
     private Role editRole = Role.ADMIN;
 
-    @Column(name = "icon")
-    @Comment("아이콘 Class - FontAwesome")
-    private String icon;
-
-    @Column(name = "target")
-    @Builder.Default
-    @Enumerated(EnumType.STRING)
-    @Comment("새창 여부 - {self: 사용 안함, blank: 사용함}")
-    private MenuTarget target = MenuTarget.SELF;
-
     @Column(name = "order_seq")
     @Builder.Default
     @Comment("메뉴 보여질 순서 설정 - 오름차순 정렬")
-    private Integer order = 0;
+    private Integer orderSeq = 0;
 
     @Column(name = "use_yn")
     @Builder.Default
@@ -94,10 +71,10 @@ public class MenuAdmin {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime editDate;
 
-    public static MenuAdminBuilder builder(){
-        return new MenuAdminBuilder();
+    public static MenuGroupBuilder builder(){
+        return new MenuGroupBuilder();
     }
-    public static MenuAdminBuilder builder(MenuType type){
-        return builder().name(type.getName()).url(String.format("/admin/%s", type.getCode()));
+    public static MenuGroupBuilder builder(MenuGroupType type){
+        return builder().code(type).name(type.getName());
     }
 }
