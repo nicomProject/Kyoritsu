@@ -28,6 +28,8 @@ const SideBar = {
         this.menus.forEach(menu => {
             container.find(`#collpase-${menu.group.code}`).append(that.createMenuItem(menu))
         });
+
+        container.find('.nav-link.active').parents('.nav-group').collapse('show');
     },
     createMenuGroup: function(group){
         return `<li class="nav-item" data-bs-toggle="collapse" data-bs-target="#collpase-${group.code}" role="button" aria-expanded="false" aria-controls="#collpase-${group.code}">
