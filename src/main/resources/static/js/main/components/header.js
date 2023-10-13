@@ -1,26 +1,29 @@
-const SideBar = {
+const Menu = {
     menus: [],
     load: function () {
+        console.log("menu")
+        console.log(AjaxUtil)
         const that = this;
         AjaxUtil.request({
-            url: '/api/adm/setting/menus',
+            url: '/api/main/setting/menus',
             async: false,
             success: function (data) {
                 that.menus = data.result.items;
-                console.log(data.result)
+                console.log(data.result);
                 that.draw();
-            }
+            },
         });
     },
     draw: function () {
         const that = this;
-        const container = $('.navbar.sidenav .navbar-nav');
+        const container = $('#navbarSupportedContent .navbar-nav');
         container.html('');
         this.menus.forEach(menu => {
             container.append(that.createMenuItem(menu));
         });
     },
     createMenuItem: function (menu) {
+        console.log(menu)
         let path = menu.url || '/';
         let activated = location.pathname === menu.url ? 'active' : '';
         if (menu.code === 'dashboard' && location.pathname === '/') {
@@ -42,14 +45,12 @@ const SideBar = {
 $(function () {
     const Content = {
         load: function () {
-            SideBar.load();
-
+            Menu.load();
             this.event();
         },
         event: function () {
             const $body = $('body');
             const navbar = $('.navbar');
-
 
             navbar.find('.navbar-close').on({
                 click: function (e) {

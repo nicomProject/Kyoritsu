@@ -36,7 +36,7 @@
 
 
 	//======== tiny slider
-tns({
+	tns({
 		container: '.client-logo-carousel',
 		autoplay: true,
 		autoplayButtonOutput: false,
@@ -99,6 +99,136 @@ tns({
 			this.classList.add("active");
 		};
 	}
+
+	//========= glightbox
+	GLightbox({
+		'href': 'https://www.youtube.com/watch?v=BqI0Q7e4kbk&t=1s',
+		'type': 'video',
+		'source': 'youtube', //vimeo, youtube or local
+		'width': 900,
+		'autoplayVideos': true,
+	});
+
+	//====== Clients Logo Slider
+	tns({
+		container: '.client-logo-carousel',
+		slideBy: 'page',
+		autoplay: true,
+		autoplayButtonOutput: false,
+		mouseDrag: true,
+		gutter: 15,
+		nav: false,
+		controls: false,
+		responsive: {
+			0: {
+				items: 1,
+			},
+			540: {
+				items: 2,
+			},
+			768: {
+				items: 3,
+			},
+			992: {
+				items: 4,
+			},
+			1170: {
+				items: 6,
+			}
+		}
+	});
+
+	//======== Home Slider
+	var slider = new tns({
+		container: '.home-slider',
+		slideBy: 'page',
+		autoplay: false,
+		mouseDrag: true,
+		gutter: 0,
+		items: 1,
+		nav: true,
+		controls: false,
+		controlsText: [
+			'<i class="lni lni-arrow-left prev"></i>',
+			'<i class="lni lni-arrow-right next"></i>'
+		],
+		responsive: {
+			1200: {
+				items: 1,
+			},
+			992: {
+				items: 1,
+			},
+			0: {
+				items: 1,
+			}
+
+		}
+	});
+
+	//======== Testimonial Slider
+	/*var TestSlider = new tns({
+		container: '.testimonial-slider',
+		slideBy: 'page',
+		autoplay: false,
+		mouseDrag: true,
+		gutter: 0,
+		items: 1,
+		nav: true,
+		controls: false,
+		controlsText: [
+			'<i class="lni lni-arrow-left prev"></i>',
+			'<i class="lni lni-arrow-right next"></i>'
+		],
+		responsive: {
+			1200: {
+				items: 2,
+			},
+			992: {
+				items: 1,
+			},
+			0: {
+				items: 1,
+			}
+
+		}
+	});*/
+
+	//============== isotope masonry js with imagesloaded
+	imagesLoaded('#container', function () {
+		var elem = document.querySelector('.grid');
+		var iso = new Isotope(elem, {
+			// options
+			itemSelector: '.grid-item',
+			masonry: {
+				// use outer width of grid-sizer for columnWidth
+				columnWidth: '.grid-item'
+			}
+		});
+
+		let filterButtons = document.querySelectorAll('.portfolio-btn-wrapper button');
+		filterButtons.forEach(e =>
+			e.addEventListener('click', () => {
+
+				let filterValue = event.target.getAttribute('data-filter');
+				iso.arrange({
+					filter: filterValue
+				});
+			})
+		);
+	});
+
+	// header animation
+	const navbar = $('#nav');
+
+	navbar.find('li').click(function (e) {
+
+		$(this).toggleClass('active');
+		$(this).siblings().removeClass("active");
+
+		console.log($(this));
+	});
+
 
 
 })();

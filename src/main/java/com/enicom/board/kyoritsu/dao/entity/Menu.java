@@ -1,5 +1,6 @@
 package com.enicom.board.kyoritsu.dao.entity;
 
+import com.enicom.board.kyoritsu.dao.entity.admin.MenuAdmin;
 import com.enicom.board.kyoritsu.dao.type.MenuTarget;
 import com.enicom.board.kyoritsu.dao.type.MenuType;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -83,4 +84,12 @@ public class Menu {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime deleteDate;
+
+    public static MenuBuilder builder(){
+        return new MenuBuilder();
+    }
+    public static MenuBuilder builder(MenuType type){
+        return builder().name(type.getName()).url(String.format("/main/%s", type.getCode()));
+    }
+
 }
