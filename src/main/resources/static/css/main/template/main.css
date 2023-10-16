@@ -40,7 +40,7 @@ button:focus,
 }
 
 a:hover {
-  color: #3E54FF;
+  color: #005bab;
 }
 
 a {
@@ -157,7 +157,7 @@ p {
 .scroll-top {
   width: 45px;
   height: 45px;
-  background: #3E54FF;
+  background: #005bab;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -227,7 +227,7 @@ p {
   width: 100px;
   height: 100px;
   border-radius: 100%;
-  background: #3E54FF;
+  background: #005bab;
   -webkit-animation: preloader-fx 1.6s linear infinite;
   animation: preloader-fx 1.6s linear infinite;
 }
@@ -1020,7 +1020,7 @@ p {
 .header .toolbar-area .toolbar-contact p i {
   display: inline-block;
   margin-right: 6px;
-  color: #3E54FF;
+  color: #005bab;
   font-size: 15px;
 }
 
@@ -1101,7 +1101,7 @@ p {
 .navbar-area.sticky {
   position: fixed;
   z-index: 99;
-  background: #3E54FF;
+  background: #005bab;
   box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease-out 0s;
   background: #fff;
@@ -1200,7 +1200,7 @@ p {
 }
 
 .navbar-nav .nav-item:hover a {
-  color: #3E54FF;
+  color: #005bab;
 }
 
 .navbar-nav .nav-item a {
@@ -1240,7 +1240,7 @@ p {
 }
 
 .navbar-nav .nav-item a.active {
-  color: #3E54FF;
+  color: #005bab;
 }
 
 .navbar-nav .nav-item a.dd-menu {
@@ -1356,7 +1356,7 @@ p {
 
 .navbar-nav .nav-item .sub-menu>li.active>a,
 .navbar-nav .nav-item .sub-menu>li:hover>a {
-  color: #3E54FF;
+  color: #005bab;
 }
 
 .navbar-nav .nav-item .sub-menu>li>a {
@@ -1375,7 +1375,7 @@ p {
 
 .navbar-nav .nav-item .sub-menu>li>a:hover {
   background: rgba(0, 0, 0, 0.05);
-  color: #3E54FF;
+  color: #005bab;
 }
 
 /*======================================
@@ -1387,7 +1387,7 @@ p {
 ========================================*/
 .hero-slider {
   position: relative;
-  background: #3e54ff08;
+  background: #005bab08;
 }
 
 .hero-slider .single-slider {
@@ -1420,7 +1420,7 @@ p {
 
 .hero-slider .hero-text .small-title {
   color: #fff;
-  background: #3E54FF;
+  background: #005bab;
   font-size: 15px;
   padding: 5px 18px;
   display: inline-block;
@@ -1464,11 +1464,11 @@ p {
 }
 
 .hero-slider .hero-text .button .btn .dir-part {
-  background-color: #3E54FF;
+  background-color: #005bab;
 }
 
 .hero-slider .hero-text .button .btn:hover {
-  border-color: #3E54FF;
+  border-color: #005bab;
   color: #fff;
 }
 
@@ -1487,7 +1487,7 @@ p {
 }
 
 .hero-slider .tns-nav {
-  background: #3E54FF;
+  background: #005bab;
   display: inline-block;
   padding: 8px 20px 8px 20px;
   border-radius: 3px;
@@ -1547,7 +1547,7 @@ p {
   text-transform: capitalize;
   font-size: 14px;
   display: inline-block;
-  background: #3e54ff;
+  background: #005bab;
   color: #fff;
   padding: 4px 18px;
   margin-bottom: 5px;
@@ -1650,7 +1650,7 @@ p {
 }
 
 .feature-right .video-head .video:hover {
-  background: #3E54FF;
+  background: #005bab;
   color: #fff;
 }
 
@@ -1658,7 +1658,7 @@ p {
   height: 80px;
   width: 80px;
   background: #fff;
-  color: #3E54FF;
+  color: #005bab;
   text-align: center;
   line-height: 84px;
   border-radius: 50%;
@@ -1740,22 +1740,22 @@ p {
   line-height: 65px;
   text-align: center;
   background: #74b9ff;
-  color: #3E54FF;
+  color: #005bab;
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
-  background: #3E54FF0f;
+  background: #005bab0f;
   border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
 }
 
 .services .single-service:hover {
-  background: #3E54FF;
+  background: #005bab;
 }
 
 .services .single-service:hover .serial span {
   border-color: transparent;
   background: #fff;
-  color: #3E54FF;
+  color: #005bab;
   border-radius: 50%;
 }
 
@@ -1824,7 +1824,7 @@ p {
   bottom: 0;
   height: 3px;
   width: 80px;
-  background: #3E54FF;
+  background: #005bab;
   z-index: 1;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -1863,15 +1863,15 @@ p {
 }
 
 .services .single-service .content .button .btn {
-  border: 2px solid #3E54FF;
-  color: #3E54FF;
+  border: 2px solid #005bab;
+  color: #005bab;
   background: transparent;
 }
 
 .services .single-service .content .button .btn:hover {
   border-color: transparent;
   color: #fff;
-  background: #3E54FF;
+  background: #005bab;
 }
 
 /*=============================
@@ -1900,7 +1900,7 @@ p {
 
 .pricing-table .single-table .popular {
   color: #fff;
-  background: #3E54FF;
+  background: #005bab;
   display: inline-block;
   padding: 5px 70px;
   position: absolute;
@@ -2021,7 +2021,7 @@ p {
 ========================================*/
 .newsletter {
   background-image: url('/static/images/bizfinity/pattern.png');
-  background-color: #3E54FF;
+  background-color: #005bab;
 }
 
 .newsletter .subscribe-text h6 {
@@ -2084,7 +2084,7 @@ p {
 }
 
 .newsletter .button button .dir-part {
-  background-color: #3E54FF;
+  background-color: #005bab;
 }
 
 .newsletter .button button:hover {
@@ -2154,7 +2154,7 @@ p {
   display: block;
   border: 1px solid #eee;
   line-height: 35px;
-  background: #3e54ff;
+  background: #005bab;
   border: none;
   color: #fff;
 }
@@ -2248,7 +2248,7 @@ p {
 }
 
 .footer .f-link ul li a:hover {
-  color: #3E54FF;
+  color: #005bab;
   padding-left: 5px;
 }
 
@@ -2288,7 +2288,7 @@ p {
   display: inline-block;
   margin-right: 7px;
   font-size: 17px;
-  color: #3E54FF;
+  color: #005bab;
 
 }
 
@@ -2324,7 +2324,7 @@ p {
   top: 0;
   height: 100%;
   width: 100%;
-  background: #3E54FF;
+  background: #005bab;
   opacity: 0;
   visibility: hidden;
   -webkit-transition: all 0.4s ease;
@@ -2393,7 +2393,7 @@ p {
 }
 
 .footer .footer-bottom p a:hover {
-  color: #3E54FF;
+  color: #005bab;
 }
 
 .footer .footer-bottom .left {}
@@ -2409,7 +2409,7 @@ p {
 
 .free-version-banner {
   position: relative;
-  background: #3e54ff;
+  background: #005bab;
   background-image: url('/static/images/bizfinity/pattern.png');
 }
 
@@ -2422,7 +2422,7 @@ p {
 .free-version-banner .section-title span {
   margin-bottom: 15px;
   background-color: #fff;
-  color: #3e54ff !important;
+  color: #005bab !important;
 }
 
 .free-version-banner .section-title h2 {
@@ -2446,7 +2446,7 @@ p {
 
 .free-version-banner .button .btn {
   background-color: #fff;
-  color: #3e54ff;
+  color: #005bab;
 }
 
 .free-version-banner .button .btn:hover {
