@@ -19,6 +19,7 @@ public class MultipleParam {
 
     // LIST 조건 목록
     private List<String> idList;
+    private List<Long> idListLong;
     private Map<String, Object> updateList;
 
     // SPECIFIC 조건 field

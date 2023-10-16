@@ -31,6 +31,12 @@ public class Content {
     @Column(name = "subtitle", length = 100)
     private String subtitle;
 
+    @Column(name = "category", length = 20)
+    private String category;
+
+    @Column(name = "subcategory", length = 20)
+    private String subcategory;
+
     @Column(name = "content", length = 10000)
     private String content;
 
