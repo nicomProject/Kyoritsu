@@ -33,17 +33,9 @@ const Menu = {
         });
     },
     createMenuGroup: function (menu) {
-        const that = this;
-        const subMenus = this.subMenus
-        let path = subMenus.url || '/';
-        let activated = location.pathname ===  subMenus.url ? 'active' : '';
-        if (menu.code === 'dashboard' && location.pathname === '/') {
-            path = '/';
-            activated = 'active';
-        }
 
         return $(`<li class="nav-item">
-                    <a class="nav-link ${activated}" href="javascript:void(0)"
+                    <a class="nav-link" href="javascript:void(0)"
                         data-bs-toggle="collapse" data-bs-target="#submenu-${menu.recKey}-1"
                         aria-controls="navbarSupportedContent" aria-expanded="false"
                         aria-label="Toggle navigation"> ${menu.name}
@@ -54,7 +46,17 @@ const Menu = {
     },
     createSubMenuItem: function (subMenu) {
         const path = subMenu.url || '/';
-        return $(`<li class="nav-item"><a href="${path}">${subMenu.name}</a></li>`);
+        let activated = location.pathname ===  path ? 'active' : '';
+
+        const menuContainer = $('.nav-item');
+        const menuCategory = menuContainer.find('.nav-link');
+
+        menuCategory.addClass(activated);
+
+        console.log(activated)
+
+
+        return $(`<li class="nav-item ${activated}"><a href="${path}">${subMenu.name}</a></li>`);
     },
 };
 
