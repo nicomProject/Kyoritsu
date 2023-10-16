@@ -24,8 +24,8 @@
                 </p>
             </div>
             <div class="card-body">
-                <table class="introduceTable">
-                    <tr class="introduceSub">
+                <table class="pageSubTable">
+                    <tr class="pageSub">
                         <td><label for="category">카테고리</label></td>
                         <td>
 <!--                            <input type="text" id="category" name="category" required></td>-->
@@ -40,19 +40,25 @@
                         </select>
                         </td>
                     </tr>
-                    <tr class="introduceSub">
+                    <tr class="pageSub">
                         <td><label for="title">제목</label></td>
                         <td colspan="3"><input type="text" id="title" name="title"></td>
                     </tr>
-                    <tr class="introduceSub">
+                    <tr class="pageSub">
                         <td><label for="sub_title">소제목</label></td>
                         <td colspan="3"><input type="text" id="sub_title" name="sub_title"></td>
                     </tr>
-                    <tr class="introduceSub">
+<!--                    <tr class="pageSub">-->
+<!--                        <td><label for="contents">본문</label></td>-->
+<!--                        <td colspan="3"><textarea id="contents" name="contents" rows="4" cols="50"></textarea></td>-->
+<!--                    </tr>-->
+                    <tr class="pageSub">
                         <td><label for="contents">본문</label></td>
-                        <td colspan="3"><textarea id="contents" name="contents" rows="4" cols="50"></textarea></td>
+                        <td colspan="3">
+                            <textarea class="form-control" name="contents" id="contents" rows="10" cols="100" ></textarea>
+                        </td>
                     </tr>
-                    <tr class="introduceSub">
+                    <tr class="pageSub">
                         <td><label for="management">관리</label></td>
                         <td colspan="3"><div type="text" id="management" name="management">
                             <button class="btn btn-round btn-success bg-gradient-success" role="action" data-action="list">
@@ -76,4 +82,5 @@
     </div>
 </main>
 <script type="text/javascript" src="/static/js/admin/page/detail/introduction.js"></script>
+<script type="text/javascript" src="/static/js/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </body>

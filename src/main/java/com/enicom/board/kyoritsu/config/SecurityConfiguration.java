@@ -24,6 +24,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @ComponentScan("com.enicom.board.kyoritsu")
 public class SecurityConfiguration {
+
     @Bean
     public static ServletListenerRegistrationBean httpSessionEventPublisher() {
         return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
@@ -64,6 +65,9 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .headers()
+                .frameOptions().sameOrigin(); // 'X-Frame-Options'를 'SAMEORIGIN'
         http
                 .authenticationManager(authManager(http))
                 .authorizeHttpRequests()
