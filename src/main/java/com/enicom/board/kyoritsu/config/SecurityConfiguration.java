@@ -1,9 +1,9 @@
 package com.enicom.board.kyoritsu.config;
 
-import com.enicom.board.kyoritsu.login.CustomAuthenticationProvider;
-import com.enicom.board.kyoritsu.login.LoginFailureHandler;
-import com.enicom.board.kyoritsu.login.LoginSuccessHandler;
-import com.enicom.board.kyoritsu.login.Role;
+import com.enicom.board.kyoritsu.dao.repository.introduction.IntroductionRepository;
+import com.enicom.board.kyoritsu.login.*;
+import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +17,7 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -24,6 +25,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @ComponentScan("com.enicom.board.kyoritsu")
 public class SecurityConfiguration {
+
 
     @Bean
     public static ServletListenerRegistrationBean httpSessionEventPublisher() {
