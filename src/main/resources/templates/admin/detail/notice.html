@@ -4,6 +4,7 @@
 <th:block th:replace="~{components/_side::side_manager}"></th:block>
 <main class="main-content position-relative h-100 border-radius-lg">
     <th:block th:replace="~{components/_header::header_manager}"></th:block>
+
     <input type="hidden" class="param" name="key" th:value="${key}"/>
 
     <div class="container-fluid page-container">
@@ -23,12 +24,97 @@
                 </p>
             </div>
             <div class="card-body">
-                <div id="table"></div>
+                <table class="pageSubTable" th:if="${key == null}">
+                    <tr class="pageSub">
+                        <td><label for="category">카테고리</label></td>
+                        <td>
+                            <!--                            <input type="text" id="category" name="category" required></td>-->
+                            <select id="category" name="category">
+                                <option value="news">뉴스</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="title">제목</label></td>
+                        <td><input type="text" id="title" name="title"></td>
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="contents">본문</label></td>
+                        <td colspan="3">
+                            <textarea class="form-control" name="contents" id="contents" rows="10" cols="100" ></textarea>
+                        </td>
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="management">관리</label></td>
+                        <td><div type="text" id="management" name="management">
+                            <button class="btn btn-round btn-success bg-gradient-success" role="action" data-action="list">
+                                <i class="fas fa-plus"></i><span class="icon-title">목록</span>
+                            </button>
+                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key == null}">
+                                <i class="fas fa-plus"></i><span class="icon-title">저장</span>
+                            </button>
+                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key != null}">
+                                <i class="fas fa-plus"></i><span class="icon-title">수정</span>
+                            </button>
+                            <button class="btn btn-round btn-danger bg-gradient-danger" role="action" data-action="delete">
+                                <i class="fas fa-plus"></i><span class="icon-title">삭제</span>
+                            </button>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="pageSubTable" th:if="${key != null}">
+                    <tr class="pageSub">
+                        <td><label for="category">카테고리</label></td>
+                        <td>
+                            <!--                            <input type="text" id="category" name="category" required></td>-->
+                            <select id="category" name="category">
+                                <option value="news">뉴스</option>
+                            </select>
+                        <td><label for="views">조회수</label></td>
+                        <td colspan="3"><input type="text" id="views" name="title"></td>
+                        </td>
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="title">제목</label></td>
+                        <td colspan="3"><input type="text" id="title" name="title"></td>
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="create_user">작성자</label></td>
+                        <td><input type="text" id="create_user" name="sub_title"></td>
+                        <td><label for="create_data">작성일</label></td>
+                        <td><input type="text" id="create_data" name="sub_title"></td>
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="contents">본문</label></td>
+                        <td colspan="3">
+                            <textarea class="form-control" name="contents" id="contents" rows="10" cols="100" ></textarea>
+                        </td>
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="management">관리</label></td>
+                        <td colspan="3"><div type="text" id="management" name="management">
+                            <button class="btn btn-round btn-success bg-gradient-success" role="action" data-action="list">
+                                <i class="fas fa-plus"></i><span class="icon-title">목록</span>
+                            </button>
+                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key == null}">
+                                <i class="fas fa-plus"></i><span class="icon-title">저장</span>
+                            </button>
+                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="update" th:if="${key != null}">
+                                <i class="fas fa-plus"></i><span class="icon-title">수정</span>
+                            </button>
+                            <button class="btn btn-round btn-danger bg-gradient-danger" role="action" data-action="delete">
+                                <i class="fas fa-plus"></i><span class="icon-title">삭제</span>
+                            </button>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
 </main>
-<th:block th:replace="~{components/_footer::footer_manager}"></th:block>
-
 <script type="text/javascript" src="/static/js/admin/page/detail/notice.js"></script>
+<script type="text/javascript" src="/static/js/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </body>

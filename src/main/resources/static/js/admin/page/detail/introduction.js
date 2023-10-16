@@ -8,6 +8,15 @@ $(function () {
         },
         event: function () {
 
+            var oEditors = [];
+            nhn.husky.EZCreator.createInIFrame({
+                oAppRef: oEditors,
+                elPlaceHolder: "contents",
+                sSkinURI: "/static/js/smartEditor/SmartEditor2Skin.html",
+                fCreator: "createSEditor2"
+            })
+
+
             const paramValue = this.params.key
             console.log("paramValue" + paramValue)
 
@@ -19,11 +28,11 @@ $(function () {
                     },
                     success: function (data) {
                         console.log(data)
-                        $(".introduceSub #category").val(data.result.items[0].category);
-                        $(".introduceSub #sub_category").val(data.result.items[0].subcategory);
-                        $(".introduceSub #title").val(data.result.items[0].title);
-                        $(".introduceSub #sub_title").val(data.result.items[0].subtitle);
-                        $(".introduceSub #contents").val(data.result.items[0].content);
+                        $(".pageSub #category").val(data.result.items[0].category);
+                        $(".pageSub #sub_category").val(data.result.items[0].subcategory);
+                        $(".pageSub #title").val(data.result.items[0].title);
+                        $(".pageSub #sub_title").val(data.result.items[0].subtitle);
+                        $(".pageSub #contents").val(data.result.items[0].content);
 
                         if (data.code == 200) {
                             Swal.fire({
@@ -47,6 +56,13 @@ $(function () {
                 button.addEventListener("click", function () {
                     // data-action 속성을 확인하여 해당 동작을 처리합니다.
                     const action = button.getAttribute("data-action");
+
+                    // // 네이버 스마트에디터 <p>태그 삭제
+                    // var contentText = oEditors.getById["contents"].getIR();
+                    // contentText = contentText.replace(/<p>/gi, "").replace(/<\/p>/gi, "");
+                    // oEditors.getById["contents"].setIR(contentText);
+                    oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+
                     if (action === "add") {
                         var titleValue = $("#title").val();
                         var sub_titleValue = $("#sub_title").val();
@@ -114,7 +130,7 @@ $(function () {
                             })
                         }}
                     else if(action === "list"){
-                        window.location.href = 'introductions'
+                        location.href = '/admin/introductions'
                     }
                     else if(action === "delete"){
                         AjaxUtil.requestBody({

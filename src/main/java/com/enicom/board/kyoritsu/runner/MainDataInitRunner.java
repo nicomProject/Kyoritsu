@@ -37,23 +37,23 @@ public class MainDataInitRunner implements ApplicationRunner {
         MainMenu recruit = MainMenu.builder().order(4).name("채용정보").type(MenuType.GROUP).build();
         menuRepository.saveAll(Arrays.asList(company, product, notice, recruit));
 
-        menuList.add(MainMenu.builder().order(1).menu(company).name("기업개요").type(MenuType.INTRO).build());
-        menuList.add(MainMenu.builder().order(2).menu(company).name("경영이념/비전").type(MenuType.INTRO).build());
-        menuList.add(MainMenu.builder().order(3).menu(company).name("연력").type(MenuType.INTRO).build());
-        menuList.add(MainMenu.builder().order(4).menu(company).name("조직도").type(MenuType.INTRO).build());
-        menuList.add(MainMenu.builder().order(5).menu(company).name("오시는길").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(1).menu(company).url("/intro/overview").name("기업개요").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(2).menu(company).url("/intro/vision").name("경영이념/비전").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(3).menu(company).url("/intro/history").name("연혁").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(4).menu(company).url("/intro/organization").name("조직도").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(5).menu(company).url("/intro/location").name("오시는길").type(MenuType.INTRO).build());
 
-        menuList.add(MainMenu.builder().order(1).menu(product).name("기숙사").type(MenuType.INTRO).build());
-        menuList.add(MainMenu.builder().order(2).menu(product).name("도미인").type(MenuType.INTRO).build());
-        menuList.add(MainMenu.builder().order(3).menu(product).name("리조트").type(MenuType.INTRO).build());
-        menuList.add(MainMenu.builder().order(4).menu(product).name("수석생활").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(1).menu(product).url("/business/dormitory").name("기숙사").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(2).menu(product).url("/business/dormyinn").name("도미인").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(3).menu(product).url("/business/resort").name("리조트").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(4).menu(product).url("/business/seniorlife").name("요양원").type(MenuType.INTRO).build());
 
-        menuList.add(MainMenu.builder().order(1).menu(notice).name("공지사항").type(MenuType.GENERAL).build());
+        menuList.add(MainMenu.builder().order(1).menu(notice).url("/notice/notice").name("공지사항").type(MenuType.GENERAL).build());
 
-        menuList.add(MainMenu.builder().order(1).menu(recruit).name("채용 안내").type(MenuType.GENERAL).build());
-        menuList.add(MainMenu.builder().order(2).menu(recruit).name("채용 공고").type(MenuType.GENERAL).build());
-        menuList.add(MainMenu.builder().order(3).menu(recruit).name("채용 지원").type(MenuType.GENERAL).build());
-        menuList.add(MainMenu.builder().order(4).menu(recruit).name("채용 문의").type(MenuType.GENERAL).build());
+        menuList.add(MainMenu.builder().order(1).menu(recruit).url("/recruit/info").name("채용 안내").type(MenuType.GENERAL).build());
+        menuList.add(MainMenu.builder().order(2).menu(recruit).url("/recruit/notice").name("채용 공고").type(MenuType.GENERAL).build());
+        menuList.add(MainMenu.builder().order(3).menu(recruit).url("/recruit/apply").name("채용 지원").type(MenuType.GENERAL).build());
+        menuList.add(MainMenu.builder().order(4).menu(recruit).url("/recruit/inquire").name("채용 문의").type(MenuType.GENERAL).build());
 
         menuRepository.saveAll(menuList);
 

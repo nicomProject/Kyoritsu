@@ -1,15 +1,16 @@
 const Menu = {
     menus: [],
+    subMenus: [],
     load: function () {
-        console.log("menu")
-        console.log(AjaxUtil)
         const that = this;
         AjaxUtil.request({
             url: '/api/main/setting/menus',
             async: false,
             success: function (data) {
-                that.menus = data.result.items;
-                console.log(data.result);
+                const items = data.result.items;
+                that.menus = items.filter(item => item.type === "group");
+                that.subMenus = items.filter(item => item.type !== "group")
+
                 that.draw();
             },
         });
@@ -18,28 +19,45 @@ const Menu = {
         const that = this;
         const container = $('#navbarSupportedContent .navbar-nav');
         container.html('');
+
         this.menus.forEach(menu => {
-            container.append(that.createMenuItem(menu));
+            const menuGroup = that.createMenuGroup(menu);
+            container.append(menuGroup);
+
+            const subMenuContainer = menuGroup.find('.sub-menu');
+            const subMenuItems = that.subMenus.filter(subMenu => subMenu.menu.recKey === menu.recKey);
+
+            subMenuItems.forEach(subMenu => {
+                subMenuContainer.append(that.createSubMenuItem(subMenu));
+            });
         });
     },
-    createMenuItem: function (menu) {
-        console.log(menu)
-        let path = menu.url || '/';
-        let activated = location.pathname === menu.url ? 'active' : '';
-        if (menu.code === 'dashboard' && location.pathname === '/') {
-            path = '/';
-            activated = 'active';
-        }
+    createMenuGroup: function (menu) {
 
-        return `<li class="nav-item">
-                    <a class="nav-link ${activated}" href="${path}">
-                        <div class="icon icon-shape icon-sm">
-                            <i class="${menu.icon}"></i>
-                        </div>
-                        <span class="nav-link-text ms-2">${menu.name}</span>
+        return $(`<li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)"
+                        data-bs-toggle="collapse" data-bs-target="#submenu-${menu.recKey}-1"
+                        aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation"> ${menu.name}
                     </a>
-                </li>`;
-    }
+                    <ul class="sub-menu collapse" id="submenu-${menu.recKey}-1">
+                    </ul>
+                </li>`);
+    },
+    createSubMenuItem: function (subMenu) {
+        const path = subMenu.url || '/';
+        let activated = location.pathname ===  path ? 'active' : '';
+
+        const menuContainer = $('.nav-item');
+        const menuCategory = menuContainer.find('.nav-link');
+
+        menuCategory.addClass(activated);
+
+        console.log(activated)
+
+
+        return $(`<li class="nav-item ${activated}"><a href="${path}">${subMenu.name}</a></li>`);
+    },
 };
 
 $(function () {
@@ -71,29 +89,6 @@ $(function () {
                     $body.toggleClass('g-sidenav-hidden');
                 }
             })
-
-            tippy('*[role="action"][data-action="shield"]', {
-                content: '비밀번호 변경'
-            });
-            tippy('*[role="action"][data-action="logout"]', {
-                content: '로그아웃'
-            });
-
-            navbar.find('*[role="action"]').click(function (e) {
-                const action = this.dataset.action;
-                if (action === 'logout') {
-                    Alert.confirm({
-                        title: '로그아웃',
-                        text: '로그아웃 하시겠습니까?',
-                    }, function (result) {
-                        if (result.isConfirmed) {
-                            location.href = '/admin/logout';
-                        }
-                    });
-                } else if (action === 'shield') {
-                    ParamManager.show('password', 'password', {});
-                }
-            });
         }
     }
 

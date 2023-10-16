@@ -7,7 +7,6 @@ const SideBar = {
             async: false,
             success: function (data) {
                 that.menus = data.result.items;
-                console.log(data.result)
                 that.draw();
 
                 setTimeout(function(){
@@ -24,8 +23,11 @@ const SideBar = {
         const groups = this.menus.map(e => e.group);
         const groupHash = {};
         groups.forEach(function(e){
+            console.log(e)
             groupHash[e.code] = e;
         });
+
+        console.log(groupHash)
 
         Object.entries(groupHash).forEach(([code, group]) => {
             container.append(that.createMenuGroup(group))

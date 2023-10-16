@@ -27,10 +27,11 @@ public class HomeController {
         return "main/index";
     }
 
-    @GetMapping("/{page}")
-    public String main(Model model, HttpServletResponse response, @PathVariable String page) throws IOException {
+    @GetMapping("/{category}/{page}")
+    public String main(@PathVariable String category, @PathVariable String page) throws IOException {
+        String menu = category;
         String view = page;
-        return String.format("main/%s", view);
+        return String.format("main/%s/%s", menu, view);
     }
 
     @GetMapping(path = { "/admin"})

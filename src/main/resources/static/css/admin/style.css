@@ -1400,30 +1400,30 @@ input[type=checkbox]:checked {
     }
 }
 
-.introduceSub {
+.pageSub {
     text-align: center;
     height: 40px;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
 }
 
-.introduceTable{
+.pageSubTable{
     width: 90%;
 }
 
-.introduceSub [id]  {
+.pageSub [id]  {
     text-align: center;
     width: 100%;
     height: 40px;
 }
 
-.introduceSub #contents  {
+.pageSub #contents  {
     text-align: center;
     width: 100%;
     height: 500px;
 }
 
-.introduceSub #management  {
+.pageSub #management  {
     height: 60px;
     background-color: #fff;
     border: 0.25px solid #7b7f83;
