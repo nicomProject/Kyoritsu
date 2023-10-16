@@ -185,7 +185,7 @@ th {
 }
 /* Bread Crumbs */
 .breadcrumbs {
-	background-image: url('../images/breadcrumbs-bg.jpg');
+	background-image: url('/static/images/main/hero-bg.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
