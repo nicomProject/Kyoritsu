@@ -1194,6 +1194,10 @@ p {
   }
 }
 
+.nav-item:has(> .sub-menu .nav-item.active) .nav-link{
+  color: #005bab;
+}
+
 .navbar-nav .nav-item {
   position: relative;
   z-index: 1;
