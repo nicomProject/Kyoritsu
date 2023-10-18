@@ -1,8 +1,20 @@
 $(function () {
+    // let categoryitems = [];
     const Content = {
         params: {},
+        categoryItems: {},
+        items: {},
         load: function (params) {
             this.params = params;
+            // let items = [];
+            AjaxUtil.request({
+                url: '/api/main/setting/category',
+                async: false,
+                success: function (data) {
+                    items = data.result.items;
+                    categoryItems = Array.from(new Set(items.map(item => item.menu.recKey))).map(recKey => items.find(item => item.menu.recKey === recKey));
+                }
+            });
 
             Data.load({role: true});
             this.event();
@@ -75,7 +87,6 @@ $(function () {
         },
         draw: function (target) {
             const that = this;
-
             const roleHash = Data.roleHash || {};
             const table = new Tabulator(target, {
                 locale: 'ko-kr',
@@ -126,18 +137,19 @@ $(function () {
                         download: false,
                         headerSort: false
                     },
-                    {title: '카테고리', field: "category", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
-                            values: ["company"],
+                    {title: '카테고리', field: "category", headerHozAlign: "center", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
+                            values: categoryItems.map(e => e.menu.name),
                         }
                     },
-                    {title: '서브 카테고리', field: "subcategory", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
-                            values: ["sub"],
+                    {title: '서브 카테고리', field: "subcategory", headerHozAlign: "center", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
+                            values: items.map(e => e.name),
                         }},
-                    {title: '제목', field: "title", tooltip: true, headerTooltip: true, headerFilter: 'input'},
-                    {title: '소제목', field: "subtitle", tooltip: true, headerTooltip: true, headerFilter: 'input'},
+                    {title: '제목', field: "title", headerHozAlign: "center", tooltip: true, headerTooltip: true, headerFilter: 'input'},
+                    {title: '소제목', field: "subtitle", headerHozAlign: "center", tooltip: true, headerTooltip: true, headerFilter: 'input'},
                     {
                         title: '등록 일시',
                         field: "createDate",
+                        headerHozAlign: "center",
                         tooltip: true,
                         headerTooltip: true
                     },

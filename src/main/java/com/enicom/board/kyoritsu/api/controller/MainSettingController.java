@@ -20,4 +20,12 @@ public class MainSettingController {
         return new ResponseHandler<>(mainSettingService.getMenuList());
     }
 
+    @RequestMapping(path = "/category", method = {RequestMethod.GET, RequestMethod.POST})
+    @ApiMapping(order = 60, desc = "소개글 메뉴 카테고리 조회")
+    public ResponseHandler<?> getCategoryList() {
+        return new ResponseHandler<>(mainSettingService.getCategoryList());
+    }
+
+
+
 }
