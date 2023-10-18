@@ -102,7 +102,7 @@
 
 	//========= glightbox
 	GLightbox({
-		'href': 'https://www.youtube.com/watch?v=BqI0Q7e4kbk&t=1s',
+		'href': 'https://youtu.be/t0zB-fOuzEk',
 		'type': 'video',
 		'source': 'youtube', //vimeo, youtube or local
 		'width': 900,
