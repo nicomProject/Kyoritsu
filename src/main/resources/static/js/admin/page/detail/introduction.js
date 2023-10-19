@@ -4,6 +4,7 @@ $(function () {
         subCategorys: [],
         params: {},
         load: function (params) {
+
             const that = this;
             const category = $("#category");
             const sub_category = $("#sub_category");
