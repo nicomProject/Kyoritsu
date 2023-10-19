@@ -4,3 +4,102 @@ button, input, optgroup, select, textarea {
     margin: 0;
     font-family: "Noto Sans KR", serif !important;
 }
+
+/* apply.html */
+.Features .sub-title{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 40px;
+    background: white;
+}
+
+.apply-section{
+    padding-top: 0 !important;
+    background: #f5f5f5;
+}
+
+.Features.apply-section .container{
+    background: white;
+    padding: 0;
+    margin: 20px auto;
+}
+
+.Features .container .title-container{
+    display: flex;
+    box-shadow:
+            1px 0 0 0 #888,
+            0 1px 0 0 #888,
+            1px 1px 0 0 #888,
+            1px 0 0 0 #888 inset,
+            0 1px 0 0 #888 inset;
+    padding: 24px;
+}
+
+.Features .container .content-default,
+.Features .container .content-education,
+.Features .container .content-career,
+.Features .container .content-personal{
+    box-shadow:
+            1px 0 0 0 #888,
+            0 1px 0 0 #888,
+            1px 1px 0 0 #888,
+            1px 0 0 0 #888 inset,
+            0 1px 0 0 #888 inset;
+    padding: 30px 54px;
+}
+
+.Features .container .title-container .apply-career{
+    font-size: 0.7rem;
+    border: 1px solid #b2b2b2;
+    border-radius: 3px;
+    padding: 0 5px;
+}
+
+.Features .container .title-container .apply-title{
+    font-size: 1rem;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.Features .container .title-container .apply-subtitle{
+    font-size: 0.9rem;
+    padding-left: 10px;
+}
+
+.form_radio_btn {
+    height : 45px;
+    border: 1px solid #EAE7E7;
+}
+.form_radio_btn input[type=radio] {
+    display: none;
+}
+.form_radio_btn label {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 45px;
+}
+
+.form_toggle{
+    margin-left: 10px;
+}
+
+/* Checked */
+.form_radio_btn input[type=radio]:checked + label {
+    background: #5CA3E1;
+    color: #fff;
+    padding: 0 20px;
+}
+
+/* Hover */
+.form_radio_btn label:hover {
+    color: #666;
+}
+
+/* Disabled */
+.form_radio_btn input[type=radio] + label {
+    background: #F9FAFC;
+    color: #666;
+    padding: 0 20px;
+}

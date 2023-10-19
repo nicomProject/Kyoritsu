@@ -44,26 +44,37 @@
 
 	<!-- Start Features Area -->
     <main>
-        <section class="Features section">
+        <section class="Features apply-section">
+            <div class="sub-title">
+                지원서 작성
+            </div>
             <div class="container">
-                <div class="row">
-                    <div class="">
-                        <div class="apply-career">신입</div>
-                        <div class="apply-title">[기숙사] Dormitory 회계</div>
-                        <div class="apply-subtitle">
-                            <span>정규직</span>
-                            <span>상시모집</span>
-                        </div>
+                <div class="title-container">
+                    <div class="apply-career">신입</div>
+                    <div class="apply-title">[기숙사] Dormitory 회계</div>
+                    <div class="apply-subtitle">
+                        <span>정규직</span>
+                        <span>상시모집</span>
                     </div>
-                    <div class="apply-content">
-                        <div>
+                </div>
+                <div class="apply-content">
+                    <div class="content-default">
+                        <div class="d-flex">
                             <input type="text" placeholder="성함"/>
-                            <button type="button">내국인</button>
-                            <button type="button">외국인</button>
+                            <div class="form_toggle row-vh d-flex flex-row justify-content-between" >
+                                <div class="form_radio_btn radio_male">
+                                    <input id="radio-1" type="radio" name="userSex" value="male" checked>
+                                    <label for="radio-1">내국인</label>
+                                </div>
+                                <div class="form_radio_btn">
+                                    <input id="radio-2" type="radio" name="userSex" value="female">
+                                    <label for="radio-2">외국인</label>
+                                </div>
+                            </div>
                         </div>
                         <div>
-                            <input type="radio"/>
-                            <input type="radio"/>
+                            <input type="radio" value="male"/> 남
+                            <input type="radio" value="female"/> 여
                         </div>
                         <div>
                             <input type="number" placeholder="휴대폰 번호('-'없이 입력)"/>
@@ -79,11 +90,39 @@
                             <input type="text" placeholder="상세주소를 입력해주세요">
                         </div>
                         <div>
-                            <input type="number" placeholder="비상연락처">
+                            <input type="text" placeholder="비상연락처">
                             <select>
                                 <option>관계</option>
                             </select>
                         </div>
+                    </div>
+                    <div class="content-education">
+                        <div> 학력 </div>
+                        <div>
+                            <select class="">
+                                <option>구분</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="content-career">
+                        <div> 경력 </div>
+                        <div>
+                            <input type="text" placeholder="회사명"/>
+                            <input type="text" placeholder="근무부서"/>
+                            <input type="text" placeholder="직급/직책"/>
+                            <select>
+                                <option> 근무형태 </option>
+                            </select>
+                            <input type="date"> ~ <input type="date">
+                        </div>
+                    </div>
+                    <div class="content-personal">
+                        <div> 자기소개서 </div>
+                        <span> 경험을 바탕으로 자세히 작성해주세요.</span>
+                        <div>
+                            <textarea cols="50" rows="10"></textarea>
+                        </div>
+                        <div> 0/10000</div>
                     </div>
                 </div>
             </div>
