@@ -63,7 +63,15 @@ public class HomeController {
     public String admin(Model model, HttpServletResponse response, @PathVariable String page) throws IOException {
         MemberDetail member = getCurrentUser(model);
         if (member == null || page.equalsIgnoreCase("login")) {
-            response.sendRedirect("/admin");
+            response.sendRedirect("/");
+        }
+
+        else {
+            securityUtil.getMenu(page).ifPresent(menu -> {
+                System.out.println(menu.getName());
+                model.addAttribute("menu_group", menu.getGroup().getName());
+                model.addAttribute("menu_name", menu.getName());
+            });
         }
 
         String view = page;
@@ -79,6 +87,13 @@ public class HomeController {
         MemberDetail member = getCurrentUser(model);
         if (member == null || page.equalsIgnoreCase("login")) {
             response.sendRedirect("/admin");
+        }
+        else {
+            securityUtil.getDetailMenu(page).ifPresent(menu -> {
+                System.out.println(menu.getName());
+                model.addAttribute("menu_group", menu.getGroup().getName());
+                model.addAttribute("menu_detail_name", menu.getName());
+            });
         }
 
         return String.format("admin/detail/%s", page);

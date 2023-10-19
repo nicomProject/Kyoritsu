@@ -3,6 +3,7 @@ package com.enicom.board.kyoritsu.api.service.setting;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.dao.entity.MainMenu;
 import com.enicom.board.kyoritsu.dao.repository.MainMenuRepository;
+import com.enicom.board.kyoritsu.dao.type.MenuType;
 import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,11 @@ public class MainSettingServiceImpl implements MainSettingService {
     public PageVO<MainMenu> getMenuList() {
         List<Role> roles = securityUtil.getRoleList();
         return PageVO.builder(menuRepository.findAll()).build();
+    }
+
+    @Override
+    public PageVO<MainMenu> getCategoryList() {
+        return PageVO.builder(menuRepository.findAllByType(MenuType.INTRO)).build();
     }
 
 }

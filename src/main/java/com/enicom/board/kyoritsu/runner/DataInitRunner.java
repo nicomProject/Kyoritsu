@@ -88,26 +88,26 @@ public class DataInitRunner implements ApplicationRunner {
         });
 
         List<Menu> menuList = new ArrayList<>();
-        if (!menuStoredList.containsKey(MenuPageType.INTRODUCTION)) {
-            menuList.add(Menu.builder(MenuPageType.INTRODUCTION).group(homepage).orderSeq(1).icon("fas fa-handshake").build());
+        if (!menuStoredList.containsKey(MenuPageType.INTRODUCTIONS)) {
+            menuList.add(Menu.builder(MenuPageType.INTRODUCTIONS).group(homepage).orderSeq(1).icon("fas fa-handshake").codeDetail("INTRODUCTION").build());
         }
-        if (!menuStoredList.containsKey(MenuPageType.NOTICE)) {
-            menuList.add(Menu.builder(MenuPageType.NOTICE).group(homepage).orderSeq(2).icon("fas fa-volume-down").build());
+        if (!menuStoredList.containsKey(MenuPageType.NOTICES)) {
+            menuList.add(Menu.builder(MenuPageType.NOTICES).group(homepage).orderSeq(2).icon("fas fa-volume-down").codeDetail("NOTICE").build());
         }
-        if (!menuStoredList.containsKey(MenuPageType.JOB)) {
-            menuList.add(Menu.builder(MenuPageType.JOB).group(recruit).orderSeq(3).icon("fas fa-exclamation-circle").build());
+        if (!menuStoredList.containsKey(MenuPageType.JOBS)) {
+            menuList.add(Menu.builder(MenuPageType.JOBS).group(recruit).orderSeq(3).icon("fas fa-exclamation-circle").codeDetail("JOB").build());
         }
-        if (!menuStoredList.containsKey(MenuPageType.APPLICANT)) {
-            menuList.add(Menu.builder(MenuPageType.APPLICANT).group(recruit).orderSeq(4).icon("fas fa-id-badge").build());
+        if (!menuStoredList.containsKey(MenuPageType.APPLICANTS)) {
+            menuList.add(Menu.builder(MenuPageType.APPLICANTS).group(recruit).orderSeq(4).icon("fas fa-id-badge").codeDetail("APPLICANT").build());
         }
-        if (!menuStoredList.containsKey(MenuPageType.INQUIRY)) {
-            menuList.add(Menu.builder(MenuPageType.INQUIRY).group(recruit).orderSeq(5).icon("fas fa-question-circle").build());
+        if (!menuStoredList.containsKey(MenuPageType.INQUIRES)) {
+            menuList.add(Menu.builder(MenuPageType.INQUIRES).group(recruit).orderSeq(5).icon("fas fa-question-circle").codeDetail("INQUIREY").build());
         }
         if (!menuStoredList.containsKey(MenuPageType.ACCESS)) {
             menuList.add(Menu.builder(MenuPageType.ACCESS).group(system).orderSeq(6).icon("fas fa-sign-in-alt").build());
         }
-        if (!menuStoredList.containsKey(MenuPageType.ACCOUNT)) {
-            menuList.add(Menu.builder(MenuPageType.ACCOUNT).group(system).orderSeq(7).icon("fas fa-users-cog").build());
+        if (!menuStoredList.containsKey(MenuPageType.ACCOUNTS)) {
+            menuList.add(Menu.builder(MenuPageType.ACCOUNTS).group(system).orderSeq(7).icon("fas fa-users-cog").build());
         }
 
         log.info("메뉴 {}건 추가됨", menuList.size());

@@ -8,4 +8,5 @@ public interface MainSettingService {
 
     PageVO<MainMenu> getMenuList();
 
+    PageVO<MainMenu> getCategoryList();
 }

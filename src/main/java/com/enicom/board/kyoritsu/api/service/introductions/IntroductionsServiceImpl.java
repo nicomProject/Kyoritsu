@@ -31,13 +31,11 @@ public class IntroductionsServiceImpl implements IntroductionsService {
 
     @Override
     public PageVO<Content> findAll() {
-        System.out.println(introductionsRepository.findAllByDeleteDateNull() + "introductionsRepository.findAllByCreateDateNotNull()");
         return PageVO.builder(introductionsRepository.findAllByDeleteDateNull()).build();
     }
 
     @Override
     public PageVO<Content> findAll(IntroductionsParam param) {
-        System.out.println(introductionsRepository.findAllByDeleteDateNull() + "introductionsRepository.findAllByCreateDateNotNull()");
         return PageVO.builder(introductionsRepository.findAllByRecKey(Long.valueOf(param.getKey()))).build();
     }
 
@@ -48,11 +46,8 @@ public class IntroductionsServiceImpl implements IntroductionsService {
         System.out.println("1111111" + param);
 
         Content content = param.create();
-        System.out.println("222222" + content);
         content.setCreateDate(LocalDateTime.now());
-        System.out.println("333333333" + content);
         content.setCreateUser(member.getId());
-        System.out.println("4444444" + content);
         introductionsRepository.save(content);
 
         return ResponseDataValue.builder(200).build();

@@ -1417,6 +1417,18 @@ input[type=checkbox]:checked {
     height: 40px;
 }
 
+.pageSub #category  {
+    text-align: center;
+    width: 100%;
+    height: 40px;
+}
+
+.pageSub #sub_category  {
+    text-align: center;
+    width: 100%;
+    height: 40px;
+}
+
 .pageSub #contents  {
     text-align: center;
     width: 100%;
@@ -1428,4 +1440,15 @@ input[type=checkbox]:checked {
     background-color: #fff;
     border: 0.25px solid #7b7f83;
     text-align: left;
+    display: flex;
+    Align-items: center;
+    padding: 5px;
+}
+
+.pageSub #management button {
+    margin-left: 5px;
+}
+
+.pageSub .valueNochange {
+    border: 1px solid #ccc;
 }
