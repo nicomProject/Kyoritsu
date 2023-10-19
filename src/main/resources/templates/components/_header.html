@@ -13,8 +13,8 @@
                 <li class="breadcrumb-item text-sm">
                     <a class="opacity-5 text-dark" th:text="${menu_group}"></a>
                 </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page" th:text="${menu_name}" ></li>
-                <li class="breadcrumb-item text-sm text-dark active" id="changeModel" aria-current="page">상세페이지</li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page" th:text="${menu_name} ? ${menu_name} : ${menu_detail_name}" ></li>
+                <li class="breadcrumb-item text-sm text-dark active" id="changeModel" aria-current="page" th:if="${menu_detail_name != null}">상세페이지</li>
             </ol>
 <!--            <h6 class="font-weight-bolder mb-0" th:text="${menu_name}"></h6>-->
         </nav>
