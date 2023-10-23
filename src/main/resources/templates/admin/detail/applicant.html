@@ -13,8 +13,149 @@
                     <span class="icon-title"></span>
                 </p>
             </div>
-            <div class="card-body">
-                <div id="table"></div>
+            <div class="card-body" style="width: 95%">
+                    <div class="tob_body">
+                        <div class="form-div">채용공고</div>
+                        <i class="bi bi-caret-right-fill"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                        </svg>
+                        <select class="form-select">
+                            <option>선택하기</option>
+                            <option>선택하기</option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                        </svg>
+                        <select class="form-select">
+                            <option>선택하기</option>
+                            <option>선택하기</option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                        </svg>
+                        <select class="form-select">
+                            <option>선택하기</option>
+                            <option>선택하기</option>
+                        </select>
+                    </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" colspan="2" style="width: 10%">지원자 조회</th>
+                        <th scope="col" colspan="2" style="width: 20%">기본 정보</th>
+                        <th scope="col" colspan="2" style="width: 35%">신상 정보</th>
+                        <th scope="col" colspan="2" style="width: 35%">학력사항</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>이름</td>
+                        <td></td>
+                        <td>보훈여부</td>
+                        <td></td>
+                        <td>최종학력</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>성별</td>
+                        <td></td>
+                        <td>장애여부</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>생년월일</td>
+                        <td></td>
+                        <th scope="col" colspan="2">병역사항</th>
+                        <th scope="col" colspan="2">자격사항</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>국적</td>
+                        <td></td>
+                        <td>병역여부</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>휴대전화</td>
+                        <td></td>
+                        <td>병역구분</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>이메일</td>
+                        <td></td>
+                        <td>복무기간</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <th scope="col" colspan="6">자기소개서</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td colspan="6">
+                            <textarea class="form-control" name="contents" id="contents" rows="10" cols="100" ></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="col" colspan="8">결과등록</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+<!--                        <td class="applicant_content">-->
+<!--                            -->
+<!--                        </td>-->
+                        <td colspan="6" class="applicant_content">
+                            <div class="resultCombine">
+                            <div>
+                                <select class="form-select">
+                                    <option>선택하기</option>
+                                    <option>선택하기</option>
+                                </select>
+                                <select class="form-select">
+                                    <option>선택하기</option>
+                                    <option>선택하기</option>
+                                </select>
+                            </div>
+                            <textarea class="form-control" name="contents" id="contents" rows="10" cols="100" ></textarea>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8">
+                            <div type="text" id="management" name="management">
+                            <button class="btn btn-round btn-success bg-gradient-success" role="action" data-action="list">
+                                <i class="fas fa-plus"></i><span class="icon-title">목록으로</span>
+                            </button>
+                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add">
+                                <i class="fas fa-plus"></i><span class="icon-title">등록하기</span>
+                            </button>
+                        </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

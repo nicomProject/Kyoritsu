@@ -16,8 +16,7 @@ $(function () {
 
                 // 관리자 등록
                 if (action === 'add') {
-                    ParamManager.show('account', action, {});
-                }
+                    window.location.href = '/admin/account/detail'                }
                 // 관리자 초기화
                 else if (action === 'reset') {
                     const selected = table.getSelectedData().map(e => e.userId);
@@ -231,9 +230,7 @@ $(function () {
 
             const events = {
                 rowClick: function (e, row) {
-                    TableUtil.showRowDetail(row, 'account', {
-                        rowActive: false,
-                    });
+                    window.location.href = '/admin/account/detail/' + row.getData().recKey;
                 },
                 downloadComplete: function () {
                     Swal.close();

@@ -1,0 +1,87 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{components/_include::include_manager}"></th:block>
+<body class="g-sidenav-show">
+<th:block th:replace="~{components/_side::side_manager}"></th:block>
+<main class="main-content position-relative h-100 border-radius-lg">
+    <th:block th:replace="~{components/_header::header_manager}"></th:block>
+
+    <input type="hidden" class="param" name="key" th:value="${key}"/>
+
+    <div class="container-fluid page-container">
+        <div class="card">
+            <div class="card-header card-header-primary" th:if="${key != null}">
+                <h4 class="card-title">관리자 수정</h4>
+                <p class="card-category ellipsis">
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="icon-title"></span>
+                </p>
+            </div>
+            <div class="card-header card-header-primary" th:if="${key == null}">
+                <h4 class="card-title">관리자 추가</h4>
+                <p class="card-category ellipsis">
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="icon-title"></span>
+                </p>
+            </div>
+            <div class="card-body">
+                <i class="fas fa-exclamation-circle"></i>
+                <span class="icon-title modal-ext-desc"> 이용 안내<br>
+					- 관리자 생성 후에는 아이디를 수정할 수 없습니다.<br>
+					- 비밀번호는 초기 비밀번호로 생성됩니다.
+				</span>
+
+                <table class="pageSubTable">
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="manager_id">아이디</label></td>
+                        <td><input type="text" id="manager_id" name="manager_id"></td>
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="manager_name">이름</label></td>
+                        <td><input type="text" id="manager_name" name="manager_name"></td>
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="manager_role">권한</label></td>
+                        <td>
+                            <select class="manager_role" name="manager_role" id="manager_role">
+                                <option value="USER">일반 사용자</option>
+                                <option value="ROLE_ADMIN">관리자</option>
+                                <option value="ROLE_SYSTEM">시스템 관리자</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="pageSub">
+                        <td><label for="manager_enable">활성여부</label></td>
+                        <td>
+                            <select class="manager_enable" name="manager_enable" id="manager_enable">
+                                <option value="1">활성</option>
+                                <option value="2">비활성</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr class="pageSub">
+                        <td><label for="management">관리</label></td>
+                        <td><div type="text" id="management" name="management">
+                            <button class="btn btn-round btn-success bg-gradient-success" role="action" data-action="list">
+                                <i class="fas fa-plus"></i><span class="icon-title">목록</span>
+                            </button>
+                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key == null}">
+                                <i class="fas fa-plus"></i><span class="icon-title">저장</span>
+                            </button>
+                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key != null}">
+                                <i class="fas fa-plus"></i><span class="icon-title">수정</span>
+                            </button>
+                            <button class="btn btn-round btn-danger bg-gradient-danger" role="action" data-action="delete">
+                                <i class="fas fa-plus"></i><span class="icon-title">삭제</span>
+                            </button>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<script type="text/javascript" src="/static/js/admin/page/detail/account.js"></script>
+</body>
