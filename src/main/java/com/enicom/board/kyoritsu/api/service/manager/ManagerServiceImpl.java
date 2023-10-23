@@ -38,6 +38,7 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public ResponseDataValue<?> add(ManagerInfoParam param) {
         Optional<Manager> managerOp = managerRepository.findByUserId(param.getId());
+        MemberDetail member = securityUtil.getCurrentUser();
         if (managerOp.isPresent()) {
             return ResponseDataValue.builder(400).build();
         } else {
@@ -47,6 +48,7 @@ public class ManagerServiceImpl implements ManagerService {
                     .role(param.getRole())
                     .enable(param.getEnable())
                     .createDate(LocalDateTime.now())
+                    .createUser(member.getId())
                     .password(securityUtil.getEncodedInitPwd()).build();
 
             managerRepository.save(manager);

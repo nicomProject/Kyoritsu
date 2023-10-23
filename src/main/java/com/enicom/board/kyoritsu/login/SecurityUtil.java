@@ -116,7 +116,6 @@ public class SecurityUtil {
 
     public Optional<Menu> getDetailMenu(String code) {
         code = code.toUpperCase();
-        System.out.println(menuRepository.findByCodeDetail(code) + "menuRepository.findByCodeDetail(code)");
         return menuRepository.findByCodeDetail(code);
     }
 }

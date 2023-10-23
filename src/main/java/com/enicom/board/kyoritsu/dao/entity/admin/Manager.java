@@ -20,11 +20,12 @@ import java.time.LocalDateTime;
 @Getter
 @SequenceGenerator(name = "SEQ_MANAGER_GENERATOR", sequenceName = "SEQ_MANAGER", initialValue = 1, allocationSize = 1)
 public class Manager {
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MANAGER_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
 
-    @Id
+
     @Column(name = "id", length = 20, unique = true, nullable = false)
     @NonNull
     private String userId;
