@@ -44,7 +44,7 @@
 
 	<!-- Start Features Area -->
     <main>
-        <section class="Features apply-section">
+        <section class="apply apply-section">
             <div class="sub-title">
                 지원서 작성
             </div>
@@ -63,26 +63,28 @@
                             <input type="text" placeholder="성함"/>
                             <div class="form_toggle row-vh d-flex flex-row justify-content-between" >
                                 <div class="form_radio_btn radio_male">
-                                    <input id="radio-1" type="radio" name="userSex" value="male" checked>
+                                    <input id="radio-1" type="radio" name="residence" value="local" checked>
                                     <label for="radio-1">내국인</label>
                                 </div>
                                 <div class="form_radio_btn">
-                                    <input id="radio-2" type="radio" name="userSex" value="female">
+                                    <input id="radio-2" type="radio" name="residence" value="foreigner">
                                     <label for="radio-2">외국인</label>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <input type="radio" value="male"/> 남
-                            <input type="radio" value="female"/> 여
+                            <input type="radio" name="gender" value="male" checked/>
+                            <label>남</label>
+                            <input type="radio" name="gender" value="female"/>
+                            <label>여</label>
                         </div>
                         <div>
-                            <input type="number" placeholder="휴대폰 번호('-'없이 입력)"/>
+                            <input type="text" placeholder="휴대폰 번호('-'없이 입력)"/>
                         </div>
                         <div>
                             <input type="text" placeholder="생년월일(8자리)"/>
                         </div>
-                        <div>
+                        <div class="apply-address">
                             <input type="text" placeholder="주소"/>
                             <input type="checkbox"/> <div>해외거주</div>
                         </div>
@@ -97,7 +99,7 @@
                         </div>
                     </div>
                     <div class="content-education">
-                        <div> 학력 </div>
+                        <div class="category-title"> 학력 </div>
                         <div>
                             <select class="">
                                 <option>구분</option>
@@ -105,7 +107,7 @@
                         </div>
                     </div>
                     <div class="content-career">
-                        <div> 경력 </div>
+                        <div class="category-title"> 경력 </div>
                         <div>
                             <input type="text" placeholder="회사명"/>
                             <input type="text" placeholder="근무부서"/>
@@ -117,13 +119,29 @@
                         </div>
                     </div>
                     <div class="content-personal">
-                        <div> 자기소개서 </div>
+                        <div class="category-title"> 자기소개서 </div>
                         <span> 경험을 바탕으로 자세히 작성해주세요.</span>
                         <div>
                             <textarea cols="50" rows="10"></textarea>
                         </div>
                         <div> 0/10000</div>
                     </div>
+                </div>
+            </div>
+            <div class="submit-container">
+                <div>
+                    <span>
+                        위 사항은 모두 본인이 직접 작성하였으며, 사실과 다름없습니까?<br>
+                        지원서에 기재된 내용이 사실과 다를 경우 합격 또는 입사가 취소될 수 있습니다.
+                    </span>
+                    <input type="radio" name="answer" value="yes"/>
+                    <label>네</label>
+                    <input type="radio" name="answer" value="no" checked/>
+                    <label>아니오</label>
+                </div>
+                <div class="submit-btn">
+                    <button type="button" role="action" data-action="preview"> 미리보기 </button>
+                    <button type="button" role="action" data-action="submit"> 제출하기 </button>
                 </div>
             </div>
         </section>
