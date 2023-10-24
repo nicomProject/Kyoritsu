@@ -5,6 +5,11 @@ button, input, optgroup, select, textarea {
     font-family: "Noto Sans KR", serif !important;
 }
 
+.font-weight-500{
+    font-weight: 500;
+}
+
+
 section .sub-title{
     text-align: center;
     font-size: 1.5rem;
@@ -191,4 +196,69 @@ section .sub-title{
 .apply-inquire .inquire-input{
     resize: none;
 
+}
+
+
+/* overview */
+.overview .container .flex-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.overview .container .flex-box .box-2{
+    margin-top: 18px;
+}
+
+.overview .container .flex-box .box-2 .profile .profile-key{
+    padding-right: 14px;
+    border-right: solid 2px #0067bb;
+    font-size: 1.6rem;
+    font-weight: bold;
+    flex-grow: 1;
+    text-align: right;
+}
+
+
+/* notice/notice */
+.notice.section .tabulator{
+    border: none !important;
+    border-right: 0px;
+    font-size: 13px !important;
+}
+
+.notice.section .tabulator > div.tabulator-header > div{
+    border-top: 2px solid black;
+}
+
+/* notice/notice/detail */
+.notice.section .notice-container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.notice.section .notice-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}
+
+.notice.section #title{
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.notice.section .notice-subtitle{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+    padding: 10px;
+}
+
+.notice.section .notice-content{
+    padding: 30px;
+    border-bottom: 1px solid #e3e3e3;
 }
