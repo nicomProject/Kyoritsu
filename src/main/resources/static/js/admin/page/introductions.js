@@ -108,6 +108,7 @@ $(function () {
                         return [];
                     }
                     response = response.result;
+                    console.log(response)
                     return response.items;
                 },
                 ajaxError: TableUtil.ajaxError,
