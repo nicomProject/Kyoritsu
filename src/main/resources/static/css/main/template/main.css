@@ -1194,6 +1194,10 @@ p {
   }
 }
 
+.nav-item:has(> .sub-menu .nav-item.active) .nav-link{
+  color: #005bab;
+}
+
 .navbar-nav .nav-item {
   position: relative;
   z-index: 1;
@@ -1609,7 +1613,7 @@ p {
 
 .feature-right {
   position: relative;
-  background-image: url('/static/images/bizfinity/feature-image.jpg');
+  background-image: url('/static/images/bizfinity/thumbnail.png');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
@@ -1697,6 +1701,46 @@ p {
   -o-animation: play-btn-2 1.5s linear infinite;
   animation: play-btn-2 1.5s linear infinite;
 }
+
+.Features .container .row .building{
+  width: 100%;
+  padding: 60px 60px 0 60px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.Features .container .row .building li{
+  width: 14%;
+  text-align: center;
+}
+
+.Features .container .row .building li figure{
+  display: block;
+  width: 90%;
+  margin: 0 auto 10px;
+}
+
+.Features .container .flex-box{
+  display: flex;
+  justify-content: space-between;
+}
+
+.Features .container .flex-box .box-2{
+  margin-top: 18px;
+}
+
+.Features .container .flex-box .box-2 .profile .profile-key{
+  padding-right: 14px;
+  border-right: solid 2px #0067bb;
+  font-size: 1.6rem;
+  font-weight: bold;
+  flex-grow: 1;
+  text-align: right;
+}
+
+
 
 /*=============================
 	End Features CSS
@@ -1873,6 +1917,10 @@ p {
   color: #fff;
   background: #005bab;
 }
+
+
+
+
 
 /*=============================
   End Service CSS

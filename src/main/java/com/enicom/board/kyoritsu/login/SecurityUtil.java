@@ -1,8 +1,13 @@
 package com.enicom.board.kyoritsu.login;
 
 import com.enicom.board.kyoritsu.dao.entity.Code;
+import com.enicom.board.kyoritsu.dao.entity.MainMenu;
+import com.enicom.board.kyoritsu.dao.entity.admin.Menu;
 import com.enicom.board.kyoritsu.dao.repository.CodeRepository;
+import com.enicom.board.kyoritsu.dao.repository.MainMenuRepository;
+import com.enicom.board.kyoritsu.dao.repository.admin.MenuRepository;
 import com.enicom.board.kyoritsu.dao.type.CodeGroup;
+import com.enicom.board.kyoritsu.dao.type.admin.MenuPageType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -14,21 +19,25 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class SecurityUtil {
     private final SessionRegistry sessionRegistry;
     private final CodeRepository codeRepository;
     private final BCryptPasswordEncoder encoder;
+    private final MenuRepository menuRepository;
 
     @Value("${system.initPwd}")
     private String initPwd;
 
     @Autowired
-    public SecurityUtil(SessionRegistry sessionRegistry, CodeRepository codeRepository, BCryptPasswordEncoder encoder) {
+    public SecurityUtil(SessionRegistry sessionRegistry, CodeRepository codeRepository, BCryptPasswordEncoder encoder,
+                        MenuRepository menuRepository) {
         this.sessionRegistry = sessionRegistry;
         this.codeRepository = codeRepository;
         this.encoder = encoder;
+        this.menuRepository = menuRepository;
     }
 
     /**
@@ -98,5 +107,15 @@ public class SecurityUtil {
             roles = getCurrentUser().getRoles();
         }
         return roles;
+    }
+
+    public Optional<Menu> getMenu(String code) {
+        code = code.toUpperCase();
+        return menuRepository.findByCode(MenuPageType.valueOf(code));
+    }
+
+    public Optional<Menu> getDetailMenu(String code) {
+        code = code.toUpperCase();
+        return menuRepository.findByCodeDetail(code);
     }
 }

@@ -1,6 +1,5 @@
-package com.enicom.board.kyoritsu.dao.repository.Notice;
+package com.enicom.board.kyoritsu.dao.repository.notice;
 
-import com.enicom.board.kyoritsu.dao.entity.Content;
 import com.enicom.board.kyoritsu.dao.entity.Notice;
 import org.springframework.data.repository.CrudRepository;
 

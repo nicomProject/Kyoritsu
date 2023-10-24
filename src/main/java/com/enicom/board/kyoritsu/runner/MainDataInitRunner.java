@@ -46,7 +46,7 @@ public class MainDataInitRunner implements ApplicationRunner {
         menuList.add(MainMenu.builder().order(1).menu(product).url("/business/dormitory").name("기숙사").type(MenuType.INTRO).build());
         menuList.add(MainMenu.builder().order(2).menu(product).url("/business/dormyinn").name("도미인").type(MenuType.INTRO).build());
         menuList.add(MainMenu.builder().order(3).menu(product).url("/business/resort").name("리조트").type(MenuType.INTRO).build());
-        menuList.add(MainMenu.builder().order(4).menu(product).url("/business/seniorlife").name("요양원").type(MenuType.INTRO).build());
+        menuList.add(MainMenu.builder().order(4).menu(product).url("/business/seniorlife").name("노인주택").type(MenuType.INTRO).build());
 
         menuList.add(MainMenu.builder().order(1).menu(notice).url("/notice/notice").name("공지사항").type(MenuType.GENERAL).build());
 

@@ -48,14 +48,6 @@ const Menu = {
         const path = subMenu.url || '/';
         let activated = location.pathname ===  path ? 'active' : '';
 
-        const menuContainer = $('.nav-item');
-        const menuCategory = menuContainer.find('.nav-link');
-
-        menuCategory.addClass(activated);
-
-        console.log(activated)
-
-
         return $(`<li class="nav-item ${activated}"><a href="${path}">${subMenu.name}</a></li>`);
     },
 };

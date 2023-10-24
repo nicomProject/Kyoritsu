@@ -1,11 +1,60 @@
 $(function () {
     const Content = {
+        categorys: [],
+        subCategorys: [],
         params: {},
         load: function (params) {
+
+            const that = this;
+            const category = $("#category");
+            const sub_category = $("#sub_category");
+            let items = [];
+
+            AjaxUtil.request({
+                url: '/api/main/setting/category',
+                async: false,
+                success: function (data) {
+                    items = data.result.items;
+                }
+            });
+
+            const categoryHash = {};
+            items.map(e => e.menu).forEach(group => {
+                categoryHash[group.recKey] = group;
+            });
+
+            Object.keys(categoryHash).forEach(key => {
+                category.append($('<option>', {
+                        value: key,
+                        text: categoryHash[key].name,
+                    }
+                ));
+            });
+
+            const changeFunc = function(){
+                sub_category.empty();
+                items.forEach(item => {
+                    if(Number(category.val()) === item.menu.recKey){
+                        sub_category.append($('<option>', {
+                            value: item.recKey,
+                            text: item.name
+                        }));
+                    }
+                });
+
+            }
+            changeFunc();
+            category.on('change', function() {
+                changeFunc();
+            });
+
+
+
             this.params = params;
             console.log(this.params)
             this.event();
         },
+
         event: function () {
 
             var oEditors = [];
@@ -35,10 +84,6 @@ $(function () {
                         $(".pageSub #contents").val(data.result.items[0].content);
 
                         if (data.code == 200) {
-                            Swal.fire({
-                                icon: 'success',
-                                html: "소개글 조회하였습니다.",
-                            })
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -76,31 +121,31 @@ $(function () {
 
                             console.log("asdasfasf")
 
-                        AjaxUtil.requestBody({
-                            url: '/api/introductions/add',
-                            data: {
-                                title: titleValue,
-                                sub_title: sub_titleValue,
-                                contents: contentsValue,
-                                category: categoryValue,
-                                sub_category: sub_categoryValue
-                            },
-                            success: function (data) {
-                                console.log(data)
-                                if (data.code == 200) {
-                                    Alert.success({text: '소개글 등록이 완료되었습니다.'}, function(){
-                                        location.href = '/admin/introductions'
-                                    })
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        html: "소개글 등록이 실패하였습니다.",
-                                    })
+                            AjaxUtil.requestBody({
+                                url: '/api/introductions/add',
+                                data: {
+                                    title: titleValue,
+                                    sub_title: sub_titleValue,
+                                    contents: contentsValue,
+                                    category: categoryValue,
+                                    sub_category: sub_categoryValue
+                                },
+                                success: function (data) {
+                                    console.log(data)
+                                    if (data.code == 200) {
+                                        Alert.success({text: '소개글 등록이 완료되었습니다.'}, function(){
+                                            location.href = '/admin/introductions'
+                                        })
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            html: "소개글 등록이 실패하였습니다.",
+                                        })
+                                    }
                                 }
-                            }
-                        })
-                        alert("저장 동작을 수행합니다.");
-                    }else if(paramValue !== ""){
+                            })
+                            alert("저장 동작을 수행합니다.");
+                        }else if(paramValue !== ""){
 
                             AjaxUtil.requestBody({
                                 url: '/api/introductions/update',

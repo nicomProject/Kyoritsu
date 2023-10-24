@@ -357,9 +357,6 @@ p {
 	font-weight:400;
 	font-size:14px;
 }
-a,button,input,textarea{
-	font-weight:600;
-}
 img,a,input,h1, h2, h3, h4, h5, h6{
 	-webkit-transition:all 0.4s ease;
 	-moz-transition:all 0.4s ease;

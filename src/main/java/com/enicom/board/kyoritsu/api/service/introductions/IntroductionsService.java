@@ -11,7 +11,7 @@ import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
 
 public interface IntroductionsService {
 
-    PageVO<Content> findAll();
+    PageVO<?> findAll();
 
     PageVO<Content> findAll(IntroductionsParam param);
     ResponseDataValue<?> add(IntroductionsParam param);

@@ -5,8 +5,10 @@ import com.enicom.board.kyoritsu.api.type.InfoVO;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
 import com.enicom.board.kyoritsu.dao.entity.Code;
+import com.enicom.board.kyoritsu.dao.entity.MainMenu;
 import com.enicom.board.kyoritsu.dao.entity.admin.Menu;
 import com.enicom.board.kyoritsu.dao.repository.CodeRepository;
+import com.enicom.board.kyoritsu.dao.repository.MainMenuRepository;
 import com.enicom.board.kyoritsu.dao.repository.admin.MenuRepository;
 import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 public class SettingServiceImpl implements SettingService {
     private final SecurityUtil securityUtil;
     private final MenuRepository menuRepository;
+    private final MainMenuRepository mainMenuRepository;
     private final CodeRepository codeRepository;
 
 
@@ -31,6 +34,12 @@ public class SettingServiceImpl implements SettingService {
         List<Role> roles = securityUtil.getRoleList();
         return PageVO.builder(menuRepository.findAllByOrderByOrderSeqAsc()).build();
     }
+
+//    @Override
+//    public PageVO<MainMenu> getAdminMenuList() {
+//        System.out.println(mainMenuRepository.findAll()+"zzzz");
+//        return PageVO.builder(mainMenuRepository.findAll()).build();
+//    }
 
     @Override
     public PageVO<RoleVO> getRoleList() {

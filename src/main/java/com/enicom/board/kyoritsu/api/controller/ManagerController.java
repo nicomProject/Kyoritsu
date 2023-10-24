@@ -1,6 +1,7 @@
 package com.enicom.board.kyoritsu.api.controller;
 
 import com.enicom.board.kyoritsu.api.annotation.ApiMapping;
+import com.enicom.board.kyoritsu.api.param.IntroductionsParam;
 import com.enicom.board.kyoritsu.api.param.manager.ManagerInfoParam;
 import com.enicom.board.kyoritsu.api.param.manager.ManagerPasswordParam;
 import com.enicom.board.kyoritsu.api.param.type.MultipleParam;
@@ -35,6 +36,7 @@ public class ManagerController {
     @RequestMapping(path = "/manager/mod", method = {RequestMethod.POST})
     @ApiMapping(order = 52, desc = "[관리자] 관리자 정보 수정", param = ManagerInfoParam.class)
     public ResponseHandler<?> modifyManagerInfo(@RequestBody @Valid ManagerInfoParam param) {
+        System.out.println(param + "param값");
         return new ResponseHandler<>(managerService.modify(param));
     }
 
@@ -55,4 +57,25 @@ public class ManagerController {
     public ResponseHandler<?> changePassword(@RequestBody @Valid ManagerPasswordParam param) {
         return new ResponseHandler<>(managerService.changePassword(param));
     }
+
+//    @RequestMapping(path = "/introductions/find", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ResponseHandler<?> find() {
+//        return new ResponseHandler<>(introductionsService.findAll());
+//    }
+//
+//    @RequestMapping(path = "/introductions/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ResponseHandler<?> findSelf(@RequestBody @Valid IntroductionsParam param){
+//        return new ResponseHandler<>(introductionsService.findAll(param));
+//    }
+//
+//    @RequestMapping(value = "/introductions/update", method = RequestMethod.POST)
+//    public ResponseHandler<?> update(@RequestBody @Valid IntroductionsParam param) throws Exception {
+//        return new ResponseHandler<>(introductionsService.update(param));
+//    }
+//
+//    @RequestMapping(value = "/introductions/delete", method = RequestMethod.POST)
+//    public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
+//        System.out.println("hihihihi");
+//        return new ResponseHandler<>(introductionsService.delete(param));
+//    }
 }

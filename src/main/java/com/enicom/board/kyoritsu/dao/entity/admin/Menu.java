@@ -28,6 +28,10 @@ public class Menu {
     @Comment("메뉴 코드")
     private MenuPageType code;
 
+    @Column(name = "code_Detail")
+    @Comment("메뉴 상세 코드")
+    private String codeDetail;
+
     @JoinColumn(name = "group_id")
     @ManyToOne
     @Comment("메뉴 그룹")

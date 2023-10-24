@@ -1,8 +1,8 @@
-package com.enicom.board.kyoritsu.dao.repository.Notice;
+package com.enicom.board.kyoritsu.dao.repository.job;
 
 import com.enicom.board.kyoritsu.api.param.type.MultipleParam;
 
-public interface NoticeRepositoryCustom {
+public interface JobRepositoryCustom {
 
     Long deleteListContent(MultipleParam param);
 

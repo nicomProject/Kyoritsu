@@ -23,7 +23,12 @@ public class SettingController {
     public ResponseHandler<?> getMenuList() {
         return new ResponseHandler<>(settingService.getMenuList());
     }
-
+//    @RequestMapping(path = "/admin/menus", method = {RequestMethod.GET, RequestMethod.POST})
+//    @ApiMapping(order = 60, desc = "메뉴 목록 조회")
+//    public ResponseHandler<?> getAdminMenuList() {
+//        System.out.println("asdasdasdasd");
+//        return new ResponseHandler<>(settingService.getMenuList());
+//    }
     @RequestMapping(path = "/roles", method = {RequestMethod.GET, RequestMethod.POST})
     @ApiMapping(order = 70, desc = "역할 조회")
     public ResponseHandler<?> getRoleList() {

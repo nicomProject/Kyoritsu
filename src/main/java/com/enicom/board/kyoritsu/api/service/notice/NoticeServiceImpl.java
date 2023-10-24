@@ -1,15 +1,12 @@
 package com.enicom.board.kyoritsu.api.service.notice;
 
-import com.enicom.board.kyoritsu.api.param.IntroductionsParam;
 import com.enicom.board.kyoritsu.api.param.NoticeParam;
 import com.enicom.board.kyoritsu.api.param.type.MultipleParam;
 import com.enicom.board.kyoritsu.api.param.type.MultipleType;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
-import com.enicom.board.kyoritsu.dao.entity.Content;
 import com.enicom.board.kyoritsu.dao.entity.Notice;
-import com.enicom.board.kyoritsu.dao.repository.Notice.NoticeRepository;
-import com.enicom.board.kyoritsu.dao.repository.introduction.IntroductionRepository;
+import com.enicom.board.kyoritsu.dao.repository.notice.NoticeRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
