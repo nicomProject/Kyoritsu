@@ -18,6 +18,9 @@
     <th:block th:replace="~{components/_header::header_main}"></th:block>
     <!-- ========================= header end ========================= -->
 
+    <input type="hidden" id="overview_contentId" class="param" name="key"/>
+    <!-- 이때 , value= content_id 값이 들어가야함 -->
+
     <!-- Start Breadcrumbs -->
     <div class="breadcrumbs" data-stellar-background-ratio="0.5">
         <div class="container">
@@ -45,14 +48,16 @@
 	<!-- Start Features Area -->
 
     <main>
-        <section class="Features section">
-            <div class="container">
+        <section class="overview section">
+            <div class="editor-content container">
+            </div>
+            <!--<div class="container">
                 <div class="flex-box">
                     <div class="box-1 inview animated fadeInUp">
                         <h2 class="sec-title">
                             <p class="en">Company<br>overview</p>
                         </h2>
-                        <!--<div class="date">As of June 25, 2021</div>-->
+                        &lt;!&ndash;<div class="date">As of June 25, 2021</div>&ndash;&gt;
                     </div>
                     <div class="box-2 inview animated fadeInUp">
                         <div class="profile profile-1">
@@ -143,10 +148,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </section>
         <!-- End Features Area -->
-
+    </main>
     <!-- Start Footer Area -->
     <th:block th:replace="~{components/_footer::footer_main}"></th:block>
     <!--/ End Footer Area -->
