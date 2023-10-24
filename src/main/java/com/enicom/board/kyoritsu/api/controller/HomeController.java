@@ -34,6 +34,12 @@ public class HomeController {
         return String.format("main/%s/%s", menu, view);
     }
 
+    @GetMapping("/{category}/{page}/detail/{key}")
+    public String mainDetail(Model model, @PathVariable String page, @PathVariable String key) throws IOException {
+        model.addAttribute("key", key);
+        return String.format("main/detail/%s", page);
+    }
+
     @GetMapping(path = { "/admin"})
     public String admin(Model model) throws Exception {
         return login(model);
