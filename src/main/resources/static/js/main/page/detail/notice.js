@@ -11,16 +11,16 @@ $(function () {
 
             if(paramValue !== ""){
                 AjaxUtil.requestBody({
-                    url: '/api/notice/findSelf',
+                    url: '/api/notice/detail/' + paramValue,
                     data: {
                         key: paramValue,
                     },
                     success: function (data) {
                         console.log(data)
-                        $(".notice-container #title").text(data.result.items[0].title);
-                        $(".notice-container #create-user").text(data.result.items[0].createUser);
-                        $(".notice-container #create-date").text(data.result.items[0].createDate);
-                        $(".notice-container #content").html(data.result.items[0].content);
+                        $(".notice-container #title").text(data.result.info.title);
+                        $(".notice-container #create-user").text(data.result.info.createUser);
+                        $(".notice-container #create-date").text(data.result.info.createDate);
+                        $(".notice-container #content").html(data.result.info.content);
 
                         if (data.code != 200) {
                             Swal.fire({

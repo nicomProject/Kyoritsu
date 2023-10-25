@@ -8,10 +8,7 @@ import com.enicom.board.kyoritsu.api.service.introductions.IntroductionsService;
 import com.enicom.board.kyoritsu.api.service.notice.NoticeService;
 import com.enicom.board.kyoritsu.api.type.ResponseHandler;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -34,6 +31,11 @@ public class NoticeController {
     @RequestMapping(path = "/notice/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseHandler<?> findSelf(@RequestBody @Valid NoticeParam param){
         return new ResponseHandler<>(noticeService.findAll(param));
+    }
+
+    @RequestMapping(path = "/notice/detail/{recKey}", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseHandler<?> findSelf(@PathVariable Long recKey){
+        return new ResponseHandler<>(noticeService.findBy(recKey));
     }
 
     @RequestMapping(value = "/notice/update", method = RequestMethod.POST)

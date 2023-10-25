@@ -1,5 +1,7 @@
 package com.enicom.board.kyoritsu.api.controller;
 
+import com.enicom.board.kyoritsu.dao.entity.Notice;
+import com.enicom.board.kyoritsu.dao.repository.notice.NoticeRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
     private final SecurityUtil securityUtil;
+    private NoticeRepository noticeRepository;
 
     @GetMapping(path = {"/"})
     public String home(Model model) throws Exception {
@@ -35,7 +39,7 @@ public class HomeController {
     }
 
     @GetMapping("/{category}/{page}/detail/{key}")
-    public String mainDetail(Model model, @PathVariable String page, @PathVariable String key) throws IOException {
+    public String mainDetail(Model model, @PathVariable String category, @PathVariable String page, @PathVariable long key) {
         model.addAttribute("key", key);
         return String.format("main/detail/%s", page);
     }

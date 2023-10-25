@@ -57,7 +57,7 @@ $(function () {
                     },
                     {title: '제목', field: "title", tooltip: true, headerTooltip: true, headerSort: false, hozAlign: "center", headerHozAlign: "center", },
                     {title: '작성자', field: "createUser", tooltip: true, headerTooltip: true, headerSort: false, hozAlign: "center", headerHozAlign: "center",},
-                    {title: '조회수', field: "subtitle", tooltip: true, headerTooltip: true, headerSort: false, hozAlign: "center", headerHozAlign: "center",},
+                    {title: '조회수', field: "hit", tooltip: true, headerTooltip: true, headerSort: false, hozAlign: "center", headerHozAlign: "center",},
                     {title: '작성일', field: "createDate", tooltip: true, headerTooltip: true, headerSort: false, hozAlign: "center", headerHozAlign: "center",},
                 ],
             });
