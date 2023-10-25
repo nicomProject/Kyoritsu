@@ -28,21 +28,21 @@
                     <tr class="pageSub">
                         <td><label for="category">카테고리</label></td>
                         <td>
-                            <select id="category" name="category">
+                            <select id="category" name="category" class="form-select">
                             </select>
                         <td><label for="sub_category">서브카테고리</label></td>
                         <td>
-                            <select id="sub_category" name="subcategory">
+                            <select id="sub_category" name="subcategory" class="form-select">
                         </select>
                         </td>
                     </tr>
                     <tr class="pageSub">
                         <td><label for="title">제목</label></td>
-                        <td colspan="3"><input type="text" id="title" name="title"></td>
+                        <td colspan="3"><input type="text" id="title" name="title" class="form-control"></td>
                     </tr>
                     <tr class="pageSub">
                         <td><label for="sub_title">소제목</label></td>
-                        <td colspan="3"><input type="text" id="sub_title" name="sub_title"></td>
+                        <td colspan="3"><input type="text" id="sub_title" name="sub_title" class="form-control"></td>
                     </tr>
 <!--                    <tr class="pageSub">-->
 <!--                        <td><label for="contents">본문</label></td>-->
@@ -58,16 +58,16 @@
                         <td><label for="management">관리</label></td>
                         <td colspan="5"><div type="text" id="management" name="management">
                             <button class="btn btn-round btn-success bg-gradient-success" role="action" data-action="list">
-                                <i class="fas fa-plus"></i><span class="icon-title">목록</span>
+                                <i class="fas fa-list"></i><span class="icon-title">목록</span>
                             </button>
                             <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key == null}">
                                 <i class="fas fa-plus"></i><span class="icon-title">저장</span>
                             </button>
                             <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key != null}">
-                                <i class="fas fa-plus"></i><span class="icon-title">수정</span>
+                                <i class="fas fa-edit"></i><span class="icon-title">수정</span>
                             </button>
                             <button class="btn btn-round btn-danger bg-gradient-danger" role="action" data-action="delete">
-                                <i class="fas fa-plus"></i><span class="icon-title">삭제</span>
+                                <i class="fas fa-trash"></i><span class="icon-title">삭제</span>
                             </button>
                         </div>
                         </td>

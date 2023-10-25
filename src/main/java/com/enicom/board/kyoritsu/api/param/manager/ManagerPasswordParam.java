@@ -16,4 +16,5 @@ public class ManagerPasswordParam {
     private String newPassword;
     @NotNull
     private String newPasswordConfirm;
+    private String key;
 }

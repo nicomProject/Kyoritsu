@@ -10,6 +10,18 @@ $(function () {
             const sub_category = $("#sub_category");
             let items = [];
 
+            // var myImage = document.querySelector('#preview');
+            //
+            // console.log(params)
+            // console.log(params.path);
+            //
+            // myImage.setAttribute('src', '/api/image?name=' + "kyoritsu");
+            // myImage.onerror = function (e) {
+            //     this.src = '/static/images/banner/noimage.png';
+            //     console.log(myImage, "myImage");
+            // };
+
+
             AjaxUtil.request({
                 url: '/api/main/setting/category',
                 async: false,
@@ -200,6 +212,7 @@ $(function () {
         }
     };
     Content.load({
-        key: $('.param[name="key"]').val() || ''
+        key: $('.param[name="key"]').val() || '',
+        path: $('.param[name="path"]').val() || ''
     });
 })

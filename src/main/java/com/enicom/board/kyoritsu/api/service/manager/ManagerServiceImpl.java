@@ -7,13 +7,14 @@ import com.enicom.board.kyoritsu.api.param.type.MultipleType;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
 import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
-import com.enicom.board.kyoritsu.dao.repository.ManagerRepository;
+import com.enicom.board.kyoritsu.dao.repository.manager.ManagerRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -31,8 +32,12 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public PageVO<Manager> findAll() {
-        List<Role> roles = securityUtil.getRoleList();
-        return PageVO.builder(managerRepository.findAllByRoleIn(roles)).build();
+        return PageVO.builder(managerRepository.findAllByDeleteDateNull()).build();
+    }
+
+    @Override
+    public PageVO<Manager> findAll(ManagerInfoParam param) {
+        return PageVO.builder(managerRepository.findAllByRecKey(Long.valueOf(param.getKey()))).build();
     }
 
     @Override
@@ -58,7 +63,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ResponseDataValue<?> modify(ManagerInfoParam param) {
-        Optional<Manager> managerOp = managerRepository.findByUserId(param.getId());
+        Optional<Manager> managerOp = managerRepository.findByRecKey(Long.valueOf(param.getKey()));
         if (!managerOp.isPresent()) {
             return ResponseDataValue.builder(210).build();
         } else {
@@ -73,13 +78,26 @@ public class ManagerServiceImpl implements ManagerService {
         return ResponseDataValue.builder(200).build();
     }
 
+    @Transactional
     @Override
     public ResponseDataValue<?> delete(MultipleParam param) {
+        MemberDetail member = securityUtil.getCurrentUser();
         MultipleType type = param.getType();
+        LocalDateTime deleteTime = LocalDateTime.now();
+
         if (type.equals(MultipleType.ONE)) {
-            managerRepository.deleteByUserId(param.getId());
-        } else if (type.equals(MultipleType.LIST)) {
-            managerRepository.deleteAllByUserIdIn(param.getIdList());
+            Optional<Manager> managerOptional = managerRepository.findByRecKey(Long.valueOf(param.getKey()));
+            if (managerOptional.isPresent()) {
+                Manager manager = managerOptional.get();
+                manager.setDeleteDate(LocalDateTime.now());
+                manager.setDeleteUser(member.getId());
+            }
+        }
+        else if (type.equals(MultipleType.LIST)) {
+            managerRepository.deleteListContent(param);
+        }
+        else if(type.equals(MultipleType.SPECIFIC)){
+            managerRepository.deleteALLContent();
         }
 
         return ResponseDataValue.builder(200).build();
@@ -111,7 +129,8 @@ public class ManagerServiceImpl implements ManagerService {
             return ResponseDataValue.builder(421).build();
         }
 
-        Manager manager = managerRepository.findByUserId(current.getId()).get();
+        Manager manager = managerRepository.findByRecKey(Long.valueOf(param.getKey())).get();
+        System.out.println(manager.getUserId());
 
         String password = param.getPassword();
         String newPassword = param.getNewPassword();
