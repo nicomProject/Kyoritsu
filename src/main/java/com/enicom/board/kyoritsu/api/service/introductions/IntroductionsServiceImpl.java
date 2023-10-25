@@ -29,6 +29,11 @@ public class IntroductionsServiceImpl implements IntroductionsService {
         this.securityUtil = securityUtil;
     }
 
+//    @Override
+//    public PageVO<Content> findAll() {
+//        return PageVO.builder(introductionsRepository.findAllByDeleteDateNull()).build();
+//    }
+
     @Override
     public PageVO<Content> findAll() {
         return PageVO.builder(introductionsRepository.findAllByDeleteDateNull()).build();

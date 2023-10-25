@@ -11,4 +11,6 @@ public interface IntroductionRepositoryCustom {
 
     Long deleteALLContent();
 
+//    List<Content> findAllByDeleteDateNull();
+
 }
