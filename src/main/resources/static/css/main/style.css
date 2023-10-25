@@ -200,24 +200,99 @@ section .sub-title{
 
 
 /* overview */
-.overview .container .flex-box{
+.overview.section .container .flex-box{
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
 }
 
-.overview .container .flex-box .box-2{
+.overview.section .container .flex-box .box-2{
     margin-top: 18px;
 }
 
-.overview .container .flex-box .box-2 .profile .profile-key{
+.company_profile .profile-sec .inner .flex-box .box-2 .profile{
+
+}
+
+.overview.section .container .flex-box .box-2 .profile .profile-key{
     padding-right: 14px;
     border-right: solid 2px #0067bb;
-    font-size: 1.6rem;
+    font-size: 1rem;
     font-weight: bold;
     flex-grow: 1;
     text-align: right;
 }
 
+.overview.section .container .flex-box .box-2 .profile .profile-value{
+    width: 480px;
+    padding-left: 26px;
+    margin-right: 5px;
+    line-height: 1.8125;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.overview.section .container .flex-box .box-2 .profile .profile-value p{
+    font-weight: bold !important;
+    color: #333;
+}
+
+.overview.section .container .flex-box .box-2 .profile-7 .profile-value p{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: baseline;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+
+.sec-title .en {
+    color: #0067bb;
+    font-size: 3.2rem;
+    font-weight: bold;
+}
+
+.overview.section .editor-content .box-1{
+    height: 6rem;
+}
+
+.overview.section .editor-content .box-2{
+    display: flex;
+    flex-direction: column;
+}
+
+.overview.section .editor-content .box-2 .profile{
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.overview.section .editor-content .box-2 .profile-7 .profile-value p .position{
+    padding-top: 11px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-end;
+
+    width: 57%;
+    line-height: 1.2;
+}
+
+.overview.section .editor-content .box-2 .profile-7 .profile-value p .name{
+    width: 32%;
+    margin-right: 2%;
+    line-height: 1.2;
+}
+
+.overview.section .container .flex-box .box-2 .profile .small{
+    font-weight: normal;
+}
+
+/* vision */
+.vision.section{
+    background: #F9FAFF;
+    padding-bottom: 70px !important;
+}
 
 /* notice/notice */
 .notice.section .tabulator{
@@ -228,6 +303,10 @@ section .sub-title{
 
 .notice.section .tabulator > div.tabulator-header > div{
     border-top: 2px solid black;
+}
+
+.notice-container .notice-title .list-btn{
+    padding-left: 10px;
 }
 
 /* notice/notice/detail */
@@ -261,4 +340,8 @@ section .sub-title{
 .notice.section .notice-content{
     padding: 30px;
     border-bottom: 1px solid #e3e3e3;
+}
+
+.notice.section .notice-title .list-btn a {
+    font-weight: 500;
 }
