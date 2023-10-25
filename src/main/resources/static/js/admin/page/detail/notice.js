@@ -19,6 +19,8 @@ $(function () {
                 fCreator: "createSEditor2"
             })
 
+            oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+
             if(paramValue !== ""){
                 AjaxUtil.requestBody({
                     url: '/api/notice/findSelf',
@@ -52,7 +54,6 @@ $(function () {
             card.find('*[role="action"]').click(function(e){
                 const action = this.dataset.action;
 
-                oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
                 var categoryValue = $("#category").val();
                 var titleValue = $("#title").val();
                 var contentsValue = $("#contents").val();

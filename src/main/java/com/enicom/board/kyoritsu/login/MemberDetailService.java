@@ -2,7 +2,7 @@ package com.enicom.board.kyoritsu.login;
 
 import com.enicom.board.kyoritsu.dao.entity.Code;
 import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
-import com.enicom.board.kyoritsu.dao.repository.ManagerRepository;
+import com.enicom.board.kyoritsu.dao.repository.manager.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

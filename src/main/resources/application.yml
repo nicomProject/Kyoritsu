@@ -22,6 +22,9 @@ spring:
 server:
   port: 9000
 
+# logging:
+  # level:
+    # root: DEBUG
 system:
   name: Kyoritsu
   version: 1.0.0

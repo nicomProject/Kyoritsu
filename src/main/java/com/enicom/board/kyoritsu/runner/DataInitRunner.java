@@ -4,7 +4,7 @@ import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
 import com.enicom.board.kyoritsu.dao.entity.admin.Menu;
 import com.enicom.board.kyoritsu.dao.entity.admin.MenuGroup;
 import com.enicom.board.kyoritsu.dao.repository.CodeRepository;
-import com.enicom.board.kyoritsu.dao.repository.ManagerRepository;
+import com.enicom.board.kyoritsu.dao.repository.manager.ManagerRepository;
 import com.enicom.board.kyoritsu.dao.repository.admin.MenuGroupRepository;
 import com.enicom.board.kyoritsu.dao.repository.admin.MenuRepository;
 import com.enicom.board.kyoritsu.dao.type.admin.MenuGroupType;
