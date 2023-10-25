@@ -1,67 +1,51 @@
-const Menu = {
-    menus: [],
-    subMenus: [],
-    load: function () {
-        const that = this;
-        AjaxUtil.request({
-            url: '/api/main/setting/menus',
-            async: false,
-            success: function (data) {
-                const items = data.result.items;
-                that.menus = items.filter(item => item.type === "group");
-                that.subMenus = items.filter(item => item.type !== "group")
-
-                that.draw();
-            },
-        });
-    },
-    draw: function () {
-        const that = this;
-        const container = $('#navbarSupportedContent .navbar-nav');
-        container.html('');
-
-        this.menus.forEach(menu => {
-            const menuGroup = that.createMenuGroup(menu);
-            container.append(menuGroup);
-
-            const subMenuContainer = menuGroup.find('.sub-menu');
-            const subMenuItems = that.subMenus.filter(subMenu => subMenu.menu.recKey === menu.recKey);
-
-            subMenuItems.forEach(subMenu => {
-                subMenuContainer.append(that.createSubMenuItem(subMenu));
-            });
-        });
-    },
-    createMenuGroup: function (menu) {
-        const that = this;
-        const subMenus = this.subMenus
-        let path = subMenus.url || '/';
-        let activated = location.pathname ===  subMenus.url ? 'active' : '';
-        if (menu.code === 'dashboard' && location.pathname === '/') {
-            path = '/';
-            activated = 'active';
-        }
-
-        return $(`<li class="nav-item">
-                    <a class="nav-link ${activated}" href="javascript:void(0)"
-                        data-bs-toggle="collapse" data-bs-target="#submenu-${menu.recKey}-1"
-                        aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation"> ${menu.name}
-                    </a>
-                    <ul class="sub-menu collapse" id="submenu-${menu.recKey}-1">
-                    </ul>
-                </li>`);
-    },
-    createSubMenuItem: function (subMenu) {
-        const path = subMenu.url || '/';
-        return $(`<li class="nav-item"><a href="${path}">${subMenu.name}</a></li>`);
-    },
-};
-
 $(function () {
     const Content = {
         load: function () {
-            Menu.load();
+            const submenu = Menu.subMenus;
+            console.log(submenu)
+
+            submenu.forEach(menu =>{
+                const path = menu.url;
+                const pathName = location.pathname;
+
+                const input = $('#overview_contentId');
+
+                if(path == pathName){
+                    const contentKey = menu.content.recKey;
+                    input.val(contentKey);
+                }
+
+            })
+            this.draw();
+        },
+        draw: function () {
+
+            const container = $('.overview');
+            const editorContent = container.find('.editor-content');
+
+            let contentObj = [];
+
+            AjaxUtil.request({
+                url: '/api/introductions/find',
+                async: false,
+                success: function (data){
+                    contentObj = data.result.items;
+                }
+
+            })
+
+            contentObj.forEach(item => {
+                const contentId = item.recKey;
+                const contentData = item.content;
+
+                const overviewContentId = $('#overview_contentId').val();
+
+                if(contentId == overviewContentId){
+                    editorContent.html(contentData)
+                }
+            })
+
+
             this.event();
         },
         event: function () {

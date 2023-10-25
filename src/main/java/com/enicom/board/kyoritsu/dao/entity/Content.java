@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -42,6 +43,7 @@ public class Content {
 
     @Column(name = "hit")
     @Builder.Default
+    @Comment("조회수")
     @ColumnDefault("0")
     private Integer hit = 0;
 

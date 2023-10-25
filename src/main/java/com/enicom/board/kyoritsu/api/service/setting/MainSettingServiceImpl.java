@@ -20,7 +20,7 @@ public class MainSettingServiceImpl implements MainSettingService {
     @Override
     public PageVO<MainMenu> getMenuList() {
         List<Role> roles = securityUtil.getRoleList();
-        return PageVO.builder(menuRepository.findAll()).build();
+        return PageVO.builder(menuRepository.findAllByOrderByRecKey()).build();
     }
 
     @Override

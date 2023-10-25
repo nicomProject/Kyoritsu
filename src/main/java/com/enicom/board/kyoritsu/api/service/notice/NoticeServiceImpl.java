@@ -3,6 +3,7 @@ package com.enicom.board.kyoritsu.api.service.notice;
 import com.enicom.board.kyoritsu.api.param.NoticeParam;
 import com.enicom.board.kyoritsu.api.param.type.MultipleParam;
 import com.enicom.board.kyoritsu.api.param.type.MultipleType;
+import com.enicom.board.kyoritsu.api.type.InfoVO;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
 import com.enicom.board.kyoritsu.dao.entity.Notice;
@@ -49,14 +50,27 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public PageVO<Notice> findAll() {
-        System.out.println(noticeRepository.findAllByDeleteDateNull() + "introductionsRepository.findAllByCreateDateNotNull()");
-        return PageVO.builder(noticeRepository.findAllByDeleteDateNull()).build();
+        System.out.println(noticeRepository.findAllByDeleteDateNullOrderByCreateDateDesc() + "introductionsRepository.findAllByCreateDateNotNull()");
+        return PageVO.builder(noticeRepository.findAllByDeleteDateNullOrderByCreateDateDesc()).build();
     }
 
     @Override
     public PageVO<Notice> findAll(NoticeParam param) {
-        System.out.println(noticeRepository.findAllByDeleteDateNull() + "introductionsRepository.findAllByCreateDateNotNull()");
         return PageVO.builder(noticeRepository.findAllByRecKey(Long.valueOf(param.getKey()))).build();
+    }
+
+    @Override
+    public InfoVO<Notice> findBy(Long recKey) {
+        Optional<Notice> noticeOptional = noticeRepository.findByRecKey(recKey);
+        if(noticeOptional.isPresent()){
+            Notice notice = noticeOptional.get();
+            notice.setHit(notice.getHit()+1);
+            noticeRepository.save(notice);
+
+            return InfoVO.builder(notice).build();
+        }
+
+        return InfoVO.builder(Notice.builder().build()).build();
     }
 
     @Transactional

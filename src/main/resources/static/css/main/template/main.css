@@ -1722,25 +1722,6 @@ p {
   margin: 0 auto 10px;
 }
 
-.Features .container .flex-box{
-  display: flex;
-  justify-content: space-between;
-}
-
-.Features .container .flex-box .box-2{
-  margin-top: 18px;
-}
-
-.Features .container .flex-box .box-2 .profile .profile-key{
-  padding-right: 14px;
-  border-right: solid 2px #0067bb;
-  font-size: 1.6rem;
-  font-weight: bold;
-  flex-grow: 1;
-  text-align: right;
-}
-
-
 
 /*=============================
 	End Features CSS

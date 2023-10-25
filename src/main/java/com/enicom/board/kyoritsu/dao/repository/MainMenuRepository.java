@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface MainMenuRepository extends CrudRepository<MainMenu, String> {
-    List<MainMenu> findAll();
+    List<MainMenu> findAllByOrderByRecKey();
     List<MainMenu> findAllByType(MenuType type);
 
     @Override
