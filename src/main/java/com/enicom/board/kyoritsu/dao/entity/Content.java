@@ -56,6 +56,10 @@ public class Content {
     @Column(name = "delete_user", length = 50)
     private String deleteUser;
 
+    @Transient
+    @Column(name = "check_content", length = 50)
+    private String checkContent;
+
     @Column(name = "create_date")
     @Builder.Default
     @JsonSerialize(using = LocalDateTimeSerializer.class)

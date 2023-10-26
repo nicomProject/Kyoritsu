@@ -114,7 +114,6 @@ public class IntroductionsServiceImpl implements IntroductionsService {
         if (!contentOptional.isPresent()) {
             return ResponseDataValue.builder(210).desc("잘못된 등록번호입니다.").build();
         }
-
         Optional<MainMenu> mainMenuOptional = mainMenuRepository.findByRecKey(Long.valueOf(contentOptional.get().getSubcategory()));
         if (!mainMenuOptional.isPresent()) {
             return ResponseDataValue.builder(210).desc("잘못된 등록번호입니다.").build();

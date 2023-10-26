@@ -1,4 +1,5 @@
 $(function () {
+    var hi;
     const Content = {
         categorys: [],
         subCategorys: [],
@@ -8,6 +9,8 @@ $(function () {
             const category = $("#category");
             const sub_category = $("#sub_category");
             let items = [];
+            const paramValue = params.key
+            let hi = ""
 
             AjaxUtil.request({
                 url: '/api/main/setting/category',
@@ -30,40 +33,51 @@ $(function () {
                 ));
             });
 
-            const changeFunc = function(){
-                sub_category.empty();
-                items.forEach(item => {
-                    var lastRecKey = item.menu.recKey;
-                    if(Number(lastRecKey) === item.menu.recKey){
-                        sub_category.append($('<option>', {
-                            value: item.recKey,
-                            text: item.name
-                        }));
-                    }
-                });
+                const changeFunc = function(){
+                    sub_category.empty();
+                    console.log(category.val())
+                    items.forEach(item => {
+                        if(Number(category.val()) === item.menu.recKey){
+                            sub_category.append($('<option>', {
+                                value: item.recKey,
+                                text: item.name
+                            }));
+                        }
+                    });
+                }
 
-            }
             changeFunc();
-            category.on('change', function() {
-                changeFunc();
-            });
 
-            const changeFuncFind = function(){
-                sub_category.empty();
-                items.forEach(item => {
-                    if(Number(category.val()) === item.menu.recKey){
-                        sub_category.append($('<option>', {
-                            value: item.recKey,
-                            text: item.name
-                        }));
-                        console.log(sub_category.val());
-                    }
+
+            category.on('change', function() {
+                    changeFunc();
                 });
 
+            if(paramValue !== ""){
+                AjaxUtil.requestBody({
+                    url: '/api/introductions/findSelf',
+                    data: {
+                        key: paramValue,
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        $(".pageSub #category").val(data.result.items[0].category);
+                        $(".pageSub #sub_category").val(data.result.items[0].subcategory);
+                        $(".pageSub #title").val(data.result.items[0].title);
+                        $(".pageSub #sub_title").val(data.result.items[0].subtitle);
+                        $(".pageSub #contents").val(data.result.items[0].content);
+                        changeFunc();
+
+                        if (data.code == 200) {
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                html: "소개글 조회가 실패하였습니다.",
+                            })
+                        }
+                    }
+                })
             }
-
-
-
 
             this.params = params;
             console.log(this.params)
@@ -80,33 +94,6 @@ $(function () {
                 fCreator: "createSEditor2"
             })
 
-
-            const paramValue = this.params.key
-
-            if(paramValue !== ""){
-                AjaxUtil.requestBody({
-                    url: '/api/introductions/findSelf',
-                    data: {
-                        key: paramValue,
-                    },
-                    success: function (data) {
-                        console.log(data)
-                        $(".pageSub #category").val(data.result.items[0].category);
-                        $(".pageSub #sub_category").val(data.result.items[0].subcategory);
-                        $(".pageSub #title").val(data.result.items[0].title);
-                        $(".pageSub #sub_title").val(data.result.items[0].subtitle);
-                        $(".pageSub #contents").val(data.result.items[0].content);
-
-                        if (data.code == 200) {
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                html: "소개글 조회가 실패하였습니다.",
-                            })
-                        }
-                    }
-                })
-            }
 
             const buttons = document.querySelectorAll("button");
 
