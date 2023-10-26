@@ -4,6 +4,8 @@ const Data = {
     MenuHash: {},
     menus: [],
     subMenuHash: {},
+    subMenuCheck:[],
+    subMenuCheckHash: {},
     subMenus: [],
     /**
      * @param config
@@ -44,16 +46,21 @@ const Data = {
             async: false,
             success: function (data) {
                 const items = data.result.items;
-                console.log(data)
+
                 that.menus = items.filter(item => item.type === "group");
                 that.subMenus = items.filter(item => item.type === "intro")
-                that.subMenus.forEach(menu => {
-                    that.subMenuHash[menu.recKey] = menu.name;
-                })
 
                 that.menus.forEach(menu => {
                     that.MenuHash[menu.recKey] = menu.name;
                 })
+
+                that.subMenus.forEach(menu => {
+                    that.subMenuHash[menu.recKey] = menu.name;
+                    if(menu.content){
+                        that.subMenuCheckHash[menu.recKey] = menu.content.recKey;
+                    }
+                })
+
             },
         });
     }

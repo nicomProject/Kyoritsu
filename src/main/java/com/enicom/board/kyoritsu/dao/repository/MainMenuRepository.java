@@ -15,7 +15,6 @@ import java.util.Optional;
 public interface MainMenuRepository extends CrudRepository<MainMenu, String> {
     List<MainMenu> findAllByOrderByRecKey();
     List<MainMenu> findAllByType(MenuType type);
-
     Optional<MainMenu> findByRecKey(Long recKey);
 
     @Override

@@ -1,5 +1,4 @@
 $(function () {
-    // let categoryitems = [];
     const Content = {
         params: {},
         categoryItems: {},
@@ -15,7 +14,6 @@ $(function () {
                     categoryItems = Array.from(new Set(items.map(item => item.menu.recKey))).map(recKey => items.find(item => item.menu.recKey === recKey));
                 }
             });
-
             Data.load({role: true, menu: true});
             console.log(Data)
             this.event();
@@ -104,9 +102,10 @@ $(function () {
         },
         draw: function (target) {
             const that = this;
-
+            const subMenuCheckHash = Data.subMenuCheckHash || {};
             const subMenuHash = Data.subMenuHash || {};
             const MenuHash = Data.MenuHash || {};
+            console.log(subMenuCheckHash)
             const table = new Tabulator(target, {
                 locale: 'ko-kr',
                 langs: TableUtil.setDefaults(),
@@ -176,6 +175,18 @@ $(function () {
                         tooltip: true,
                         headerTooltip: true
                     },
+                    {
+                        title: '상태',
+                        headerFilterParams: {
+                            values: subMenuHash,
+                        }, formatter: function(cell){
+                            const data = cell.getRow().getData();
+                            const subcategory = data.subcategory;
+                            console.log(subcategory)
+                            const subMenuCheckHash = Data.subMenuCheckHash[subcategory];
+                            return data.recKey == subMenuCheckHash;
+                        },
+                    }
                 ],
             });
 
