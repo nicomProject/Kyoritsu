@@ -4,23 +4,10 @@ $(function () {
         subCategorys: [],
         params: {},
         load: function (params) {
-
             const that = this;
             const category = $("#category");
             const sub_category = $("#sub_category");
             let items = [];
-
-            // var myImage = document.querySelector('#preview');
-            //
-            // console.log(params)
-            // console.log(params.path);
-            //
-            // myImage.setAttribute('src', '/api/image?name=' + "kyoritsu");
-            // myImage.onerror = function (e) {
-            //     this.src = '/static/images/banner/noimage.png';
-            //     console.log(myImage, "myImage");
-            // };
-
 
             AjaxUtil.request({
                 url: '/api/main/setting/category',
@@ -46,7 +33,8 @@ $(function () {
             const changeFunc = function(){
                 sub_category.empty();
                 items.forEach(item => {
-                    if(Number(category.val()) === item.menu.recKey){
+                    var lastRecKey = item.menu.recKey;
+                    if(Number(lastRecKey) === item.menu.recKey){
                         sub_category.append($('<option>', {
                             value: item.recKey,
                             text: item.name
@@ -59,6 +47,21 @@ $(function () {
             category.on('change', function() {
                 changeFunc();
             });
+
+            const changeFuncFind = function(){
+                sub_category.empty();
+                items.forEach(item => {
+                    if(Number(category.val()) === item.menu.recKey){
+                        sub_category.append($('<option>', {
+                            value: item.recKey,
+                            text: item.name
+                        }));
+                        console.log(sub_category.val());
+                    }
+                });
+
+            }
+
 
 
 
@@ -79,7 +82,6 @@ $(function () {
 
 
             const paramValue = this.params.key
-            console.log("paramValue" + paramValue)
 
             if(paramValue !== ""){
                 AjaxUtil.requestBody({
@@ -143,10 +145,10 @@ $(function () {
                                     sub_category: sub_categoryValue
                                 },
                                 success: function (data) {
-                                    console.log(data)
                                     if (data.code == 200) {
-                                        Alert.success({text: '소개글 등록이 완료되었습니다.'}, function(){
-                                            location.href = '/admin/introductions'
+                                        Swal.fire({
+                                            icon: 'success',
+                                            html: "소개글 등록이 완료되었습니다.",
                                         })
                                     } else {
                                         Swal.fire({
@@ -156,9 +158,7 @@ $(function () {
                                     }
                                 }
                             })
-                            alert("저장 동작을 수행합니다.");
                         }else if(paramValue !== ""){
-
                             AjaxUtil.requestBody({
                                 url: '/api/introductions/update',
                                 data: {
@@ -173,14 +173,13 @@ $(function () {
                                     console.log(data)
                                     if (data.code == 200) {
                                         Swal.fire({
-
                                             icon: 'success',
-                                            html: "소개글 등록이 완료되었습니다.",
+                                            html: "소개글 수정이 완료되었습니다.",
                                         })
                                     } else {
                                         Swal.fire({
                                             icon: 'error',
-                                            html: "소개글 등록이 실패하였습니다.",
+                                            html: "소개글 수정이 실패하였습니다.",
                                         })
                                     }
                                 }
@@ -199,6 +198,15 @@ $(function () {
                             success: function (data) {
                                 console.log(data)
                                 if (data.code == 200) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        html: "삭제가 완료되었습니다.",
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "삭제가 실패하였습니다.",
+                                    })
                                 }
                             }
                         })
@@ -213,6 +221,5 @@ $(function () {
     };
     Content.load({
         key: $('.param[name="key"]').val() || '',
-        path: $('.param[name="path"]').val() || ''
     });
 })
