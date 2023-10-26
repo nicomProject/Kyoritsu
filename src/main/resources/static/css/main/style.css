@@ -291,7 +291,27 @@ section .sub-title{
 /* vision */
 .vision.section{
     background: #F9FAFF;
-    padding-bottom: 70px !important;
+    padding-bottom: 300px !important;
+}
+
+.vision.section .img-wrap{
+    width: 100%;
+    position: relative;
+}
+
+.vision.section .img-wrap img{
+    width: 100%;
+    vertical-align: middle;
+}
+
+.vision.section .img-wrap .img-text{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 100%;
+    transform: translate( -50%, -50%);
+    font-size: 1rem;
+    text-align: center;
 }
 
 /* notice/notice */
