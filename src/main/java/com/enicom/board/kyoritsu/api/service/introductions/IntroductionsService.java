@@ -18,5 +18,7 @@ public interface IntroductionsService {
     ResponseDataValue<?> update(IntroductionsParam param);
     ResponseDataValue<?> delete(MultipleParam param);
 
+    ResponseDataValue<?> check(MultipleParam param);
+
 
 }

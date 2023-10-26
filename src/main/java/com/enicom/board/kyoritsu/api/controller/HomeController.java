@@ -94,6 +94,7 @@ public class HomeController {
 
     @GetMapping("/admin/{page}/detail")
     public String adminDetail(Model model, HttpServletResponse response, @PathVariable String page) throws IOException {
+        System.out.println("11111타는것");
         MemberDetail member = getCurrentUser(model);
         if (member == null || page.equalsIgnoreCase("login")) {
             response.sendRedirect("/admin");
@@ -110,9 +111,17 @@ public class HomeController {
     }
     @GetMapping("/admin/{page}/detail/{key}")
     public String adminDetail(Model model, HttpServletResponse response, @PathVariable String page, @PathVariable String key) throws IOException {
+        System.out.println("222222타는것");
         MemberDetail member = getCurrentUser(model);
         if (member == null || page.equalsIgnoreCase("login")) {
             response.sendRedirect("/admin");
+        }
+        else {
+            securityUtil.getDetailMenu(page).ifPresent(menu -> {
+                System.out.println(menu.getName());
+                model.addAttribute("menu_group", menu.getGroup().getName());
+                model.addAttribute("menu_detail_name", menu.getName());
+            });
         }
 
         model.addAttribute("key", key);

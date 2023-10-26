@@ -32,7 +32,29 @@ $(function () {
                 if(action === 'add'){
                     window.location.href = '/admin/introduction/detail'
                 }
+                else if(action === 'check'){
+                    if(selected.length === 1){
+                        AjaxUtil.requestBody({
+                            url: '/api/introductions/check',
+                            data: {
+                                idListLong: selected,
+                                type: 'one',
+                            },
+                            table: 'table',
+                            successMessage: '성공적으로 삭제되었습니다',
+                            failMessage: '삭제중 오류가 발생하였습니다.',
+                        })
+                    }else{
+                        if(selected.length === 1){
 
+                        }else if(selected.length === 0){
+                            Alert.warning({text: '소개글을 먼저 선택해주세요!'})
+
+                        }else if(selected.length > 1){
+                            Alert.warning({text: '선택한 항목이 2항목 이상입니다.'})
+                        }
+                    }
+                }
                 else if (action === 'del') {
                     if(selected.length === 0 && range !== 'all'){
                         Alert.warning({text: '소개글을 먼저 선택해주세요!'});
