@@ -12,7 +12,6 @@ import java.util.List;
 @Builder
 @Setter
 @Getter
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class PageVO<T> {
     public static final String columns = "pageIdx, pageSize";
     @Builder.Default

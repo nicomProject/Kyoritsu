@@ -2,6 +2,9 @@ package com.enicom.board.kyoritsu.api.controller;
 
 import com.enicom.board.kyoritsu.dao.entity.Notice;
 import com.enicom.board.kyoritsu.dao.repository.notice.NoticeRepository;
+import com.enicom.board.kyoritsu.dao.type.MenuType;
+import com.enicom.board.kyoritsu.dao.type.admin.MenuGroupType;
+import com.enicom.board.kyoritsu.dao.type.admin.MenuPageType;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -53,10 +56,12 @@ public class HomeController {
     public String login(Model model) throws Exception {
         MemberDetail member = getCurrentUser(model);
 
-
         if (member == null) {
             return "admin/login";
         }
+
+        model.addAttribute("menu_group", MenuGroupType.HOMEPAGE.getName());
+        model.addAttribute("menu_name", MenuPageType.INTRODUCTIONS.getName());
 
         return "admin/introductions";
     }
