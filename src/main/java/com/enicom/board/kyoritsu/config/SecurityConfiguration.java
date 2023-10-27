@@ -107,11 +107,11 @@ public class SecurityConfiguration {
                 .expiredSessionStrategy(event -> {
                     event.getSessionInformation().expireNow();
                 });
-        http
-                .headers()
-                .xssProtection()
-                .and()
-                .contentSecurityPolicy("script-src 'self'");
+//        http
+//                .headers()
+//                .xssProtection()
+//                .and()
+//                .contentSecurityPolicy("script-src 'self'");
         return http.build();
     }
 }

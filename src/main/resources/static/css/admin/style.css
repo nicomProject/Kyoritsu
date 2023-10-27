@@ -1557,3 +1557,28 @@ input[type=checkbox]:checked {
 .card .card-body:has(> table){
     padding-right: 50px;
 }
+
+.card-body #listButton{
+    margin-top: 10px;
+    position: absolute;
+    right: 70px;
+}
+
+.card .card-body .card-body-separation-one{
+    margin-right: 50px;
+}
+
+.card .card-body .card-body-separation-two{
+    margin-right: 50px;
+}
+
+.form-select:focus {
+    /*outline: 3px solid #d0d0d0;*/
+    outline: none;
+}
+
+.form-control:focus {
+    /*outline: 3px solid #d0d0d0;*/
+    outline: none;
+}
+

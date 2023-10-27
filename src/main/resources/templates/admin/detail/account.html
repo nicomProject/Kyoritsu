@@ -13,19 +13,18 @@
                 <h4 class="card-title">관리자 수정</h4>
                 <p class="card-category ellipsis">
                     <i class="fas fa-arrow-right"></i>
-                    <span class="icon-title"></span>
+                    <span class="icon-title">수정할 관리자를 작성해주세요</span>
                 </p>
             </div>
             <div class="card-header card-header-primary" th:if="${key == null}">
                 <h4 class="card-title">관리자 추가</h4>
                 <p class="card-category ellipsis">
                     <i class="fas fa-arrow-right"></i>
-                    <span class="icon-title"></span>
+                    <span class="icon-title">추가할 관리자를 작성해주세요.</span>
                 </p>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="card-body-separation-one">
                         <i class="fas fa-exclamation-circle"></i>
                         <span class="icon-title modal-ext-desc"> 이용 안내<br>
                             - 관리자 생성 후에는 아이디를 수정할 수 없습니다.<br>
@@ -66,7 +65,7 @@
                                 <td>
                                     <div id="management" name="management" type="text">
                                         <button class="btn btn-round btn-success bg-gradient-success" data-action="list"
-                                                role="action">
+                                                role="action" th:if="${key == null}">
                                             <i class="fas fa-plus"></i><span class="icon-title">목록</span>
                                         </button>
                                         <button class="btn btn-round btn-primary bg-gradient-primary" data-action="add"
@@ -86,11 +85,10 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="col-md-6">
-                        <i class="fas fa-exclamation-circle"></i>
+                    <div class="card-body-separation-two" th:if="${key != null}">
+                        <br><i class="fas fa-exclamation-circle"></i>
                         <span class="icon-title modal-ext-desc"> 이용 안내<br>
-                        - 비밀번호는 영문자, 숫자, 특수문자 포함 8자 이상 20자이내로 사용 가능합니다.<br>
-                            <br>
+                        - 비밀번호는 영문자, 숫자, 특수문자 포함 8자 이상 20자이내로 사용 가능합니다.
                     </span>
 
                         <table class="pageSubTable">
@@ -129,6 +127,14 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-round btn-success bg-gradient-success" data-action="list"
+                                            role="action" id="listButton" th:if="${key != null}">
+                                        <i class="fas fa-plus"></i><span class="icon-title">목록</span>
+                                    </button>
+                                </td>
+                            </tr>
                             <!--                    <tr class="pageSub">-->
                             <!--                        <td><label for="management">관리</label></td>-->
                             <!--                        <td><div type="text" id="management" name="management">-->
@@ -140,8 +146,6 @@
                             <!--                    </tr>-->
                         </table>
                     </div>
-                </div>
-
             </div>
         </div>
 

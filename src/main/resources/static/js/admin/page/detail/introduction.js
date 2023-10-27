@@ -9,7 +9,7 @@ $(function () {
             const category = $("#category");
             const sub_category = $("#sub_category");
             let items = [];
-            const paramValue = params.key
+            let paramValue = params.key
             let hi = ""
 
             AjaxUtil.request({
@@ -96,13 +96,12 @@ $(function () {
 
 
             const buttons = document.querySelectorAll("button");
-
+            const paramKey = this.params.key
             // 모든 버튼에 클릭 이벤트 리스너를 추가합니다.
             buttons.forEach(function (button) {
                 button.addEventListener("click", function () {
                     // data-action 속성을 확인하여 해당 동작을 처리합니다.
                     const action = button.getAttribute("data-action");
-
                     // // 네이버 스마트에디터 <p>태그 삭제
                     // var contentText = oEditors.getById["contents"].getIR();
                     // contentText = contentText.replace(/<p>/gi, "").replace(/<\/p>/gi, "");
@@ -118,8 +117,7 @@ $(function () {
 
                         console.log("check")
 
-                        if(paramValue === ""){
-
+                        if(paramKey === ""){
                             console.log("asdasfasf")
 
                             AjaxUtil.requestBody({
@@ -145,7 +143,7 @@ $(function () {
                                     }
                                 }
                             })
-                        }else if(paramValue !== ""){
+                        }else if(paramKey !== ""){
                             AjaxUtil.requestBody({
                                 url: '/api/introductions/update',
                                 data: {
