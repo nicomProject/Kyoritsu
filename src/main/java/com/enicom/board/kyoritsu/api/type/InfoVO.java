@@ -8,7 +8,6 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class InfoVO<T> {
     private T info;
 
