@@ -109,9 +109,8 @@ public class SecurityConfiguration {
                 });
         http
                 .headers()
-                .xssProtection()
-                .and()
-                .contentSecurityPolicy("script-src 'self'");
+                .xssProtection();
+
         return http.build();
     }
 }

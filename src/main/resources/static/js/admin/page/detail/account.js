@@ -123,7 +123,6 @@ $(function () {
                                     role: manager_role,
                                     enable: manager_enable,
                                 },
-                                table: 'table',
                                 successMessage: '관리자가 성공적으로 추가되었습니다!'
                             })
                         }else if(paramValue !== ""){
