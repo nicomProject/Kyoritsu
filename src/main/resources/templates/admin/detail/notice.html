@@ -25,6 +25,10 @@
             </div>
             <div class="card-body">
                 <table class="pageSubTable" th:if="${key == null}">
+                    <colgroup>
+                        <col width="10%"/>
+                        <col width="90%"/>
+                    </colgroup>
                     <tr class="pageSub">
                         <td><label for="category">카테고리</label></td>
                         <td>
@@ -65,6 +69,12 @@
                 </table>
 
                 <table class="pageSubTable" th:if="${key != null}">
+                    <colgroup>
+                        <col width="10%"/>
+                        <col width="40%"/>
+                        <col width="10%"/>
+                        <col width="40%"/>
+                    </colgroup>
                     <tr class="pageSub">
                         <td><label for="category">카테고리</label></td>
                         <td>

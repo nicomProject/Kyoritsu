@@ -4,6 +4,7 @@ import com.enicom.board.kyoritsu.dao.entity.Content;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Builder
@@ -14,11 +15,14 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class IntroductionsParam {
 
+    @NotBlank
     private String title;
+    @NotBlank
     private String contents;
     private String category;
     private String sub_category;
     private String key;
+    @NotBlank
     private String sub_title;
 
     @JsonIgnore

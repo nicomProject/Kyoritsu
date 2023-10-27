@@ -63,16 +63,15 @@ $(function () {
                             contents: contentsValue,
                         },
                         success: function (data) {
-                            console.log(data)
                             if (data.code == 200) {
                                 Alert.success({text: '공지사항 등록이 완료되었습니다.'}, function(){
-                                    location.href = '/admin/introductions'
+                                    location.href = '/admin/notices'
                                 })
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    html: "공지사항 등록이 실패하였습니다.",
-                                })
+                            } else if(data.code === 210){
+                                Alert.warning({text: data.desc})
+                            }
+                            else{
+                                Alert.error({text: data.desc});
                             }
                         }
                     })
@@ -88,18 +87,15 @@ $(function () {
                             key: paramValue
                         },
                         success: function (data) {
-                            console.log(data)
                             if (data.code == 200) {
-                                Swal.fire({
-
-                                    icon: 'success',
-                                    html: "공지사항 수정이 완료되었습니다.",
+                                Alert.success({text: '공지사항이 수정되었습니다.'}, function(){
+                                    location.href = '/admin/notices'
                                 })
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    html: "공지사항 수정이 실패하였습니다.",
-                                })
+                            } else if(data.code === 210){
+                                Alert.warning({text: data.desc})
+                            }
+                            else{
+                                Alert.error({text: data.desc});
                             }
                         }
                     })
@@ -116,7 +112,13 @@ $(function () {
                         },
                         success: function (data) {
                             console.log(data)
-                            if (data.code == 200) {
+                            if(data.code === 200){
+                                Alert.success({text: data.desc}, function (){
+                                    location.href = '/admin/notices'
+                                })
+                            }
+                            else{
+                                Alert.error({text: data.desc});
                             }
                         }
                     })

@@ -4,6 +4,8 @@ import com.enicom.board.kyoritsu.dao.entity.Notice;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+
 @Builder
 @Getter
 @AllArgsConstructor
@@ -12,7 +14,9 @@ import lombok.*;
 @Setter
 public class NoticeParam {
 
+    @NotBlank
     private String title;
+    @NotBlank
     private String contents;
     private String category;
     private String key;

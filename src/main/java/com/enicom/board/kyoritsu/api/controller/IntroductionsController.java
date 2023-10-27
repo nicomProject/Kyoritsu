@@ -38,7 +38,7 @@ public class IntroductionsController {
     }
 
     @RequestMapping(path = "/introductions/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseHandler<?> findSelf(@RequestBody @Valid IntroductionsParam param){
+    public ResponseHandler<?> findSelf(@RequestBody IntroductionsParam param){
         System.out.println(introductionsService.findAll(param));
         return new ResponseHandler<>(introductionsService.findAll(param));
     }

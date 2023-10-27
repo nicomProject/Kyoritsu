@@ -64,7 +64,7 @@ public class ManagerController {
 //    }
 //
     @RequestMapping(path = "/manager/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseHandler<?> findSelf(@RequestBody @Valid ManagerInfoParam param) {
+    public ResponseHandler<?> findSelf(@RequestBody ManagerInfoParam param) {
         return new ResponseHandler<>(managerService.findAll(param));
     }
 

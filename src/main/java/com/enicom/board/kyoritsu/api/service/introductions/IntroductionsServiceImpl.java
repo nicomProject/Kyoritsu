@@ -129,8 +129,6 @@ public class IntroductionsServiceImpl implements IntroductionsService {
 
             mainMenuRepository.save(mainMenu);
         }
-
-
         return ResponseDataValue.builder(200).build();
     }
 }
