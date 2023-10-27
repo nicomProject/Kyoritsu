@@ -1455,7 +1455,7 @@ section .sub-title{
     margin-top: 53px;
 }
 .history.section .sp_view .history-list-container .history-item .content .left::before {
-    content: "共立メンテナンスの歩み";
+    content: "";
     margin-top: 1px;
     margin-bottom: 13px;
     padding: 4.5px 13px;
@@ -1473,7 +1473,7 @@ section .sub-title{
     margin-top: 53px;
 }
 .history.section .sp_view .history-list-container .history-item .content .right::before {
-    content: "共立メンテナンスのトピックス";
+    content: "";
     margin-top: 1px;
     margin-bottom: 13px;
     padding: 4.5px 13px;
@@ -1604,6 +1604,27 @@ section .sub-title{
 
 .organization.section .container .chart img{
     width: 100%;
+}
+
+/* location */
+.location.section #map{
+    width: 100%;
+    height: 570px;
+}
+
+.location.section .location-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.location.section .location-container .map-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.location.section .location-container .map-info .bottom{
+    display: flex;
+    justify-content: space-between;
 }
 
 /* notice/notice */
