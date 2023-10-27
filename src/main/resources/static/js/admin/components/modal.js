@@ -1,15 +1,25 @@
 const Data = {
     roles: {},
     roleHash: {},
+    MenuHash: {},
+    menus: [],
+    subMenuHash: {},
+    subMenuCheck:[],
+    subMenuCheckHash: {},
+    subMenus: [],
     /**
      * @param config
      * @param {boolean} config.role 역할 사용여부
      */
     load: function (config) {
         const roleUse = config.role && true;
+        const menuUse = config.menu && true;
 
         if (roleUse) {
             this.getRoles();
+        }
+        if(menuUse){
+            this.getMenus();
         }
 
     },
@@ -29,6 +39,31 @@ const Data = {
             }
         })
     },
+    getMenus: function(){
+        const that = this;
+        AjaxUtil.request({
+            url: '/api/main/setting/menus',
+            async: false,
+            success: function (data) {
+                const items = data.result.items;
+
+                that.menus = items.filter(item => item.type === "group");
+                that.subMenus = items.filter(item => item.type === "intro")
+
+                that.menus.forEach(menu => {
+                    that.MenuHash[menu.recKey] = menu.name;
+                })
+
+                that.subMenus.forEach(menu => {
+                    that.subMenuHash[menu.recKey] = menu.name;
+                    if(menu.content){
+                        that.subMenuCheckHash[menu.recKey] = menu.content.recKey;
+                    }
+                })
+
+            },
+        });
+    }
 };
 
 class AbstractModal {

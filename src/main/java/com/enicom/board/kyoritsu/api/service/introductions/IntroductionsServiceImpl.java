@@ -6,6 +6,8 @@ import com.enicom.board.kyoritsu.api.param.type.MultipleType;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
 import com.enicom.board.kyoritsu.dao.entity.Content;
+import com.enicom.board.kyoritsu.dao.entity.MainMenu;
+import com.enicom.board.kyoritsu.dao.repository.MainMenuRepository;
 import com.enicom.board.kyoritsu.dao.repository.introduction.IntroductionRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
@@ -20,14 +22,21 @@ import java.util.Optional;
 public class IntroductionsServiceImpl implements IntroductionsService {
     private final SecurityUtil securityUtil;
     private final IntroductionRepository introductionsRepository;
+    private final MainMenuRepository mainMenuRepository;
 
 
 
     @Autowired
-    public IntroductionsServiceImpl(IntroductionRepository introductionsRepository, SecurityUtil securityUtil) {
+    public IntroductionsServiceImpl(IntroductionRepository introductionsRepository, SecurityUtil securityUtil, MainMenuRepository mainMenuRepository) {
         this.introductionsRepository = introductionsRepository;
         this.securityUtil = securityUtil;
+        this.mainMenuRepository = mainMenuRepository;
     }
+
+//    @Override
+//    public PageVO<Content> findAll() {
+//        return PageVO.builder(introductionsRepository.findAllByDeleteDateNull()).build();
+//    }
 
     @Override
     public PageVO<Content> findAll() {
@@ -43,7 +52,6 @@ public class IntroductionsServiceImpl implements IntroductionsService {
     public ResponseDataValue<?> add(IntroductionsParam param) {
 
         MemberDetail member = securityUtil.getCurrentUser();
-        System.out.println("1111111" + param);
 
         Content content = param.create();
         content.setCreateDate(LocalDateTime.now());
@@ -93,6 +101,30 @@ public class IntroductionsServiceImpl implements IntroductionsService {
         else if(type.equals(MultipleType.SPECIFIC)){
             introductionsRepository.deleteALLContent();
         }
+
+        return ResponseDataValue.builder(200).build();
+    }
+
+    @Override
+    public ResponseDataValue<?> check(MultipleParam param) {
+        System.out.println("check값");
+        System.out.println(param.getIdListLong().get(0));
+
+        Optional<Content> contentOptional = introductionsRepository.findByRecKey(param.getIdListLong().get(0));
+        if (!contentOptional.isPresent()) {
+            return ResponseDataValue.builder(210).desc("잘못된 등록번호입니다.").build();
+        }
+        Optional<MainMenu> mainMenuOptional = mainMenuRepository.findByRecKey(Long.valueOf(contentOptional.get().getSubcategory()));
+        if (!mainMenuOptional.isPresent()) {
+            return ResponseDataValue.builder(210).desc("잘못된 등록번호입니다.").build();
+        }
+        else {
+            MainMenu mainMenu = mainMenuOptional.get();
+            mainMenu.setContent(contentOptional.get());
+
+            mainMenuRepository.save(mainMenu);
+        }
+
 
         return ResponseDataValue.builder(200).build();
     }

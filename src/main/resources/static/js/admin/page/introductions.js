@@ -1,5 +1,4 @@
 $(function () {
-    // let categoryitems = [];
     const Content = {
         params: {},
         categoryItems: {},
@@ -15,8 +14,8 @@ $(function () {
                     categoryItems = Array.from(new Set(items.map(item => item.menu.recKey))).map(recKey => items.find(item => item.menu.recKey === recKey));
                 }
             });
-
-            Data.load({role: true});
+            Data.load({role: true, menu: true});
+            console.log(Data)
             this.event();
         },
         event: function () {
@@ -29,14 +28,33 @@ $(function () {
                 const selected = table.getSelectedData().map(e => e.recKey);
 
                 if(action === 'add'){
-                    console.log("add")
                     window.location.href = '/admin/introduction/detail'
                 }
+                else if(action === 'check'){
+                    if(selected.length === 1){
+                        AjaxUtil.requestBody({
+                            url: '/api/introductions/check',
+                            data: {
+                                idListLong: selected,
+                                type: 'one',
+                            },
+                            table: 'table',
+                            successMessage: '성공적으로 삭제되었습니다',
+                            failMessage: '삭제중 오류가 발생하였습니다.',
+                        })
+                    }else{
+                        if(selected.length === 1){
 
+                        }else if(selected.length === 0){
+                            Alert.warning({text: '소개글을 먼저 선택해주세요!'})
+
+                        }else if(selected.length > 1){
+                            Alert.warning({text: '선택한 항목이 2항목 이상입니다.'})
+                        }
+                    }
+                }
                 else if (action === 'del') {
-                    console.log("????")
-                    if(selected.length === 0){
-                        console.log("????")
+                    if(selected.length === 0 && range !== 'all'){
                         Alert.warning({text: '소개글을 먼저 선택해주세요!'});
                         return;
                     } else if(range === 'list' && selected.length > 0){
@@ -62,8 +80,6 @@ $(function () {
                         })
 
                     }
-                    console.log("삭제");
-                    // ... (기존의 삭제 로직을 이곳에 삽입)
                 }
                 else if (action === 'file') {
                     const range = this.dataset.range;
@@ -71,7 +87,6 @@ $(function () {
                         Alert.warning({text: '소개글을 먼저 선택해주세요!'});
                         return;
                     }
-                    // 다운로드
                     else if (range === 'download') {
                         TableUtil.download(table, 'excel', '소개글 목록');
                     }
@@ -87,7 +102,10 @@ $(function () {
         },
         draw: function (target) {
             const that = this;
-            const roleHash = Data.roleHash || {};
+            const subMenuCheckHash = Data.subMenuCheckHash || {};
+            const subMenuHash = Data.subMenuHash || {};
+            const MenuHash = Data.MenuHash || {};
+            console.log(subMenuCheckHash)
             const table = new Tabulator(target, {
                 locale: 'ko-kr',
                 langs: TableUtil.setDefaults(),
@@ -108,7 +126,7 @@ $(function () {
                         return [];
                     }
                     response = response.result;
-                    return response.items;
+                    return response.items || [];
                 },
                 ajaxError: TableUtil.ajaxError,
                 columnHeaderVertAlign: "middle",
@@ -138,11 +156,15 @@ $(function () {
                         headerSort: false
                     },
                     {title: '카테고리', field: "category", headerHozAlign: "center", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
-                            values: categoryItems.map(e => e.menu.name),
+                            values: MenuHash,
+                        }, formatter: function(cell){
+                            return MenuHash[cell.getValue()] || cell.getValue();
                         }
                     },
                     {title: '서브 카테고리', field: "subcategory", headerHozAlign: "center", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
-                            values: items.map(e => e.name),
+                            values: subMenuHash,
+                        }, formatter: function(cell){
+                            return subMenuHash[cell.getValue()] || cell.getValue();
                         }},
                     {title: '제목', field: "title", headerHozAlign: "center", tooltip: true, headerTooltip: true, headerFilter: 'input'},
                     {title: '소제목', field: "subtitle", headerHozAlign: "center", tooltip: true, headerTooltip: true, headerFilter: 'input'},
@@ -153,6 +175,18 @@ $(function () {
                         tooltip: true,
                         headerTooltip: true
                     },
+                    {
+                        title: '상태',
+                        headerFilterParams: {
+                            values: subMenuHash,
+                        }, formatter: function(cell){
+                            const data = cell.getRow().getData();
+                            const subcategory = data.subcategory;
+                            console.log(subcategory)
+                            const subMenuCheckHash = Data.subMenuCheckHash[subcategory];
+                            return data.recKey == subMenuCheckHash;
+                        },
+                    }
                 ],
             });
 

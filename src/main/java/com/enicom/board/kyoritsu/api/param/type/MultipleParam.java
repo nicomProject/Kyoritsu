@@ -11,6 +11,8 @@ public class MultipleParam {
     @NotNull(message = "유형을 선택해주세요. (one, list, all, specific)")
     private MultipleType type;
 
+    private String key;
+
     // 강제 집행 여부
     private Boolean force;
 

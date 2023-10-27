@@ -35,6 +35,7 @@ public class Notice {
     private String content;
 
     @Column(name = "hit")
+    @Builder.Default
     @Comment("조회수")
     @ColumnDefault("0")
     private Integer hit = 0;

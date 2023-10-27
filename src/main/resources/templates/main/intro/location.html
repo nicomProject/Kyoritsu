@@ -18,6 +18,8 @@
     <th:block th:replace="~{components/_header::header_main}"></th:block>
     <!-- ========================= header end ========================= -->
 
+    <input type="hidden" id="location_contentId" class="param contentId" name="key"/>
+
     <!-- Start Breadcrumbs -->
     <div class="breadcrumbs" data-stellar-background-ratio="0.5">
         <div class="container">
@@ -45,12 +47,17 @@
 	<!-- Start Features Area -->
 
     <main>
+        <section id="location-section" class="location section">
+            <div class="editor-content container">
+            </div>
+        </section>
     </main>
     <!-- /End Newsletter Area -->
 
     <!-- Start Footer Area -->
     <th:block th:replace="~{components/_footer::footer_main}"></th:block>
     <!--/ End Footer Area -->
+
 
     <!-- ========================= scroll-top ========================= -->
     <a href="#" class="scroll-top btn-hover">

@@ -9,7 +9,6 @@ $(function () {
         event: function () {
 
             const paramValue = this.params.key
-            console.log("paramValue" + paramValue)
 
             var oEditors = [];
             nhn.husky.EZCreator.createInIFrame({
@@ -18,6 +17,7 @@ $(function () {
                 sSkinURI: "/static/js/smartEditor/SmartEditor2Skin.html",
                 fCreator: "createSEditor2"
             })
+
 
             if(paramValue !== ""){
                 AjaxUtil.requestBody({
@@ -50,9 +50,9 @@ $(function () {
 
             const card = $('.card-body');
             card.find('*[role="action"]').click(function(e){
-                const action = this.dataset.action;
-
                 oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+
+                const action = this.dataset.action;
                 var categoryValue = $("#category").val();
                 var titleValue = $("#title").val();
                 var contentsValue = $("#contents").val();

@@ -32,11 +32,14 @@ public class IntroductionsController {
 
     @RequestMapping(path = "/introductions/find", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseHandler<?> find() {
+        System.out.println(introductionsService.findAll() + "asfzzzzz");
+
         return new ResponseHandler<>(introductionsService.findAll());
     }
 
     @RequestMapping(path = "/introductions/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseHandler<?> findSelf(@RequestBody @Valid IntroductionsParam param){
+        System.out.println(introductionsService.findAll(param));
         return new ResponseHandler<>(introductionsService.findAll(param));
     }
 
@@ -47,8 +50,12 @@ public class IntroductionsController {
 
     @RequestMapping(value = "/introductions/delete", method = RequestMethod.POST)
     public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
-        System.out.println("hihihihi");
         return new ResponseHandler<>(introductionsService.delete(param));
+    }
+
+    @RequestMapping(value = "/introductions/check", method = RequestMethod.POST)
+    public ResponseHandler<?> check(@RequestBody @Valid MultipleParam param) throws Exception {
+        return new ResponseHandler<>(introductionsService.check(param));
     }
 
 }

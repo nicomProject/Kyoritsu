@@ -9,7 +9,23 @@ const Menu = {
             success: function (data) {
                 const items = data.result.items;
                 that.menus = items.filter(item => item.type === "group");
-                that.subMenus = items.filter(item => item.type !== "group")
+                that.subMenus = items.filter(item => item.type !== "group");
+
+                /* 각 메뉴별 content 불러오기 */
+                const submenu = Menu.subMenus;
+                console.log(submenu)
+
+                submenu.forEach(menu =>{
+                    const path = menu.url;
+                    const pathName = location.pathname;
+
+                    const input = $('.param.contentId');
+
+                    if(path == pathName){
+                        const contentKey = menu.content.recKey;
+                        input.val(contentKey);
+                    }
+                })
 
                 that.draw();
             },

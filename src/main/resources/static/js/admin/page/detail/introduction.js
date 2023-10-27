@@ -1,14 +1,16 @@
 $(function () {
+    var hi;
     const Content = {
         categorys: [],
         subCategorys: [],
         params: {},
         load: function (params) {
-
             const that = this;
             const category = $("#category");
             const sub_category = $("#sub_category");
             let items = [];
+            const paramValue = params.key
+            let hi = ""
 
             AjaxUtil.request({
                 url: '/api/main/setting/category',
@@ -31,24 +33,51 @@ $(function () {
                 ));
             });
 
-            const changeFunc = function(){
-                sub_category.empty();
-                items.forEach(item => {
-                    if(Number(category.val()) === item.menu.recKey){
-                        sub_category.append($('<option>', {
-                            value: item.recKey,
-                            text: item.name
-                        }));
-                    }
+                const changeFunc = function(){
+                    sub_category.empty();
+                    console.log(category.val())
+                    items.forEach(item => {
+                        if(Number(category.val()) === item.menu.recKey){
+                            sub_category.append($('<option>', {
+                                value: item.recKey,
+                                text: item.name
+                            }));
+                        }
+                    });
+                }
+
+            changeFunc();
+
+
+            category.on('change', function() {
+                    changeFunc();
                 });
 
+            if(paramValue !== ""){
+                AjaxUtil.requestBody({
+                    url: '/api/introductions/findSelf',
+                    data: {
+                        key: paramValue,
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        $(".pageSub #category").val(data.result.items[0].category);
+                        $(".pageSub #sub_category").val(data.result.items[0].subcategory);
+                        $(".pageSub #title").val(data.result.items[0].title);
+                        $(".pageSub #sub_title").val(data.result.items[0].subtitle);
+                        $(".pageSub #contents").val(data.result.items[0].content);
+                        changeFunc();
+
+                        if (data.code == 200) {
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                html: "소개글 조회가 실패하였습니다.",
+                            })
+                        }
+                    }
+                })
             }
-            changeFunc();
-            category.on('change', function() {
-                changeFunc();
-            });
-
-
 
             this.params = params;
             console.log(this.params)
@@ -65,34 +94,6 @@ $(function () {
                 fCreator: "createSEditor2"
             })
 
-
-            const paramValue = this.params.key
-            console.log("paramValue" + paramValue)
-
-            if(paramValue !== ""){
-                AjaxUtil.requestBody({
-                    url: '/api/introductions/findSelf',
-                    data: {
-                        key: paramValue,
-                    },
-                    success: function (data) {
-                        console.log(data)
-                        $(".pageSub #category").val(data.result.items[0].category);
-                        $(".pageSub #sub_category").val(data.result.items[0].subcategory);
-                        $(".pageSub #title").val(data.result.items[0].title);
-                        $(".pageSub #sub_title").val(data.result.items[0].subtitle);
-                        $(".pageSub #contents").val(data.result.items[0].content);
-
-                        if (data.code == 200) {
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                html: "소개글 조회가 실패하였습니다.",
-                            })
-                        }
-                    }
-                })
-            }
 
             const buttons = document.querySelectorAll("button");
 
@@ -131,10 +132,10 @@ $(function () {
                                     sub_category: sub_categoryValue
                                 },
                                 success: function (data) {
-                                    console.log(data)
                                     if (data.code == 200) {
-                                        Alert.success({text: '소개글 등록이 완료되었습니다.'}, function(){
-                                            location.href = '/admin/introductions'
+                                        Swal.fire({
+                                            icon: 'success',
+                                            html: "소개글 등록이 완료되었습니다.",
                                         })
                                     } else {
                                         Swal.fire({
@@ -144,9 +145,7 @@ $(function () {
                                     }
                                 }
                             })
-                            alert("저장 동작을 수행합니다.");
                         }else if(paramValue !== ""){
-
                             AjaxUtil.requestBody({
                                 url: '/api/introductions/update',
                                 data: {
@@ -161,14 +160,13 @@ $(function () {
                                     console.log(data)
                                     if (data.code == 200) {
                                         Swal.fire({
-
                                             icon: 'success',
-                                            html: "소개글 등록이 완료되었습니다.",
+                                            html: "소개글 수정이 완료되었습니다.",
                                         })
                                     } else {
                                         Swal.fire({
                                             icon: 'error',
-                                            html: "소개글 등록이 실패하였습니다.",
+                                            html: "소개글 수정이 실패하였습니다.",
                                         })
                                     }
                                 }
@@ -187,6 +185,15 @@ $(function () {
                             success: function (data) {
                                 console.log(data)
                                 if (data.code == 200) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        html: "삭제가 완료되었습니다.",
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "삭제가 실패하였습니다.",
+                                    })
                                 }
                             }
                         })
@@ -200,6 +207,6 @@ $(function () {
         }
     };
     Content.load({
-        key: $('.param[name="key"]').val() || ''
+        key: $('.param[name="key"]').val() || '',
     });
 })

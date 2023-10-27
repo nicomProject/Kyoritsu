@@ -11,9 +11,11 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ManagerInfoParam {
-    @NotNull
+
+
     private String id;
     private String name;
     private Role role;
     private Integer enable;
+    private String key;
 }

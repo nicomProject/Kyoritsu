@@ -1,5 +1,7 @@
 package com.enicom.board.kyoritsu.api.controller;
 
+import com.enicom.board.kyoritsu.dao.entity.Notice;
+import com.enicom.board.kyoritsu.dao.repository.notice.NoticeRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
     private final SecurityUtil securityUtil;
+    private NoticeRepository noticeRepository;
 
     @GetMapping(path = {"/"})
     public String home(Model model) throws Exception {
@@ -32,6 +36,12 @@ public class HomeController {
         String menu = category;
         String view = page;
         return String.format("main/%s/%s", menu, view);
+    }
+
+    @GetMapping("/{category}/{page}/detail/{key}")
+    public String mainDetail(Model model, @PathVariable String category, @PathVariable String page, @PathVariable long key) {
+        model.addAttribute("key", key);
+        return String.format("main/detail/%s", page);
     }
 
     @GetMapping(path = { "/admin"})
@@ -84,6 +94,7 @@ public class HomeController {
 
     @GetMapping("/admin/{page}/detail")
     public String adminDetail(Model model, HttpServletResponse response, @PathVariable String page) throws IOException {
+        System.out.println("11111타는것");
         MemberDetail member = getCurrentUser(model);
         if (member == null || page.equalsIgnoreCase("login")) {
             response.sendRedirect("/admin");
@@ -100,9 +111,17 @@ public class HomeController {
     }
     @GetMapping("/admin/{page}/detail/{key}")
     public String adminDetail(Model model, HttpServletResponse response, @PathVariable String page, @PathVariable String key) throws IOException {
+        System.out.println("222222타는것");
         MemberDetail member = getCurrentUser(model);
         if (member == null || page.equalsIgnoreCase("login")) {
             response.sendRedirect("/admin");
+        }
+        else {
+            securityUtil.getDetailMenu(page).ifPresent(menu -> {
+                System.out.println(menu.getName());
+                model.addAttribute("menu_group", menu.getGroup().getName());
+                model.addAttribute("menu_detail_name", menu.getName());
+            });
         }
 
         model.addAttribute("key", key);

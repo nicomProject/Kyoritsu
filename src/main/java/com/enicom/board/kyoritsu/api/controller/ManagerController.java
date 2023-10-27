@@ -33,18 +33,18 @@ public class ManagerController {
         return new ResponseHandler<>(managerService.add(param));
     }
 
-    @RequestMapping(path = "/manager/mod", method = {RequestMethod.POST})
-    @ApiMapping(order = 52, desc = "[관리자] 관리자 정보 수정", param = ManagerInfoParam.class)
-    public ResponseHandler<?> modifyManagerInfo(@RequestBody @Valid ManagerInfoParam param) {
-        System.out.println(param + "param값");
-        return new ResponseHandler<>(managerService.modify(param));
-    }
+//    @RequestMapping(path = "/manager/mod", method = {RequestMethod.POST})
+//    @ApiMapping(order = 52, desc = "[관리자] 관리자 정보 수정", param = ManagerInfoParam.class)
+//    public ResponseHandler<?> modifyManagerInfo(@RequestBody @Valid ManagerInfoParam param) {
+//        System.out.println(param + "param값");
+//        return new ResponseHandler<>(managerService.modify(param));
+//    }
 
-    @RequestMapping(path = "/manager/del", method = {RequestMethod.POST})
-    @ApiMapping(order = 53, desc = "[관리자] 관리자 삭제", param = MultipleParam.class)
-    public ResponseHandler<?> deleteManagerInfo(@RequestBody @Valid MultipleParam param) {
-        return new ResponseHandler<>(managerService.delete(param));
-    }
+//    @RequestMapping(path = "/manager/del", method = {RequestMethod.POST})
+//    @ApiMapping(order = 53, desc = "[관리자] 관리자 삭제", param = MultipleParam.class)
+//    public ResponseHandler<?> deleteManagerInfo(@RequestBody @Valid MultipleParam param) {
+//        return new ResponseHandler<>(managerService.delete(param));
+//    }
 
     @RequestMapping(path = "/manager/init", method = {RequestMethod.POST})
     @ApiMapping(order = 54, desc = "[관리자] 관리자 초기화", param = MultipleParam.class)
@@ -55,6 +55,7 @@ public class ManagerController {
     @RequestMapping(path = "/manager/mypassword", method = {RequestMethod.POST})
     @ApiMapping(order = 55, desc = "[관리자] 관리자 비밀번호 변경", param = ManagerPasswordParam.class)
     public ResponseHandler<?> changePassword(@RequestBody @Valid ManagerPasswordParam param) {
+        System.out.println("param값" + param);
         return new ResponseHandler<>(managerService.changePassword(param));
     }
 
@@ -63,19 +64,20 @@ public class ManagerController {
 //        return new ResponseHandler<>(introductionsService.findAll());
 //    }
 //
-//    @RequestMapping(path = "/introductions/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
-//    public ResponseHandler<?> findSelf(@RequestBody @Valid IntroductionsParam param){
-//        return new ResponseHandler<>(introductionsService.findAll(param));
-//    }
+    @RequestMapping(path = "/manager/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseHandler<?> findSelf(@RequestBody @Valid ManagerInfoParam param){
+        System.out.println("asdasdasfasfasfsaf");
+        return new ResponseHandler<>(managerService.findAll(param));
+    }
+
+    @RequestMapping(value = "/manager/update", method = RequestMethod.POST)
+    public ResponseHandler<?> update(@RequestBody @Valid ManagerInfoParam param) throws Exception {
+        return new ResponseHandler<>(managerService.modify(param));
+    }
 //
-//    @RequestMapping(value = "/introductions/update", method = RequestMethod.POST)
-//    public ResponseHandler<?> update(@RequestBody @Valid IntroductionsParam param) throws Exception {
-//        return new ResponseHandler<>(introductionsService.update(param));
-//    }
-//
-//    @RequestMapping(value = "/introductions/delete", method = RequestMethod.POST)
-//    public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
-//        System.out.println("hihihihi");
-//        return new ResponseHandler<>(introductionsService.delete(param));
-//    }
+    @RequestMapping(value = "/manager/delete", method = RequestMethod.POST)
+    public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
+        System.out.println("hihihihi");
+        return new ResponseHandler<>(managerService.delete(param));
+    }
 }

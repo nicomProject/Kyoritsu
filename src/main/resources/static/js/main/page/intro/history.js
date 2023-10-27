@@ -1,92 +1,144 @@
-const Menu = {
-    menus: [],
-    subMenus: [],
-    load: function () {
-        const that = this;
-        AjaxUtil.request({
-            url: '/api/main/setting/menus',
-            async: false,
-            success: function (data) {
-                const items = data.result.items;
-                that.menus = items.filter(item => item.type === "group");
-                that.subMenus = items.filter(item => item.type !== "group")
-
-                that.draw();
-            },
-        });
-    },
-    draw: function () {
-        const that = this;
-        const container = $('#navbarSupportedContent .navbar-nav');
-        container.html('');
-
-        this.menus.forEach(menu => {
-            const menuGroup = that.createMenuGroup(menu);
-            container.append(menuGroup);
-
-            const subMenuContainer = menuGroup.find('.sub-menu');
-            const subMenuItems = that.subMenus.filter(subMenu => subMenu.menu.recKey === menu.recKey);
-
-            subMenuItems.forEach(subMenu => {
-                subMenuContainer.append(that.createSubMenuItem(subMenu));
-            });
-        });
-    },
-    createMenuGroup: function (menu) {
-        const that = this;
-        const subMenus = this.subMenus
-        let path = subMenus.url || '/';
-        let activated = location.pathname ===  subMenus.url ? 'active' : '';
-        if (menu.code === 'dashboard' && location.pathname === '/') {
-            path = '/';
-            activated = 'active';
-        }
-
-        return $(`<li class="nav-item">
-                    <a class="nav-link ${activated}" href="javascript:void(0)"
-                        data-bs-toggle="collapse" data-bs-target="#submenu-${menu.recKey}-1"
-                        aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation"> ${menu.name}
-                    </a>
-                    <ul class="sub-menu collapse" id="submenu-${menu.recKey}-1">
-                    </ul>
-                </li>`);
-    },
-    createSubMenuItem: function (subMenu) {
-        const path = subMenu.url || '/';
-        return $(`<li class="nav-item"><a href="${path}">${subMenu.name}</a></li>`);
-    },
-};
-
 $(function () {
     const Content = {
         load: function () {
-            Menu.load();
+            this.draw();
+        },
+        draw: function () {
+            const container = $('#history-section');
+            const editorContent = container.find('.editor-content');
+
+            let contentObj = [];
+
+            AjaxUtil.request({
+                url: '/api/introductions/find',
+                async: false,
+                success: function (data){
+                    contentObj = data.result.items;
+                }
+            })
+
+            if(contentObj != null){
+                contentObj.forEach(item => {
+                    const contentId = item.recKey;
+                    const contentData = item.content;
+
+                    const historyContentId = $('#history_contentId').val();
+
+                    if(contentId == historyContentId){
+                        editorContent.html(contentData)
+                    }
+                })
+            }
+
             this.event();
         },
         event: function () {
-            const $body = $('body');
-            const navbar = $('.navbar');
 
-            navbar.find('.navbar-close').on({
-                click: function (e) {
-                    $body.removeClass('g-sidenav-pinned');
-                }
-            });
-            navbar.find('.navbar-open').on({
-                click: function (e) {
-                    $body.addClass('g-sidenav-pinned');
-                }
+            var list_a = '.list-a';
+            var list_a_pc = '.pc_view .list-a';
+            var list_a_sp = '.sp_view .list-a';
+            var list_b = '.list-b';
+            var list_b_pc = '.pc_view .list-b';
+            var list_b_sp = '.sp_view .list-b';
+            var list_c = '.list-c';
+            var list_c_pc = '.pc_view .list-c';
+            var list_c_sp = '.sp_view .list-c';
+            var list_d = '.list-d';
+            var list_d_pc = '.pc_view .list-d';
+            var list_d_sp = '.sp_view .list-d';
+            $(function () {
+                $(list_a_pc).next().hide();
+                $(list_a_sp).next().hide();
+                $(list_a).on('click', function () {
+                    $(list_a).next().slideToggle(200);
+                    $(list_a).toggleClass('close', 200);
+                });
+                $('.pc_view ' + list_a).on('click', function () {
+                    $("html,body").animate({scrollTop:$('.pc_view .history-list-title.list-a').offset().top - 150});
+                })
+                $('.sp_view ' + list_a).on('click', function () {
+                    $("html,body").animate({scrollTop:$('.sp_view .history-list-title.list-a').offset().top - 70});
+                })
+                $(list_b_pc).next().hide();
+                $(list_b_sp).next().hide();
+                $(list_b).on('click', function () {
+                    $(list_b).next().slideToggle(200);
+                    $(list_b).toggleClass('close', 200);
+                });
+                $('.pc_view ' + list_b).on('click', function () {
+                    $("html,body").animate({scrollTop:$('.pc_view .history-list-title.list-b').offset().top - 150});
+                })
+                $('.sp_view ' + list_b).on('click', function () {
+                    $("html,body").animate({scrollTop:$('.sp_view .history-list-title.list-b').offset().top - 70});
+                })
+                $(list_c_pc).next().hide();
+                $(list_c_sp).next().hide();
+                $(list_c).on('click', function () {
+                    $(list_c).next().slideToggle(200);
+                    $(list_c).toggleClass('close', 200);
+                });
+                $('.pc_view ' + list_c).on('click', function () {
+                    $("html,body").animate({scrollTop:$('.pc_view .history-list-title.list-c').offset().top - 150});
+                })
+                $('.sp_view ' + list_c).on('click', function () {
+                    $("html,body").animate({scrollTop:$('.sp_view .history-list-title.list-c').offset().top - 70});
+                })
+                $(list_d_pc).next().hide();
+                $(list_d_sp).next().hide();
+                $(list_d).on('click', function () {
+                    $(list_d).next().slideToggle(200);
+                    $(list_d).toggleClass('close', 200);
+                });
+                $('.pc_view ' + list_d).on('click', function () {
+                    $("html,body").animate({scrollTop:$('.pc_view .history-list-title.list-d').offset().top - 150});
+                })
+                $('.sp_view ' + list_d).on('click', function () {
+                    $("html,body").animate({scrollTop:$('.sp_view .history-list-title.list-d').offset().top - 70});
+                })
+                /*
+                  $('.sp_view .history-list-container .history-item .center').on('click', function () {
+                    $(this).next().slideToggle(200);
+                    $(this).parent().toggleClass('open', 200);
+                  });
+                  $('.sp_view .history-list-container .history-item .close').on('click', function () {
+                    $(this).parent().slideToggle(200);
+                    $(this).parent().parent().toggleClass('open', 200);
+                  });
+                */
             });
 
-            navbar.find('.sidenav-button').on({
-                click: function (e) {
-                    const icon = $(this).find('i');
-                    icon.toggleClass('fa-compress');
-                    icon.toggleClass('fa-thumbtack');
-                    $body.toggleClass('g-sidenav-hidden');
+            $(function () {
+                $(window).scroll(function () {
+                    $('.effect-fade').each(function () {
+                        var elemPos = $(this).offset().top;
+                        var scroll = $(window).scrollTop();
+                        var windowHeight = $(window).height();
+                        if (scroll > elemPos - windowHeight) {
+                            $(this).addClass('effect-scroll');
+                        }
+                    });
+                });
+            });
+
+            window.onload = function () {
+                scroll_effect();
+
+                $(window).scroll(function () {
+                    scroll_effect();
+                });
+
+                function scroll_effect() {
+                    $('.effect-fade').each(function () {
+                        var elemPos = $(this).offset().top;
+                        var scroll = $(window).scrollTop();
+                        var windowHeight = $(window).height();
+                        if (scroll > elemPos - windowHeight) {
+                            $(this).addClass('effect-scroll');
+                        }
+                    });
                 }
-            })
+            };
+
         }
     }
 
