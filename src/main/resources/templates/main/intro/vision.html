@@ -18,6 +18,8 @@
     <th:block th:replace="~{components/_header::header_main}"></th:block>
     <!-- ========================= header end ========================= -->
 
+    <input type="hidden" id="vision_contentId" class="param contentId" name="key"/>
+
     <!-- Start Breadcrumbs -->
     <div class="breadcrumbs" data-stellar-background-ratio="0.5">
         <div class="container">
@@ -45,7 +47,7 @@
     <main>
         <section id="vision-section" class="vision section">
             <div class="editor-content container">
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-lg-8 offset-lg-2 col-12">
                         <div class="section-title">
                             <span class="wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Management Philosophy</span>
@@ -55,11 +57,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-12">
+                    <div class="col-lg-4 col-md-6 col-12">
                         <div class="team-card wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                             <div class="team-img">
                                 <div class="img-wrap">
-                                    <img src="assets/images/team/team1.jpg" alt="Images">
+                                    <img src="/static/images/main/vision1.PNG" alt="Images">
                                     <div class="img-text">
                                         01
                                     </div>
@@ -68,97 +70,66 @@
                                 </div>
                             </div>
                             <div class="content">
-                                <h3>John Doe</h3>
-                                <span>Founder - CEO</span>
-                                <p>Lorem ipsum dolor sit consectetur adipiscing elit lacinia pharetra purus.</p>
+                                <h3>
+                                    Be thankful and<br>
+                                    be appreciated
+                                </h3>
+                                <p>Work in a way to be able to always say “thank you”<br>
+                                    to customers and, at the same time, always have<br>
+                                    customers say “thank you” to you.<br>
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-12">
+                    <div class="col-lg-4 col-md-6 col-12">
                         <div class="team-card wow fadeInUp" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                             <div class="team-img">
-                                <img src="assets/images/team/team2.jpg" alt="Images">
+                                <div class="img-wrap">
+                                    <img src="/static/images/main/vision2.PNG" alt="Images">
+                                    <div class="img-text">
+                                        02
+                                    </div>
+                                </div>
                                 <div class="team-social-icon">
-                                    <ul class="social-link">
-                                        <li>
-                                            <a href="#"><i class="lni lni-facebook-filled"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="lni lni-twitter-original"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="lni lni-instagram-original"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="lni lni-linkedin-original"></i></a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="content">
-                                <h3>John Doe</h3>
-                                <span>Founder - CEO</span>
-                                <p>Lorem ipsum dolor sit consectetur adipiscing elit lacinia pharetra purus.</p>
+                                <h3>
+                                    Be thankful and<br>
+                                    be appreciated
+                                </h3>
+                                <p>Work in a way to be able to always say “thank you”<br>
+                                    to customers and, at the same time, always have<br>
+                                    customers say “thank you” to you.<br>
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-12">
+                    <div class="col-lg-4 col-md-6 col-12">
                         <div class="team-card wow fadeInUp" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
                             <div class="team-img">
-                                <img src="assets/images/team/team3.jpg" alt="Images">
+                                <div class="img-wrap">
+                                    <img src="/static/images/main/vision3.PNG" alt="Images">
+                                    <div class="img-text">
+                                        03
+                                    </div>
+                                </div>
                                 <div class="team-social-icon">
-                                    <ul class="social-link">
-                                        <li>
-                                            <a href="#"><i class="lni lni-facebook-filled"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="lni lni-twitter-original"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="lni lni-instagram-original"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="lni lni-linkedin-original"></i></a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="content">
-                                <h3>John Doe</h3>
-                                <span>Founder - CEO</span>
-                                <p>Lorem ipsum dolor sit consectetur adipiscing elit lacinia pharetra purus.</p>
+                                <h3>
+                                    Be thankful and<br>
+                                    be appreciated
+                                </h3>
+                                <p>Work in a way to be able to always say “thank you”<br>
+                                    to customers and, at the same time, always have<br>
+                                    customers say “thank you” to you.<br>
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <div class="team-card wow fadeInUp" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
-                            <div class="team-img">
-                                <img src="assets/images/team/team3.jpg" alt="Images">
-                                <div class="team-social-icon">
-                                    <ul class="social-link">
-                                        <li>
-                                            <a href="#"><i class="lni lni-facebook-filled"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="lni lni-twitter-original"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="lni lni-instagram-original"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="lni lni-linkedin-original"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <h3>John Doe</h3>
-                                <span>Founder - CEO</span>
-                                <p>Lorem ipsum dolor sit consectetur adipiscing elit lacinia pharetra purus.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>-->
             </div>
         </section>
     </main>

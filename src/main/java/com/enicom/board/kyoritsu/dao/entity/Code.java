@@ -43,6 +43,9 @@ public class Code {
     @Column(name = "use_yn")
     private Integer use_yn;
 
+    @Column(name = "desc", length = 100)
+    private String desc;
+
     @Column(name = "description", length = 3000)
     private String description;
 
