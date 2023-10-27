@@ -9,6 +9,7 @@ import com.enicom.board.kyoritsu.login.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -17,6 +18,7 @@ public class MainSettingServiceImpl implements MainSettingService {
     private final SecurityUtil securityUtil;
     private final MainMenuRepository menuRepository;
 
+    @Transactional
     @Override
     public PageVO<MainMenu> getMenuList() {
         List<Role> roles = securityUtil.getRoleList();
