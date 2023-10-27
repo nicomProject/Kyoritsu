@@ -1,7 +1,6 @@
 package com.enicom.board.kyoritsu.api.controller;
 
 import com.enicom.board.kyoritsu.api.annotation.ApiMapping;
-import com.enicom.board.kyoritsu.api.param.IntroductionsParam;
 import com.enicom.board.kyoritsu.api.param.manager.ManagerInfoParam;
 import com.enicom.board.kyoritsu.api.param.manager.ManagerPasswordParam;
 import com.enicom.board.kyoritsu.api.param.type.MultipleParam;
@@ -59,14 +58,13 @@ public class ManagerController {
         return new ResponseHandler<>(managerService.changePassword(param));
     }
 
-//    @RequestMapping(path = "/introductions/find", method = {RequestMethod.GET, RequestMethod.POST})
+    //    @RequestMapping(path = "/introductions/find", method = {RequestMethod.GET, RequestMethod.POST})
 //    public ResponseHandler<?> find() {
 //        return new ResponseHandler<>(introductionsService.findAll());
 //    }
 //
     @RequestMapping(path = "/manager/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseHandler<?> findSelf(@RequestBody @Valid ManagerInfoParam param){
-        System.out.println("asdasdasfasfasfsaf");
+    public ResponseHandler<?> findSelf(@RequestBody @Valid ManagerInfoParam param) {
         return new ResponseHandler<>(managerService.findAll(param));
     }
 
@@ -74,10 +72,9 @@ public class ManagerController {
     public ResponseHandler<?> update(@RequestBody @Valid ManagerInfoParam param) throws Exception {
         return new ResponseHandler<>(managerService.modify(param));
     }
-//
+
     @RequestMapping(value = "/manager/delete", method = RequestMethod.POST)
     public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
-        System.out.println("hihihihi");
         return new ResponseHandler<>(managerService.delete(param));
     }
 }

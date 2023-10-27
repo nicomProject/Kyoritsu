@@ -28,14 +28,12 @@ public class ImageController {
     // 업로드", param = RoomInfoParam.class)
     public ResponseHandler<?> uploadRoomImage(Model model, MultipartHttpServletRequest request, @RequestPart String name, @RequestPart MultipartFile file) {
         model.addAttribute("path", request);
-        System.out.println("업로드");
         return new ResponseHandler<>(imageService.upload(request, name, file));
     }
 
     @RequestMapping(path = "/image", method = {RequestMethod.GET})
     // @ApiMapping(order = 25, desc = "[자료실] 이미지 다운로드", param = RoomInfoParam.class)
     public void downloadRoomImage(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "name") String name) {
-        System.out.println("다운로드");
         imageService.download(request, response, name);
     }
 }

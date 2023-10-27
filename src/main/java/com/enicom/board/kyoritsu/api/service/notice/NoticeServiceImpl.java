@@ -33,16 +33,12 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public ResponseDataValue<?> add(NoticeParam param) {
-
         MemberDetail member = securityUtil.getCurrentUser();
         System.out.println("1111111" + param);
 
         Notice notice = param.create();
-        System.out.println("222222" + notice);
         notice.setCreateDate(LocalDateTime.now());
-        System.out.println("333333333" + notice);
         notice.setCreateUser(member.getId());
-        System.out.println("4444444" + notice);
         noticeRepository.save(notice);
 
         return ResponseDataValue.builder(200).build();

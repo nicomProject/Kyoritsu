@@ -25,11 +25,8 @@ public class IntroductionRepositoryCustomImpl implements IntroductionRepositoryC
 
     @Override
     public Long deleteListContent(MultipleParam param) {
-        System.out.println("deleteListContentvv");
         QContent qContent = QContent.content1;
         MemberDetail member = securityUtil.getCurrentUser();
-        // select
-        // List<Content> contents = factory.select(qContent).from(qContent).fetch();
 
         return factory.update(qContent)
                 .set(qContent.deleteDate, LocalDateTime.now())

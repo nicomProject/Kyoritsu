@@ -18,12 +18,8 @@ public class NoticeRepositoryCustomImpl implements NoticeRepositoryCustom {
 
     @Override
     public Long deleteListContent(MultipleParam param) {
-        System.out.println("paramvalue" + param);
-        System.out.println("deleteListContent123123");
         QNotice qNotice = QNotice.notice;
         MemberDetail member = securityUtil.getCurrentUser();
-        // select
-        // List<Content> contents = factory.select(qContent).from(qContent).fetch();
 
         return factory.update(qNotice)
                 .set(qNotice.deleteDate, LocalDateTime.now())
@@ -33,7 +29,6 @@ public class NoticeRepositoryCustomImpl implements NoticeRepositoryCustom {
 
     @Override
     public Long deleteALLContent() {
-        System.out.println("deleteALLContent");
         QNotice qNotice = QNotice.notice;
         MemberDetail member = securityUtil.getCurrentUser();
 

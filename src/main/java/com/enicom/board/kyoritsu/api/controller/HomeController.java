@@ -46,7 +46,6 @@ public class HomeController {
 
     @GetMapping(path = { "/admin"})
     public String admin(Model model) throws Exception {
-        System.out.println("33333333333333333333333333");
         return login(model);
     }
 
@@ -81,7 +80,6 @@ public class HomeController {
 
         else {
             securityUtil.getMenu(page).ifPresent(menu -> {
-                System.out.println(menu.getName());
                 model.addAttribute("menu_group", menu.getGroup().getName());
                 model.addAttribute("menu_name", menu.getName());
             });
@@ -118,7 +116,6 @@ public class HomeController {
         }
         else {
             securityUtil.getDetailMenu(page).ifPresent(menu -> {
-                System.out.println(menu.getName());
                 model.addAttribute("menu_group", menu.getGroup().getName());
                 model.addAttribute("menu_detail_name", menu.getName());
             });

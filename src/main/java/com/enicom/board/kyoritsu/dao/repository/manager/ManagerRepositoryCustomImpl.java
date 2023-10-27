@@ -18,12 +18,8 @@ public class ManagerRepositoryCustomImpl implements ManagerRepositoryCustom {
 
     @Override
     public Long deleteListContent(MultipleParam param) {
-        System.out.println("paramvalue" + param);
-        System.out.println("deleteListContent123123");
         QJob qJob = QJob.job;
         MemberDetail member = securityUtil.getCurrentUser();
-        // select
-        // List<Content> contents = factory.select(qContent).from(qContent).fetch();
 
         return factory.update(qJob)
                 .set(qJob.deleteDate, LocalDateTime.now())
@@ -33,7 +29,6 @@ public class ManagerRepositoryCustomImpl implements ManagerRepositoryCustom {
 
     @Override
     public Long deleteALLContent() {
-        System.out.println("deleteALLContent");
         QJob qJob = QJob.job;
         MemberDetail member = securityUtil.getCurrentUser();
 
