@@ -123,7 +123,8 @@ $(function () {
                                     role: manager_role,
                                     enable: manager_enable,
                                 },
-                                successMessage: '관리자가 성공적으로 추가되었습니다!'
+                                successMessage: '관리자가 성공적으로 추가되었습니다!',
+                                failMessage: '중복된 ID가 존재합니다.'
                             })
                         }else if(paramValue !== ""){
 
@@ -140,11 +141,11 @@ $(function () {
                                     console.log(data)
                                     if (data.code == 200) {
                                         Swal.fire({
-
                                             icon: 'success',
                                             html: "소개글 등록이 완료되었습니다.",
                                         })
                                     } else {
+
                                         Swal.fire({
                                             icon: 'error',
                                             html: "소개글 등록이 실패하였습니다.",
@@ -189,10 +190,8 @@ $(function () {
                                 type: 'one',
                                 key: paramValue
                             },
-                            success: function (data) {
-                                if (data.code == 200) {
-                                }
-                            }
+                            successMessage: '관리자가 삭제되었습니다!',
+                            failMessage: '관리자 삭제가 실패하였습니다.'
                         })
                     }
 

@@ -152,7 +152,7 @@ $(function () {
                                     contents: contentsValue,
                                     category: categoryValue,
                                     sub_category: sub_categoryValue,
-                                    key: paramValue
+                                    key: paramKey
                                 },
                                 success: function (data) {
                                     console.log(data)
