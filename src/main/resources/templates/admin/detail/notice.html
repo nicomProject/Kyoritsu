@@ -13,14 +13,14 @@
                 <h4 class="card-title">공지사항 수정</h4>
                 <p class="card-category ellipsis">
                     <i class="fas fa-arrow-right"></i>
-                    <span class="icon-title"></span>
+                    <span class="icon-title">수정할 공지사항을 작성해주세요.</span>
                 </p>
             </div>
             <div class="card-header card-header-primary" th:if="${key == null}">
                 <h4 class="card-title">공지사항 추가</h4>
                 <p class="card-category ellipsis">
                     <i class="fas fa-arrow-right"></i>
-                    <span class="icon-title"></span>
+                    <span class="icon-title">등록할 공지사항을 작성해주세요.</span>
                 </p>
             </div>
             <div class="card-body">
@@ -72,19 +72,19 @@
                             <select id="category" name="category" class="form-select">
                                 <option value="news">뉴스</option>
                             </select>
-                        <td><label for="views">조회수</label></td>
-                        <td colspan="3"><input type="text" id="views" name="title"></td>
+                        <td><label for="hit">조회수</label></td>
+                        <td colspan="3"><input type="text" id="hit" name="title" class="form-control"></td>
                         </td>
                     </tr>
                     <tr class="pageSub">
                         <td><label for="title">제목</label></td>
-                        <td colspan="3"><input type="text" id="title" name="title"></td>
+                        <td colspan="3"><input type="text" id="title" name="title" class="form-control"></td>
                     </tr>
                     <tr class="pageSub">
                         <td><label for="create_user">작성자</label></td>
-                        <td><input type="text" id="create_user" name="sub_title"></td>
+                        <td><input type="text" id="create_user" name="sub_title" class="form-control"></td>
                         <td><label for="create_data">작성일</label></td>
-                        <td><input type="text" id="create_data" name="sub_title"></td>
+                        <td><input type="text" id="create_data" name="sub_title" class="form-control"></td>
                     </tr>
                     <tr class="pageSub">
                         <td><label for="contents">본문</label></td>

@@ -127,14 +127,13 @@ $(function () {
                         headerSort: false
                     },
                     {title: '카테고리', field: "category", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
-                            values: ["company"],
+                            values: ["news"],
                         }
                     },
                     {title: '제목', field: "title", tooltip: true, headerTooltip: true, headerFilter: 'input'},
-                    {title: '조회수', field: "subtitle", tooltip: true, headerTooltip: true},
+                    {title: '조회수', field: "hit", tooltip: true, headerTooltip: true},
                     {title: '작성자', field: "createUser", tooltip: true, headerTooltip: true},
                     {title: '작성일', field: "createDate", tooltip: true, headerTooltip: true},
-                    {title: '관리', field: "subtitle", tooltip: true, headerTooltip: true},
 
 
                 ],

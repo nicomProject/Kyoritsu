@@ -107,7 +107,7 @@ public class DataInitRunner implements ApplicationRunner {
             menuList.add(Menu.builder(MenuPageType.ACCESS).group(system).orderSeq(6).icon("fas fa-sign-in-alt").build());
         }
         if (!menuStoredList.containsKey(MenuPageType.ACCOUNTS)) {
-            menuList.add(Menu.builder(MenuPageType.ACCOUNTS).group(system).orderSeq(7).icon("fas fa-users-cog").build());
+            menuList.add(Menu.builder(MenuPageType.ACCOUNTS).group(system).orderSeq(7).icon("fas fa-users-cog").codeDetail("ACCOUNT").build());
         }
 
         log.info("메뉴 {}건 추가됨", menuList.size());

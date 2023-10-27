@@ -570,7 +570,6 @@ body.g-sidenav-hidden:not(.g-sidenav-pinned) .sidenav:not(:hover) .nav-link-text
 }
 .card-body {
     overflow: hidden;
-    margin-right: 50px;
 }
 *[role="action"][data-action="refresh"] {
     font-size: 1.2rem;
@@ -1422,6 +1421,10 @@ input[type=checkbox]:checked {
     height: 40px;
 }
 
+.pageSub [id]:focus {
+    /*outline:1px solid red;*/
+}
+
 .pageSub #category  {
     text-align: center;
     width: 100%;
@@ -1549,4 +1552,8 @@ input[type=checkbox]:checked {
 
 .table #contents {
     margin-left: 10px;
+}
+
+.card .card-body:has(> table){
+    padding-right: 50px;
 }

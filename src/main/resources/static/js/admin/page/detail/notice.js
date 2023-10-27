@@ -32,16 +32,13 @@ $(function () {
                         $(".pageSub #contents").val(data.result.items[0].content);
                         $(".pageSub #create_user").val(data.result.items[0].createUser);
                         $(".pageSub #create_data").val(data.result.items[0].createDate);
+                        $(".pageSub #hit").val(data.result.items[0].hit)
 
                         if (data.code == 200) {
-                            Swal.fire({
-                                icon: 'success',
-                                html: "소개글 조회하였습니다.",
-                            })
                         } else {
                             Swal.fire({
                                 icon: 'error',
-                                html: "소개글 조회가 실패하였습니다.",
+                                html: "공지사항 조회가 실패하였습니다.",
                             })
                         }
                     }
@@ -68,13 +65,13 @@ $(function () {
                         success: function (data) {
                             console.log(data)
                             if (data.code == 200) {
-                                Alert.success({text: '소개글 등록이 완료되었습니다.'}, function(){
+                                Alert.success({text: '공지사항 등록이 완료되었습니다.'}, function(){
                                     location.href = '/admin/introductions'
                                 })
                             } else {
                                 Swal.fire({
                                     icon: 'error',
-                                    html: "소개글 등록이 실패하였습니다.",
+                                    html: "공지사항 등록이 실패하였습니다.",
                                 })
                             }
                         }
@@ -96,12 +93,12 @@ $(function () {
                                 Swal.fire({
 
                                     icon: 'success',
-                                    html: "소개글 등록이 완료되었습니다.",
+                                    html: "공지사항 수정이 완료되었습니다.",
                                 })
                             } else {
                                 Swal.fire({
                                     icon: 'error',
-                                    html: "소개글 등록이 실패하였습니다.",
+                                    html: "공지사항 수정이 실패하였습니다.",
                                 })
                             }
                         }

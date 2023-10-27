@@ -9,11 +9,8 @@ $(function () {
         },
 
         event: function () {
-
             const paramValue = this.params.key
-            console.log(paramValue)
             if(paramValue !== ""){
-                console.log("통과값")
                 AjaxUtil.requestBody({
                     url: '/api/manager/findSelf',
                     data: {
@@ -30,7 +27,7 @@ $(function () {
                         } else {
                             Swal.fire({
                                 icon: 'error',
-                                html: "소개글 조회가 실패하였습니다.",
+                                html: "관리자 계정 조회가 실패하였습니다.",
                             })
                         }
                     }
@@ -194,7 +191,6 @@ $(function () {
                                 key: paramValue
                             },
                             success: function (data) {
-                                console.log(data)
                                 if (data.code == 200) {
                                 }
                             }
