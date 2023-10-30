@@ -19,7 +19,7 @@ $(function () {
                 locale: 'ko-kr',
                 langs: TableUtil.setDefaults(),
                 layout: 'fitColumns',
-                placeholder: TableUtil.getPlaceholder('공지사항이 없습니다.'),
+                placeholder: TableUtil.getPlaceholder('채용문의가 없습니다.'),
                 pagination: false,
                 paginationSize: paginationConfig.size,
                 paginationSizeSelector: paginationConfig.selector,
@@ -51,12 +51,6 @@ $(function () {
                         headerSort: false
                     },
                     {
-                        title: '카테고리', field: "category", tooltip: true, headerTooltip: true,
-                        headerFilterParams: {
-                            values: ["company"],
-                        }, headerSort: false, hozAlign: "center", headerHozAlign: "center",
-                    },
-                    {
                         title: '제목',
                         field: "title",
                         tooltip: true,
@@ -68,15 +62,6 @@ $(function () {
                     {
                         title: '작성자',
                         field: "createUser",
-                        tooltip: true,
-                        headerTooltip: true,
-                        headerSort: false,
-                        hozAlign: "center",
-                        headerHozAlign: "center",
-                    },
-                    {
-                        title: '조회수',
-                        field: "hit",
                         tooltip: true,
                         headerTooltip: true,
                         headerSort: false,
