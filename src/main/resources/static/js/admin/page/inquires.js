@@ -23,7 +23,7 @@ $(function () {
                         return;
                     } else if(range === 'list' && selected.length > 0){
                         AjaxUtil.requestBody({
-                            url: '/api/notice/delete',
+                            url: '/api/inquiry/delete',
                             data: {
                                 type: 'list',
                                 idListLong: selected
@@ -34,7 +34,7 @@ $(function () {
                         })
                     }else{
                         AjaxUtil.requestBody({
-                            url: '/api/introductions/delete',
+                            url: '/api/inquiry/delete',
                             data: {
                                 type: 'specific',
                             },
@@ -54,6 +54,8 @@ $(function () {
                     }
                     // 다운로드
                     else if (range === 'download') {
+                        console.log("??????")
+                        console.log(table.getData())
                         TableUtil.download(table, 'excel', '채용문의 관리 목록');
                     }
                 }
@@ -129,7 +131,7 @@ $(function () {
             const events = {
 
                 rowClick: function (e, row) {
-                    window.location.href = '/admin/notice/detail/' + row.getData().recKey;
+                    window.location.href = '/admin/inquiry/detail/' + row.getData().recKey;
 
                 },
                 downloadComplete: function () {
@@ -151,6 +153,6 @@ $(function () {
     };
 
     Content.load({
-        url: "/api/notice/find"
+        url: "/api/inquiry/find"
     });
 })

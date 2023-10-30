@@ -49,6 +49,9 @@ public class Inquiry {
     @Column(name = "answer_user", length = 50)
     private String answerUser;
 
+    @Column(name = "delete_user", length = 50)
+    private String deleteUser;
+
     @Column(name = "create_date")
     @Builder.Default
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -61,4 +64,10 @@ public class Inquiry {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime answerDate;
+
+    @Column(name = "delete_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime deleteDate;
 }

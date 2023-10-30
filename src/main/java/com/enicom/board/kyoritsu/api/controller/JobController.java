@@ -43,7 +43,6 @@ public class JobController {
 
     @RequestMapping(value = "/job/delete", method = RequestMethod.POST)
     public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
-        System.out.println("hihihihi");
         return new ResponseHandler<>(jobService.delete(param));
     }
 
