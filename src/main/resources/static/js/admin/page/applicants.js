@@ -7,9 +7,13 @@ $(function () {
             this.event();
         },
         event: function () {
+            if(this.params.key !== ""){
+            let urlDetail = '/api/applicant/findSelf/' + this.params.key
+                console.log(urlDetail)
+            Content.params.urlDetail = urlDetail;
+            }
             const table = Table.load('#table');
             const tableDetail = TableDetail.load('#tableDetail');
-
         }
     };
 
@@ -80,11 +84,10 @@ $(function () {
             });
 
             const events = {
-
                 rowClick: function (e, row) {
-                    window.location.href = '/admin/notice/detail/' + row.getData().recKey;
-
+                    window.location.href = '/admin/applicants/' + row.getData().recKey;
                 },
+
                 downloadComplete: function () {
                     Swal.close();
                 },
@@ -111,6 +114,8 @@ $(function () {
         draw: function (target) {
             const that = this;
 
+            console.log(Content.params);
+
             const roleHash = Data.roleHash || {};
             const tableDetail = new Tabulator(target, {
                 locale: 'ko-kr',
@@ -121,7 +126,7 @@ $(function () {
                 paginationSize: paginationConfig.size,
                 paginationSizeSelector: paginationConfig.selector,
                 ajaxLoaderLoading: TableUtil.getLoaderLoading(),
-                ajaxURL: Content.params.url,
+                ajaxURL: Content.params.urlDetail,
                 ajaxConfig: ajaxConfig,
                 dataReceiveParams: {
                     "last_page": "lastPage",
@@ -184,15 +189,16 @@ $(function () {
             };
 
             Object.entries(events).forEach(([event, callback]) => {
-                table.on(event, callback);
+                tableDetail.on(event, callback);
             });
 
-            this.table = table;
-            return table;
+            this.table = tableDetail;
+            return tableDetail;
         },
     };
 
     Content.load({
-        url: "/api/notice/find"
+        key: $('.param[name="key"]').val() || '',
+        url: "/api/job/find",
     });
 })

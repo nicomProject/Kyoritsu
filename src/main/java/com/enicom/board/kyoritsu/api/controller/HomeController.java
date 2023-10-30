@@ -103,6 +103,23 @@ public class HomeController {
         return String.format("admin/%s", view);
     }
 
+    @GetMapping("/admin/{page}/{key}")
+    public String admin(Model model, HttpServletResponse response, @PathVariable String page, @PathVariable long key) throws IOException {
+        System.out.println("ㅇㅇㅇ?");
+        MemberDetail member = getCurrentUser(model);
+        if (member == null || page.equalsIgnoreCase("login")) {
+            response.sendRedirect("/admin");
+        }
+        else {
+            securityUtil.getMenu(page).ifPresent(menu -> {
+                model.addAttribute("menu_group", menu.getGroup().getName());
+                model.addAttribute("menu_name", menu.getName());
+            });
+        }
+        model.addAttribute("key", key);
+        return String.format("admin/%s", page);
+    }
+
     @GetMapping("/admin/{page}/detail")
     public String adminDetail(Model model, HttpServletResponse response, @PathVariable String page) throws IOException {
         MemberDetail member = getCurrentUser(model);

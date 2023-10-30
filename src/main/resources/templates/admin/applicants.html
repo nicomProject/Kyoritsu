@@ -4,6 +4,9 @@
 <th:block th:replace="~{components/_side::side_manager}"></th:block>
 <main class="main-content position-relative h-100 border-radius-lg">
     <th:block th:replace="~{components/_header::header_manager}"></th:block>
+
+    <input type="hidden" class="param" name="key" th:value="${key}"/>
+
     <div class="container-fluid page-container">
         <div class="card">
             <div class="card-header card-header-primary">
