@@ -1,5 +1,6 @@
 package com.enicom.board.kyoritsu.dao.repository.inquiry;
 
+import com.enicom.board.kyoritsu.dao.entity.Content;
 import com.enicom.board.kyoritsu.dao.entity.Inquiry;
 import org.springframework.data.repository.CrudRepository;
 
@@ -11,5 +12,7 @@ public interface InquiryRepository extends CrudRepository<Inquiry, Long>, Inquir
     Optional<Inquiry> findByRecKey(Long recKey);
 
     List<Inquiry> findAllByRecKey(Long recKey);
+
+    List<Inquiry> findAllByDeleteDateNull();
 
 }
