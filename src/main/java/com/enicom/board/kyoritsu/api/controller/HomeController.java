@@ -47,6 +47,11 @@ public class HomeController {
         return String.format("main/detail/%s", page);
     }
 
+    @GetMapping("/recruit/inquire/{action}")
+    public String recruitAction(@PathVariable String category, @PathVariable String page, @PathVariable String action) throws IOException {
+        return String.format("main/recruit/inquire/%s", action);
+    }
+
     @GetMapping(path = { "/admin"})
     public String admin(Model model) throws Exception {
         return login(model);
