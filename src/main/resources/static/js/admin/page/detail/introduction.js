@@ -98,8 +98,6 @@ $(function () {
                     }
                 }
                 return true;
-
-
             }
 
 
@@ -181,7 +179,6 @@ $(function () {
                                 id: paramKey
                             },
                             success: function (data) {
-                                console.log(data)
                                 if(data.code === 200){
                                     Alert.success({text: data.desc}, function (){
                                         location.href = '/admin/introductions'

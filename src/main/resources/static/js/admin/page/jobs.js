@@ -17,14 +17,10 @@ $(function () {
                 const selected = table.getSelectedData().map(e => e.recKey);
 
                 if(action === 'add'){
-                    console.log("add")
                     window.location.href = '/admin/job/detail'
                 }
-
                 else if (action === 'del') {
-                    console.log("????")
                     if(selected.length === 0){
-                        console.log("????")
                         Alert.warning({text: '채용공고를 먼저 선택해주세요!'});
                         return;
                     } else if(range === 'list' && selected.length > 0){
@@ -50,7 +46,6 @@ $(function () {
                         })
 
                     }
-                    console.log("삭제");
                     // ... (기존의 삭제 로직을 이곳에 삽입)
                 }
                 else if (action === 'file') {
@@ -61,6 +56,13 @@ $(function () {
                     }
                     // 다운로드
                     else if (range === 'download') {
+                        const tableData = table.getData();
+                        tableData.forEach(item => {
+                            const fromDate = item.fromDate || 0;
+                            const toDate = item.toDate || 0;
+                            item["fromDate + toDate"] = fromDate + "~" +toDate;
+                        });
+                        table.setData(tableData);
                         TableUtil.download(table, 'excel', '채용공고 목록');
                     }
                 }
@@ -75,8 +77,8 @@ $(function () {
         },
         draw: function (target) {
             const that = this;
-
             const roleHash = Data.roleHash || {};
+
             const table = new Tabulator(target, {
                 locale: 'ko-kr',
                 langs: TableUtil.setDefaults(),
@@ -127,15 +129,27 @@ $(function () {
                         headerSort: false
                     },
                     {title: '구분', field: "category", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
-                            values: ["company"],
+                            values: ["job"],
                         }
                     },
                     {title: '제목', field: "title", tooltip: true, headerTooltip: true, headerFilter: 'input'},
-                    {title: '기간', field: "subtitle", tooltip: true, headerTooltip: true},
-                    {title: '등록일시', field: "createUser", tooltip: true, headerTooltip: true},
-                    {title: '공고기간', field: "createDate", tooltip: true, headerTooltip: true},
-                    {title: '지원자현황', field: "subtitle", tooltip: true, headerTooltip: true},
+                    {title: '기간', field: "title", tooltip: true, headerTooltip: true},
 
+                   {title: '등록일시', field: 'createDate', tooltip: true, headerTooltip: true, customDisplay: true},
+                    {
+                        title: '공고기간',
+                        field: "fromDate + toDate",
+                        tooltip: true,
+                        headerTooltip: true,
+                        formatter: function(cell, formatterParams, onRendered) {
+                            const data = cell.getData();
+                            const fromDate = data.fromDate || 0; // fromDate가 없으면 0으로 가정
+                            const toDate = data.toDate || 0;     // toDate가 없으면 0으로 가정
+                            const result = fromDate + "~" + toDate;
+                            return result;
+                        }
+                    },
+                    {title: '지원자현황', field: "fromDate", tooltip: true, headerTooltip: true},
 
                 ],
             });

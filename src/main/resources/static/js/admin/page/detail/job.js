@@ -9,6 +9,7 @@ $(function () {
         },
         event: function () {
             formData = {'title' : '제목', 'Datefrom' : '시작일', 'Dateto' : '종료일', 'contents' : '본문'};
+            formDataKey = {'title' : '제목', 'contents' : '본문'};
             const paramValue = this.params.key
 
             var oEditors = [];
@@ -19,6 +20,22 @@ $(function () {
                 fCreator: "createSEditor2"
             })
 
+            function validateField(formData) {
+                console.log(formData)
+                for (const field in formData) {
+                    console.log("222")
+                    const value = document.getElementById(field).value;
+                    console.log(value)
+                    if(!value){
+                        console.log("4444")
+                        Alert.warning({text: `${formData[field]}은 필수 입력 항목입니다.`})
+                        console.log("5555")
+                        return false
+                    }
+                }
+                return true;
+            }
+
             if(paramValue !== ""){
                 AjaxUtil.requestBody({
                     url: '/api/job/findSelf',
@@ -26,7 +43,6 @@ $(function () {
                         key: paramValue,
                     },
                     success: function (data) {
-                        console.log(data)
                         $(".pageSub #category").val(data.result.items[0].category);
                         $(".pageSub #title").val(data.result.items[0].title);
                         $(".pageSub #contents").val(data.result.items[0].content);
@@ -36,14 +52,10 @@ $(function () {
                         $(".pageSub #notice_period").val(data.result.items[0].fromDate + "~" + data.result.items[0].toDate);
 
                         if (data.code == 200) {
-                            Swal.fire({
-                                icon: 'success',
-                                html: "소개글 조회하였습니다.",
-                            })
                         } else {
                             Swal.fire({
                                 icon: 'error',
-                                html: "소개글 조회가 실패하였습니다.",
+                                html: "채용공고 조회가 실패하였습니다.",
                             })
                         }
                     }
@@ -61,7 +73,7 @@ $(function () {
                 var Dateto = $("#Dateto").val();
                 var Datefrom = $("#Datefrom").val();
 
-                if(action === 'add'){
+                if(action === 'add' && validateField(formData)){
                     AjaxUtil.requestBody({
                         url: '/api/job/add',
                         data: {
@@ -72,22 +84,20 @@ $(function () {
                             date_to: Dateto
                         },
                         success: function (data) {
-                            console.log(data)
-                            if (data.code == 200) {
-                                Alert.success({text: '소개글 등록이 완료되었습니다.'}, function(){
-                                    location.href = '/admin/introductions'
+                            if(data.code === 200){
+                                Alert.success({text: data.desc}, function (){
+                                    location.href = '/admin/jobs'
                                 })
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    html: "소개글 등록이 실패하였습니다.",
-                                })
+                            }else if(data.code === 210){
+                                Alert.warning({text: data.desc})
+                            }
+                            else{
+                                Alert.error({text: data.desc});
                             }
                         }
                     })
                 }
-                else if(action === "update"){
-
+                else if(action === "update" && validateField(formDataKey)){
                     AjaxUtil.requestBody({
                         url: '/api/job/update',
                         data: {
@@ -97,18 +107,15 @@ $(function () {
                             key: paramValue
                         },
                         success: function (data) {
-                            console.log(data)
-                            if (data.code == 200) {
-                                Swal.fire({
-
-                                    icon: 'success',
-                                    html: "소개글 등록이 완료되었습니다.",
+                            if(data.code === 200){
+                                Alert.success({text: data.desc}, function (){
+                                    location.href = '/admin/jobs'
                                 })
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    html: "소개글 등록이 실패하였습니다.",
-                                })
+                            }else if(data.code === 210){
+                                Alert.warning({text: data.desc})
+                            }
+                            else{
+                                Alert.error({text: data.desc});
                             }
                         }
                     })
@@ -124,8 +131,13 @@ $(function () {
                             id: paramValue
                         },
                         success: function (data) {
-                            console.log(data)
-                            if (data.code == 200) {
+                            if(data.code === 200){
+                                Alert.success({text: data.desc}, function (){
+                                    location.href = '/admin/jobs'
+                                })
+                            }
+                            else{
+                                Alert.error({text: data.desc});
                             }
                         }
                     })
