@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Service
-public abstract class InquiryServiceImpl implements InquiryService {
+public class InquiryServiceImpl implements InquiryService {
     private final SecurityUtil securityUtil;
     private final InquiryRepository inquiryRepository;
 
@@ -45,35 +45,10 @@ public abstract class InquiryServiceImpl implements InquiryService {
         return ResponseDataValue.builder(200).build();
     }
 
-    @Override
-    public PageVO<Inquiry> findAll() {
-        return PageVO.builder(inquiryRepository.findAllByDeleteDateNull()).build();
-    }
 
     @Override
     public PageVO<Inquiry> findAll(InquiryParam param) {
         return PageVO.builder(inquiryRepository.findAllByRecKey(Long.valueOf(param.getKey()))).build();
-    }
-
-    @Transactional
-    @Override
-    public ResponseDataValue<?> delete(MultipleParam param) {
-        MemberDetail member = securityUtil.getCurrentUser();
-        MultipleType type = param.getType();
-        LocalDateTime deleteTime = LocalDateTime.now();
-
-        if (type.equals(MultipleType.ONE)) {
-            Optional<Inquiry> inquiryOptional = inquiryRepository.findByRecKey(Long.valueOf(param.getId()));
-            if (inquiryOptional.isPresent()) {
-                Inquiry inquiry = inquiryOptional.get();
-            }
-        }
-        else if (type.equals(MultipleType.LIST)) {
-        }
-        else if(type.equals(MultipleType.SPECIFIC)){
-        }
-
-        return ResponseDataValue.builder(200).build();
     }
 
     @Override

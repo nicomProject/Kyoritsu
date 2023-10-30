@@ -11,11 +11,7 @@ public interface InquiryService {
 
     ResponseDataValue<?> add(InquiryParam param);
 
-    PageVO<Inquiry> findAll();
-
     PageVO<Inquiry> findAll(InquiryParam param);
-
-    ResponseDataValue<?> delete(MultipleParam param);
 
     ResponseDataValue<?> update(InquiryParam param);
 }
