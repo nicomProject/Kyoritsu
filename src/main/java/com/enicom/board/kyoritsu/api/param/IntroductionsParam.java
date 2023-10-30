@@ -15,14 +15,11 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class IntroductionsParam {
 
-    @NotBlank
     private String title;
-    @NotBlank
     private String contents;
     private String category;
     private String sub_category;
     private String key;
-    @NotBlank
     private String sub_title;
 
     @JsonIgnore

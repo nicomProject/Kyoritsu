@@ -1352,3 +1352,4 @@ const IconUtil = {
     success: '<i class="status-1 status-title fas fa-circle"></i>',
     fail: '<i class="status-0 status-title fas fa-circle"></i>'
 }
+
