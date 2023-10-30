@@ -1,15 +1,15 @@
 $(function () {
     const Content = {
         params: {},
+        formData: {},
         load: function (params) {
             this.params = params;
             console.log(this.params)
             this.event();
         },
         event: function () {
-
+            formData = {'title' : '제목', 'Datefrom' : '시작일', 'Dateto' : '종료일', 'contents' : '본문'};
             const paramValue = this.params.key
-            console.log("paramValue" + paramValue)
 
             var oEditors = [];
             nhn.husky.EZCreator.createInIFrame({
@@ -32,6 +32,7 @@ $(function () {
                         $(".pageSub #contents").val(data.result.items[0].content);
                         $(".pageSub #create_user").val(data.result.items[0].createUser);
                         $(".pageSub #create_data").val(data.result.items[0].createDate);
+                        $(".pageSub #hit").val(data.result.items[0].hit);
                         $(".pageSub #notice_period").val(data.result.items[0].fromDate + "~" + data.result.items[0].toDate);
 
                         if (data.code == 200) {

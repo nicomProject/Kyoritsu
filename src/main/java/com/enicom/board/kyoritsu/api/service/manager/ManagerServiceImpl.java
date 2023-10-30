@@ -9,7 +9,6 @@ import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
 import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
 import com.enicom.board.kyoritsu.dao.repository.manager.ManagerRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
-import com.enicom.board.kyoritsu.login.Role;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,25 +80,11 @@ public class ManagerServiceImpl implements ManagerService {
     @Transactional
     @Override
     public ResponseDataValue<?> delete(MultipleParam param) {
-        MemberDetail member = securityUtil.getCurrentUser();
         MultipleType type = param.getType();
-        LocalDateTime deleteTime = LocalDateTime.now();
 
         if (type.equals(MultipleType.ONE)) {
-            Optional<Manager> managerOptional = managerRepository.findByRecKey(Long.valueOf(param.getKey()));
-            if (managerOptional.isPresent()) {
-                Manager manager = managerOptional.get();
-                manager.setDeleteDate(LocalDateTime.now());
-                manager.setDeleteUser(member.getId());
-            }
+            managerRepository.deleteById(Long.valueOf(param.getKey()));
         }
-        else if (type.equals(MultipleType.LIST)) {
-            managerRepository.deleteListContent(param);
-        }
-        else if(type.equals(MultipleType.SPECIFIC)){
-            managerRepository.deleteALLContent();
-        }
-
         return ResponseDataValue.builder(200).build();
     }
 

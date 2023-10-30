@@ -8,3 +8,9 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: create
+
+
+#      datasource:
+#        url: jdbc:postgresql://127.0.0.1:5432/EZBoard
+#        username: postgres
+#        password: nicom123.

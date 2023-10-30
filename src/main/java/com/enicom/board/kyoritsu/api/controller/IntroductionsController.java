@@ -27,18 +27,17 @@ public class IntroductionsController {
 
     @RequestMapping(value = "/introductions/add", method = RequestMethod.POST)
     public ResponseHandler<?> Add(@RequestBody @Valid IntroductionsParam param) throws Exception {
+        System.out.println(param);
         return new ResponseHandler<>(introductionsService.add(param));
     }
 
     @RequestMapping(path = "/introductions/find", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseHandler<?> find() {
-        System.out.println(introductionsService.findAll() + "asfzzzzz");
-
         return new ResponseHandler<>(introductionsService.findAll());
     }
 
     @RequestMapping(path = "/introductions/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseHandler<?> findSelf(@RequestBody @Valid IntroductionsParam param){
+    public ResponseHandler<?> findSelf(@RequestBody IntroductionsParam param){
         System.out.println(introductionsService.findAll(param));
         return new ResponseHandler<>(introductionsService.findAll(param));
     }

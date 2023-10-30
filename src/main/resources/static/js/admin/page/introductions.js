@@ -15,7 +15,6 @@ $(function () {
                 }
             });
             Data.load({role: true, menu: true});
-            console.log(Data)
             this.event();
         },
         event: function () {
@@ -39,8 +38,8 @@ $(function () {
                                 type: 'one',
                             },
                             table: 'table',
-                            successMessage: '성공적으로 삭제되었습니다',
-                            failMessage: '삭제중 오류가 발생하였습니다.',
+                            successMessage: '성공적으로 표기되었습니다',
+                            failMessage: '표기중 오류가 발생하였습니다.',
                         })
                     }else{
                         if(selected.length === 1){
@@ -63,6 +62,15 @@ $(function () {
                             data: {
                                 type: 'list',
                                 idListLong: selected
+                            },
+                            success: function (data) {
+                                console.log(data)
+                                if(data.code === 200){
+                                    Alert.success({text: data.desc});
+                                }
+                                else{
+                                    Alert.error({text: data.desc});
+                                }
                             },
                             table: 'table',
                             successMessage: '성공적으로 삭제되었습니다',

@@ -32,6 +32,10 @@
                         </span>
 
                         <table class="pageSubTable">
+                            <colgroup>
+                                <col width="10%"/>
+                                <col width="90%"/>
+                            </colgroup>
                             <tr class="pageSub">
                                 <td><label for="manager_id">아이디</label></td>
                                 <td><input class="form-control" id="manager_id" name="manager_id" type="text"></td>
@@ -77,7 +81,7 @@
                                             <i class="fas fa-plus"></i><span class="icon-title">수정</span>
                                         </button>
                                         <button class="btn btn-round btn-danger bg-gradient-danger" data-action="delete"
-                                                role="action">
+                                                role="action" th:if="${key != null}">
                                             <i class="fas fa-plus"></i><span class="icon-title">삭제</span>
                                         </button>
                                     </div>
@@ -92,6 +96,10 @@
                     </span>
 
                         <table class="pageSubTable">
+                            <colgroup>
+                                <col width="10%"/>
+                                <col width="90%"/>
+                            </colgroup>
                             <tr class="pageSub">
                                 <td><label for="modify_password">기존 비밀번호</label></td>
                                 <td style="position: relative;"><input aria-describedby="invalid_modify_password" autocomplete="modify_password"
@@ -135,15 +143,6 @@
                                     </button>
                                 </td>
                             </tr>
-                            <!--                    <tr class="pageSub">-->
-                            <!--                        <td><label for="management">관리</label></td>-->
-                            <!--                        <td><div type="text" id="management" name="management">-->
-                            <!--                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key == null}">-->
-                            <!--                                <i class="fas fa-plus"></i><span class="icon-title">수정</span>-->
-                            <!--                            </button>-->
-                            <!--                        </div>-->
-                            <!--                        </td>-->
-                            <!--                    </tr>-->
                         </table>
                     </div>
             </div>

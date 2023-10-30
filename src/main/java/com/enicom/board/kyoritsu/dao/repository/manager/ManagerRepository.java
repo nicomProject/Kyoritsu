@@ -10,7 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface ManagerRepository extends CrudRepository<Manager, Long>, ManagerRepositoryCustom {
+public interface ManagerRepository extends CrudRepository<Manager, Long>{
     Optional<Manager> findByUserId(String userId);
 
     List<Manager> findAllByRoleIn(List<Role> roles);
@@ -23,7 +23,7 @@ public interface ManagerRepository extends CrudRepository<Manager, Long>, Manage
 
     Optional<Manager> findByRecKey(Long recKey);
 
-
+    void deleteByRecKeyIn(List<Long> recKey);
 
     void deleteByUserId(String userId);
 

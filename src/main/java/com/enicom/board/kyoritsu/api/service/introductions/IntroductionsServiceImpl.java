@@ -38,16 +38,19 @@ public class IntroductionsServiceImpl implements IntroductionsService {
 //        return PageVO.builder(introductionsRepository.findAllByDeleteDateNull()).build();
 //    }
 
+    @Transactional
     @Override
     public PageVO<Content> findAll() {
         return PageVO.builder(introductionsRepository.findAllByDeleteDateNull()).build();
     }
 
+    @Transactional
     @Override
     public PageVO<Content> findAll(IntroductionsParam param) {
         return PageVO.builder(introductionsRepository.findAllByRecKey(Long.valueOf(param.getKey()))).build();
     }
 
+    @Transactional
     @Override
     public ResponseDataValue<?> add(IntroductionsParam param) {
 
@@ -61,6 +64,7 @@ public class IntroductionsServiceImpl implements IntroductionsService {
         return ResponseDataValue.builder(200).build();
     }
 
+    @Transactional
     @Override
     public ResponseDataValue<?> update(IntroductionsParam param) {
 
@@ -105,6 +109,7 @@ public class IntroductionsServiceImpl implements IntroductionsService {
         return ResponseDataValue.builder(200).build();
     }
 
+    @Transactional
     @Override
     public ResponseDataValue<?> check(MultipleParam param) {
         System.out.println("check값");
@@ -124,8 +129,6 @@ public class IntroductionsServiceImpl implements IntroductionsService {
 
             mainMenuRepository.save(mainMenu);
         }
-
-
         return ResponseDataValue.builder(200).build();
     }
 }

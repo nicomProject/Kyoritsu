@@ -41,7 +41,7 @@ public class NoticeController {
     }
 
     @RequestMapping(path = "/notice/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseHandler<?> findSelf(@RequestBody @Valid NoticeParam param) {
+    public ResponseHandler<?> findSelf(@RequestBody NoticeParam param) {
         return new ResponseHandler<>(noticeService.findAll(param));
     }
 

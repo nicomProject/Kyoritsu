@@ -3,12 +3,30 @@ $(function () {
         categorys: [],
         subCategorys: [],
         params: {},
+        formData: {},
         load: function (params) {
             this.params = params;
             this.event();
         },
 
         event: function () {
+
+            function validateField(formData) {
+                for (const field in formData) {
+                    console.log(field)
+                    const value = document.getElementById(field).value;
+                    if(!value){
+                        Alert.warning({text: `${formData[field]}은 필수 입력 항목입니다.`})
+                        return false
+                    }
+                }
+                return true;
+
+
+            }
+
+            formData = {'manager_id' : '아이디', 'manager_name' : '이름'};
+
             const paramValue = this.params.key
             if(paramValue !== ""){
                 AjaxUtil.requestBody({
@@ -108,7 +126,7 @@ $(function () {
             buttons.forEach(function (button) {
                 button.addEventListener("click", function () {
                     const action = button.getAttribute("data-action");
-                    if (action === "add") {
+                    if (action === "add" && validateField(formData)) {
                         var manager_id = $("#manager_id").val();
                         var manager_name = $("#manager_name").val();
                         var manager_role = $("#manager_role").val();
@@ -123,9 +141,20 @@ $(function () {
                                     role: manager_role,
                                     enable: manager_enable,
                                 },
-                                successMessage: '관리자가 성공적으로 추가되었습니다!'
+                                success: function (data) {
+                                    if (data.code == 200) {
+                                        Alert.success({text: '관리자 계정이 등록되었습니다.'}, function(){
+                                            location.href = '/admin/accounts'
+                                        })
+                                    } else if(data.code === 210){
+                                        Alert.warning({text: data.desc})
+                                    }
+                                    else{
+                                        Alert.error({text: data.desc});
+                                    }
+                                }
                             })
-                        }else if(paramValue !== ""){
+                        }else if(paramValue !== "" && validateField(formData)){
 
                             AjaxUtil.requestBody({
                                 url: '/api/manager/update',
@@ -137,18 +166,15 @@ $(function () {
                                     key: paramValue
                                 },
                                 success: function (data) {
-                                    console.log(data)
                                     if (data.code == 200) {
-                                        Swal.fire({
-
-                                            icon: 'success',
-                                            html: "소개글 등록이 완료되었습니다.",
+                                        Alert.success({text: '관리자 계정이 수정되었습니다.'}, function(){
+                                            location.href = '/admin/accounts'
                                         })
-                                    } else {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            html: "소개글 등록이 실패하였습니다.",
-                                        })
+                                    } else if(data.code === 210){
+                                        Alert.warning({text: data.desc})
+                                    }
+                                    else{
+                                        Alert.error({text: data.desc});
                                     }
                                 }
                             })
@@ -169,7 +195,7 @@ $(function () {
                             success: function (data) {
                                 if (data.code === 200) {
                                     Alert.success({text: '비밀번호가 성공적으로 변경되었습니다!<br>변경된 비밀번호로 다시 로그인해주세요!'}, function () {
-                                        location.href = '/logout';
+                                        location.href = '/admin/logout';
 
                                     });
                                 } else {
@@ -191,6 +217,14 @@ $(function () {
                             },
                             success: function (data) {
                                 if (data.code == 200) {
+                                    Alert.success({text: '관리자 계정이 삭제되었습니다.'}, function(){
+                                        location.href = '/admin/accounts'
+                                    })
+                                } else if(data.code === 210){
+                                    Alert.warning({text: data.desc})
+                                }
+                                else{
+                                    Alert.error({text: data.desc});
                                 }
                             }
                         })

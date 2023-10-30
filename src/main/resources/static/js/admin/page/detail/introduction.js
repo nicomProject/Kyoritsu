@@ -1,9 +1,9 @@
 $(function () {
-    var hi;
     const Content = {
         categorys: [],
         subCategorys: [],
         params: {},
+        formData: {},
         load: function (params) {
             const that = this;
             const category = $("#category");
@@ -24,7 +24,6 @@ $(function () {
             items.map(e => e.menu).forEach(group => {
                 categoryHash[group.recKey] = group;
             });
-
             Object.keys(categoryHash).forEach(key => {
                 category.append($('<option>', {
                         value: key,
@@ -32,10 +31,8 @@ $(function () {
                     }
                 ));
             });
-
                 const changeFunc = function(){
                     sub_category.empty();
-                    console.log(category.val())
                     items.forEach(item => {
                         if(Number(category.val()) === item.menu.recKey){
                             sub_category.append($('<option>', {
@@ -45,7 +42,6 @@ $(function () {
                         }
                     });
                 }
-
             changeFunc();
 
 
@@ -60,7 +56,6 @@ $(function () {
                         key: paramValue,
                     },
                     success: function (data) {
-                        console.log(data)
                         $(".pageSub #category").val(data.result.items[0].category);
                         $(".pageSub #sub_category").val(data.result.items[0].subcategory);
                         $(".pageSub #title").val(data.result.items[0].title);
@@ -78,21 +73,34 @@ $(function () {
                     }
                 })
             }
-
             this.params = params;
             console.log(this.params)
             this.event();
         },
 
         event: function () {
-
             var oEditors = [];
+            formData = {'title' : '제목', 'sub_title' : '소제목', 'contents' : '본문'};
             nhn.husky.EZCreator.createInIFrame({
                 oAppRef: oEditors,
                 elPlaceHolder: "contents",
                 sSkinURI: "/static/js/smartEditor/SmartEditor2Skin.html",
                 fCreator: "createSEditor2"
             })
+
+            function validateField(formData) {
+                for (const field in formData) {
+                    console.log(field)
+                    const value = document.getElementById(field).value;
+                    if(!value){
+                        Alert.warning({text: `${formData[field]}은 필수 입력 항목입니다.`})
+                        return false
+                    }
+                }
+                return true;
+
+
+            }
 
 
             const buttons = document.querySelectorAll("button");
@@ -102,11 +110,8 @@ $(function () {
                 button.addEventListener("click", function () {
                     // data-action 속성을 확인하여 해당 동작을 처리합니다.
                     const action = button.getAttribute("data-action");
-                    // // 네이버 스마트에디터 <p>태그 삭제
-                    // var contentText = oEditors.getById["contents"].getIR();
-                    // contentText = contentText.replace(/<p>/gi, "").replace(/<\/p>/gi, "");
-                    // oEditors.getById["contents"].setIR(contentText);
                     oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+
 
                     if (action === "add") {
                         var titleValue = $("#title").val();
@@ -115,11 +120,8 @@ $(function () {
                         var categoryValue = $("#category").val();
                         var sub_categoryValue = $("#sub_category").val();
 
-                        console.log("check")
 
-                        if(paramKey === ""){
-                            console.log("asdasfasf")
-
+                        if(paramKey === "" && validateField(formData)){
                             AjaxUtil.requestBody({
                                 url: '/api/introductions/add',
                                 data: {
@@ -130,20 +132,19 @@ $(function () {
                                     sub_category: sub_categoryValue
                                 },
                                 success: function (data) {
-                                    if (data.code == 200) {
-                                        Swal.fire({
-                                            icon: 'success',
-                                            html: "소개글 등록이 완료되었습니다.",
+                                    if(data.code === 200){
+                                        Alert.success({text: data.desc}, function (){
+                                            location.href = '/admin/introductions'
                                         })
-                                    } else {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            html: "소개글 등록이 실패하였습니다.",
-                                        })
+                                    }else if(data.code === 210){
+                                        Alert.warning({text: data.desc})
+                                    }
+                                    else{
+                                        Alert.error({text: data.desc});
                                     }
                                 }
                             })
-                        }else if(paramKey !== ""){
+                        }else if(paramKey !== "" && validateField(formData)){
                             AjaxUtil.requestBody({
                                 url: '/api/introductions/update',
                                 data: {
@@ -152,20 +153,19 @@ $(function () {
                                     contents: contentsValue,
                                     category: categoryValue,
                                     sub_category: sub_categoryValue,
-                                    key: paramValue
+                                    key: paramKey
                                 },
                                 success: function (data) {
                                     console.log(data)
-                                    if (data.code == 200) {
-                                        Swal.fire({
-                                            icon: 'success',
-                                            html: "소개글 수정이 완료되었습니다.",
+                                    if(data.code === 200){
+                                        Alert.success({text: data.desc}, function (){
+                                            location.href = '/admin/introductions'
                                         })
-                                    } else {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            html: "소개글 수정이 실패하였습니다.",
-                                        })
+                                    }else if(data.code === 210){
+                                        Alert.warning({text: data.desc})
+                                    }
+                                    else{
+                                        Alert.error({text: data.desc});
                                     }
                                 }
                             })
@@ -178,27 +178,21 @@ $(function () {
                             url: '/api/introductions/delete',
                             data: {
                                 type: 'one',
-                                id: paramValue
+                                id: paramKey
                             },
                             success: function (data) {
                                 console.log(data)
-                                if (data.code == 200) {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        html: "삭제가 완료되었습니다.",
+                                if(data.code === 200){
+                                    Alert.success({text: data.desc}, function (){
+                                        location.href = '/admin/introductions'
                                     })
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        html: "삭제가 실패하였습니다.",
-                                    })
+                                }
+                                else{
+                                    Alert.error({text: data.desc});
                                 }
                             }
                         })
                     }
-
-
-
                 });
             });
 

@@ -25,6 +25,10 @@
             </div>
             <div class="card-body">
                 <table class="pageSubTable" th:if="${key == null}">
+                    <colgroup>
+                        <col width="10%"/>
+                        <col width="90%"/>
+                    </colgroup>
                     <tr class="pageSub">
                         <td><label for="category">카테고리</label></td>
                         <td>
@@ -50,14 +54,8 @@
                             <button class="btn btn-round btn-success bg-gradient-success" role="action" data-action="list">
                                 <i class="fas fa-list"></i><span class="icon-title">목록</span>
                             </button>
-                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key == null}">
+                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add">
                                 <i class="fas fa-plus"></i><span class="icon-title">저장</span>
-                            </button>
-                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key != null}">
-                                <i class="fas fa-edit"></i><span class="icon-title">수정</span>
-                            </button>
-                            <button class="btn btn-round btn-danger bg-gradient-danger" role="action" data-action="delete">
-                                <i class="fas fa-trash"></i><span class="icon-title">삭제</span>
                             </button>
                         </div>
                         </td>
@@ -65,6 +63,12 @@
                 </table>
 
                 <table class="pageSubTable" th:if="${key != null}">
+                    <colgroup>
+                        <col width="10%"/>
+                        <col width="40%"/>
+                        <col width="10%"/>
+                        <col width="40%"/>
+                    </colgroup>
                     <tr class="pageSub">
                         <td><label for="category">카테고리</label></td>
                         <td>
@@ -97,9 +101,6 @@
                         <td colspan="3"><div type="text" id="management" name="management">
                             <button class="btn btn-round btn-success bg-gradient-success" role="action" data-action="list">
                                 <i class="fas fa-list"></i><span class="icon-title">목록</span>
-                            </button>
-                            <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="add" th:if="${key == null}">
-                                <i class="fas fa-plus"></i><span class="icon-title">저장</span>
                             </button>
                             <button class="btn btn-round btn-primary bg-gradient-primary" role="action" data-action="update" th:if="${key != null}">
                                 <i class="fas fa-edit"></i><span class="icon-title">수정</span>
