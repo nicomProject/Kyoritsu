@@ -50,6 +50,7 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public ResponseDataValue<?> add(InquiryParam param) {
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         MemberDetail member = securityUtil.getCurrentUser();
 

@@ -8,8 +8,6 @@ import java.util.Optional;
 
 public interface InquiryRepository extends CrudRepository<Inquiry, Long>, InquiryRepositoryCustom {
 
-    List<Inquiry> findAllByDeleteDateNull();
-
     Optional<Inquiry> findByRecKey(Long recKey);
 
     List<Inquiry> findAllByRecKey(Long recKey);
