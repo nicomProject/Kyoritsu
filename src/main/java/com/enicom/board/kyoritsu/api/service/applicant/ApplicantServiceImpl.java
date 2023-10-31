@@ -60,7 +60,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
         applicantRepository.save(applicant);
 
-        EmailConfiguration.sendMail(applicant.getEmail());
+        EmailConfiguration.sendMail(applicant.getEmail(), param.getContentsAnswer());
 
         return ResponseDataValue.builder(200).build();
     }

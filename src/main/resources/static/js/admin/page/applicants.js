@@ -9,7 +9,6 @@ $(function () {
         event: function () {
             if(this.params.key !== ""){
             let urlDetail = '/api/applicant/findSelf/' + this.params.key
-                console.log(urlDetail)
             Content.params.urlDetail = urlDetail;
             }
             const table = Table.load('#table');

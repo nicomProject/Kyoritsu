@@ -10,20 +10,20 @@ import javax.mail.internet.MimeUtility;
 import java.util.Properties;
 
 public class EmailConfiguration {
-    public static void sendMail(String toEmail) {
+    public static void sendMail(String toEmail, String answer_content) {
 
-        String _email = "jjo360647@gmail.com";
-        String _password = "qwe1234!!";
+        String _email = "nicom7708@gmail.com";
+        String _password = "lnqvzqvqgckroyqo";
 
         System.out.println("Start JavaMail API Test ~!");
 
         String subject = "Hello JavaMail API Test";
-        String fromMail = "from.email@gmail.com";
-        String fromName = "Cristoval";
+        String fromMail = "jjg@enicom.co.kr";
+        String fromName = "인사담당자";
 
         // mail contents
         StringBuffer contents = new StringBuffer();
-        contents.append("<h1>Hello</h1>\n");
+        contents.append(answer_content);
         contents.append("<p>Nice to meet you ~! :)</p><br>");
 
         // mail properties
