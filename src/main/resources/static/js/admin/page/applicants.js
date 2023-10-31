@@ -166,9 +166,9 @@ $(function () {
                         download: false,
                         headerSort: false
                     },
-                    {title: '이름', field: "title", tooltip: true, headerTooltip: true},
-                    {title: '제목', field: "subtitle", tooltip: true, headerTooltip: true},
-                    {title: '연락처', field: "createUser", tooltip: true, headerTooltip: true},
+                    {title: '이름', field: "name", tooltip: true, headerTooltip: true},
+                    {title: '제목', field: "name", tooltip: true, headerTooltip: true},
+                    {title: '연락처', field: "name", tooltip: true, headerTooltip: true},
 
                 ],
             });
@@ -176,7 +176,7 @@ $(function () {
             const events = {
 
                 rowClick: function (e, row) {
-                    window.location.href = '/admin/notice/detail/' + row.getData().recKey;
+                    window.location.href = '/admin/applicant/detail/' + row.getData().recKey;
 
                 },
                 downloadComplete: function () {

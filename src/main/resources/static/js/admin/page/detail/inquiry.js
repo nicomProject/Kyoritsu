@@ -8,7 +8,6 @@ $(function () {
         event: function () {
 
             const paramValue = this.params.key
-            console.log("paramValue" + paramValue)
 
             var oEditors = [];
             nhn.husky.EZCreator.createInIFrame({

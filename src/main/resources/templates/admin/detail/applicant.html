@@ -4,6 +4,8 @@
 <th:block th:replace="~{components/_side::side_manager}"></th:block>
 <main class="main-content position-relative h-100 border-radius-lg">
     <th:block th:replace="~{components/_header::header_manager}"></th:block>
+    <input type="hidden" class="param" name="key" th:value="${key}"/>
+
     <div class="container-fluid page-container">
         <div class="card">
             <div class="card-header card-header-primary">
@@ -43,9 +45,7 @@
                     <thead>
                     <tr>
                         <th scope="col" colspan="2" style="width: 10%">지원자 조회</th>
-                        <th scope="col" colspan="2" style="width: 20%">기본 정보</th>
-                        <th scope="col" colspan="2" style="width: 35%">신상 정보</th>
-                        <th scope="col" colspan="2" style="width: 35%">학력사항</th>
+                        <th scope="col" colspan="8" style="width: 90%">기본 정보</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,59 +53,26 @@
                         <td></td>
                         <td></td>
                         <td>이름</td>
-                        <td></td>
-                        <td>보훈여부</td>
-                        <td></td>
-                        <td>최종학력</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
+                        <td id="name"></td>
                         <td>성별</td>
-                        <td></td>
-                        <td>장애여부</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>생년월일</td>
-                        <td></td>
-                        <th scope="col" colspan="2">병역사항</th>
-                        <th scope="col" colspan="2">자격사항</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>국적</td>
-                        <td></td>
-                        <td>병역여부</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td id="gneder"></td>
+                        <td rowspan="3"><img src="images/200x200.png" alt="My Image"></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td>휴대전화</td>
-                        <td></td>
-                        <td>병역구분</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td id="phone"></td>
+                        <td>이메일</td>
+                        <td id="email"></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>이메일</td>
-                        <td></td>
-                        <td>복무기간</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>생년월일</td>
+                        <td id="birth"></td>
+                        <td>국적</td>
+                        <td id="nationality"></td>
                     </tr>
                     <tr>
                         <td colspan="2"></td>
@@ -114,7 +81,7 @@
                     <tr>
                         <td colspan="2"></td>
                         <td colspan="6">
-                            <textarea class="form-control" name="contents" id="contents" rows="10" cols="100" ></textarea>
+                            <textarea class="form-control" name="contents_question" id="contents_question" rows="10" cols="100" ></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -128,16 +95,15 @@
                         <td colspan="6" class="applicant_content">
                             <div class="resultCombine">
                             <div>
-                                <select class="form-select">
-                                    <option>선택하기</option>
-                                    <option>선택하기</option>
+                                <select class="form-select" id="passYn">
+                                    <option value="pass">합격</option>
+                                    <option value="fail">불합격</option>
                                 </select>
-                                <select class="form-select">
-                                    <option>선택하기</option>
-                                    <option>선택하기</option>
+                                <select class="form-select" id="formTag">
+                                    <option value="default">기본</option>
                                 </select>
                             </div>
-                            <textarea class="form-control" name="contents" id="contents" rows="10" cols="100" ></textarea>
+                            <textarea class="form-control" name="contents_answer" id="contents_answer" rows="10" cols="100" ></textarea>
                             </div>
 
                         </td>
@@ -162,5 +128,5 @@
 </main>
 <th:block th:replace="~{components/_footer::footer_manager}"></th:block>
 
-<script type="text/javascript" src="/static/js/admin/page/detail/inquiry.js"></script>
+<script type="text/javascript" src="/static/js/admin/page/detail/applicant.js" ></script>
 </body>

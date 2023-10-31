@@ -38,61 +38,53 @@ public class Applicant {
     private String image;
 
     @Column(name = "name", length = 50)
+    @Comment("이름")
     private String name;
 
     @Column(name = "gender", length = 50)
+    @Comment("성별")
     private String gender;
 
     @Column(name = "birth_date")
+    @Comment("생년월일")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime birthDate;
 
     @Column(name = "nationality", length = 50)
+    @Comment("국적")
     private String nationality;
 
     @Column(name = "phone", length = 50)
+    @Comment("휴대전화")
     private String phone;
 
     @Column(name = "email", length = 50)
+    @Comment("이메일")
     private String email;
 
-    @Column(name = "education", length = 500)
-    private String education;
-
-    @Column(name = "certificate", length = 500)
-    private String certificate;
-
     @Column(name = "contents", length = 10000)
+    @Comment("자기소개서")
     private String contents;
 
-    @Column(name = "veteran_status", length = 50)
-    private String veteranStatus;
-
-    @Column(name = "disability", length = 50)
-    private String disability;
-
-    @Column(name = "military_status", length = 50)
-    private String militaryStatus;
-
-    @Column(name = "military_category", length = 100)
-    private String militaryCategory;
-
-    @Column(name = "military_start_date")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime militaryStartDate;
-
-    @Column(name = "military_end_date")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime militaryEndDate;
-
     @Column(name = "result_id", length = 50)
+    @Comment("지원자 ID")
     private String resultId;
+
+    @Column(name = "pass_yn", length = 20)
+    @Comment("합격여부")
+    private String passYn;
+
+    @Column(name = "form_tag", length = 20)
+    @Comment("폼태그")
+    private String formTag;
+
+    @Column(name = "content_answer", length = 10000)
+    @Comment("조회결과내용")
+    private String contentAnswer;
+
+
 
 
 }

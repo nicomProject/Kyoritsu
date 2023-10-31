@@ -5,7 +5,9 @@ import com.enicom.board.kyoritsu.api.param.type.MultipleParam;
 import com.enicom.board.kyoritsu.api.param.type.MultipleType;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
+import com.enicom.board.kyoritsu.dao.entity.Applicant;
 import com.enicom.board.kyoritsu.dao.entity.Inquiry;
+import com.enicom.board.kyoritsu.dao.repository.applicant.ApplicantRepository;
 import com.enicom.board.kyoritsu.dao.repository.inquiry.InquiryRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
@@ -20,20 +22,21 @@ import java.util.Optional;
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
     private final SecurityUtil securityUtil;
-    private final InquiryRepository inquiryRepository;
+    private final ApplicantRepository applicantRepository;
 
 
 
     @Autowired
-    public ApplicantServiceImpl(InquiryRepository inquiryRepository, SecurityUtil securityUtil) {
-        this.inquiryRepository = inquiryRepository;
+    public ApplicantServiceImpl(ApplicantRepository applicantRepository, SecurityUtil securityUtil) {
+        this.applicantRepository = applicantRepository;
         this.securityUtil = securityUtil;
     }
 
 
     @Transactional
     @Override
-    public PageVO<Inquiry> findAll(Long key) {
-        return PageVO.builder(inquiryRepository.findAllByRecKey(key)).build();
+    public PageVO<Applicant> findAll(Long key) {
+        System.out.println(applicantRepository.findAllByRecKey(key));
+        return PageVO.builder(applicantRepository.findAllByRecKey(key)).build();
     }
 }

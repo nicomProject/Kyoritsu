@@ -21,18 +21,10 @@ public class ApplicantController {
     private final ApplicantService applicantService;
 
 
-//    @RequestMapping(path = "/inquiry/find", method = {RequestMethod.GET, RequestMethod.POST})
-//    public ResponseHandler<?> find() {
-//        return new ResponseHandler<>(inquiryService.findAll());
-//    }
     @RequestMapping(path = "/applicant/findSelf/{key}", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseHandler<?>  findSelf(@PathVariable Long key){
-        System.out.println("????");
-        System.out.println("????" + key);
-
-        applicantService.findAll(key);
-
-        return null;
+        System.out.println(applicantService.findAll(key));
+        return new ResponseHandler<>(applicantService.findAll(key));
         // return new ResponseHandler<>(inquiryService.findAll(param));
     }
 //    @RequestMapping(value = "/inquiry/add", method = RequestMethod.POST)
