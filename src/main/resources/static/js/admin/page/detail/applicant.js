@@ -12,7 +12,7 @@ $(function () {
         event: function () {
             const paramValue = this.params.key
                 AjaxUtil.requestBody({
-                    url: '/api/applicant/findSelf/' + this.params.key,
+                    url: '/api/applicant/findSelf/' + paramValue,
                     success: function (data) {
                         console.log(data)
                         $("#name").text(data.result.items[0].name);
@@ -38,35 +38,34 @@ $(function () {
             buttons.forEach(function (button) {
                 button.addEventListener("click", function () {
                     const action = button.getAttribute("data-action");
-                    if (action === "add" && validateField(formData)) {
-                        var manager_id = $("#manager_id").val();
-                        var manager_name = $("#manager_name").val();
-                        var manager_role = $("#contents_answer").val();
-                        var manager_enable = $("#manager_enable").val();
+                    if (action === "add") {
+                        var passYn = $("#pass_yn").val();
+                        var formTag = $("#form_tag").val();
+                        var contentsAnswer = $("#contents_answer").val();
 
-                        if(paramValue === ""){
                             AjaxUtil.requestBody({
-                                url: '/api/manager/add',
+                                url: '/api/applicant/add',
                                 data: {
-                                    id: manager_id,
-                                    name: manager_name,
-                                    role: manager_role,
-                                    enable: manager_enable,
+                                    passYn: passYn,
+                                    formTag: formTag,
+                                    contentsAnswer: contentsAnswer,
+                                    key: paramValue,
                                 },
                                 success: function (data) {
-                                    if (data.code == 200) {
-                                        Alert.success({text: '관리자 계정이 등록되었습니다.'}, function(){
-                                            location.href = '/admin/accounts'
-                                        })
-                                    } else if(data.code === 210){
-                                        Alert.warning({text: data.desc})
-                                    }
-                                    else{
-                                        Alert.error({text: data.desc});
-                                    }
+                                    // if (data.code == 200)
+                                    // {
+                                    //     Alert.success({text: '관리자 계정이 등록되었습니다.'}, function(){
+                                    //         location.href = '/admin/accounts'
+                                    //     })
+                                    // } else if(data.code === 210){
+                                    //     Alert.warning({text: data.desc})
+                                    // }
+                                    // else{
+                                    //     Alert.error({text: data.desc});
+                                    // }
                                 }
                             })
-                        }}
+                        }
                     else if(action === "list"){
                         location.href = '/admin/accounts'
                     }

@@ -1,6 +1,7 @@
 package com.enicom.board.kyoritsu.api.controller;
 
 
+import com.enicom.board.kyoritsu.api.param.ApplicantParam;
 import com.enicom.board.kyoritsu.api.param.InquiryParam;
 import com.enicom.board.kyoritsu.api.param.IntroductionsParam;
 import com.enicom.board.kyoritsu.api.param.type.MultipleParam;
@@ -25,15 +26,9 @@ public class ApplicantController {
     public ResponseHandler<?>  findSelf(@PathVariable Long key){
         System.out.println(applicantService.findAll(key));
         return new ResponseHandler<>(applicantService.findAll(key));
-        // return new ResponseHandler<>(inquiryService.findAll(param));
     }
-//    @RequestMapping(value = "/inquiry/add", method = RequestMethod.POST)
-//    public ResponseHandler<?> Add(@RequestBody @Valid InquiryParam param) throws Exception {
-//        return new ResponseHandler<>(inquiryService.add(param));
-//    }
-//    @RequestMapping(value = "/inquiry/delete", method = RequestMethod.POST)
-//    public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
-//        return new ResponseHandler<>(inquiryService.delete(param));
-//    }
-
+    @RequestMapping(value = "/applicant/add", method = RequestMethod.POST)
+    public ResponseHandler<?> Add(@RequestBody @Valid ApplicantParam param) throws Exception {
+        return new ResponseHandler<>(applicantService.add(param));
+    }
 }
