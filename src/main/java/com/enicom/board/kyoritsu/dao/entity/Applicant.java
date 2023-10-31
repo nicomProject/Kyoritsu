@@ -34,11 +34,11 @@ public class Applicant {
     private String career;
 
     @Column(name = "image", length = 1000)
-    @Comment("경력구분")
+    @Comment("증명사진")
     private String image;
 
     @Column(name = "name", length = 50)
-    @Comment("이름")
+    @Comment("지원자명")
     private String name;
 
     @Column(name = "gender", length = 50)
@@ -68,9 +68,10 @@ public class Applicant {
     @Comment("자기소개서")
     private String contents;
 
-    @Column(name = "result_id", length = 50)
-    @Comment("지원자 ID")
-    private String resultId;
+//    @JoinColumn(name = "result_id")
+//    @ManyToOne
+//    @Comment("지원자 ID")
+//    private Content resultId;
 
     @Column(name = "pass_yn", length = 20)
     @Comment("합격여부")
