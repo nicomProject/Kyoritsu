@@ -6,6 +6,7 @@ import com.enicom.board.kyoritsu.api.param.type.MultipleParam;
 import com.enicom.board.kyoritsu.api.param.type.MultipleType;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
+import com.enicom.board.kyoritsu.config.EmailConfiguration;
 import com.enicom.board.kyoritsu.dao.entity.Applicant;
 import com.enicom.board.kyoritsu.dao.entity.Inquiry;
 import com.enicom.board.kyoritsu.dao.repository.applicant.ApplicantRepository;
@@ -51,18 +52,15 @@ public class ApplicantServiceImpl implements ApplicantService {
             return ResponseDataValue.builder(210).desc("잘못된 등록번호입니다").build();
         }
 
-//        Optional<Inquiry> inquiryOptional = inquiryRepository.findByRecKey(Long.valueOf(param.getKey()));
-//        if(!inquiryOptional.isPresent()){
-//            return ResponseDataValue.builder(210).desc("잘못된 등록번호입니다").build();
-//        }
-//
-//        Inquiry inquiry = inquiryOptional.get();
-//        param.applyTo(inquiry);
-//        inquiry.setAnswer(param.getAnswer());
-//        inquiry.setAnswerUser(member.getId());
-//        inquiry.setAnswerDate(LocalDateTime.now());
-//
-//        inquiryRepository.save(inquiry);
+        Applicant applicant = applicantOptional.get();
+        applicant.setContentAnswer(param.getContentsAnswer());
+        applicant.setFormTag(param.getFormTag());
+        applicant.setPassYn(param.getPassYn());
+        applicant.setAnswerId(member.getId());
+
+        applicantRepository.save(applicant);
+
+        EmailConfiguration.sendMail(applicant.getEmail());
 
         return ResponseDataValue.builder(200).build();
     }

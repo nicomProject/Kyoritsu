@@ -52,6 +52,13 @@ public class Applicant {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime birthDate;
 
+    @Column(name = "create_date")
+    @Builder.Default
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime createDate = LocalDateTime.now();
+
     @Column(name = "nationality", length = 50)
     @Comment("국적")
     private String nationality;
@@ -85,6 +92,15 @@ public class Applicant {
     @Comment("조회결과내용")
     private String contentAnswer;
 
+    @Column(name = "answer_id", length = 10000)
+    @Comment("답변자")
+    private String answerId;
+
+    @Column(name = "answer_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime answerDate;
 
 
 

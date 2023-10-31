@@ -22,6 +22,10 @@ $(function () {
                         $("#birth").text(data.result.items[0].birthDate);
                         $("#nationality").text(data.result.items[0].nationality);
                         $("#contents_question").text(data.result.items[0].contents);
+                        $("#form_tag").val(data.result.items[0].formTag);
+                        $("#pass_yn").val(data.result.items[0].passYn);
+                        $("#contents_answer").text(data.result.items[0].contentAnswer);
+
 
                         if (data.code == 200) {
                         } else {
@@ -52,17 +56,17 @@ $(function () {
                                     key: paramValue,
                                 },
                                 success: function (data) {
-                                    // if (data.code == 200)
-                                    // {
-                                    //     Alert.success({text: '관리자 계정이 등록되었습니다.'}, function(){
-                                    //         location.href = '/admin/accounts'
-                                    //     })
-                                    // } else if(data.code === 210){
-                                    //     Alert.warning({text: data.desc})
-                                    // }
-                                    // else{
-                                    //     Alert.error({text: data.desc});
-                                    // }
+                                    if (data.code == 200)
+                                    {
+                                        Alert.success({text: '결과등록이 완료되었습니다.'}, function(){
+                                            location.href = '/admin/applicants'
+                                        })
+                                    } else if(data.code === 210){
+                                        Alert.warning({text: data.desc})
+                                    }
+                                    else{
+                                        Alert.error({text: data.desc});
+                                    }
                                 }
                             })
                         }
