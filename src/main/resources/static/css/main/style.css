@@ -1693,15 +1693,15 @@ section .sub-title{
     margin-bottom: 10px;
 }
 
-.recruit-info.section .container .card1 .contents-wrap,
-.recruit-info.section .container .card2 .contents-wrap{
+#recruit-info-section1 .container .contents-wrap,
+#recruit-info-section2 .container .contents-wrap{
     display: flex;
     /*flex-wrap: wrap;
     justify-content: center;
     padding: 50px;*/
 }
 
-.recruit-info.section .container .card2 .contents-wrap .card-box{
+#recruit-info-section2 .container .contents-wrap .card-box{
     border: 1px solid #ccc;
     /*padding: 78px;*/
     margin: 10px;
@@ -1799,6 +1799,6 @@ section .sub-title{
     margin-top: 30px;
 }
 
-.recruit-info.section .card1 .row {
+#recruit-info-section1 .row {
     margin: 55px 0;
 }
