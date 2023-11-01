@@ -85,6 +85,11 @@ $(function () {
             const events = {
                 rowClick: function (e, row) {
                     window.location.href = '/admin/applicants/' + row.getData().recKey;
+
+                    /*const tableDetail = Tabulator.findTable('#tableDetail')[0];
+                    const table = Tabulator.findTable('#table')[0]
+
+                    tableDetail.setData(table.getData());*/
                 },
 
                 downloadComplete: function () {
