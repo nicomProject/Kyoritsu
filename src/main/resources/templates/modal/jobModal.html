@@ -1,0 +1,131 @@
+<div class="modal-dialog modal-dialog-centered">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title">도서 정보 관리</h4>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+				<i class="fas fa-times"></i>
+			</button>
+		</div>
+		<div class="modal-header modal-title-desc">
+			<div>
+				<i class="fas fa-exclamation-circle"></i>
+				<span class="icon-title modal-ext-desc"> 이용 안내<br>
+					- 도서를 등록한 후에는 등록번호 및 태그를 변경할 수 없습니다.<br>
+					- 자료실 변경 후에는 위치 추적 기능이 제한됩니다.<br>
+					- 서가를 이동하면 도서의 위치가 자동으로 변경됩니다.<br>
+				</span>
+			</div>
+		</div>
+		<div class="modal-body">
+			<form id="bookForm">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="bookBarcode">등록번호</label>
+							<input type="text" class="form-control param" id="bookBarcode" name="barcode" aria-describedby="invalid_book_barcode">
+							<div class="valid-feedback">
+								사용 가능한 등록번호입니다.
+							</div>
+							<div class="invalid-feedback"></div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="bookEpc">태그</label>
+							<input type="text" class="form-control param" id="bookEpc" name="epc" />
+							<div class="valid-feedback">
+								사용 가능한 태그입니다.
+							</div>
+							<div class="invalid-feedback"></div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="bookTitle">제목</label>
+							<input type="text" class="form-control param" id="bookTitle" name="title" />
+						</div>
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="bookAuthor">저자</label>
+							<input type="text" class="form-control param" id="bookAuthor" name="author" />
+						</div>
+						<div class="invalid-feedback"></div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="bookPublisher">출판사</label>
+							<input type="text" class="form-control param" id="bookPublisher" name="publisher" />
+						</div>
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="bookCallNo">청구기호</label>
+							<input type="text" class="form-control param" id="bookCallNo" name="callNo" />
+						</div>
+						<div class="invalid-feedback"></div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="bookISBN">ISBN</label>
+							<input type="text" class="form-control param" id="bookISBN" name="isbn" />
+						</div>
+						<div class="invalid-feedback"></div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="bookYear">출판 연도</label>
+							<input type="number" class="form-control param" id="bookYear" name="year" min="1900" value="2023" max="2100"/>
+						</div>
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="bookRoom">자료실</label>
+							<select class="form-control param" id="bookRoom" name="room"></select>
+						</div>
+						<div class="invalid-feedback"></div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="bookShelf">서가</label>
+							<select class="form-control param" id="bookShelf" name="shelf"></select>
+						</div>
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+
+			</form>
+		</div>
+<!--		<div class="modal-footer" class="auth-edit">-->
+<!--			<button class="btn btn-rounded btn-primary btn-pulse me-2" role="action" data-action="add">-->
+<!--				<i class="fas fa-plus"></i><span class="icon-title">등록</span>-->
+<!--			</button>-->
+<!--			<button type="button" class="btn btn-rounded btn-primary btn-update me-2" role="action" data-action="mod">-->
+<!--				<div class="pen-container">-->
+<!--					<span class="pen"><span></span></span>-->
+<!--					<i></i>-->
+<!--				</div>-->
+<!--				<span class="icon-title">수정</span>-->
+<!--			</button>-->
+<!--			<button class="btn btn-rounded btn-danger btn-trash" role="action" data-action="del">-->
+<!--				<span class="trash">-->
+<!--					<span></span><i></i>-->
+<!--				</span>-->
+<!--				<span class="icon-title">삭제</span>-->
+<!--			</button>-->
+<!--		</div>-->
+	</div>
+</div>

@@ -581,7 +581,10 @@ $(function () {
         }
     });
 
-    const PasswordModal = new AbstractModal('password', {
+    console.log(new AbstractModal('jobModal', {}))
+
+    const jobModal = new AbstractModal('jobModal', {
+
         titleCustom: function () {
             return "내 비밀번호 수정";
         },
