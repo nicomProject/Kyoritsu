@@ -48,6 +48,12 @@ $(function () {
                     }
                     // ... (기존의 삭제 로직을 이곳에 삽입)
                 }
+                else if (action === 'category_add'){
+                    const request = {
+                        msg: '알림창 메세지를 수정해주세요.'
+                    };
+                    ParamManager.show('jobModal', action, request);
+                }
                 else if (action === 'file') {
                     const range = this.dataset.range;
                     if (selected.length === 0) {

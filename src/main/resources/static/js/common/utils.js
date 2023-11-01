@@ -415,12 +415,15 @@ const ParamManager = {
     },
     show: function (modalID, action, params) {
         const urlHash = {
+            'jobModal': '/modal/jobModal',
         }
 
         let url = urlHash[modalID] || '/modal/' + modalID;
 
         modalID = modalID.replace('Modal', '');
         const obj = $(`#${modalID}Modal`);
+
+        console.log(url)
 
         AjaxUtil.request({
             method: 'GET',
@@ -430,7 +433,6 @@ const ParamManager = {
                 obj.html(data);
             }
         });
-
         obj.append(ParamManager.load(action, JSON.stringify(params)));
         obj.modal('show');
     }
