@@ -204,12 +204,12 @@ class AbstractModal {
 
             body.find(`.form-control`).removeClass('required');
 
-            if (modal.config && modal.config.actionHash[type]) {
-                const required = modal.config.actionHash[type].required || {};
-                Object.keys(required).forEach(field => {
-                    body.find(`.form-control[name="${field}"]`).addClass('required');
-                })
-            }
+            // if (modal.config && modal.config.actionHash[type]) {
+            //     const required = modal.config.actionHash[type].required || {};
+            //     Object.keys(required).forEach(field => {
+            //         body.find(`.form-control[name="${field}"]`).addClass('required');
+            //     })
+            // }
 
             /**
              * fieldFill 옵션이 활성화 됐을 경우, 필드값 채우기
@@ -581,62 +581,89 @@ $(function () {
         }
     });
 
-    console.log(new AbstractModal('jobModal', {}))
 
     const jobModal = new AbstractModal('jobModal', {
 
         titleCustom: function () {
-            return "내 비밀번호 수정";
+            return "채용공고 카테고리";
         },
-        validation: async function (modal, obj, invalid, key, value) {
-            const container = modal.obj;
+        buttonCustom: function (modal) {
 
-            const params = {};
-            container.find('.param.form-control').each(function (e) {
-                params[this.name] = this.value;
+            AjaxUtil.requestBody({
+                url: '/api/category/find',
+                success: function (data) {
+
+                    if (data.code == 200) {
+                        let items = [];
+                        items = data.result.items;
+                        items.forEach(item => {
+                            modal.obj.find("#category").append($('<option>', {
+                                    value: item.categoryName,
+                                    text: item.categoryName,
+                                }
+                            ));
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            html: "카테고리 조회가 실패하였습니다.",
+                        })
+                    }
+                }
             })
 
-            if (key === 'new_password' && value !== '') {
-                const validation = ValidationUtil.checkPasswordPattern(value);
-                if (!validation.result) {
-                    invalid.html(validation.error);
-                    return false;
-                } else if (params.password === value) {
-                    invalid.html('기존 비밀번호와 동일합니다.');
-                    return false;
-                }
-            } else if (key === 'new_password_confirm' && value !== '') {
-                if (params.new_password !== value) {
-                    return false;
-                }
-            }
+            const ModalButton = modal.obj.find('.input-group-append');
+            const AddButton = ModalButton.find('*[data-action="add"]');
+            const DeleteButton = ModalButton.find('*[data-action="delete"]');
+            const SelectValue = modal.obj.find("#category");
 
-            return true;
-        },
-        buttonsForEnable: ['send'],
-        actionHash: {
-            send: {
-                required: {password: '기존 비밀번호', new_password: '새 비밀번호', new_password_confirm: '비밀번호 확인'},
-                func: function (modal, params) {
-                    AjaxUtil.requestBody({
-                        url: '/api/manager/mypassword',
-                        data: {
-                            password: params.password,
-                            newPassword: params.new_password,
-                            newPasswordConfirm: params.new_password_confirm
-                        },
-                        success: function (data) {
-                            if (data.code === 200) {
-                                Alert.success({text: '비밀번호가 성공적으로 변경되었습니다!<br>변경된 비밀번호로 다시 로그인해주세요!'}, function () {
-                                    location.href = '/admin/logout';
-                                });
-                            } else {
-                                Alert.warning({text: data.desc});
-                            }
+            SelectValue.on('change', function(){
+                modal.obj.find("#jobCategory").val(modal.obj.find("#category").val())
+            })
+
+            AddButton.click(function (e) {
+                AjaxUtil.requestBody({
+                    url: '/api/category/add',
+                    data: {
+                        categoryName: modal.obj.find("#jobCategory").val()
+                    },
+                    success: function (data) {
+
+                        if (data.code == 200) {
+                            Alert.success({text: '카테고리가 추가되었습니다'}, function(){
+                                modal.obj.modal('hide');
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                html: "카테고리가 추가가 실패하였습니다",
+                            })
                         }
-                    })
-                }
-            }
-        }
+                    }
+                })
+            })
+
+            DeleteButton.click(function (e) {
+                AjaxUtil.requestBody({
+                    url: '/api/category/delete',
+                    data: {
+                        categoryName: modal.obj.find("#jobCategory").val()
+                    },
+                    success: function (data) {
+                        if (data.code == 200)
+                        {
+                            Alert.success({text: '카테고리가 삭제되었습니다'}, function(){
+                                modal.obj.modal('hide');
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                html: "해당 카테고리가 삭제가 실패하였습니다.",
+                            })
+                        }
+                    }
+                })
+            })
+        },
     });
 });

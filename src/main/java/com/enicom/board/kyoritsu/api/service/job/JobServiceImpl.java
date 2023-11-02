@@ -45,11 +45,8 @@ public class JobServiceImpl implements JobService {
         System.out.println("1111111" + param);
 
         Job job = param.create();
-        System.out.println("222222" + job);
         job.setCreateDate(LocalDateTime.now());
-        System.out.println("333333333" + job);
         job.setCreateUser(member.getId());
-        System.out.println("4444444" + job);
         job.setFromDate(LocalDate.parse(param.getDate_from(), formatter).atStartOfDay());
         job.setToDate(LocalDate.parse(param.getDate_to(), formatter).atTime(23, 59, 59));
         jobRepository.save(job);

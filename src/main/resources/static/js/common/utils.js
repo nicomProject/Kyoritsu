@@ -420,10 +420,9 @@ const ParamManager = {
 
         let url = urlHash[modalID] || '/modal/' + modalID;
 
-        modalID = modalID.replace('Modal', '');
+        // modalID = modalID.replace('Modal', '')
         const obj = $(`#${modalID}Modal`);
 
-        console.log(url)
 
         AjaxUtil.request({
             method: 'GET',

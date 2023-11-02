@@ -4,9 +4,29 @@ $(function () {
         formData: {},
         load: function (params) {
             this.params = params;
-            console.log(this.params)
+            console.log(params)
+            let items = [];
+            const category = $("#category");
+
+            AjaxUtil.request({
+                url: '/api/category/find',
+                async: false,
+                success: function (data) {
+                    items = data.result.items;
+                }
+            });
+
+            items.forEach(item => {
+                category.append($('<option>', {
+                        value: item.recKey,
+                        text: item.categoryName,
+                    }
+                ));
+            })
+
             this.event();
         },
+
         event: function () {
             formData = {'title' : '제목', 'Datefrom' : '시작일', 'Dateto' : '종료일', 'contents' : '본문'};
             formDataKey = {'title' : '제목', 'contents' : '본문'};
@@ -68,6 +88,8 @@ $(function () {
 
                 oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
                 var categoryValue = $("#category").val();
+                var supportValue = $("#support").val();
+                var experienceValue = $("#experience").val();
                 var titleValue = $("#title").val();
                 var contentsValue = $("#contents").val();
                 var Dateto = $("#Dateto").val();
@@ -78,6 +100,8 @@ $(function () {
                         url: '/api/job/add',
                         data: {
                             category: categoryValue,
+                            support: supportValue,
+                            experience: experienceValue,
                             title: titleValue,
                             contents: contentsValue,
                             date_from: Datefrom,
@@ -102,6 +126,8 @@ $(function () {
                         url: '/api/job/update',
                         data: {
                             category: categoryValue,
+                            support: supportValue,
+                            experience: experienceValue,
                             title: titleValue,
                             contents: contentsValue,
                             key: paramValue

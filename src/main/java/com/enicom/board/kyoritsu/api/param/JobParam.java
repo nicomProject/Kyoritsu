@@ -19,6 +19,8 @@ public class JobParam {
     private String title;
     private String contents;
     private String category;
+    private String support;
+    private String experience;
     private String key;
     private String date_to;
     private String date_from;
@@ -45,12 +47,12 @@ public class JobParam {
         if (this.category != null) {
             job.setCategory(this.category);
         }
-//        if (this.date_to != null) {
-//            job.setToDate(this.date_to);
-//        }
-//        if (this.date_from != null) {
-//            job.setFromDate(this.date_from);
-//        }
+        if (this.support != null) {
+            job.setSupport(this.support);
+        }
+        if (this.experience != null) {
+            job.setExperience(this.experience);
+        }
     }
 
 }

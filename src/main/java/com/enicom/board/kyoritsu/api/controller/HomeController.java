@@ -155,6 +155,8 @@ public class HomeController {
     @RequestMapping(path = "/modal/{page}", method = {RequestMethod.GET})
     public String modal(@PathVariable String page, Model model, @RequestParam Map<String, Object> paramMap) {
         model.addAllAttributes(paramMap);
+        System.out.println(paramMap);
+        System.out.println(page);
         return String.format("modal/%s", page);
     }
 
