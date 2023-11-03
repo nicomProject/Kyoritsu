@@ -19,7 +19,9 @@ $(function () {
                 locale: 'ko-kr',
                 langs: TableUtil.setDefaults(),
                 layout: 'fitColumns',
-                placeholder: TableUtil.getPlaceholder('채용문의가 없습니다.'),
+                placeholder: `<div>
+                                <div class="mt-3">채용문의가 없습니다.</div>
+                              </div>`,
                 pagination: false,
                 paginationSize: paginationConfig.size,
                 paginationSizeSelector: paginationConfig.selector,

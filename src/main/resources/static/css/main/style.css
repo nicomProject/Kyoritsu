@@ -41,10 +41,7 @@ section .sub-title{
     padding: 24px;
 }
 
-.apply .container .content-default,
-.apply .container .content-education,
-.apply .container .content-career,
-.apply .container .content-personal{
+.apply .container .content{
     box-shadow:
             1px 0 0 0 #888,
             0 1px 0 0 #888,
