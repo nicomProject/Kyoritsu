@@ -18,15 +18,21 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 @Getter
-@SequenceGenerator(name = "SEQ_NOTICE_GENERATOR", sequenceName = "SEQ_NOTICE", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "SEQ_JOB_GENERATOR", sequenceName = "SEQ_JOB", initialValue = 1, allocationSize = 1)
 public class Job {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_NOTICE_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_JOB_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
 
     @Column(name = "category", length = 20)
     private String category;
+
+    @Column(name = "support", length = 20)
+    private String support;
+
+    @Column(name = "experience", length = 20)
+    private String experience;
 
     @Column(name = "title", length = 100)
     private String title;

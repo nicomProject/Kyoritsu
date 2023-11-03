@@ -31,6 +31,11 @@ public class JobController {
         return new ResponseHandler<>(jobService.findAll());
     }
 
+    @RequestMapping(path = "/job/findCategorySelf", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseHandler<?> findCategorySelf(@RequestBody JobParam param) {
+        return new ResponseHandler<>(jobService.findAllCategory(param));
+    }
+
     @RequestMapping(path = "/job/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseHandler<?> findSelf(@RequestBody @Valid JobParam param){
         return new ResponseHandler<>(jobService.findAll(param));

@@ -26,28 +26,44 @@
                 <table class="pageSubTable" th:if="${key == null}">
                     <tr class="pageSub">
                         <td><label for="category">카테고리</label></td>
-                        <td colspan="3">
-                            <!--                            <input type="text" id="category" name="category" required></td>-->
+                        <td>
                             <select id="category" name="category" class="form-select">
-                                <option value="job">채용공고</option>
+                            </select>
+                        </td>
+                        <td><label for="support">지원분야</label></td>
+                        <td>
+                            <select id="support" name="support" class="form-select">
+                                <option value="total">전체</option>
+                                <option value="dormitory">기숙사</option>
+                                <option value="domiin">도미인</option>
+                                <option value="resort">리조트</option>
+                                <option value="nursinghome">요양원</option>
+                            </select>
+                        </td>
+                        <td><label for="experience">경력여부</label></td>
+                        <td>
+                            <select id="experience" name="experience" class="form-select">
+                                <option value="newcomer">신입</option>
+                                <option value="career">경력</option>
+                                <option value="Synthesis">신입/경력</option>
                             </select>
                         </td>
                     </tr>
                     <tr class="pageSub">
                         <td><label for="title">제목</label></td>
-                        <td colspan="3"><input type="text" id="title" name="title" class="form-control"></td>
+                        <td colspan="5"><input type="text" id="title" name="title" class="form-control"></td>
                     </tr>
                     <tr class="pageSub">
 <!--                        <td><label for="notice_period">공고기간</label></td>-->
 <!--                        <td><input type="text" id="notice_period" name="notice_period"></td>-->
                         <td><label for="Datefrom">시작일</label></td>
-                        <td><input type="Date" name="Datefrom" id="Datefrom" autocomplete="off" class="form-control"></td>
+                        <td ><input type="Date" name="Datefrom" id="Datefrom" autocomplete="off" class="form-control"></td>
                         <td><label for="Dateto">종료일</label></td>
-                        <td><input type="Date" name="Dateto" id="Dateto" autocomplete="off" class="form-control"></td>
+                        <td colspan="3"><input type="Date" name="Dateto" id="Dateto" autocomplete="off" class="form-control"></td>
                     </tr>
                     <tr class="pageSub">
                         <td><label for="contents">본문</label></td>
-                        <td colspan="3">
+                        <td colspan="5">
                             <textarea class="form-control" name="contents" id="contents" rows="10" cols="100" ></textarea>
                         </td>
                     </tr>
@@ -72,14 +88,26 @@
                     <tr class="pageSub">
                         <td><label for="category">카테고리</label></td>
                         <td>
-                            <!--                            <input type="text" id="category" name="category" required></td>-->
                             <select id="category" name="category" class="form-select">
-                                <option value="job">채용공고</option>
                             </select>
-                        <td><label for="hit">조회수</label></td>
-                        <td><input type="text" id="hit" name="hit" class="form-control"></td>
-                        <td><label for="applicant">지원자</label></td>
-                        <td><input type="text" id="applicant" name="applicant" class="form-control"></td>
+                        </td>
+                        <td><label for="support">지원분야</label></td>
+                        <td>
+                            <select id="support" name="support" class="form-select">
+                                <option value="total">전체</option>
+                                <option value="dormitory">기숙사</option>
+                                <option value="domiin">도미인</option>
+                                <option value="resort">리조트</option>
+                                <option value="nursinghome">요양원</option>
+                            </select>
+                        </td>
+                        <td><label for="experience">경력여부</label></td>
+                        <td>
+                            <select id="experience" name="experience" class="form-select">
+                                <option value="newcomer">신입</option>
+                                <option value="career">경력</option>
+                                <option value="Synthesis">신입/경력</option>
+                            </select>
                         </td>
                     </tr>
                     <tr class="pageSub">
@@ -87,17 +115,17 @@
                         <td colspan="5"><input type="text" id="title" name="title" class="form-control"></td>
                     </tr>
                     <tr class="pageSub">
-                        <td><label for="create_user">작성자</label></td>
-                        <td><input type="text" id="create_user" name="sub_title" class="form-control"></td>
-                        <td><label for="create_data">작성일</label></td>
-                        <td><input type="text" id="create_data" name="sub_title" class="form-control"></td>
-                        <td><label for="notice_period">공고기간</label></td>
-                        <td><input type="text" id="notice_period" name="notice_period" class="form-control"></td>
+                        <!--                        <td><label for="notice_period">공고기간</label></td>-->
+                        <!--                        <td><input type="text" id="notice_period" name="notice_period"></td>-->
+                        <td><label for="Datefrom">시작일</label></td>
+                        <td ><input type="Date" name="Datefrom" id="Datefrom" autocomplete="off" class="form-control"></td>
+                        <td><label for="Dateto">종료일</label></td>
+                        <td colspan="3"><input type="Date" name="Dateto" id="Dateto" autocomplete="off" class="form-control"></td>
                     </tr>
                     <tr class="pageSub">
                         <td><label for="contents">본문</label></td>
                         <td colspan="5">
-                            <textarea class="form-control" name="contents" id="contents" rows="10" cols="100" th:value="${contents}"></textarea>
+                            <textarea class="form-control" name="contents" id="contents" rows="10" cols="100" ></textarea>
                         </td>
                     </tr>
                     <tr class="pageSub">
@@ -123,6 +151,4 @@
 <th:block th:replace="~{components/_footer::footer_manager}"></th:block>
 <script type="text/javascript" src="/static/js/admin/page/detail/job.js"></script>
 <script type="text/javascript" src="/static/js/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>

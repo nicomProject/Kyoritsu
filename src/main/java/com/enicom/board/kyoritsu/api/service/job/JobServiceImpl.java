@@ -45,11 +45,8 @@ public class JobServiceImpl implements JobService {
         System.out.println("1111111" + param);
 
         Job job = param.create();
-        System.out.println("222222" + job);
         job.setCreateDate(LocalDateTime.now());
-        System.out.println("333333333" + job);
         job.setCreateUser(member.getId());
-        System.out.println("4444444" + job);
         job.setFromDate(LocalDate.parse(param.getDate_from(), formatter).atStartOfDay());
         job.setToDate(LocalDate.parse(param.getDate_to(), formatter).atTime(23, 59, 59));
         jobRepository.save(job);
@@ -59,14 +56,22 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public PageVO<Job> findAll() {
-        System.out.println(jobRepository.findAllByDeleteDateNull() + "introductionsRepository.findAllByCreateDateNotNull()");
         return PageVO.builder(jobRepository.findAllByDeleteDateNull()).build();
     }
 
     @Override
     public PageVO<Job> findAll(JobParam param) {
-        System.out.println(jobRepository.findAllByDeleteDateNull() + "introductionsRepository.findAllByCreateDateNotNull()");
         return PageVO.builder(jobRepository.findAllByRecKey(Long.valueOf(param.getKey()))).build();
+    }
+
+    @Override
+    public PageVO<Job> findAllCategory(JobParam param) {
+        if(param.getCategory().equals("total")){
+            return PageVO.builder(jobRepository.findAllByDeleteDateNull()).build();
+        }
+        else {
+            return PageVO.builder(jobRepository.findAllByDeleteDateNullAndCategory(param.getCategory())).build();
+        }
     }
 
     @Transactional
