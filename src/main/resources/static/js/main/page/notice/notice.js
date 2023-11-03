@@ -14,12 +14,17 @@ $(function () {
     const Table = {
         table: null,
         load: function (target) {
+            return this.draw(target);
+        },
+        draw: function (target) {
             const that = this;
             const table = new Tabulator(target, {
                 locale: 'ko-kr',
                 langs: TableUtil.setDefaults(),
                 layout: 'fitColumns',
-                placeholder: TableUtil.getPlaceholder('공지사항이 없습니다.'),
+                placeholder: `<div>
+                                <div class="mt-3">공지사항이 없습니다.</div>
+                              </div>`,
                 pagination: false,
                 paginationSize: paginationConfig.size,
                 paginationSizeSelector: paginationConfig.selector,
