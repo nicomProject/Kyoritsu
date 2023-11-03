@@ -118,4 +118,10 @@ public class JobServiceImpl implements JobService {
         return ResponseDataValue.builder(200).build();
     }
 
+    @Override
+    public PageVO<Job> findSearch(JobParam param) {
+        System.out.println(jobRepository.findByTitleContaining(param.getTitle()));
+        return PageVO.builder(jobRepository.findByTitleContaining(param.getTitle())).build();
+    }
+
 }

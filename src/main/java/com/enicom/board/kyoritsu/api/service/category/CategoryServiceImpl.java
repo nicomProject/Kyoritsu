@@ -45,6 +45,11 @@ public class CategoryServiceImpl implements CategoryService {
     public PageVO<Category> findAll() {
         return PageVO.builder(categoryRepository.findAllByDeleteDateNull()).build();
     }
+
+//    @Override
+//    public PageVO<Category> findAllDetail(CategoryParam param) {
+//        return PageVO.builder(categoryRepository.findeDetail(param)).build();
+//    }
     @Transactional
     @Override
     public ResponseDataValue<?> delete(CategoryParam param) {

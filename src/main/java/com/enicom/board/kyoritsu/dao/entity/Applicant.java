@@ -80,6 +80,11 @@ public class Applicant {
 //    @Comment("지원자 ID")
 //    private Content resultId;
 
+    @JoinColumn(name = "job_id")
+    @ManyToOne
+    @Comment("지원공고")
+    private Job jobId;
+
     @Column(name = "pass_yn", length = 20)
     @Comment("합격여부")
     private String passYn;

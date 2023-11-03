@@ -75,7 +75,6 @@ $(function () {
         },
         draw: function (target) {
             const that = this;
-
             const roleHash = Data.roleHash || {};
             const table = new Tabulator(target, {
                 locale: 'ko-kr',
@@ -127,7 +126,15 @@ $(function () {
                         headerSort: false
                     },
                     {title: '카테고리', field: "category", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
-                            values: ["news"],
+                            values: {"news" : "뉴스"}, // 가능한 필드 값
+                        },
+                        formatter: function(cell) {
+                            var originalValue = cell.getValue();
+                            if (originalValue === "news") {
+                                return "뉴스";
+                            } else {
+                                return originalValue;
+                            }
                         }
                     },
                     {title: '제목', field: "title", tooltip: true, headerTooltip: true, headerFilter: 'input'},

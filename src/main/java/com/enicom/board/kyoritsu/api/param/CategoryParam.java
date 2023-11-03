@@ -13,6 +13,7 @@ import lombok.*;
 public class CategoryParam {
 
     private String categoryName;
+    private String key;
 
     @JsonIgnore
     public Category create(){

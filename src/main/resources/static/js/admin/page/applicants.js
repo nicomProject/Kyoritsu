@@ -8,6 +8,7 @@ $(function () {
 
             const category = $("#category");
             const table = Table.load('#table');
+            const tableDetail = TableDetail.load('#tableDetail');
 
 
             AjaxUtil.request({
@@ -26,8 +27,6 @@ $(function () {
             })
 
             category.on('change', function(){
-                Content.params.url = '/api/job/findCategorySelf';
-                console.log(Content.params.url)
                 AjaxUtil.requestBody({
                     url: '/api/job/findCategorySelf',
                     data: {
@@ -48,12 +47,32 @@ $(function () {
             this.event();
         },
         event: function () {
-            console.log(this.params.key)
-            if(this.params.key !== ""){
-            let urlDetail = '/api/applicant/findSelf/' + this.params.key
-            Content.params.urlDetail = urlDetail;
+
+            const card = $('.card');
+
+            $('#searchText').on('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            $('.btn[role="action"][data-action="search"]').on('click', function() {
+                performSearch();
+            });
+
+            function performSearch() {
+                const searchText = $('#searchText').val();
+                AjaxUtil.requestBody({
+                    url: '/api/job/search',
+                    data: {
+                        title: searchText
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        Table.table.setData(data.result.items);
+                    }
+                });
             }
-            const tableDetail = TableDetail.load('#tableDetail');
         }
     };
 
@@ -125,12 +144,10 @@ $(function () {
 
             const events = {
                 rowClick: function (e, row) {
-                    window.location.href = '/admin/applicants/' + row.getData().recKey;
-
-                    /*const tableDetail = Tabulator.findTable('#tableDetail')[0];
-                    const table = Tabulator.findTable('#table')[0]
-
-                    tableDetail.setData(table.getData());*/
+                    // window.location.href = '/admin/applicants/' + row.getData().recKey;
+                        let urlDetail = '/api/applicant/findSelf/' + row.getData().recKey
+                        Content.params.urlDetail = urlDetail;
+                    const tableDetail = TableDetail.load('#tableDetail');
                 },
 
                 downloadComplete: function () {

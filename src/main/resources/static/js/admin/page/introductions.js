@@ -113,7 +113,6 @@ $(function () {
             const subMenuCheckHash = Data.subMenuCheckHash || {};
             const subMenuHash = Data.subMenuHash || {};
             const MenuHash = Data.MenuHash || {};
-            console.log(subMenuCheckHash)
             const table = new Tabulator(target, {
                 locale: 'ko-kr',
                 langs: TableUtil.setDefaults(),
@@ -163,7 +162,8 @@ $(function () {
                         download: false,
                         headerSort: false
                     },
-                    {title: '카테고리', field: "category", headerHozAlign: "center", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
+                    {title: '카테고리', field: "category", headerHozAlign: "center", tooltip: true, headerTooltip: true, headerFilter: 'select',
+                        headerFilterParams: {
                             values: MenuHash,
                         }, formatter: function(cell){
                             return MenuHash[cell.getValue()] || cell.getValue();

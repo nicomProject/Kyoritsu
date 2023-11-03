@@ -22,4 +22,6 @@ public interface JobService {
     ResponseDataValue<?> delete(MultipleParam param);
 
     ResponseDataValue<?> update(JobParam param);
+
+    PageVO<Job> findSearch(JobParam param);
 }

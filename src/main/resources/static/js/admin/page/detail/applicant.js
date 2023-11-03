@@ -6,6 +6,31 @@ $(function () {
         formData: {},
         load: function (params) {
             this.params = params;
+
+            let items = [];
+            const category = $("#categoryDetail");
+            let categoryValue = "";
+
+            AjaxUtil.request({
+                url: '/api/category/find',
+                async: false,
+                success: function (data) {
+                    items = data.result.items;
+                }
+            });
+
+            items.forEach(item => {
+                category.append($('<option>', {
+                        value: item.recKey,
+                        text: item.categoryName,
+                    }
+                ));
+            })
+
+            category.on("change", function(){
+                categoryValue = $("#categoryDetail option:selected").val()
+                console.log(categoryValue)
+            })
             this.event();
         },
 
@@ -71,7 +96,7 @@ $(function () {
                             })
                         }
                     else if(action === "list"){
-                        location.href = '/admin/accounts'
+                        location.href = '/admin/applicants'
                     }
                 });
             });

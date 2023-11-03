@@ -1,9 +1,22 @@
 $(function () {
     const Content = {
+        categoryHash:{},
         params: {},
         load: function (params) {
+            const that = this;
+            let items = [];
             this.params = params;
 
+            AjaxUtil.request({
+                url: '/api/category/find',
+                async: false,
+                success: function (data) {
+                    items = data.result.items;
+                    items.forEach(menu => {
+                        that.categoryHash[menu.recKey] = menu.categoryName;
+                    })
+                }
+            });
             Data.load({role: true});
             this.event();
         },
@@ -135,7 +148,10 @@ $(function () {
                         headerSort: false
                     },
                     {title: '구분', field: "category", tooltip: true, headerTooltip: true, headerFilter: 'select', headerFilterParams: {
-                            values: ["job"],
+                            values: Content.categoryHash,
+                        },
+                        formatter: function(cell) {
+                            return Content.categoryHash[cell.getValue()];
                         }
                     },
                     {title: '제목', field: "title", tooltip: true, headerTooltip: true, headerFilter: 'input'},

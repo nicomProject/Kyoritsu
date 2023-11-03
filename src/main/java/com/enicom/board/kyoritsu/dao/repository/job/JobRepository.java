@@ -1,5 +1,6 @@
 package com.enicom.board.kyoritsu.dao.repository.job;
 
+import com.enicom.board.kyoritsu.api.param.JobParam;
 import com.enicom.board.kyoritsu.dao.entity.Job;
 import com.enicom.board.kyoritsu.dao.entity.Notice;
 import org.springframework.data.repository.CrudRepository;
@@ -16,6 +17,8 @@ public interface JobRepository extends CrudRepository<Job, Long>, JobRepositoryC
     List<Job> findAllByRecKey(Long recKey);
 
     List<Job> findAllByDeleteDateNullAndCategory(String category);
+
+    List<Job> findByTitleContaining(String title);
 
 
 }

@@ -51,4 +51,11 @@ public class JobController {
         return new ResponseHandler<>(jobService.delete(param));
     }
 
+    @RequestMapping(path = "/job/search", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseHandler<?> search(@RequestBody JobParam param) {
+        System.out.println(param.getTitle());
+        return new ResponseHandler<>(jobService.findSearch(param));
+    }
+
+
 }

@@ -10,6 +10,8 @@ public interface CategoryService {
 
     ResponseDataValue<?> add(CategoryParam param);
     PageVO<Category> findAll();
+
+//    PageVO<Category> findAllDetail(CategoryParam param);
     ResponseDataValue<?> delete(CategoryParam param);
 
 }
