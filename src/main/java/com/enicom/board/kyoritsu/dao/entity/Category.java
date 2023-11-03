@@ -1,4 +1,4 @@
-package com.enicom.board.kyoritsu.dao.entity.admin;
+package com.enicom.board.kyoritsu.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -18,10 +18,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 @Getter
-@SequenceGenerator(name = "SEQ_NOTICE_GENERATOR", sequenceName = "SEQ_NOTICE", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "SEQ_CATEGORY_GENERATOR", sequenceName = "SEQ_CATEGORY", initialValue = 1, allocationSize = 1)
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_NOTICE_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CATEGORY_GENERATOR")
     @Column(name = "rec_key")
     private Long recKey;
 

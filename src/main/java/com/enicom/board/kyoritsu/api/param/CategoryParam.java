@@ -1,7 +1,6 @@
 package com.enicom.board.kyoritsu.api.param;
 
-import com.enicom.board.kyoritsu.dao.entity.Job;
-import com.enicom.board.kyoritsu.dao.entity.admin.Category;
+import com.enicom.board.kyoritsu.dao.entity.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 

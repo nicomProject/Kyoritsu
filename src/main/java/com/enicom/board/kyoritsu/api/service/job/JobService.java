@@ -15,6 +15,8 @@ public interface JobService {
 
     PageVO<Job> findAll();
 
+    PageVO<Job> findAllCategory(JobParam param);
+
     PageVO<Job> findAll(JobParam param);
 
     ResponseDataValue<?> delete(MultipleParam param);

@@ -4,14 +4,55 @@ $(function () {
         load: function (params) {
             this.params = params;
             Data.load({role: true});
+            let items = [];
+
+            const category = $("#category");
+            const table = Table.load('#table');
+
+
+            AjaxUtil.request({
+                url: '/api/category/find',
+                async: false,
+                success: function (data) {
+                    items = data.result.items;
+                }
+            });
+            items.forEach(item => {
+                category.append($('<option>', {
+                        value: item.recKey,
+                        text: item.categoryName,
+                    }
+                ));
+            })
+
+            category.on('change', function(){
+                Content.params.url = '/api/job/findCategorySelf';
+                console.log(Content.params.url)
+                AjaxUtil.requestBody({
+                    url: '/api/job/findCategorySelf',
+                    data: {
+                        category : category.val()
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            table.setData(data.result.items);
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                html: "조회가 실패하였습니다",
+                            })
+                        }
+                    }
+                })
+            })
             this.event();
         },
         event: function () {
+            console.log(this.params.key)
             if(this.params.key !== ""){
             let urlDetail = '/api/applicant/findSelf/' + this.params.key
             Content.params.urlDetail = urlDetail;
             }
-            const table = Table.load('#table');
             const tableDetail = TableDetail.load('#tableDetail');
         }
     };

@@ -1,8 +1,6 @@
 package com.enicom.board.kyoritsu.dao.repository.category;
 
-import com.enicom.board.kyoritsu.dao.entity.Applicant;
-import com.enicom.board.kyoritsu.dao.entity.admin.Category;
-import com.enicom.board.kyoritsu.dao.entity.admin.Manager;
+import com.enicom.board.kyoritsu.dao.entity.Category;
 import com.enicom.board.kyoritsu.dao.repository.inquiry.InquiryRepositoryCustom;
 import org.springframework.data.repository.CrudRepository;
 

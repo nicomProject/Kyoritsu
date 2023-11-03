@@ -56,14 +56,22 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public PageVO<Job> findAll() {
-        System.out.println(jobRepository.findAllByDeleteDateNull() + "introductionsRepository.findAllByCreateDateNotNull()");
         return PageVO.builder(jobRepository.findAllByDeleteDateNull()).build();
     }
 
     @Override
     public PageVO<Job> findAll(JobParam param) {
-        System.out.println(jobRepository.findAllByDeleteDateNull() + "introductionsRepository.findAllByCreateDateNotNull()");
         return PageVO.builder(jobRepository.findAllByRecKey(Long.valueOf(param.getKey()))).build();
+    }
+
+    @Override
+    public PageVO<Job> findAllCategory(JobParam param) {
+        if(param.getCategory().equals("total")){
+            return PageVO.builder(jobRepository.findAllByDeleteDateNull()).build();
+        }
+        else {
+            return PageVO.builder(jobRepository.findAllByDeleteDateNullAndCategory(param.getCategory())).build();
+        }
     }
 
     @Transactional

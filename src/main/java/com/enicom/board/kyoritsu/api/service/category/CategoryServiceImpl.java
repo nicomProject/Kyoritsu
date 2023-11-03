@@ -1,25 +1,18 @@
 package com.enicom.board.kyoritsu.api.service.category;
 
 import com.enicom.board.kyoritsu.api.param.CategoryParam;
-import com.enicom.board.kyoritsu.api.param.JobParam;
-import com.enicom.board.kyoritsu.api.param.type.MultipleParam;
-import com.enicom.board.kyoritsu.api.param.type.MultipleType;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
-import com.enicom.board.kyoritsu.dao.entity.Job;
-import com.enicom.board.kyoritsu.dao.entity.admin.Category;
+import com.enicom.board.kyoritsu.dao.entity.Category;
 import com.enicom.board.kyoritsu.dao.repository.category.CategoryRepository;
-import com.enicom.board.kyoritsu.dao.repository.job.JobRepository;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Optional;
 
 @Service

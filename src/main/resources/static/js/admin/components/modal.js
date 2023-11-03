@@ -598,7 +598,7 @@ $(function () {
                         items = data.result.items;
                         items.forEach(item => {
                             modal.obj.find("#category").append($('<option>', {
-                                    value: item.categoryName,
+                                    value: item.recKey,
                                     text: item.categoryName,
                                 }
                             ));
@@ -618,7 +618,7 @@ $(function () {
             const SelectValue = modal.obj.find("#category");
 
             SelectValue.on('change', function(){
-                modal.obj.find("#jobCategory").val(modal.obj.find("#category").val())
+                modal.obj.find("#jobCategory").val(modal.obj.find("#category option:selected").text())
             })
 
             AddButton.click(function (e) {
