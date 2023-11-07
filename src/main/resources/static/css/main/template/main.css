@@ -158,7 +158,7 @@ p {
   width: 45px;
   height: 45px;
   background: #005bab;
-  display: flex;
+  display: flex !important;
   justify-content: center;
   align-items: center;
   font-size: 14px;
@@ -1391,7 +1391,10 @@ p {
 ========================================*/
 .hero-slider {
   position: relative;
-  background: #005bab08;
+  /*background: #005bab08;*/
+
+  background-image: url(/static/images/main/hero-bg.jpg);
+  background-size: contain;
 }
 
 .hero-slider .single-slider {
@@ -1399,6 +1402,8 @@ p {
   background-size: cover;
   background-position: center;
   position: relative;
+
+  background: rgb(0 0 0 / 26%);
 }
 
 .hero-slider .single-slider::before {
@@ -1406,7 +1411,7 @@ p {
   content: "";
   right: 0;
   width: 50%;
-  background-image: url(/static/images/main/hero-bg.jpg);
+  /*background-image: url(/static/images/main/hero-bg.jpg);*/
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1432,7 +1437,7 @@ p {
 }
 
 .hero-slider .hero-text h1 {
-  color: #333;
+  color: #ffffff;
   font-size: 40px;
   font-weight: 700;
   line-height: 50px;
@@ -1444,7 +1449,7 @@ p {
 }
 
 .hero-slider .hero-text p {
-  color: #666;
+  color: #ffffff;
   font-size: 14px;
 }
 
@@ -1453,14 +1458,14 @@ p {
 }
 
 .hero-slider .hero-text .button .btn {
-  color: #333;
+  color: #ffffff;
   background: transparent;
   border: none;
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
   border: 1px solid transparent;
-  border: 2px solid #333;
+  border: 2px solid #ffffff;
 }
 
 .hero-slider .hero-text .button .btn {
@@ -1472,7 +1477,7 @@ p {
 }
 
 .hero-slider .hero-text .button .btn:hover {
-  border-color: #005bab;
+  border-color: #ffffff;
   color: #fff;
 }
 
@@ -1583,10 +1588,13 @@ p {
   line-height: 55px;
   text-align: center;
   color: #ffffff;
-  display: inline-block;
   position: absolute;
   left: 0;
   top: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Features .feature-item .banner-content {
@@ -1648,9 +1656,12 @@ p {
   background: #fff;
   color: #333;
   border-radius: 100%;
-  display: inline-block;
   font-size: 28px;
   padding-left: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .feature-right .video-head .video:hover {
@@ -1764,13 +1775,17 @@ p {
   width: 65px;
   line-height: 65px;
   text-align: center;
-  background: #74b9ff;
+ /* background: #74b9ff;*/
   color: #005bab;
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
   background: #005bab0f;
   border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .services .single-service:hover {
