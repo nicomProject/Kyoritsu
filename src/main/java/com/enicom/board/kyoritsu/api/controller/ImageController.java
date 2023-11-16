@@ -2,7 +2,6 @@ package com.enicom.board.kyoritsu.api.controller;
 
 
 import com.enicom.board.kyoritsu.api.service.image.ImageService;
-import com.enicom.board.kyoritsu.api.type.ResponseDataValue;
 import com.enicom.board.kyoritsu.api.type.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +12,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Array;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,5 +40,48 @@ public class ImageController {
     // @ApiMapping(order = 25, desc = "[자료실] 이미지 다운로드", param = RoomInfoParam.class)
     public void downloadRoomImage(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "name") String name) {
         imageService.download(request, response, name);
+    }
+
+    @RequestMapping(path = "/uploadImages", method = RequestMethod.POST)
+    public String testRoomImage(HttpServletRequest request, HttpServletResponse response, @RequestParam("images") MultipartFile[] images) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat ("yyyyMMddhhmmss");
+        System.out.println(sdf.format(timestamp));
+
+        try {
+            for (int i = 0; i < images.length; i++) {
+                MultipartFile image = images[i];
+
+                if (!image.isEmpty()) {
+                    System.out.println(image.getName());
+                    System.out.println(image.getOriginalFilename());
+                    System.out.println(image.getSize());
+                    // 이미지 데이터를 바이트 배열로 가져옴
+                    byte[] fileData = image.getBytes();
+
+                    // 파일 이름을 생성 (예: image0.png, image1.png)
+                    String fileName = "image" + sdf.format(timestamp) + ".png";
+
+                    // 파일을 서버에 저장
+                    try {
+                        // 이미지 데이터를 파일로 저장
+                        File file = new File("D:/Kyoritsu(1101)/src/main/resources/static/images/image/" + fileName);
+                        System.out.println(file);
+                        FileOutputStream fos = new FileOutputStream(file);
+                        fos.write(fileData);
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    String imageUrl = fileName;
+                    return imageUrl;
+
+                    // 파일 경로나 URL을 클라이언트에게 전달하거나 저장 로직을 추가하세요
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Image upload failed"; // 실패한 경우에도 어떤 값을 반환할지 정의
     }
 }

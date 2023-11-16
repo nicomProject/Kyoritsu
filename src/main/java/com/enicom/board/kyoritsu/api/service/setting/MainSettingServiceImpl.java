@@ -24,7 +24,7 @@ public class MainSettingServiceImpl implements MainSettingService {
         List<Role> roles = securityUtil.getRoleList();
         return PageVO.builder(menuRepository.findAllByOrderByRecKey()).build();
     }
-
+    @Transactional
     @Override
     public PageVO<MainMenu> getCategoryList() {
         return PageVO.builder(menuRepository.findAllByType(MenuType.INTRO)).build();

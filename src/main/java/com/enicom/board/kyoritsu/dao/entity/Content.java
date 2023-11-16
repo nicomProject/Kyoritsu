@@ -10,6 +10,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 @Entity(name = "tb_content")
@@ -38,7 +39,7 @@ public class Content {
     @Column(name = "subcategory", length = 20)
     private String subcategory;
 
-    // @Lob
+    @Lob
     @Column(name = "content")
     private String content;
 
