@@ -14,11 +14,11 @@ public class InquiryParam {
 
     private String title;
     private String key;
-    private String question;
-    private String answer;
-    private String inquiryId;
+    private String inquiryName;
     private String inquiryPwd;
     private String inquirySecret;
+    private String inquiryPhone;
+    private String inquiryContent;
     private String answerUser;
 
     @JsonIgnore
@@ -32,26 +32,17 @@ public class InquiryParam {
 //
     @JsonIgnore
     public void applyTo(Inquiry inquiry) {
-        if (this.title != null) {
-            inquiry.setTitle(this.title);
+        if (this.inquiryPhone != null) {
+            inquiry.setTitle(this.inquiryPhone);
         }
-        if (this.question != null) {
-            inquiry.setQuestion(this.question);
-        }
-        if (this.answer != null) {
-            inquiry.setAnswer(this.answer);
-        }
-        if (this.inquiryId != null) {
-            inquiry.setAnswer(this.inquiryId);
+        if (this.inquiryName != null) {
+            inquiry.setAnswer(this.inquiryName);
         }
         if (this.inquiryPwd != null) {
             inquiry.setAnswer(this.inquiryPwd);
         }
-        if (this.inquirySecret != null) {
-            inquiry.setAnswer(this.inquirySecret);
-        }
-        if (this.answerUser != null) {
-            inquiry.setAnswer(this.answerUser);
+        if (this.inquiryContent != null) {
+            inquiry.setAnswer(this.inquiryContent);
         }
     }
 

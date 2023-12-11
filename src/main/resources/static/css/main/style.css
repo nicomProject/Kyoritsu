@@ -19,9 +19,18 @@ section .sub-title{
 }
 /* apply.html */
 
+.apply-section .tabulator{
+    border: none !important;
+    border-right: 0;
+    font-size: 13px !important;
+}
+
+.apply-section .tabulator > div.tabulator-header > div{
+    border-top: 2px solid black;
+}
+
 .apply-section{
     padding-top: 0 !important;
-    background: #f5f5f5;
 }
 
 .apply.apply-section .container{
@@ -149,8 +158,25 @@ section .sub-title{
     margin-right: 10px;
 }
 
+.apply-section .info-container label{
+    font-weight: bold;
+}
 
 /* inquire */
+
+.apply-inquire .submit-btn button[data-action="add"]{
+    background: #0072D6;
+    padding: 20px 70px;
+    font-size: 1rem;
+    border: none;
+    color: white;
+}
+
+.apply-inquire .submit-btn{
+    display: flex;
+    justify-content: center;
+}
+
 .apply-inquire .info-container{
     background: white;
     border: 1px solid #9e9e9e;
@@ -195,9 +221,123 @@ section .sub-title{
 
 }
 
+/* business-overview */
+
+.business.section .editor-content .box-1{
+    height: 6rem;
+    text-align: center;
+}
+
+.business.section .editor-content .box-2{
+    display: flex;
+    justify-content: space-between; /* 요소들을 좌우로 분산 정렬합니다. */
+    align-items: center; /* 요소들을 수직 중앙 정렬합니다. */
+}
+
+.business.section .editor-content .box-2 .profile.profile-1 {
+    flex: 1;
+    padding: 0 10px; /* 텍스트와 이미지 간격을 조절합니다. */
+}
+
+
+.business.section .editor-content .box-2 .profile.profile-1 .profile-link-1{
+    margin-bottom: 20px; /* 각 링크 사이에 간격을 조절합니다. */
+    font-size: 32px;
+    color: blue;
+}
+
+.business.section .editor-content .box-2 .profile.profile-1 .profile-link-2{
+    margin-bottom: 20px; /* 각 링크 사이에 간격을 조절합니다. */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.business.section .editor-content .box-2 .profile.profile-1 .profile-link-2 a{
+    margin-bottom: 10px; /* 원하는 만큼의 간격을 설정합니다. */
+}
+
+.business.section .editor-content .box-2 .profile.profile-1 .profile-link-3{
+    margin-bottom: 20px; /* 각 링크 사이에 간격을 조절합니다. */
+    font-size: 24px;
+}
+
+.business.section .editor-content .box-2 .profile.profile-1 .profile-link-3 a{
+    margin-bottom: 10px; /* 원하는 만큼의 간격을 설정합니다. */
+}
+
+.business.section .editor-content .box-2 .profile.profile-2 {
+    flex: 1;
+    padding: 0 10px; /* 텍스트와 이미지 간격을 조절합니다. */
+}
+
+.business.section .editor-content .box-2 .profile.profile-2 img {
+    max-width: 100%;
+    height: auto; /* 이미지의 가로를 최대로 유지하면서 비율을 유지합니다. */
+}
+
+.business.section .editor-content .box-3{
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+.business.section .editor-content .box-3 img{
+    max-width: 25%;
+    height: auto; /* 이미지의 가로를 최대로 유지하면서 비율을 유지합니다. */
+    display: block; /* 이미지를 블록 레벨로 설정하여 가운데 정렬합니다. */
+    margin-left: auto; /* 왼쪽 여백을 자동으로 설정하여 가운데 정렬합니다. */
+    margin-right: auto; /* 오른쪽 여백을 자동으로 설정하여 가운데 정렬합니다. */
+}
+
+.business.section .editor-content .box-4{
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 70%;
+    margin-left: auto; /* 왼쪽 여백을 자동으로 설정하여 가운데 정렬합니다. */
+    margin-right: auto; /* 오른쪽 여백을 자동으로 설정하여 가운데 정렬합니다. */
+    background: rgba(130, 193, 209, 0.2)
+}
+
+.business.section .editor-content .box-4 .profile-content-1{
+    flex: 1.5; /* 1.5:8.5 비율로 나누기 */
+    color: #0067bb;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.business.section .editor-content .box-4 .profile-content-2{
+    flex: 8.5;
+    padding-left: 20px; /* 좌측 여백 추가 (선택 사항) */
+    display: block; /* 링크를 블록 레벨로 설정하여 줄 바꿈이 제대로 동작하도록 합니다. */
+    margin-bottom: 10px; /* 각 링크 아래에 여백 추가 (선택 사항) */
+    border-left: 2px solid #0067bb;
+    color: #0067bb;
+    font-size: 1.7rem;
+    margin-left: 1em;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.business.section .editor-content .box-5{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 70%;
+    margin-left: auto; /* 왼쪽 여백을 자동으로 설정하여 가운데 정렬합니다. */
+    margin-right: auto; /* 오른쪽 여백을 자동으로 설정하여 가운데 정렬합니다. */
+    margin-top: 45px;
+    line-height: 1.8721428571;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
 
 /* overview */
 .overview.section .container .flex-box{
+
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -1653,6 +1793,14 @@ section .sub-title{
     padding-bottom: 15px;
 }
 
+.notice.section .notice-title .list-btn{
+    font-size: 22px;
+}
+
+.notice-section #content{
+    text-align: left !important;
+}
+
 .notice.section #title{
     font-weight: 600;
     font-size: 1.5rem;
@@ -2009,4 +2157,42 @@ section .sub-title{
 /* bootstrap.min.css */
 @media (min-width: 768px) .col-md-6{
     margin: 30px 0;
+}
+
+
+
+.breadcrumbs-content.center {
+    position: relative;
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: flex-end; /* 수직 아래 정렬 */
+    padding-top: 110px;
+}
+
+.breadcrumbs-content.center button {
+    padding: 45px 90px; /* 버튼 안의 내용과 버튼 주변 간격 조절 */
+    background-color: rgba(128, 128, 128, 0.1); /* 90% 투명한 회색 배경 */
+    color: #fff; /* 텍스트 색상 설정 */
+    border: none; /* 테두리 제거 */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능한 상태로 표시 */
+    transition: background-color 0.3s ease; /* 부드러운 배경색 전환 효과 */
+    border-radius: 0px;
+    font-size: 18px;
+}
+
+.breadcrumbs-content.center button:hover {
+    background-color: #f5f5f5;
+    color: #1B1C1D;
+}
+
+.breadcrumbs-content.title {
+    text-align: center;
+}
+
+.breadcrumbs-content.title {
+    text-align: center;
+}
+
+.breadcrumbs .blank{
+    margin-bottom: 110px;
 }

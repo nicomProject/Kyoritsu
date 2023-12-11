@@ -190,7 +190,7 @@ th {
 	background-position: center;
 	background-repeat: no-repeat;
 	position: relative;
-	padding: 110px 0;
+	/* padding-top: 110px; */
 	
 }
 /*Subheader*/
@@ -227,20 +227,20 @@ th {
 .breadcrumbs .breadcrumbs-content .page-title:before{
 	position:absolute;
 	content:"";
-	left:0;
 	bottom:0;
 	height:2px;
-	width:80px;
+	width:150px;
 	background:#005bab;
 }
 .breadcrumbs .breadcrumbs-content .breadcrumb-nav {
 	background: transparent;
 	border-radius: 0;
 	margin-bottom: 0;
-	padding: 0;
 	display: block;
 	display: inline-block;
 	float: right;
+	padding-top: 10px;
+	padding-bottom: 100px;
 }
 .breadcrumbs .breadcrumbs-content .breadcrumb-nav li{
 	display:inline-block;

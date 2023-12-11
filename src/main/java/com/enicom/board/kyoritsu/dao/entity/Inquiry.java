@@ -27,19 +27,24 @@ public class Inquiry {
     @Column(name = "title", length = 100)
     private String title;
 
-    @Column(name = "question", length = 10000)
-    private String question;
-
     @Column(name = "answer", length = 10000)
     private String answer;
 
-    @Column(name = "inquiry_id", length = 20, nullable = false)
+    @Column(name = "inquiry_name", length = 20, nullable = false)
     @Comment("문의 작성한 사용자 아이디")
-    private String inquiryId;
+    private String inquiryName;
 
     @Column(name = "inquiry_pwd", length = 200, nullable = false)
     @Comment("문의 작성한 사용자 비밀번호")
     private String inquiryPwd;
+
+    @Column(name = "inquiry_phone", length = 200, nullable = false)
+    @Comment("문의 작성한 사용자 핸드폰번호")
+    private String inquiryPhone;
+
+    @Column(name = "inquiry_content", length = 10000)
+    @Comment("문의 작성한 내용")
+    private String inquiryContent;
 
     @Column(name = "inquiry_secret")
     @Comment("문의 공개 여부")

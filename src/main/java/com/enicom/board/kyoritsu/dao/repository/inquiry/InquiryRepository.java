@@ -13,6 +13,6 @@ public interface InquiryRepository extends CrudRepository<Inquiry, Long>, Inquir
 
     List<Inquiry> findAllByRecKey(Long recKey);
 
-    List<Inquiry> findAllByDeleteDateNull();
+    List<Inquiry> findAllByDeleteDateNullOrderByCreateDateDesc();
 
 }

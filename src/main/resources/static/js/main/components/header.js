@@ -13,7 +13,6 @@ const Menu = {
 
                 /* 각 메뉴별 content 불러오기 */
                 const submenu = Menu.subMenus;
-                console.log(submenu)
 
                 submenu.forEach(menu =>{
                     const path = menu.url;
@@ -50,7 +49,7 @@ const Menu = {
     },
     createMenuGroup: function (menu) {
 
-        return $(`<li class="nav-item">
+        return $(`<li class="nav-item col-12 col-md-3 mx-2">
                     <a class="nav-link" href="javascript:void(0)"
                         data-bs-toggle="collapse" data-bs-target="#submenu-${menu.recKey}-1"
                         aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -64,7 +63,7 @@ const Menu = {
         const path = subMenu.url || '/';
         let activated = location.pathname ===  path ? 'active' : '';
 
-        return $(`<li class="nav-item ${activated}"><a href="${path}">${subMenu.name}</a></li>`);
+        return $(`<li class="nav-item col-12 mx-2 ${activated}"><a href="${path}">${subMenu.name}</a></li>`);
     },
 };
 
@@ -75,6 +74,7 @@ $(function () {
             this.event();
         },
         event: function () {
+
             const $body = $('body');
             const navbar = $('.navbar');
 

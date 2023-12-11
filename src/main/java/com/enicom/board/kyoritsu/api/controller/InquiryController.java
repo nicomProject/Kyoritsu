@@ -24,17 +24,18 @@ public class InquiryController {
     public ResponseHandler<?> find() {
         return new ResponseHandler<>(inquiryService.findAll());
     }
-    @RequestMapping(path = "/inquiry/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseHandler<?> findSelf(@RequestBody @Valid InquiryParam param) {
-        return new ResponseHandler<>(inquiryService.findAll(param));
-    }
+//    @RequestMapping(path = "/inquiry/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ResponseHandler<?> findSelf(@RequestBody @Valid InquiryParam param) {
+//        return new ResponseHandler<>(inquiryService.findAll(param));
+//    }
     @RequestMapping(value = "/inquiry/add", method = RequestMethod.POST)
     public ResponseHandler<?> Add(@RequestBody @Valid InquiryParam param) throws Exception {
+        System.out.println(param);
         return new ResponseHandler<>(inquiryService.add(param));
     }
-    @RequestMapping(value = "/inquiry/delete", method = RequestMethod.POST)
-    public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
-        return new ResponseHandler<>(inquiryService.delete(param));
-    }
+//    @RequestMapping(value = "/inquiry/delete", method = RequestMethod.POST)
+//    public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
+//        return new ResponseHandler<>(inquiryService.delete(param));
+//    }
 
 }

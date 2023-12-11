@@ -40,7 +40,6 @@ $(function () {
                         return [];
                     }
                     response = response.result;
-                    console.log(response)
                     return response.items;
                 },
                 ajaxError: TableUtil.ajaxError,
@@ -55,10 +54,15 @@ $(function () {
                         download: false,
                         headerSort: false
                     },
-                    {title: '카테고리', field: "category", tooltip: true, headerTooltip: true,
-                        headerFilterParams: {
-                            values: ["company"],
-                        }, headerSort: false, hozAlign: "center", headerHozAlign: "center",
+                    {title: '카테고리', field: "category", tooltip: true, headerTooltip: true, headerFilterParams: {values: ["company"]}, headerSort: false, hozAlign: "center", headerHozAlign: "center",
+                        formatter: function(cell) {
+                            var originalValue = cell.getValue();
+                            if (originalValue === "news") {
+                                return "뉴스";
+                            } else {
+                                return originalValue;
+                            }
+                        }
                     },
                     {title: '제목', field: "title", tooltip: true, headerTooltip: true, headerSort: false, hozAlign: "center", headerHozAlign: "center", },
                     {title: '작성자', field: "createUser", tooltip: true, headerTooltip: true, headerSort: false, hozAlign: "center", headerHozAlign: "center",},

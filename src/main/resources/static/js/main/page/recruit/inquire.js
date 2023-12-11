@@ -8,6 +8,15 @@ $(function () {
         },
         event: function () {
             Table.load("#table");
+
+            const card = $('.submit-btn');
+            card.find('*[role="action"]').click(function(e){
+                const action = this.dataset.action;
+
+                if(action === 'add'){
+                    window.location.href = '/recruit/inquire/add'
+                }
+            })
         }
     }
 
@@ -37,7 +46,6 @@ $(function () {
                         return [];
                     }
                     response = response.result;
-                    console.log(response)
                     return response.items;
                 },
                 ajaxError: TableUtil.ajaxError,
@@ -64,6 +72,15 @@ $(function () {
                     {
                         title: '작성자',
                         field: "createUser",
+                        tooltip: true,
+                        headerTooltip: true,
+                        headerSort: false,
+                        hozAlign: "center",
+                        headerHozAlign: "center",
+                    },
+                    {
+                        title: '조회수',
+                        field: "hit",
                         tooltip: true,
                         headerTooltip: true,
                         headerSort: false,
@@ -99,6 +116,6 @@ $(function () {
     }
 
     Content.load({
-        url: "/api/notice/find"
+        url: "/api/inquiry/find"
     });
 });

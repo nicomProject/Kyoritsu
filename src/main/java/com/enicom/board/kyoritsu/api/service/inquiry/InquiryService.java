@@ -8,7 +8,7 @@ import com.enicom.board.kyoritsu.dao.entity.Inquiry;
 
 public interface InquiryService {
 
-    PageVO<?> findAll();
+    PageVO<Inquiry> findAll();
 
     PageVO<Inquiry> findAll(InquiryParam param);
 

@@ -46,7 +46,6 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public PageVO<Notice> findAll() {
-        System.out.println(noticeRepository.findAllByDeleteDateNullOrderByCreateDateDesc() + "introductionsRepository.findAllByCreateDateNotNull()");
         return PageVO.builder(noticeRepository.findAllByDeleteDateNullOrderByCreateDateDesc()).build();
     }
 

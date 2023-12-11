@@ -45,7 +45,7 @@ public class InquiryServiceImpl implements InquiryService {
     @Transactional
     @Override
     public PageVO<Inquiry> findAll() {
-        return PageVO.builder(inquiryRepository.findAllByDeleteDateNull()).build();
+        return PageVO.builder(inquiryRepository.findAllByDeleteDateNullOrderByCreateDateDesc()).build();
     }
 
     @Override
@@ -54,16 +54,9 @@ public class InquiryServiceImpl implements InquiryService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         MemberDetail member = securityUtil.getCurrentUser();
 
-        Optional<Inquiry> inquiryOptional = inquiryRepository.findByRecKey(Long.valueOf(param.getKey()));
-        if(!inquiryOptional.isPresent()){
-            return ResponseDataValue.builder(210).desc("잘못된 등록번호입니다").build();
-        }
-
-        Inquiry inquiry = inquiryOptional.get();
+        Inquiry inquiry = param.create();
         param.applyTo(inquiry);
-        inquiry.setAnswer(param.getAnswer());
-        inquiry.setAnswerUser(member.getId());
-        inquiry.setAnswerDate(LocalDateTime.now());
+        inquiry.setCreateDate(LocalDateTime.now());
 
         inquiryRepository.save(inquiry);
 

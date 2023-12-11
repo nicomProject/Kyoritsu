@@ -27,8 +27,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class HomeController {
     private final SecurityUtil securityUtil;
-    private NoticeRepository noticeRepository;
-
     @GetMapping(path = {"/"})
     public String home(Model model) throws Exception {
         return "main/index";
@@ -48,7 +46,7 @@ public class HomeController {
     }
 
     @GetMapping("/recruit/inquire/{action}")
-    public String recruitAction(@PathVariable String category, @PathVariable String page, @PathVariable String action) throws IOException {
+    public String recruitAction(@PathVariable String action) throws IOException {
         return String.format("main/recruit/inquire/%s", action);
     }
 

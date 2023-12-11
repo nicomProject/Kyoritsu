@@ -1315,6 +1315,7 @@ p {
   visibility: hidden;
   transition: all 0.3s ease-out 0s;
   padding: 10px;
+  width: 100%;
 }
 
 .navbar-nav .nav-item .sub-menu.left-menu {
@@ -1323,7 +1324,27 @@ p {
 
 .navbar-nav .nav-item .sub-menu.collapse:not(.show) {
   display: block;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
 }
+
+.navbar-nav .nav-item .sub-menu.collapse.show {
+  /* 여기에 .show 클래스가 존재할 때의 스타일을 지정하세요 */
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
+.navbar-nav .nav-item .sub-menu.collapsing {
+  /* 여기에 .show 클래스가 존재할 때의 스타일을 지정하세요 */
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
 (max-width: 767px) {
@@ -2640,4 +2661,22 @@ span.circle {
 
 .free-version-banner .button .btn .dir-part {
   background-color: #333;
+}
+
+.navbar-nav {
+  width: 100% !important;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
+}
+
+.nav-item.col-12.col-md-3.mx-2 .nav-link {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav-item col-12 col-md-3 mx-2 {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
