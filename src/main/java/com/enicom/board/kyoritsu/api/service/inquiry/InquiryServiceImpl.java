@@ -38,8 +38,8 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Transactional
     @Override
-    public PageVO<Inquiry> findAll(InquiryParam param) {
-        return PageVO.builder(inquiryRepository.findAllByRecKey(Long.valueOf(param.getKey()))).build();
+    public PageVO<Inquiry> findAll(Long key) {
+        return PageVO.builder(inquiryRepository.findAllByRecKey(key)).build();
     }
 
     @Transactional
@@ -51,8 +51,7 @@ public class InquiryServiceImpl implements InquiryService {
     @Override
     public ResponseDataValue<?> add(InquiryParam param) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        MemberDetail member = securityUtil.getCurrentUser();
+        System.out.println(param);
 
         Inquiry inquiry = param.create();
         param.applyTo(inquiry);

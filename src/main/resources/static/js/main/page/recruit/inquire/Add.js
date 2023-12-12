@@ -13,6 +13,8 @@ $(function () {
                 var phoneValue = $("input[name='phone']").val();
                 var passwordValue = $("input[name='password']").val();
                 var textareaValue = $(".inquire-input").val();
+                var titleValue = $("input[name='title']").val();
+                var secretValue = $("input[name='secret']").prop("checked");
 
                 if(action === 'add'){
                     AjaxUtil.requestBody({
@@ -22,6 +24,8 @@ $(function () {
                             inquiryPhone: phoneValue,
                             inquiryPwd: passwordValue,
                             inquiryContent: textareaValue,
+                            inquiryTitle: titleValue,
+                            inquirySecret: secretValue
                         },
                         success: function (data) {
                             if (data.code == 200) {

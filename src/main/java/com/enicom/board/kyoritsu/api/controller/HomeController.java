@@ -50,6 +50,14 @@ public class HomeController {
         return String.format("main/recruit/inquire/%s", action);
     }
 
+    @GetMapping("/recruit/inquire/{action}/{key}")
+    public String recruitAction(Model model, @PathVariable String action, @PathVariable long key) throws IOException {
+        System.out.println("action타는곳");
+        System.out.println(action);
+        model.addAttribute("key", key);
+        return String.format("main/recruit/inquire/%s", action);
+    }
+
     @GetMapping(path = { "/admin"})
     public String admin(Model model) throws Exception {
         return login(model);
@@ -103,7 +111,6 @@ public class HomeController {
 
     @GetMapping("/admin/{page}/{key}")
     public String admin(Model model, HttpServletResponse response, @PathVariable String page, @PathVariable long key) throws IOException {
-        System.out.println("ㅇㅇㅇ?");
         MemberDetail member = getCurrentUser(model);
         if (member == null || page.equalsIgnoreCase("login")) {
             response.sendRedirect("/admin");

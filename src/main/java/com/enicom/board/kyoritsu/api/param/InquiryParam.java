@@ -12,14 +12,14 @@ import lombok.*;
 @Setter
 public class InquiryParam {
 
-    private String title;
     private String key;
     private String inquiryName;
     private String inquiryPwd;
-    private String inquirySecret;
     private String inquiryPhone;
     private String inquiryContent;
+    private String inquiryTitle;
     private String answerUser;
+    private String inquirySecret;
 
     @JsonIgnore
     public Inquiry create(){
@@ -33,16 +33,22 @@ public class InquiryParam {
     @JsonIgnore
     public void applyTo(Inquiry inquiry) {
         if (this.inquiryPhone != null) {
-            inquiry.setTitle(this.inquiryPhone);
+            inquiry.setInquiryPhone(this.inquiryPhone);
         }
         if (this.inquiryName != null) {
-            inquiry.setAnswer(this.inquiryName);
+            inquiry.setInquiryName(this.inquiryName);
         }
         if (this.inquiryPwd != null) {
-            inquiry.setAnswer(this.inquiryPwd);
+            inquiry.setInquiryPwd(this.inquiryPwd);
         }
         if (this.inquiryContent != null) {
-            inquiry.setAnswer(this.inquiryContent);
+            inquiry.setInquiryContent(this.inquiryContent);
+        }
+        if (this.inquiryTitle != null) {
+            inquiry.setInquiryTitle(this.inquiryTitle);
+        }
+        if (this.inquirySecret != null) {
+            inquiry.setInquirySecret(this.inquirySecret);
         }
     }
 

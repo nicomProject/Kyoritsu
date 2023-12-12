@@ -452,6 +452,11 @@ big {
 .container{
 	max-width:70%;
 }
+
+.inquire.container{
+	max-width:70%;
+}
+
 .overlay{
 	position:relative
 }

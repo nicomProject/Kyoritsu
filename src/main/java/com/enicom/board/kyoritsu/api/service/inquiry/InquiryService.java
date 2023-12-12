@@ -10,7 +10,7 @@ public interface InquiryService {
 
     PageVO<Inquiry> findAll();
 
-    PageVO<Inquiry> findAll(InquiryParam param);
+    PageVO<Inquiry> findAll(Long key);
 
     ResponseDataValue<?> add(InquiryParam param);
 

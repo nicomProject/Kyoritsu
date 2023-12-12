@@ -24,10 +24,11 @@ public class InquiryController {
     public ResponseHandler<?> find() {
         return new ResponseHandler<>(inquiryService.findAll());
     }
-//    @RequestMapping(path = "/inquiry/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
-//    public ResponseHandler<?> findSelf(@RequestBody @Valid InquiryParam param) {
-//        return new ResponseHandler<>(inquiryService.findAll(param));
-//    }
+
+    @RequestMapping(path = "/inquiry/findSelf/{key}", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseHandler<?> findSelf(@PathVariable Long key) {
+        return new ResponseHandler<>(inquiryService.findAll(key));
+    }
     @RequestMapping(value = "/inquiry/add", method = RequestMethod.POST)
     public ResponseHandler<?> Add(@RequestBody @Valid InquiryParam param) throws Exception {
         System.out.println(param);

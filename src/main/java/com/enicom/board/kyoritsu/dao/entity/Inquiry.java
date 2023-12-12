@@ -24,21 +24,21 @@ public class Inquiry {
     @Column(name = "rec_key")
     private Long recKey;
 
-    @Column(name = "title", length = 100)
-    private String title;
+    @Column(name = "inquiry_title", length = 100)
+    private String inquiryTitle;
 
     @Column(name = "answer", length = 10000)
     private String answer;
 
-    @Column(name = "inquiry_name", length = 20, nullable = false)
+    @Column(name = "inquiry_name", length = 200)
     @Comment("문의 작성한 사용자 아이디")
     private String inquiryName;
 
-    @Column(name = "inquiry_pwd", length = 200, nullable = false)
+    @Column(name = "inquiry_pwd", length = 200)
     @Comment("문의 작성한 사용자 비밀번호")
     private String inquiryPwd;
 
-    @Column(name = "inquiry_phone", length = 200, nullable = false)
+    @Column(name = "inquiry_phone", length = 200)
     @Comment("문의 작성한 사용자 핸드폰번호")
     private String inquiryPhone;
 
@@ -48,8 +48,7 @@ public class Inquiry {
 
     @Column(name = "inquiry_secret")
     @Comment("문의 공개 여부")
-    @Builder.Default
-    private Integer inquirySecret = 1;
+    private String inquirySecret;
 
     @Column(name = "answer_user", length = 50)
     private String answerUser;

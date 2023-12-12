@@ -186,6 +186,25 @@ section .sub-title{
     margin: 50px 0;
 }
 
+.info-container > div {
+    width: 30%;
+}
+
+.apply-inquire .content-container .title{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.apply-inquire .content-container .secret{
+    display: inline-block;
+    float: right
+}
+
+.info-container input {
+    width: 70%;
+}
+
+
 .info-container div lable{
     font-weight: 600;
 }
@@ -219,6 +238,13 @@ section .sub-title{
 .apply-inquire .inquire-input{
     resize: none;
 
+}
+
+.content-container .content-title{
+    width: 100%;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 /* business-overview */

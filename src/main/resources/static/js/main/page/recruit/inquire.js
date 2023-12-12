@@ -62,7 +62,7 @@ $(function () {
                     },
                     {
                         title: '제목',
-                        field: "title",
+                        field: "inquiryTitle",
                         tooltip: true,
                         headerTooltip: true,
                         headerSort: false,
@@ -71,7 +71,7 @@ $(function () {
                     },
                     {
                         title: '작성자',
-                        field: "createUser",
+                        field: "inquiryName",
                         tooltip: true,
                         headerTooltip: true,
                         headerSort: false,
@@ -101,7 +101,7 @@ $(function () {
 
             const events = {
                 rowClick: function (e, row) {
-                    window.location.href = '/notice/notice/detail/' + row.getData().recKey;
+                    window.location.href = '/recruit/inquire/detail/' + row.getData().recKey;
                 },
                 ajaxError: TableUtil.ajaxError,
             }
