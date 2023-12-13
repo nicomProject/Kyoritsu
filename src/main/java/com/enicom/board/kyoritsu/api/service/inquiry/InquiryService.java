@@ -12,7 +12,11 @@ public interface InquiryService {
 
     PageVO<Inquiry> findAll(Long key);
 
+    PageVO<Inquiry> findAllSelfPwd(Long key);
+
     ResponseDataValue<?> add(InquiryParam param);
+
+    ResponseDataValue<?> update(InquiryParam param);
 
     ResponseDataValue<?> delete(MultipleParam param);
 

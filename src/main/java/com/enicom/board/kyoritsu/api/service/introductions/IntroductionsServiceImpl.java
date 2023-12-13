@@ -112,8 +112,6 @@ public class IntroductionsServiceImpl implements IntroductionsService {
     @Transactional
     @Override
     public ResponseDataValue<?> check(MultipleParam param) {
-        System.out.println("check값");
-        System.out.println(param.getIdListLong().get(0));
 
         Optional<Content> contentOptional = introductionsRepository.findByRecKey(param.getIdListLong().get(0));
         if (!contentOptional.isPresent()) {

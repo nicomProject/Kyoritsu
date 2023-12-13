@@ -41,18 +41,10 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public ResponseDataValue<String> upload(MultipartHttpServletRequest request, String name, MultipartFile file) {
-        System.out.println("key값" + name);
-        System.out.println("file값" + file);
         ResponseDataValue<String> result = FileService.upload(ImagePath, file, name);
-        System.out.println(result);
-        System.out.println(result.getResult());
-        System.out.println(result.getCode());
-        System.out.println(name);
-        System.out.println(file);
 
         if (result.getCode() == 200) {
             String fileName = result.getResult();
-                System.out.println(fileName + "fileName2");
 
                 Image image = Image.builder()
                         .imageName(fileName)
@@ -67,7 +59,6 @@ public class ImageServiceImpl implements ImageService {
     public void download(HttpServletRequest request, HttpServletResponse response, String name) {
         imageRepository.findByKey(name).ifPresent(Image -> {
             FileInfoParam param = FileInfoParam.builder().name(Image.getImageName()).build();
-            System.out.println(param + "paramparamparamparamparam");
             FileService.download(request, response, ImagePath, param);
         });
     }

@@ -24,7 +24,6 @@ public class ApplicantController {
 
     @RequestMapping(path = "/applicant/findSelf/{key}", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseHandler<?>  findSelf(@PathVariable Long key){
-        System.out.println(applicantService.findAll(key));
         return new ResponseHandler<>(applicantService.findAll(key));
     }
     @RequestMapping(value = "/applicant/add", method = RequestMethod.POST)

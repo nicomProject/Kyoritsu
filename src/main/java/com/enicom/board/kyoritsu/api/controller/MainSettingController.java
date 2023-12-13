@@ -17,7 +17,6 @@ public class MainSettingController {
     @RequestMapping(path = "/menus", method = {RequestMethod.GET, RequestMethod.POST})
     @ApiMapping(order = 60, desc = "메뉴 목록 조회")
     public ResponseHandler<?> getMenuList() {
-        System.out.println(mainSettingService.getMenuList());
         return new ResponseHandler<>(
                 mainSettingService.getMenuList()
         );

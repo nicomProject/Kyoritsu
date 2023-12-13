@@ -36,7 +36,6 @@ public class IntroductionRepositoryCustomImpl implements IntroductionRepositoryC
 
     @Override
     public Long deleteALLContent() {
-        System.out.println("deleteALLContent");
         QContent qContent = QContent.content1;
         MemberDetail member = securityUtil.getCurrentUser();
 

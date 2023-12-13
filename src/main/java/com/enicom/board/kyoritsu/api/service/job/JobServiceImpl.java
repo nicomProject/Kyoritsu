@@ -42,7 +42,6 @@ public class JobServiceImpl implements JobService {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         MemberDetail member = securityUtil.getCurrentUser();
-        System.out.println("1111111" + param);
 
         Job job = param.create();
         job.setCreateDate(LocalDateTime.now());
@@ -120,7 +119,6 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public PageVO<Job> findSearch(JobParam param) {
-        System.out.println(jobRepository.findByTitleContaining(param.getTitle()));
         return PageVO.builder(jobRepository.findByTitleContaining(param.getTitle())).build();
     }
 

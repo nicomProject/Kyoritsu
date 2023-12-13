@@ -27,7 +27,6 @@ public class IntroductionsController {
 
     @RequestMapping(value = "/introductions/add", method = RequestMethod.POST)
     public ResponseHandler<?> Add(@RequestBody @Valid IntroductionsParam param) throws Exception {
-        System.out.println(param);
         return new ResponseHandler<>(introductionsService.add(param));
     }
 
@@ -38,7 +37,6 @@ public class IntroductionsController {
 
     @RequestMapping(path = "/introductions/findSelf", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseHandler<?> findSelf(@RequestBody IntroductionsParam param){
-        System.out.println(introductionsService.findAll(param));
         return new ResponseHandler<>(introductionsService.findAll(param));
     }
 

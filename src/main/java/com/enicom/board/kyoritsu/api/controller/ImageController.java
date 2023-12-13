@@ -46,16 +46,12 @@ public class ImageController {
     public String testRoomImage(HttpServletRequest request, HttpServletResponse response, @RequestParam("images") MultipartFile[] images) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat ("yyyyMMddhhmmss");
-        System.out.println(sdf.format(timestamp));
 
         try {
             for (int i = 0; i < images.length; i++) {
                 MultipartFile image = images[i];
 
                 if (!image.isEmpty()) {
-                    System.out.println(image.getName());
-                    System.out.println(image.getOriginalFilename());
-                    System.out.println(image.getSize());
                     // 이미지 데이터를 바이트 배열로 가져옴
                     byte[] fileData = image.getBytes();
 
@@ -66,7 +62,6 @@ public class ImageController {
                     try {
                         // 이미지 데이터를 파일로 저장
                         File file = new File("D:/Kyoritsu(1101)/src/main/resources/static/images/image/" + fileName);
-                        System.out.println(file);
                         FileOutputStream fos = new FileOutputStream(file);
                         fos.write(fileData);
                         fos.close();

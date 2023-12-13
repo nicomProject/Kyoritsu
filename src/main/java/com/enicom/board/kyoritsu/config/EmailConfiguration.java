@@ -15,8 +15,6 @@ public class EmailConfiguration {
         String _email = "nicom7708@gmail.com";
         String _password = "lnqvzqvqgckroyqo";
 
-        System.out.println("Start JavaMail API Test ~!");
-
         String subject = "Hello JavaMail API Test";
         String fromMail = "jjg@enicom.co.kr";
         String fromName = "인사담당자";
@@ -57,8 +55,6 @@ public class EmailConfiguration {
             t.connect(_email, _password);
             t.sendMessage(message, message.getAllRecipients());
             t.close();
-
-            System.out.println("Done Done ~!");
 
         } catch (Exception e) {
             e.printStackTrace();

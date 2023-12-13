@@ -255,18 +255,10 @@ public class Utils {
     public static String getClientIPTest(HttpServletRequest request) {
         String ip = getClientIP(request);
 
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        System.out.println("ip :" + ip);
 
         try {
             InetAddress inetAddress = InetAddress.getLocalHost();
             String strIpAdress = inetAddress.getHostAddress();
-
-            System.out.println("inetAddress IP : " + strIpAdress);
-
-            System.out.println("Inet4Address ip :" + Inet4Address.getLocalHost().getHostAddress());
-            System.out.println("getCurrentEnvironmentNetworkIp ip :" + getCurrentEnvironmentNetworkIp(request));
-            System.out.println("getIP ip :" + getIP(request));
 
         } catch (UnknownHostException e) {
             e.printStackTrace();

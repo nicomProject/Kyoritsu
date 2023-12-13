@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
@@ -56,12 +57,24 @@ public class Inquiry {
     @Column(name = "delete_user", length = 50)
     private String deleteUser;
 
+    @Column(name = "hit")
+    @Builder.Default
+    @Comment("조회수")
+    @ColumnDefault("0")
+    private Integer hit = 0;
+
     @Column(name = "create_date")
     @Builder.Default
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createDate = LocalDateTime.now();
+
+    @Column(name = "update_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime updateDate;
 
     @Column(name = "answer_date")
     @JsonSerialize(using = LocalDateTimeSerializer.class)

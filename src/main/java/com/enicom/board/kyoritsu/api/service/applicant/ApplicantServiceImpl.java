@@ -36,7 +36,6 @@ public class ApplicantServiceImpl implements ApplicantService {
     @Transactional
     @Override
     public PageVO<Applicant> findAll(Long key) {
-        System.out.println(applicantRepository.findAllByRecKey(key));
         return PageVO.builder(applicantRepository.findAllByRecKey(key)).build();
     }
 
@@ -45,7 +44,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         MemberDetail member = securityUtil.getCurrentUser();
-        System.out.println(param);
 
         Optional<Applicant> applicantOptional = applicantRepository.findByRecKey(Long.valueOf(param.getKey()));
         if(!applicantOptional.isPresent()){

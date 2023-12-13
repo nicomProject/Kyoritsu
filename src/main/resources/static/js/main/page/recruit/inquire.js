@@ -101,7 +101,39 @@ $(function () {
 
             const events = {
                 rowClick: function (e, row) {
-                    window.location.href = '/recruit/inquire/detail/' + row.getData().recKey;
+
+                    AjaxUtil.request({
+                        method: 'GET',
+                        url: '/api/inquiry/findSelfPwd/' + row.getData().recKey,
+                        async: false,
+                        success: function (data) {
+                            Swal.fire({
+                                title: '비밀번호 확인',
+                                html: `채용문의에서 작성한 비밀번호를 입력해주세요`,
+                                icon: 'info',
+                                input: 'password',
+                                inputAttributes: {
+                                    autocapitalize: 'off',
+                                    autocomplete: 'new-password'
+                                },
+                                customClass: {
+                                    confirmButton: `btn btn-info`,
+                                    cancelButton: `btn btn-secondary`
+                                },
+                                showCancelButton: true,
+                                confirmButtonText: '확인',
+                                cancelButtonText: '취소',
+                                showLoaderOnConfirm: true,
+                                preConfirm: (pwd) => {
+                                    if (pwd === data.result.items[0].inquiryPwd) {
+                                        window.location.href = '/recruit/inquire/detail/' + row.getData().recKey;
+                                    } else {
+                                        Swal.showValidationMessage('비밀번호가 일치하지 않습니다!');
+                                    }
+                                },
+                            })
+                        }
+                    });
                 },
                 ajaxError: TableUtil.ajaxError,
             }

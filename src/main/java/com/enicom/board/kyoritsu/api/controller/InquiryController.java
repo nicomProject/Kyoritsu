@@ -29,14 +29,25 @@ public class InquiryController {
     public ResponseHandler<?> findSelf(@PathVariable Long key) {
         return new ResponseHandler<>(inquiryService.findAll(key));
     }
+
+    @RequestMapping(path = "/inquiry/findSelfPwd/{key}", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseHandler<?> findSelfPwd(@PathVariable Long key) {
+        return new ResponseHandler<>(inquiryService.findAllSelfPwd(key));
+    }
+
     @RequestMapping(value = "/inquiry/add", method = RequestMethod.POST)
     public ResponseHandler<?> Add(@RequestBody @Valid InquiryParam param) throws Exception {
-        System.out.println(param);
         return new ResponseHandler<>(inquiryService.add(param));
     }
-//    @RequestMapping(value = "/inquiry/delete", method = RequestMethod.POST)
-//    public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
-//        return new ResponseHandler<>(inquiryService.delete(param));
-//    }
+
+    @RequestMapping(value = "/inquiry/update", method = RequestMethod.POST)
+    public ResponseHandler<?> update(@RequestBody @Valid InquiryParam param) throws Exception {
+        return new ResponseHandler<>(inquiryService.update(param));
+    }
+
+    @RequestMapping(value = "/inquiry/delete", method = RequestMethod.POST)
+    public ResponseHandler<?> delete(@RequestBody @Valid MultipleParam param) throws Exception {
+        return new ResponseHandler<>(inquiryService.delete(param));
+    }
 
 }

@@ -115,7 +115,6 @@ public class ManagerServiceImpl implements ManagerService {
         }
 
         Manager manager = managerRepository.findByRecKey(Long.valueOf(param.getKey())).get();
-        System.out.println(manager.getUserId());
 
         String password = param.getPassword();
         String newPassword = param.getNewPassword();

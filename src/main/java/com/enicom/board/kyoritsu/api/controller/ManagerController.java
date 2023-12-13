@@ -54,7 +54,6 @@ public class ManagerController {
     @RequestMapping(path = "/manager/mypassword", method = {RequestMethod.POST})
     @ApiMapping(order = 55, desc = "[관리자] 관리자 비밀번호 변경", param = ManagerPasswordParam.class)
     public ResponseHandler<?> changePassword(@RequestBody @Valid ManagerPasswordParam param) {
-        System.out.println("param값" + param);
         return new ResponseHandler<>(managerService.changePassword(param));
     }
 

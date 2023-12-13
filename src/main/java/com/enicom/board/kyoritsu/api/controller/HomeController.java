@@ -52,8 +52,6 @@ public class HomeController {
 
     @GetMapping("/recruit/inquire/{action}/{key}")
     public String recruitAction(Model model, @PathVariable String action, @PathVariable long key) throws IOException {
-        System.out.println("action타는곳");
-        System.out.println(action);
         model.addAttribute("key", key);
         return String.format("main/recruit/inquire/%s", action);
     }
@@ -160,8 +158,6 @@ public class HomeController {
     @RequestMapping(path = "/modal/{page}", method = {RequestMethod.GET})
     public String modal(@PathVariable String page, Model model, @RequestParam Map<String, Object> paramMap) {
         model.addAllAttributes(paramMap);
-        System.out.println(paramMap);
-        System.out.println(page);
         return String.format("modal/%s", page);
     }
 

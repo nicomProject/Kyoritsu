@@ -39,6 +39,20 @@ public class InquiryServiceImpl implements InquiryService {
     @Transactional
     @Override
     public PageVO<Inquiry> findAll(Long key) {
+        Optional<Inquiry> inquiryOptional = inquiryRepository.findByRecKey(key);
+
+        if(inquiryOptional.isPresent()){
+            Inquiry inquiry = inquiryOptional.get();
+            inquiry.setHit(inquiry.getHit() + 1);
+            inquiryRepository.save(inquiry);
+
+            return PageVO.builder(inquiry).build();
+        }
+
+        return PageVO.builder(inquiryRepository.findAllByRecKey(key)).build();
+    }
+
+    public PageVO<Inquiry> findAllSelfPwd(Long key) {
         return PageVO.builder(inquiryRepository.findAllByRecKey(key)).build();
     }
 
@@ -51,8 +65,6 @@ public class InquiryServiceImpl implements InquiryService {
     @Override
     public ResponseDataValue<?> add(InquiryParam param) {
 
-        System.out.println(param);
-
         Inquiry inquiry = param.create();
         param.applyTo(inquiry);
         inquiry.setCreateDate(LocalDateTime.now());
@@ -64,25 +76,36 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Transactional
     @Override
-    public ResponseDataValue<?> delete(MultipleParam param) {
-        MemberDetail member = securityUtil.getCurrentUser();
-        MultipleType type = param.getType();
-        LocalDateTime deleteTime = LocalDateTime.now();
+    public ResponseDataValue<?> update(InquiryParam param) {
 
-        if (type.equals(MultipleType.ONE)) {
-            Optional<Inquiry> inquiryOptional = inquiryRepository.findByRecKey(Long.valueOf(param.getId()));
-            if (inquiryOptional.isPresent()) {
-                Inquiry inquiry = inquiryOptional.get();
-                inquiry.setDeleteDate(LocalDateTime.now());
-                inquiry.setDeleteUser(member.getId());
-            }
+        Optional<Inquiry> inquiryOptional = inquiryRepository.findByRecKey(Long.valueOf(param.getKey()));
+        if (!inquiryOptional.isPresent()) {
+            return ResponseDataValue.builder(210).desc("잘못된 등록번호입니다.").build();
         }
-        else if (type.equals(MultipleType.LIST)) {
-            inquiryRepository.deleteListContent(param);
+
+        Inquiry inquiry = inquiryOptional.get();
+        param.applyTo(inquiry);
+        inquiry.setUpdateDate(LocalDateTime.now());
+
+        inquiryRepository.save(inquiry);
+
+        return ResponseDataValue.builder(200).build();
+    }
+
+    @Transactional
+    @Override
+    public ResponseDataValue<?> delete(MultipleParam param) {
+
+        Optional<Inquiry> contentOptional = inquiryRepository.findByRecKey(Long.valueOf(param.getKey()));
+        if (!contentOptional.isPresent()) {
+            return ResponseDataValue.builder(210).desc("잘못된 등록번호입니다.").build();
         }
-        else if(type.equals(MultipleType.SPECIFIC)){
-            inquiryRepository.deleteALLContent();
-        }
+
+        Inquiry inquiry = contentOptional.get();
+        inquiry.setDeleteUser(contentOptional.get().getInquiryName());
+        inquiry.setDeleteDate(LocalDateTime.now());
+
+        inquiryRepository.save(inquiry);
 
         return ResponseDataValue.builder(200).build();
     }
