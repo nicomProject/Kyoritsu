@@ -43,13 +43,10 @@ $(function () {
             function validateField(formData) {
                 console.log(formData)
                 for (const field in formData) {
-                    console.log("222")
                     const value = document.getElementById(field).value;
                     console.log(value)
                     if(!value){
-                        console.log("4444")
                         Alert.warning({text: `${formData[field]}은 필수 입력 항목입니다.`})
-                        console.log("5555")
                         return false
                     }
                 }

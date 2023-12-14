@@ -31,7 +31,7 @@ public class Notice {
     @Column(name = "title", length = 100)
     private String title;
 
-    @Column(name = "content", length = 10000)
+    @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
     @Column(name = "hit")

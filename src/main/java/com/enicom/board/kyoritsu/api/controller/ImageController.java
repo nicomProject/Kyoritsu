@@ -43,9 +43,15 @@ public class ImageController {
     }
 
     @RequestMapping(path = "/uploadImages", method = RequestMethod.POST)
-    public String testRoomImage(HttpServletRequest request, HttpServletResponse response, @RequestParam("images") MultipartFile[] images) {
+    public String testRoomImage(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam("images") MultipartFile[] images) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat ("yyyyMMddhhmmss");
+
+        File folder = new File("./static/images");
+        if (!folder.exists()) {
+            folder.mkdirs();
+            log.info("폴더가 생성되었습니다. folder path: {}", folder);
+        }
 
         try {
             for (int i = 0; i < images.length; i++) {
@@ -61,7 +67,8 @@ public class ImageController {
                     // 파일을 서버에 저장
                     try {
                         // 이미지 데이터를 파일로 저장
-                        File file = new File("D:/Kyoritsu(1101)/src/main/resources/static/images/image/" + fileName);
+                        String filePath = String.format("%s/%s", folder.getAbsolutePath(), fileName);
+                        File file = new File(filePath);
                         FileOutputStream fos = new FileOutputStream(file);
                         fos.write(fileData);
                         fos.close();
@@ -69,6 +76,7 @@ public class ImageController {
                         e.printStackTrace();
                     }
                     String imageUrl = fileName;
+
                     return imageUrl;
 
                     // 파일 경로나 URL을 클라이언트에게 전달하거나 저장 로직을 추가하세요

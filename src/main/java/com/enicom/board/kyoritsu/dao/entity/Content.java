@@ -39,8 +39,7 @@ public class Content {
     @Column(name = "subcategory", length = 20)
     private String subcategory;
 
-    @Lob
-    @Column(name = "content")
+    @Column(name = "content" , columnDefinition = "TEXT")
     private String content;
 
     @Column(name = "hit")

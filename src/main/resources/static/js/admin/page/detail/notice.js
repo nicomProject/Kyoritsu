@@ -31,8 +31,81 @@ $(function () {
                 oAppRef: oEditors,
                 elPlaceHolder: "contents",
                 sSkinURI: "/static/js/smartEditor/SmartEditor2Skin.html",
+                fOnAppLoad : function(){
+                    fn_checkClipboard();//추가한 함수
+                },
                 fCreator: "createSEditor2"
             })
+
+            function dataURLtoBlob(dataURL) {
+                // Base64 데이터를 디코딩합니다.
+                var byteString = atob(dataURL.split(',')[1]);
+
+                // 문자열을 ArrayBuffer로 변환합니다.
+                var ab = new ArrayBuffer(byteString.length);
+                var ia = new Uint8Array(ab);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+
+                // ArrayBuffer를 Blob 객체로 변환합니다.
+                var blob = new Blob([ab], { type: 'image/png' }); // 이미지 유형을 필요에 따라 변경할 수 있습니다.
+
+                return blob;
+            }
+
+            function fn_checkClipboard() {
+                var target_se2 = document.querySelector("iframe").contentWindow.document.querySelector("iframe").contentWindow.document.querySelector(".se2_inputarea");
+
+                var observer = new MutationObserver(function (mutationsList) {
+                    mutationsList.forEach(function (mutation) {
+                        if (mutation.type === "childList" || mutation.type === "characterData") {
+                            // 변경된 노드를 모두 가져오기
+                            var changedNodes = Array.from(target_se2.querySelectorAll("p"));
+
+                            checkForImg(changedNodes);
+                        }
+                    });
+                });
+
+
+                observer.observe(target_se2, { subtree: true, characterData: true, childList: true });
+
+                function checkForImg(changedNodes) {
+                    changedNodes.forEach(function (pElement, index) {
+                        var imgElement = pElement.querySelector("img");
+                        if (imgElement) {
+                            var imgSrc = imgElement.getAttribute("src");
+
+                            // imgSrc가 데이터 URL이라면
+                            if (imgSrc.startsWith('data:')) {
+                                var blob = dataURLtoBlob(imgSrc);
+                                var formData = new FormData();
+                                formData.append('images', blob, 'image' + index + '.png');
+
+                                var xhr = new XMLHttpRequest();
+                                xhr.open('POST', '/api/uploadImages', true);
+
+                                xhr.onload = function () {
+                                    if (xhr.status === 200) {
+                                        console.log('서버 응답:', xhr.responseText);
+                                        var imageUrl = xhr.responseText;
+
+                                        var imageSrc = "/static/images/" + imageUrl;
+                                        imgElement.setAttribute("src", imageSrc);
+                                    } else {
+                                        console.error('서버 응답 에러:', xhr.status);
+                                    }
+                                };
+
+                                xhr.send(formData);
+                            } else {
+                                console.log("외부 URL 이미지는 업로드하지 않습니다.");
+                            }
+                        }
+                    });
+                }
+            }
 
 
             if(paramValue !== ""){

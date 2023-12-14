@@ -22,9 +22,7 @@ $(function () {
                 }
 
                 else if (action === 'del') {
-                    console.log("????")
                     if(selected.length === 0){
-                        console.log("????")
                         Alert.warning({text: '공지사항을 먼저 선택해주세요!'});
                         return;
                     } else if(range === 'list' && selected.length > 0){
@@ -50,7 +48,6 @@ $(function () {
                         })
 
                     }
-                    console.log("삭제");
                     // ... (기존의 삭제 로직을 이곳에 삽입)
                 }
                 else if (action === 'file') {

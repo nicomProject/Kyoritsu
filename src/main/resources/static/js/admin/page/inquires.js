@@ -54,7 +54,6 @@ $(function () {
                     }
                     // 다운로드
                     else if (range === 'download') {
-                        console.log("??????")
                         console.log(table.getData())
                         TableUtil.download(table, 'excel', '채용문의 관리 목록');
                     }

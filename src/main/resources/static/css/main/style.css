@@ -1843,6 +1843,10 @@ section .sub-title{
     text-align: center;
 }
 
+.notice.section .notice-container .notice-content{
+    text-align: left;
+}
+
 .notice.section .notice-title{
     display: flex;
     align-items: center;
