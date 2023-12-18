@@ -3,7 +3,7 @@ package com.enicom.board.kyoritsu.dao.repository.category;
 import com.enicom.board.kyoritsu.api.param.CategoryParam;
 import com.enicom.board.kyoritsu.api.type.PageVO;
 import com.enicom.board.kyoritsu.dao.entity.Category;
-import com.enicom.board.kyoritsu.dao.entity.QContent;
+//import com.enicom.board.kyoritsu.dao.entity.QContent;
 import com.enicom.board.kyoritsu.login.MemberDetail;
 import com.enicom.board.kyoritsu.login.SecurityUtil;
 import com.querydsl.jpa.impl.JPAQueryFactory;
