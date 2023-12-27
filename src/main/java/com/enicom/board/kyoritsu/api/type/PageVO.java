@@ -1,10 +1,7 @@
 package com.enicom.board.kyoritsu.api.type;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

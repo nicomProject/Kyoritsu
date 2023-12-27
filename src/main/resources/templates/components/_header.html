@@ -1,4 +1,5 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <nav th:fragment="header_manager" class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl header" id="navbarBlur">
     <div class="container-fluid py-3 px-3">
         <div>
@@ -63,10 +64,19 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav">
                             </ul>
-                        </div> <!-- navbar collapse -->
+                        </div>
+                        <div class="button">
+                            <select class="form-select" id="language-button">
+                                <option value="kr">한국어</option>
+                                <option value="eng">English</option>
+                                <option value="jp">日本語</option>
+                            </select>
+                        </div>
+                        <!-- navbar collapse -->
                         <div class="button">
                             <a href="javascript:void(0)" class="btn white-bg mouse-dir">Contact <span class="dir-part"></span></a>
                         </div>
+
                     </nav> <!-- navbar -->
                 </div>
             </div>

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,8 +29,14 @@ public class MainMenu {
     @Column(name = "rec_key")
     private Long recKey;
 
-    @Column(name = "name", length = 20)
+    @Column(name = "name", length = 100)
     private String name;
+
+    @Column(name = "name_english", length = 100)
+    private String nameEnglish;
+
+    @Column(name = "name_japanese", length = 100)
+    private String nameJapanese;
 
     @Column(name = "url", length = 100)
     private String url;

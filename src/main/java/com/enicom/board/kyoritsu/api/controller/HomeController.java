@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
@@ -28,7 +29,10 @@ import java.util.stream.Collectors;
 public class HomeController {
     private final SecurityUtil securityUtil;
     @GetMapping(path = {"/"})
-    public String home(Model model) throws Exception {
+    public String home(Model model , HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        String language = (String) session.getAttribute("languageValue");
+        model.addAttribute("language", language);
         return "main/index";
     }
 
